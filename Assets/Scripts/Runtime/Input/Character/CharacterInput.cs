@@ -1,6 +1,7 @@
 ﻿using System;
 using Shooter.Model;
 using UnityEngine;
+// ReSharper disable All
 
 namespace Shooter.GameLogic
 {
