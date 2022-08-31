@@ -24,7 +24,8 @@ namespace Shooter.Player
         {
             if (_weaponInput.IsPressingLeftMouseButton)
             {
-                _weapon.Shoot();
+                if (_weapon.CanShoot)
+                    _weapon.Shoot();
             }
         }
     }

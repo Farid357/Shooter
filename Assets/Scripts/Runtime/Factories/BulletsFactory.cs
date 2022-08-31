@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class BulletsFactory : MonoBehaviour, IBulletsFactory
+    public sealed class BulletsFactory : MonoBehaviour, IFactory<IBullet>
     {
         [SerializeField] private BulletMovement _prefab;
         [SerializeField] private Transform _spawnPoint;

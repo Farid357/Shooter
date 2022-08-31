@@ -9,8 +9,8 @@ namespace Shooter.GameLogic
         [SerializeField, Min(1)] private int _throwForce = 100;
 
         private Rigidbody _rigidbody;
-
-        private void Start() => _rigidbody = GetComponent<Rigidbody>();
+        
+        private void OnEnable() => _rigidbody = GetComponent<Rigidbody>();
 
         public void Throw()
         {

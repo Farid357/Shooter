@@ -13,8 +13,9 @@ namespace Shooter.GameLogic
             if (collision.gameObject.TryGetComponent(out IHealthCollision healthCollision))
             {
                 healthCollision.TryDamage(_damage);
-                gameObject.SetActive(false);
             }
+
+            gameObject.SetActive(false);
         }
     }
 }

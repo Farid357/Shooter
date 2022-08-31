@@ -8,7 +8,7 @@ namespace Shooter.Tools
     public sealed class IndependentPool<T> : IUpdateble, IPool<T> where T : MonoBehaviour
     {
         private readonly IPool<T> _pool;
-        private readonly GameObjectsContainerFactory<T> _factory;
+        private readonly IGameObjectsContainerFactory<T> _factory;
         private readonly List<T> _releasedObjects = new();
 
         public IndependentPool(GameObjectsFactory<T> gameObjectsFactory)

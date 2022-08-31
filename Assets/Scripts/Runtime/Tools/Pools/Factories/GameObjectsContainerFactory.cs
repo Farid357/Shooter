@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shooter.Tools
 {
-    public  sealed  class  GameObjectsContainerFactory<T> : IFactory<T> where T : MonoBehaviour
+    public sealed class GameObjectsContainerFactory<T> : IGameObjectsContainerFactory<T> where T : MonoBehaviour
     {
         private readonly List<T> _createdObjects = new();
         private readonly IFactory<T> _factory;
@@ -13,7 +13,7 @@ namespace Shooter.Tools
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
-        
+
         public IEnumerable<T> CreatedObjects => _createdObjects;
 
         public T Create()
