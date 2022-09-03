@@ -6,10 +6,10 @@ namespace Shooter.Model
     public sealed class WeaponWithRollback : IWeapon
     {
         private readonly IWeapon _weapon;
-        private readonly IView<int> _view;
+        private readonly IBulletsView _view;
         private int _bullets;
 
-        public WeaponWithRollback(IWeapon weapon, int bullets, IView<int> view)
+        public WeaponWithRollback(IWeapon weapon, IBulletsView view, int bullets)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _bullets = bullets.TryThrowLessThanOrEqualsToZeroException();

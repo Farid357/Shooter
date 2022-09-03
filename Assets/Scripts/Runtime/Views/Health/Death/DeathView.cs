@@ -8,6 +8,9 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private AudioSource _sound;
         [SerializeField] private DeathWindow _window;
+        [SerializeField] private GameObject _character;
+        [SerializeField] private CharacterCamera _camera;
+        
         private IToggle _soundToggle;
 
         public void Init(IToggle soundToggle)
@@ -15,11 +18,13 @@ namespace Shooter.GameLogic
             _soundToggle = soundToggle ?? throw new ArgumentNullException(nameof(soundToggle));
         }
 
-        public void Visualize()
+        public void VisualizeDeath()
         {
             if (_soundToggle.IsOn)
                 _sound.Play();
             _window.Show();
+            _character.SetActive(false);
+            _camera.ClearParent();
         }
     }
 }

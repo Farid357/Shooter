@@ -2,6 +2,6 @@
 {
     public interface IDeathView
     {
-        public void Visualize();
+        public void VisualizeDeath();
     }
 }

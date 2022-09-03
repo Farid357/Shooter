@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 namespace Shooter.GameLogic
 {
-    public sealed class HealthView : MonoBehaviour, IView<int>
+    public sealed class HealthView : MonoBehaviour, IHealthView
     {
         [SerializeField] private Scrollbar _bar;
         [SerializeField, TableList] private List<ScreenBloodData> _screenBloodDatas;
         [SerializeField] private Image _blood;
-
+        [SerializeField] private DeathView _deathView;
+        
         private void OnValidate()
         {
             if (_screenBloodDatas.Any(data => data.Sprite is null))
@@ -26,6 +27,9 @@ namespace Shooter.GameLogic
             _bar.value = health / 100f;
             var data = _screenBloodDatas.Find(bloodData => bloodData.NeedHealthForSprite <= health);
             _blood.sprite = data.Sprite;
+            
+            if(health == 0)
+                _deathView.VisualizeDeath();
         }
     }
 }

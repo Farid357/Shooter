@@ -1,7 +1,11 @@
-﻿namespace Shooter.Model
+﻿using UnityEngine;
+
+namespace Shooter.Model
 {
     public interface IHealthCollision
     {
-        public void TryDamage(in int damage);
+        public void TryTakeDamage(in int damage);
+        
+        public Vector3 Position { get; }
     }
 }

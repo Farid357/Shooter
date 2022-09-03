@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class BulletsView : SerializedMonoBehaviour, IView<int>
+    public sealed class BulletsView : SerializedMonoBehaviour, IBulletsView
     {
         [SerializeField] private IView<int> _view;
         [SerializeField] private Color _zeroBullets = Color.red;
