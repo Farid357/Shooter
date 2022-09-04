@@ -1,23 +1,23 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Shooter.GameLogic;
-using Shooter.Model;
+﻿using Shooter.GameLogic;
 using Shooter.Tools;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Shooter.Root
 {
     public sealed class EnemyRoot : CompositeRoot
     {
-        [SerializeField] private EnemyFactory[] _factories;
+        [SerializeField] private StandartEnemyFactory[] _factories;
         [SerializeField] private CharacterMovement _character;
-        [SerializeField] private NavMeshBaker _navMeshBaker;
         [SerializeField] private Enemy _enemy;
-        
+        private SystemUpdate _systemUpdate;
+
         public override void Compose()
         {
-            _enemy.Init(_character, _character.GetComponent<HealthCollision>());
-            var b = _enemy.GetComponent<EnemyMovement>();
+            _systemUpdate = new SystemUpdate();
+            _factories.ForEach(factory => factory.Init(_systemUpdate));
+            new NavMeshBaker().Bake();
+            var b = _enemy.GetComponent<StandartEnemyMovement>();
             b.MoveToCharacter();
             b.RotateToCharacter();
             // UniTask.Create(async () =>
@@ -32,5 +32,8 @@ namespace Shooter.Root
             //     }
             // });
         }
+
+        private void Update() => _systemUpdate.Update(Time.deltaTime);
+        
     }
 }

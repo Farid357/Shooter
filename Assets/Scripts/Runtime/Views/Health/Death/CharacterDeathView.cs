@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class DeathView : MonoBehaviour, IDeathView
+    public sealed class CharacterDeathView : MonoBehaviour, IDeathView
     {
         [SerializeField] private AudioSource _sound;
         [SerializeField] private DeathWindow _window;

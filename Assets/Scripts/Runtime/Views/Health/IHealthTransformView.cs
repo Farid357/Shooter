@@ -2,9 +2,9 @@
 
 namespace Shooter.Model
 {
-    public interface IHealthCollision
+    public interface IHealthTransformView
     {
-        public void TryTakeDamage(in int damage);
+        public IHealth Health { get; }
         
         public Vector3 Position { get; }
     }

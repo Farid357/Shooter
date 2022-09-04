@@ -8,7 +8,7 @@ using UnityEngine.AI;
 namespace Shooter.GameLogic
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public sealed class EnemyMovement : MonoBehaviour, IEnemyMovement
+    public sealed class StandartEnemyMovement : MonoBehaviour, IEnemyMovement
     {
         [SerializeField, Min(1f)] private float _rotateSpeed = 2.5f;
 
@@ -17,10 +17,7 @@ namespace Shooter.GameLogic
         private bool _needMove;
         private bool _needRotate;
 
-        private void OnEnable()
-        {
-            _navMesh = GetComponent<NavMeshAgent>();
-        }
+        private void OnEnable() => _navMesh = GetComponent<NavMeshAgent>();
 
         private void Update()
         {

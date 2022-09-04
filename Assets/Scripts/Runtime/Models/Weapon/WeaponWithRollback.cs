@@ -3,7 +3,7 @@ using Shooter.Tools;
 
 namespace Shooter.Model
 {
-    public sealed class WeaponWithRollback : IWeapon
+    public sealed class WeaponWithRollback : IWeapon, IWeaponWithRollback
     {
         private readonly IWeapon _weapon;
         private readonly IBulletsView _view;
@@ -29,6 +29,11 @@ namespace Shooter.Model
             _weapon.Shoot();
             _bullets--;
             _view.Visualize(_bullets);
+        }
+
+        public void AddBullets(int bullets)
+        {
+            _bullets += bullets.TryThrowLessThanOrEqualsToZeroException();
         }
     }
 }

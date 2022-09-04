@@ -5,6 +5,5 @@
         public void MoveToCharacter();
 
         public void RotateToCharacter();
-        
     }
 }

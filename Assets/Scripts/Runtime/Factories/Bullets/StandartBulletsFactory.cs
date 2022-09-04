@@ -1,31 +1,29 @@
 ﻿using Shooter.Model;
+using Shooter.Root;
 using Shooter.Tools;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class BulletsFactory : MonoBehaviour, IFactory<IBullet>
+    public sealed class StandartBulletsFactory : BulletsFactory
     {
-        [SerializeField] private BulletMovement _prefab;
         [SerializeField] private Transform _spawnPoint;
+        [SerializeField] private BulletMovement _prefab;
         
         private IndependentPool<BulletMovement> _pool;
 
-        private void Awake()
+        public override void Init(ISystemUpdate systemUpdate)
         {
-            var gameObjectsFactory = new GameObjectsFactory<BulletMovement>(_prefab, transform);
-            _pool = new IndependentPool<BulletMovement>(gameObjectsFactory);
+            _pool = new IndependentPool<BulletMovement>(new GameObjectsFactory<BulletMovement>(_prefab, transform));
+            systemUpdate.Add(_pool);
         }
 
-        public IBullet Create()
+        public override IBullet Create()
         {
             var bullet = _pool.Get();
             bullet.transform.position = _spawnPoint.position;
             bullet.gameObject.SetActive(true);
             return bullet;
         }
-
-        private void Update() => _pool.Update(Time.deltaTime);
-        
     }
 }

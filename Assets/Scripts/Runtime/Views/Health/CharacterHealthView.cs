@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 namespace Shooter.GameLogic
 {
-    public sealed class HealthView : MonoBehaviour, IHealthView
+    public sealed class CharacterHealthView : MonoBehaviour, IHealthView
     {
         [SerializeField] private Scrollbar _bar;
         [SerializeField, TableList] private List<ScreenBloodData> _screenBloodDatas;
         [SerializeField] private Image _blood;
-        [SerializeField] private DeathView _deathView;
+        [SerializeField] private CharacterDeathView _characterDeathView;
         
         private void OnValidate()
         {
@@ -29,7 +29,7 @@ namespace Shooter.GameLogic
             _blood.sprite = data.Sprite;
             
             if(health == 0)
-                _deathView.VisualizeDeath();
+                _characterDeathView.VisualizeDeath();
         }
     }
 }

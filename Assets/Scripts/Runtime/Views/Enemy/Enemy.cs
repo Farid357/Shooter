@@ -7,17 +7,17 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private EnemyAttack _attack;
         [SerializeField, Min(10)] private int _healthCount = 10;
-        [SerializeField] private HealthCollision _health;
+        [SerializeField] private HealthTransformView _health;
         [SerializeField] private EnemyHealthView _enemyHealthView;
         
-        [field: SerializeField] public EnemyMovement Movement { get; private set; }
+        [field: SerializeField] public StandartEnemyMovement Movement { get; private set; }
 
-        public void Init(ICharacter character, IHealthCollision healthCollision)
+        public void Init(ICharacter character, IHealthTransformView healthTransformView)
         {
             var health = new Health(_healthCount, _enemyHealthView);
             _health.Init(health);
             Movement.Init(character);
-            _attack.Init(healthCollision);
+            _attack.Init(healthTransformView);
         }
     }
 }

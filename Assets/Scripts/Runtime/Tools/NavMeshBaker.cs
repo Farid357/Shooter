@@ -1,18 +1,15 @@
-using Unity.AI.Navigation;
-using UnityEngine;
+using UnityEditor.AI;
 
 namespace Shooter.Tools
 {
-    public sealed class NavMeshBaker : MonoBehaviour
+    public sealed class NavMeshBaker
     {
-        [SerializeField] private NavMeshSurface[] _surfaces;
-
         public void Bake()
         {
-            foreach (var surface in _surfaces)
-            {
-                surface.BuildNavMesh();
-            }
+#if UNITY_EDITOR
+
+            NavMeshBuilder.BuildNavMesh();
+#endif
         }
     }
 }

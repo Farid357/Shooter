@@ -1,29 +1,32 @@
 ﻿using Shooter.Model;
+using Shooter.Root;
 using Shooter.Tools;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class StandartEnemyFactory : EnemyFactory
+    public sealed class StandartEnemyFactory : SerializedMonoBehaviour, IFactory<IEnemyMovement>
     {
         [SerializeField] private ICharacter _character;
-        [SerializeField] private IHealthCollision _characterCollision;
-        [SerializeField] private Enemy _prefab;
+        [SerializeField] private IHealthTransformView _characterTransformView;
         [SerializeField] private Transform _spawnPoint;
-        private IndependentPool<Enemy> _pool;
+        [SerializeField] private Enemy _prefab;
         
-        private void Awake()
+        private IndependentPool<Enemy> _pool;
+
+        public void Init(ISystemUpdate systemUpdate)
         {
-            var factory = new GameObjectsFactory<Enemy>(_prefab, transform);
-            _pool = new IndependentPool<Enemy>(factory);
+            _pool = new IndependentPool<Enemy>(new GameObjectsFactory<Enemy>(_prefab, transform));
+            systemUpdate.Add(_pool);
         }
 
-        public override IEnemyMovement Create()
+        public IEnemyMovement Create()
         {
             var enemy = _pool.Get();
             enemy.transform.position = _spawnPoint.position;
             enemy.gameObject.SetActive(true);
-            enemy.Init(_character, _characterCollision);
+            enemy.Init(_character, _characterTransformView);
             return enemy.Movement;
         }
     }

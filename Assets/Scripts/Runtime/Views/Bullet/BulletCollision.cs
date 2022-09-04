@@ -8,11 +8,14 @@ namespace Shooter.GameLogic
     {
         [SerializeField, Min(1)] private int _damage = 2;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.TryGetComponent(out IHealthCollision healthCollision))
+            if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))
             {
-                healthCollision.TryTakeDamage(_damage);
+                var health = healthTransformView.Health;
+                
+                if (health.IsAlive)
+                    health.TakeDamage(_damage);
                 Debug.Log("hit");
             }
 
