@@ -12,7 +12,7 @@ namespace Shooter.GameLogic
         private Animator _animator;
         private int _id;
 
-        private void OnDisable()
+        private void OnEnable()
         {
             _animator = GetComponent<Animator>();
             _id = Animator.StringToHash(_name);

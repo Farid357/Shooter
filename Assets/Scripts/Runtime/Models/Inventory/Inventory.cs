@@ -7,29 +7,32 @@ namespace Shooter.Model.Inventory
     public sealed class Inventory<T> : IInventory<T>
     {
         private readonly IInventoryView _inventoryView;
-        private readonly Dictionary<Item<T>, int> _items = new();
-        private readonly int _maxItemsCount;
+        private readonly List<Item<T>> _items = new();
 
-        public Inventory(int maxItemsCount, IInventoryView inventoryView)
+        private const int MaxItemsCount = 10;
+
+        public Inventory(IInventoryView inventoryView)
         {
             _inventoryView = inventoryView ?? throw new ArgumentNullException(nameof(inventoryView));
-            _maxItemsCount = maxItemsCount.TryThrowLessThanOrEqualsToZeroException();
         }
 
-        public bool IsFull => _items.Count >= _maxItemsCount;
+        public IEnumerable<Item<T>> Items => _items;
+
+        public bool IsFull => _items.Count >= MaxItemsCount;
 
         public void Add(Item<T> item, int count)
         {
             if (IsFull)
                 throw new InvalidOperationException("Inventory is full!");
 
-            if (Contains(item))
-                throw new InvalidOperationException("Inventory icontains this item");
+            if (_items.Contains(item))
+                throw new InvalidOperationException("Inventory is already contains this item");
 
-            _items.Add(item, count.TryThrowLessThanOrEqualsToZeroException());
+            count.TryThrowLessThanOrEqualsToZeroException();
+            _items.Add(item);
             _inventoryView.VisualizeItem(item.Data, count);
         }
 
-        public bool Contains(Item<T> item) => _items.ContainsKey(item);
+        public bool Contains(int index) => _items.Count < index.TryThrowLessThanOrEqualsToZeroException();
     }
 }

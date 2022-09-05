@@ -14,7 +14,7 @@ namespace Shooter.GameLogic
 
         public void Throw()
         {
-            _rigidbody.AddForce(Vector3.forward * _throwForce, ForceMode.Impulse);
+            _rigidbody.AddForce(transform.forward * _throwForce, ForceMode.Impulse);
         }
     }
 }

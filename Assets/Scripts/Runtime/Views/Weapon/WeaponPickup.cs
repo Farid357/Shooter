@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Linq;
 using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class WeaponPickup : MonoBehaviour
+    public sealed class WeaponPickup : SerializedMonoBehaviour
     {
         [SerializeField] private ItemData _itemData;
         [SerializeField] private WeaponType _type;
         [SerializeField] private WeaponData _weaponData;
+        [SerializeField] private IItemView _itemView;
 
         private IInventory<IWeapon> _inventory;
         private WeaponFactoryFromType _weaponFactory;
@@ -28,7 +31,8 @@ namespace Shooter.GameLogic
                 if (_inventory.IsFull == false)
                 {
                     var weapon = _weaponFactory.Create(_type);
-                    _inventory.Add(new Item<IWeapon>(_itemData, weapon), 1);
+                    var item = new Item<IWeapon>(_itemData, weapon, _itemView);
+                    _inventory.Add(item, 1);
                     gameObject.SetActive(false);
                 }
             }

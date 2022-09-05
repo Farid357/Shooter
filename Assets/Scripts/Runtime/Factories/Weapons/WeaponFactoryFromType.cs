@@ -16,20 +16,13 @@ namespace Shooter.GameLogic
         
         public IWeapon Create(WeaponType type)
         {
-            switch (type)
+            return type switch
             {
-                case WeaponType.Ak74:
-                    return _weaponFactory.CreateAk74(_weaponData).Weapon;
-                
-                case WeaponType.Shotgun:
-                    return _weaponFactory.CreateShotgun(_weaponData).Weapon;
-                
-                case WeaponType.Other:
-                    return _weaponFactory.CreateAk74(_weaponData).Weapon;
-
-                default:
-                    throw new InvalidOperationException($"{type} not exists!");
-            }
+                WeaponType.Ak74 => _weaponFactory.CreateAk74(_weaponData).Weapon,
+                WeaponType.Shotgun => _weaponFactory.CreateShotgun(_weaponData).Weapon,
+                WeaponType.Other => _weaponFactory.CreateAk74(_weaponData).Weapon,
+                _ => throw new InvalidOperationException($"{type} not exists!")
+            };
         }
     }
 }

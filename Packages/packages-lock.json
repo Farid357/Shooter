@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.bananaparty.behaviortree": {
+      "version": "https://github.com/forcepusher/com.bananaparty.behaviortree.git#2.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0d8d027b981f2d0f28a8505c1c1db1d28c2d19d3"
+    },
     "com.unity.ai.navigation": {
       "version": "1.0.0-exp.4",
       "depth": 0,

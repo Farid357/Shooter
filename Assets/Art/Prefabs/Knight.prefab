@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attack: {fileID: 2600266487463633084}
-  _healthCount: 10
+  _healthCount: 25
   _health: {fileID: 7911525616015017911}
   _enemyHealthView: {fileID: 6500019009003649193}
   <Movement>k__BackingField: {fileID: 828202209477806023}

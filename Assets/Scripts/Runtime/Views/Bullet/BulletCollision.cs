@@ -16,7 +16,6 @@ namespace Shooter.GameLogic
                 
                 if (health.IsAlive)
                     health.TakeDamage(_damage);
-                Debug.Log("hit");
             }
 
             gameObject.SetActive(false);
