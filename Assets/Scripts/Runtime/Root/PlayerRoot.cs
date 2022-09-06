@@ -1,11 +1,12 @@
 ﻿using Shooter.GameLogic;
 using Shooter.Model;
+using Shooter.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.Root
 {
-    public sealed class PlayerRoot : CompositeRoot
+    public sealed class PlayerRoot : SerializedMonoBehaviour
     {
         [SerializeField] private IHealthView _healthView;
         [SerializeField, ProgressBar(10, 100)] private int _characterHealth;
@@ -13,20 +14,20 @@ namespace Shooter.Root
         [SerializeField] private HealthTransformView _characterTransformView;
         [SerializeField] private IToggle _soundToggle;
         [SerializeField] private CharacterMovement _movement;
-        [SerializeField] private InventoryRoot _inventoryRoot;
         
         private SystemUpdate _systemUpdate;
         private CharacterMovementInput _movementInput;
 
-        public override void Compose()
+        public IPlayer Compose(IWeapon weapon)
         {
             _systemUpdate = new SystemUpdate();
             _movementInput = new CharacterMovementInput(_movement);
             _characterDeathView.Init(_soundToggle);
             var health = new Health(_characterHealth, _healthView);
             _characterTransformView.Init(health);
-            var player = new Player.Player(new WeaponKeyboardInput(), _inventoryRoot.GetStartWeapon());
+            var player = new Player.Player(new WeaponKeyboardInput(), weapon);
             _systemUpdate.Add(player, _movementInput);
+            return player;
         }
 
         private void Update() => _systemUpdate.Update(Time.deltaTime);

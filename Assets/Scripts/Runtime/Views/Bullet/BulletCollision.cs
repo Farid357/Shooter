@@ -12,13 +12,16 @@ namespace Shooter.GameLogic
         {
             if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))
             {
-                var health = healthTransformView.Health;
-                
-                if (health.IsAlive)
-                    health.TakeDamage(_damage);
+                Attack(healthTransformView.Health);
             }
-
+            
             gameObject.SetActive(false);
+        }
+
+        private void Attack(IHealth health)
+        {
+            if (health.IsAlive)
+                health.TakeDamage(_damage);
         }
     }
 }

@@ -1714,6 +1714,7 @@ GameObject:
   - component: {fileID: 8935593083389849282}
   - component: {fileID: 6500019009003649193}
   - component: {fileID: -3487531795680843037}
+  - component: {fileID: 7959488039114093564}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -1796,6 +1797,7 @@ MonoBehaviour:
   _damage: 15
   _attackAnimation: {fileID: 86605088875889185}
   _radius: 0.5
+  _center: {fileID: 0}
 --- !u!114 &828202209477806023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1879,7 +1881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attack: {fileID: 2600266487463633084}
   _healthCount: 25
-  _health: {fileID: 7911525616015017911}
+  _health: {fileID: 0}
   _enemyHealthView: {fileID: 6500019009003649193}
   <Movement>k__BackingField: {fileID: 828202209477806023}
 --- !u!114 &6500019009003649193
@@ -1907,6 +1909,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfcaebdb19d34c11837eb5f56415edf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7959488039114093564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337382032467732511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.56, y: 2.34, z: 1}
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!1 &7357643161733517285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,8 +2219,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6679149537199838135}
   - component: {fileID: 2961533430765032547}
-  - component: {fileID: 3744416507534682151}
-  - component: {fileID: 7911525616015017911}
   m_Layer: 0
   m_Name: Knight.001
   m_TagString: Untagged
@@ -2346,31 +2359,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.008580148, y: 0.32855195, z: 0.098695144}
     m_Extent: {x: 1.0277119, y: 1.240588, z: 0.5647639}
   m_DirtyAABB: 0
---- !u!65 &3744416507534682151
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8498113325073760856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.055423, y: 2.4811757, z: 1.1295276}
-  m_Center: {x: 0.0014985176, y: 1.1135342, z: 0.5151679}
---- !u!114 &7911525616015017911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8498113325073760856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd2343020c241a7b81df91e918179ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8594522931826986084
 GameObject:
   m_ObjectHideFlags: 0

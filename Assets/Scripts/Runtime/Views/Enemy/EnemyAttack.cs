@@ -9,6 +9,8 @@ namespace Shooter.GameLogic
         [SerializeField, Range(1, 100)] private int _damage = 15;
         [SerializeField] private AttackAnimation _attackAnimation;
         [SerializeField, Min(0.1f)] private float _radius = 0.5f;
+        [SerializeField] private Transform _center;
+        
         private IHealthTransformView _character;
 
         public void Init(IHealthTransformView character)
@@ -20,7 +22,6 @@ namespace Shooter.GameLogic
         {
             if (NearCharacter())
             {
-                Debug.Log("near");
                 Attack(_character);
             }
         }
@@ -33,19 +34,13 @@ namespace Shooter.GameLogic
             {
                 if (character.Health.IsAlive)
                     character.Health.TakeDamage(_damage);
-                Debug.Log("Attack");
             }
         }
 
         private bool NearCharacter()
         {
-            var distance = (transform.position - _character.Position).sqrMagnitude;
-            return distance <= _radius;
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawSphere(transform.position, _radius);
+            var distance = (_center.position - _character.Position).sqrMagnitude;
+            return distance <= _radius * _radius;
         }
     }
 }

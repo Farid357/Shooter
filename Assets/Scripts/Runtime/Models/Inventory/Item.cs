@@ -15,5 +15,11 @@ namespace Shooter.Model.Inventory
             View = view ?? throw new ArgumentNullException(nameof(view));
             Object = self ?? throw new ArgumentNullException(nameof(self));
         }
+
+        public bool ObjectIsWeapon(out IWeapon weapon)
+        {
+            weapon = Object as IWeapon;
+            return weapon is null;
+        }
     }
 }

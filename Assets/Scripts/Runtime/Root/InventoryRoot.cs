@@ -16,6 +16,7 @@ namespace Shooter.Root
         [SerializeField] private ShotgunBulletsFactory _shotgunBulletsFactory;
         [SerializeField] private IInventoryView _inventoryView;
         [SerializeField] private Dictionary<KeyCode, int> _keypadNumbers;
+        [SerializeField] private PlayerRoot _playerRoot;
         
         [VerticalGroup("Start Weapon")]
         [SerializeField] private ItemData _weaponItemData;
@@ -40,17 +41,9 @@ namespace Shooter.Root
             pickups.ForEach(pickup => pickup.Init(inventory, factory));
             var item = new Item<IWeapon>(_weaponItemData, _weapon, _weaponItemView);
             inventory.Add(item, 1);
-            _systemUpdate.Add(new InventoryItemsSelector<IWeapon>(item, inventory, _keypadNumbers));
+            _systemUpdate.Add(new InventoryItemsSelector<IWeapon>(item, inventory, _keypadNumbers, _playerRoot.Compose(_weapon)));
         }
-
-        public IWeapon GetStartWeapon()
-        {
-            if(_weapon is null)
-                throw new InvalidOperationException("Initialize at start inventory root!");
-            
-            return _weapon;
-        }
-
+        
         private void Update() => _systemUpdate.Update(Time.deltaTime);
         
     }

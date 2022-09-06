@@ -4,10 +4,10 @@ using Shooter.Model;
 
 namespace Shooter.Player
 {
-    public sealed class Player : IUpdateble
+    public sealed class Player : IPlayer, IUpdateble
     {
         private readonly IWeaponInput _weaponInput;
-        private readonly IWeapon _weapon;
+        private IWeapon _weapon;
 
         public Player(IWeaponInput weaponInput, IWeapon weapon)
         {
@@ -15,9 +15,9 @@ namespace Shooter.Player
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
-        public Player SwitchWeapon(IWeapon weapon)
+        public void SwitchWeapon(IWeapon weapon)
         {
-            return new Player(_weaponInput, weapon);
+            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
         public void Update(float deltaTime)
