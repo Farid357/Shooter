@@ -13,7 +13,7 @@ namespace Shooter.Root
         [SerializeField] private BulletsFactory[] _factories;
         [SerializeField] private NavMeshBaker _navMeshBaker;
         [SerializeField] private StandartEnemyFactory _enemyFactory;
-        [SerializeField] private ICharacter _character;
+        [SerializeField] private ICharacterTransform _character;
         [SerializeField] private IHealthTransformView _healthTransformView;
         
         [SerializeField] private Enemy _enemy;

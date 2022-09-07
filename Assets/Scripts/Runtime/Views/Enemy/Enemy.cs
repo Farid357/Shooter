@@ -12,7 +12,7 @@ namespace Shooter.GameLogic
         
         [field: SerializeField] public StandartEnemyMovement Movement { get; private set; }
 
-        public void Init(ICharacter character, IHealthTransformView healthTransformView)
+        public void Init(ICharacterTransform character, IHealthTransformView healthTransformView)
         {
             var health = new Health(_healthCount, _enemyHealthView);
             _health.Init(health);

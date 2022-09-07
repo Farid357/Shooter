@@ -8,7 +8,7 @@ namespace Shooter.GameLogic
 {
     public sealed class StandartEnemyFactory : SerializedMonoBehaviour, IFactory<IEnemyMovement>
     {
-        [SerializeField] private ICharacter _character;
+        [SerializeField] private ICharacterTransform _character;
         [SerializeField] private IHealthTransformView _characterTransformView;
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Enemy _prefab;

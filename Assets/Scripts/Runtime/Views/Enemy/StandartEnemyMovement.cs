@@ -13,7 +13,7 @@ namespace Shooter.GameLogic
         [SerializeField, Min(1f)] private float _rotateSpeed = 2.5f;
 
         private NavMeshAgent _navMesh;
-        private ICharacter _character;
+        private ICharacterTransform _character;
         private bool _needMove;
         private bool _needRotate;
 
@@ -30,7 +30,7 @@ namespace Shooter.GameLogic
             }
         }
 
-        public void Init(ICharacter character)
+        public void Init(ICharacterTransform character)
         {
             _character = character ?? throw new ArgumentNullException(nameof(character));
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
@@ -17,7 +16,8 @@ namespace Shooter.GameLogic
 
         private IInventory<IWeapon> _inventory;
         private WeaponFactoryFromType _weaponFactory;
-
+        private bool _enable = true;
+        
         public void Init(IInventory<IWeapon> inventory, IWeaponFactory weaponFactory)
         {
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
@@ -28,14 +28,26 @@ namespace Shooter.GameLogic
         {
             if (collision.gameObject.TryGetComponent(out CharacterMovement _))
             {
-                if (_inventory.IsFull == false)
+                if (_inventory.IsFull == false && _enable)
                 {
                     var weapon = _weaponFactory.Create(_type);
-                    var item = new Item<IWeapon>(_itemData, weapon, _itemView);
+                    var item = new Item<IWeapon>(_itemData, weapon, new DummyItemView());
                     _inventory.Add(item, 1);
                     gameObject.SetActive(false);
+                    _enable = false;
                 }
             }
+        }
+    }
+
+    public class DummyItemView : IItemView
+    {
+        public void Show()
+        {
+        }
+
+        public void Hide()
+        {
         }
     }
 }

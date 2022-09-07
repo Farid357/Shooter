@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Shooter.GameLogic
 {
     [RequireComponent(typeof(CharacterController), typeof(Collider))]
-    public sealed class CharacterMovement : MonoBehaviour, ICharacter
+    public sealed class CharacterMovement : MonoBehaviour, ICharacterTransform
     {
         [SerializeField, Min(0.001f)] private float _speed = 5f;
         [SerializeField, Min(1f)] private float _jumpForce = 10;
@@ -39,5 +39,8 @@ namespace Shooter.GameLogic
 
             _velocity = _jumpForce;
         }
+
+        public void Rotate(Vector3 euler) => transform.rotation = Quaternion.Euler(euler);
+        
     }
 }

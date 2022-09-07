@@ -46,7 +46,7 @@ namespace Shooter.GameLogic
         }
 
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(transform.position, _radius);
