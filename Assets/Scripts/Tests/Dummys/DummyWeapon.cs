@@ -1,4 +1,5 @@
 ﻿using Shooter.Model;
+using Shooter.Test;
 
 public sealed class DummyWeapon : IWeapon
 {
@@ -7,5 +8,6 @@ public sealed class DummyWeapon : IWeapon
         
     }
 
-    public bool CanShoot { get; }
+    public bool CanShoot => true;
+    
 }

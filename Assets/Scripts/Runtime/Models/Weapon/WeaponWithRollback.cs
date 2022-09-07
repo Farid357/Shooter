@@ -7,17 +7,18 @@ namespace Shooter.Model
     {
         private readonly IWeapon _weapon;
         private readonly IBulletsView _view;
-        private int _bullets;
 
         public WeaponWithRollback(IWeapon weapon, IBulletsView view, int bullets)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            _bullets = bullets.TryThrowLessThanOrEqualsToZeroException();
+            Bullets = bullets.TryThrowLessThanOrEqualsToZeroException();
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _view.Visualize(_bullets);
+            _view.Visualize(Bullets);
         }
 
-        private bool NeedReload => _bullets == 0;
+        private bool NeedReload => Bullets == 0;
+        
+        public int Bullets { get; private set; }
         
         public bool CanShoot => _weapon.CanShoot && NeedReload == false;
 
@@ -27,13 +28,13 @@ namespace Shooter.Model
                 throw new InvalidOperationException(nameof(Shoot));
 
             _weapon.Shoot();
-            _bullets--;
-            _view.Visualize(_bullets);
+            Bullets--;
+            _view.Visualize(Bullets);
         }
 
         public void AddBullets(int bullets)
         {
-            _bullets += bullets.TryThrowLessThanOrEqualsToZeroException();
+            Bullets += bullets.TryThrowLessThanOrEqualsToZeroException();
         }
     }
 }

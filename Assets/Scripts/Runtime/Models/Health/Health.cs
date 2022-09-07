@@ -6,15 +6,17 @@ namespace Shooter.Model
     public sealed class Health : IHealth
     {
         private readonly IHealthView _view;
-        private int _value;
 
         public Health(int amount, IHealthView view)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _value = amount.TryThrowLessThanOrEqualsToZeroException();
+            Value = amount.TryThrowLessThanOrEqualsToZeroException();
+            _view.Visualize(Value);
         }
 
-        public bool IsAlive => _value > 0;
+        public int Value { get; private set; }
+        
+        public bool IsAlive => Value > 0;
 
         public void TakeDamage(in int damage)
         {
@@ -22,8 +24,8 @@ namespace Shooter.Model
                 throw new InvalidOperationException("Health is not alive!");
 
             damage.TryThrowLessThanOrEqualsToZeroException();
-            _value = Math.Max(0, _value - damage);
-            _view.Visualize(_value);
+            Value = Math.Max(0, Value - damage);
+            _view.Visualize(Value);
         }
     }
 }
