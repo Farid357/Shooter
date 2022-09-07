@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Shooter.GameLogic;
 using Shooter.GameLogic.Inventory;
 using Shooter.Model;
@@ -22,7 +21,7 @@ namespace Shooter.Root
         [SerializeField] private ItemData _weaponItemData;
         
         [VerticalGroup("Start Weapon")]
-        [SerializeField] private IItemView _weaponItemView;
+        [SerializeField] private InventoryItemView _weaponItemViewPrefab;
         
         [VerticalGroup("Start Weapon")]
         [SerializeField] private WeaponData _weaponData;
@@ -39,7 +38,7 @@ namespace Shooter.Root
             var inventory = new Inventory<IWeapon>(_inventoryView);
             _weapon = factory.CreateAk74(_weaponData).Weapon;
             pickups.ForEach(pickup => pickup.Init(inventory, factory));
-            var item = new Item<IWeapon>(_weaponItemData, _weapon, _weaponItemView);
+            var item = new Item<IWeapon>(_weaponItemData, _weapon, Instantiate(_weaponItemViewPrefab));
             inventory.Add(item, 1);
             _systemUpdate.Add(new InventoryItemsSelector<IWeapon>(item, inventory, _keypadNumbers, _playerRoot.Compose(_weapon)));
         }

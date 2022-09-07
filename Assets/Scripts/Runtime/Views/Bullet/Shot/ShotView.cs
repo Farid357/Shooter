@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class ShotSound : MonoBehaviour, IShotSound
+    public sealed class ShotView : MonoBehaviour, IShotView
     {
         [SerializeField] private AudioSource _audio;
         
-        public void Play() => _audio.PlayOneShot(_audio.clip);
+        public void Visualize() => _audio.PlayOneShot(_audio.clip);
         
     }
 }

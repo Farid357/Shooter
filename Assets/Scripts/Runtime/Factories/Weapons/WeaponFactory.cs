@@ -21,7 +21,7 @@ namespace Shooter.GameLogic
 
         private (IWeapon, IWeaponWithRollback) Create(WeaponData data, IFactory<IBullet> factory)
         {
-            var weapon = new Weapon(factory, data.ShotSound);
+            var weapon = new Weapon(factory, data.ShotView);
             var shotgunRollback = new WeaponWithRollback(weapon, data.BulletsView, data.Bullets);
             var shotgun = new WeaponWithShotWaiting(shotgunRollback, data.WaitSeconds);
             return (shotgun, shotgunRollback);

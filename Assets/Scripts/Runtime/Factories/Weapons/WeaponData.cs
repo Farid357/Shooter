@@ -10,7 +10,7 @@ namespace Shooter.GameLogic
 
         [field: SerializeField] public IBulletsView BulletsView { get; private set; }
 
-        [field: SerializeField] public IShotSound ShotSound { get; private set; }
+        [field: SerializeField] public IShotView ShotView { get; private set; }
 
         [field: SerializeField] public int Bullets { get; private set; }
     }
