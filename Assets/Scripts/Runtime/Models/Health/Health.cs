@@ -6,16 +6,33 @@ namespace Shooter.Model
     public sealed class Health : IHealth
     {
         private readonly IHealthView _view;
-
+        
         public Health(int amount, IHealthView view)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             Value = amount.TryThrowLessThanOrEqualsToZeroException();
+            StartValue = Value;
             _view.Visualize(Value);
         }
 
-        public int Value { get; private set; }
+        public int StartValue { get; }
         
+        public int Value { get; private set; }
+
+        public void Heal(in int amount)
+        {
+            if (IsAlive == false)
+                throw new InvalidOperationException("Health is not alive!");
+
+            if (CanHeal(amount) == false)
+                throw new InvalidOperationException(nameof(Heal));
+            
+            Value += amount.TryThrowLessThanOrEqualsToZeroException();
+            _view.Visualize(Value);
+        }
+
+        public bool CanHeal(in int amount) => Value + amount <= StartValue;
+
         public bool IsAlive => Value > 0;
 
         public void TakeDamage(in int damage)

@@ -7,31 +7,31 @@ namespace Shooter.GameLogic
 {
     public sealed class CharacterMovementInput : IUpdateble, IFixedUpdatable
     {
-        private readonly (KeyCode Key, Vector3 Direction)[] _datas =
-        {
-            new(KeyCode.W, Vector3.forward),
-            new(KeyCode.S, Vector3.back),
-            new(KeyCode.A, Vector3.left),
-            new(KeyCode.D, Vector3.right)
-        };
-
+        private readonly (KeyCode Key, CharacterDirection CharacterDirection)[] _datas;
         private readonly CharacterMovement _movement;
         private Vector3 _direction;
-        
+
         private bool NeedJump => Input.GetKeyDown(KeyCode.Space) && _movement.OnGround;
 
         public CharacterMovementInput(CharacterMovement movement)
         {
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
+            _datas = new(KeyCode, CharacterDirection)[]
+            {
+                new(KeyCode.W, new CharacterDirectionForward(_movement)),
+                new(KeyCode.S, new CharacterDirectionBack(_movement)),
+                new(KeyCode.A, new CharacterDirectionLeft(_movement)),
+                new(KeyCode.D, new CharacterDirectionRight(_movement))
+            };
         }
 
         public void Update(float deltaTime)
         {
             if (_datas.Any(data => Input.GetKey(data.Key)))
             {
-                _direction = _datas.First(data => Input.GetKey(data.Key)).Direction;
+                _direction = _datas.First(data => Input.GetKey(data.Key)).CharacterDirection.GetDirection();
             }
-            
+
             else
             {
                 _direction = Vector3.zero;

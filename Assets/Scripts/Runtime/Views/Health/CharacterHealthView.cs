@@ -27,7 +27,7 @@ namespace Shooter.GameLogic
             _bar.value = health / 100f;
             var data = _screenBloodDatas.Find(bloodData => bloodData.NeedHealthForSprite <= health);
             _blood.sprite = data.Sprite;
-            
+            Debug.Log("k");
             if(health == 0)
                 _characterDeathView.VisualizeDeath();
         }

@@ -1,10 +1,10 @@
 ﻿using Shooter.Model;
+using Shooter.Tools;
 
 namespace Shooter.GameLogic
 {
-    public interface IWeaponFactory
+    public interface IWeaponFactory : IFactory<IWeapon>
     {
-        public (IWeapon Weapon, IWeaponWithRollback Rollback) CreateShotgun(WeaponData data);
-        public (IWeapon Weapon, IWeaponWithRollback Rollback) CreateAk74(WeaponData data);
+
     }
 }

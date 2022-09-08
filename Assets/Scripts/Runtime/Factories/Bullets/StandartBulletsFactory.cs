@@ -20,9 +20,10 @@ namespace Shooter.GameLogic
 
         public override IBullet Create()
         {
-            var bullet = Instantiate(_prefab);
+            var bullet = _pool.Get();
             bullet.transform.position = _spawnPoint.position;
             bullet.gameObject.SetActive(true);
+            Debug.Log(gameObject.name);
             return bullet;
         }
     }

@@ -44,9 +44,9 @@ namespace Shooter.GameLogic
             for (var i = 0; i < _bullets; i++)
             {
                 var bullet = _pool.Get();
+                bullet.transform.position = _spawnPoint.position;
+                bullet.transform.SetPositionX(xPosition).SetRotationZ(zRotation).SetRotationX(-90);
                 bullet.gameObject.SetActive(true);
-                bullet.transform.SetXPosition(xPosition);
-                bullet.transform.SetZRotation(zRotation);
                 xPosition += _xOffset;
                 zRotation += _rotationZOffset;
                 yield return bullet;

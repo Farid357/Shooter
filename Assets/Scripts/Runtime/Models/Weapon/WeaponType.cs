@@ -4,6 +4,6 @@
     {
         Ak74,
         Shotgun,
-        Other
+        Pistol
     }
 }

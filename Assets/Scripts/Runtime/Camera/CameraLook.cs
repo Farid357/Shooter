@@ -1,4 +1,3 @@
-using System;
 using Shooter.Model;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,8 +17,6 @@ namespace Shooter.GameLogic
         private Vector3 _rotation;
         private Vector3 _smoothRotation;
 
-        private void Awake() => Cursor.visible = false;
-
         private void Update()
         {
             _rotation.x += Input.GetAxis("Mouse X") * _sensivity;
@@ -27,7 +24,7 @@ namespace Shooter.GameLogic
             _rotation.y = Mathf.Clamp(_rotation.y, _minYClamp, _maxYClamp);
             _smoothRotation = ToSmooth(_rotation);
             transform.rotation = Quaternion.Euler(-_smoothRotation.y, _smoothRotation.x, 0f);
-            _character.Rotate(new Vector3(0f, -_smoothRotation.y, 0f));
+            _character.Rotate(new Vector3(0f, _rotation.x, 0f));
         }
 
         private Vector3 ToSmooth(Vector3 rotation)

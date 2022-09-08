@@ -3,6 +3,7 @@ using Shooter.GameLogic;
 using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
+using Shooter.Tools;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Shooter.Root
         [SerializeField] private IInventoryView _inventoryView;
         [SerializeField] private Dictionary<KeyCode, int> _keypadNumbers;
         [SerializeField] private PlayerRoot _playerRoot;
+        [SerializeField] private StandartBulletsFactory _explosiveBulletsFactory;
         
         [VerticalGroup("Start Weapon")]
         [SerializeField] private ItemData _weaponItemData;
@@ -25,22 +27,41 @@ namespace Shooter.Root
         
         [VerticalGroup("Start Weapon")]
         [SerializeField] private WeaponData _weaponData;
+
+        [VerticalGroup("Start Weapon")]
+        [SerializeField] private ItemGameObjectView _itemGameObjectView;
         
         private IWeapon _weapon;
         private SystemUpdate _systemUpdate;
-
+        private readonly List<BulletsFactory> _weaponFactories = new();
+        
         public override void Compose()
         {
             _systemUpdate = new SystemUpdate();
-            _bulletsFactory.Init(_systemUpdate);
-            var pickups = FindObjectsOfType<WeaponPickup>();
-            IWeaponFactory factory = new WeaponFactory(_shotgunBulletsFactory, _bulletsFactory);
+            _weaponFactories.AddRange(_bulletsFactory, _shotgunBulletsFactory, _explosiveBulletsFactory);
+            _weaponFactories.ForEach(factory => factory.Init(_systemUpdate));
+
+            IWeaponFactory factory = new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _weaponData);
             var inventory = new Inventory<IWeapon>(_inventoryView);
-            _weapon = factory.CreateAk74(_weaponData).Weapon;
-            pickups.ForEach(pickup => pickup.Init(inventory, factory));
-            var item = new Item<IWeapon>(_weaponItemData, _weapon, Instantiate(_weaponItemViewPrefab));
+            _weapon = factory.Create();
+            
+            InitPickups<Ak74Pickup>(_bulletsFactory, inventory);
+            InitPickups<ShotgunPickup>(_shotgunBulletsFactory, inventory);
+            InitPickups<PistolPickup>(_bulletsFactory, inventory);
+            InitPickups<RpgPickup>(_explosiveBulletsFactory, inventory);
+
+            var itemView = Instantiate(_weaponItemViewPrefab);
+            itemView.Init(_itemGameObjectView);
+            itemView.Show();
+            var item = new Item<IWeapon>(_weaponItemData, _weapon, itemView);
             inventory.Add(item, 1);
             _systemUpdate.Add(new InventoryItemsSelector<IWeapon>(item, inventory, _keypadNumbers, _playerRoot.Compose(_weapon)));
+        }
+
+        private void InitPickups<T>(IFactory<IBullet> bulletsFactory, IInventory<IWeapon> inventory) where  T : MonoBehaviour, IWeaponPickup
+        {
+            var pickups = FindObjectsOfType<T>();
+            pickups.ForEach(pickup => pickup.Init(bulletsFactory, inventory));
         }
         
         private void Update() => _systemUpdate.Update(Time.deltaTime);

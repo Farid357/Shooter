@@ -33,6 +33,6 @@ namespace Shooter.Model.Inventory
             _inventoryView.VisualizeItem(item.Data, count);
         }
 
-        public bool Contains(int index) => _items.Count < index.TryThrowLessThanOrEqualsToZeroException();
+        public bool Contains(int index) => _items.Count > index;
     }
 }

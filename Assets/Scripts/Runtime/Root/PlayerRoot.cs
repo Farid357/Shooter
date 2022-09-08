@@ -14,6 +14,7 @@ namespace Shooter.Root
         [SerializeField] private HealthTransformView _characterTransformView;
         [SerializeField] private IToggle _soundToggle;
         [SerializeField] private CharacterMovement _movement;
+        [SerializeField, Range(10, 90)] private int _regeneration = 10;
         
         private SystemUpdate _systemUpdate;
         private CharacterMovementInput _movementInput;
@@ -26,6 +27,7 @@ namespace Shooter.Root
             var health = new Health(_characterHealth, _healthView);
             _characterTransformView.Init(health);
             var player = new Player.Player(new WeaponKeyboardInput(), weapon);
+           // IUpdateble regeneration = new Regeneration(health, _regeneration);
             _systemUpdate.Add(player, _movementInput);
             return player;
         }
