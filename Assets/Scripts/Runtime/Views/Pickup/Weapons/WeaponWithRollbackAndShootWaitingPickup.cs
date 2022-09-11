@@ -11,7 +11,10 @@ namespace Shooter.GameLogic
         public void Init(IFactory<IBullet> bulletsFactory, IInventory<IWeapon> inventory)
         {
             var weaponFactory = new WeaponFactoryWithShootWaitingAndRollback(bulletsFactory, _weaponPickup.Data);
-            _weaponPickup.Init(inventory, weaponFactory.Create());
+            _weaponPickup.Init(inventory, Create(weaponFactory.Create()));
         }
+
+        protected abstract IWeapon Create(IWeapon weapon);
+        
     }
 }

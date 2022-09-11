@@ -17,7 +17,7 @@ namespace Shooter.Model
         {
             var random = new Random().Next(0, 100);
 
-            if (random < 101)
+            if (random < 25)
             {
                 var randomIndex = new Random().Next(0, _abilities.Length);
                 return new AbilityReward(_abilities[randomIndex]);

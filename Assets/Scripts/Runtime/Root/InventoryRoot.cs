@@ -45,7 +45,8 @@ namespace Shooter.Root
             InitPickups<ShotgunPickup>(_shotgunBulletsFactory, inventory);
             InitPickups<PistolPickup>(_bulletsFactory, inventory);
             InitPickups<RpgPickup>(_explosiveBulletsFactory, inventory);
-
+            InitPickups<BulletsPickup>(inventory);
+            
             var itemView = Instantiate(_weaponItemViewPrefab);
             itemView.Init(_itemGameObjectView);
             itemView.Show();
@@ -58,6 +59,12 @@ namespace Shooter.Root
         {
             var pickups = FindObjectsOfType<T>();
             pickups.ForEach(pickup => pickup.Init(bulletsFactory, inventory));
+        }
+        
+        private void InitPickups<T>(IInventory<IWeapon> inventory) where  T : MonoBehaviour, IBulletsPickup
+        {
+            var pickups = FindObjectsOfType<T>();
+            pickups.ForEach(pickup => pickup.Init(inventory));
         }
         
         private void Update() => _systemUpdate.Update(Time.deltaTime);
