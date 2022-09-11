@@ -1,21 +1,52 @@
-﻿using Shooter.Model;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Shooter.Model;
+using Shooter.Tools;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class StandartBulletCollision : BulletCollision
+    [RequireComponent(typeof(Collider))]
+    public sealed class StandartBulletCollision : BulletCollision, IBulletCollision
     {
-        [SerializeField, Min(1)] private int _damage = 2;
+        [SerializeField, ProgressBar(2, 100)] private int _damage = 2;
+        private bool _canIncreaseDamage;
         
-        protected override void OnCollide(IHealth health, Vector3 point)
+        public override bool CanIncreaseDamage => _canIncreaseDamage;
+
+        public override int Damage => _damage;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            Attack(health);
+            if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))
+            {
+                Attack(healthTransformView.Health);
+            }
+
+            gameObject.SetActive(false);
         }
+
+        public override void IncreaseDamageForSeconds(int damage, float seconds) => StartIncreaseDamageForSeconds(damage, seconds);
 
         private void Attack(IHealth health)
         {
             if (health.IsAlive)
-                health.TakeDamage(_damage);
+                health.TakeDamage(Damage);
+        }
+        
+        private async UniTaskVoid StartIncreaseDamageForSeconds(int damage, float seconds)
+        {
+            var startDamage = Damage;
+            SetDamage(damage, false);
+            await UniTask.Delay(TimeSpan.FromSeconds(seconds));
+            SetDamage(startDamage, true);
+        }
+
+        private void SetDamage(int damage, bool canIncreaseDamage)
+        {
+            _damage = damage.TryThrowLessThanOrEqualsToZeroException();
+            _canIncreaseDamage = canIncreaseDamage == CanIncreaseDamage ? throw new InvalidOperationException(nameof(SetDamage)) : canIncreaseDamage;
         }
     }
 }

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEngine.Networking;
+
 [ExecuteInEditMode]
 public class LightingTools_Offer : MonoBehaviour {
 
@@ -62,6 +64,7 @@ public class LightingTools_Offer : MonoBehaviour {
 	}
 
 	int loaded;
+	[Obsolete("Obsolete")]
 	IEnumerator ReadImages()
 	{
 		for(int b = 0;b<ImagesURL.Length;b++)
@@ -80,10 +83,12 @@ public class LightingTools_Offer : MonoBehaviour {
 		}
 		isLoading = false;
 	}
+	
+	[Obsolete("Obsolete")]
 	IEnumerator ReadLinks()
 	{
 		// Read Link URLs
-		www = new WWW (gameLinks);
+		www = new WWW(gameLinks);
 
 		yield return www;
 

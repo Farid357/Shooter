@@ -31,7 +31,7 @@ namespace Shooter.Model
             _view.Visualize(Value);
         }
 
-        public bool CanHeal(in int amount) => Value + amount <= StartValue;
+        public bool CanHeal(in int amount) => Value + amount <= StartValue && IsAlive;
 
         public bool IsAlive => Value > 0;
 

@@ -18,6 +18,12 @@ namespace Shooter.Model
 
         public bool CanShoot => _weapon.CanShoot && _notNeedWaiting;
 
+        public void VisualizeBullets() => _weapon.VisualizeBullets();
+
+        public void AddBullets(int bullets) => _weapon.AddBullets(bullets);
+
+        public int Bullets => _weapon.Bullets;
+
         public void Shoot()
         {
             if (CanShoot == false)

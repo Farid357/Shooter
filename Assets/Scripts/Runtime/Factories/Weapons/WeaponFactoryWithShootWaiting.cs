@@ -17,7 +17,7 @@ namespace Shooter.GameLogic
         
         public IWeapon Create()
         {
-            var weapon = new Weapon(_bulletsFactory, _data.ShotView);
+            var weapon = new Weapon(_bulletsFactory, _data.ShotView, _data.BulletsView, _data.Bullets);
             var weaponWithShotWaiting = new WeaponWithShotWaiting(weapon, _data.WaitSeconds);
             return weaponWithShotWaiting;
         }

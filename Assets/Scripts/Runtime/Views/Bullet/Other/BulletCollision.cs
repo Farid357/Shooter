@@ -1,22 +1,13 @@
-﻿using Shooter.Model;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    [RequireComponent(typeof(Collider))]
-    public abstract class BulletCollision : MonoBehaviour
+    public abstract class BulletCollision : MonoBehaviour, IBulletCollision
     {
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))
-            {
-                OnCollide(healthTransformView.Health, collision.transform.position);
-            }
-
-            gameObject.SetActive(false);
-        }
-
-        protected abstract void OnCollide(IHealth health, Vector3 point);
+        public abstract void IncreaseDamageForSeconds(int damage, float seconds);
         
+        public abstract bool CanIncreaseDamage { get; }
+        
+        public abstract int Damage { get; }
     }
 }

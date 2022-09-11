@@ -24,10 +24,10 @@ namespace Shooter.GameLogic
 
         public void Visualize(int health)
         {
-            _bar.value = health / 100f;
+            _bar.size = health / 100f;
             var data = _screenBloodDatas.Find(bloodData => bloodData.NeedHealthForSprite <= health);
             _blood.sprite = data.Sprite;
-            Debug.Log("k");
+            
             if(health == 0)
                 _characterDeathView.VisualizeDeath();
         }

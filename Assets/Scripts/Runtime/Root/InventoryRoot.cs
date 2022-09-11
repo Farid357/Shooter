@@ -33,14 +33,10 @@ namespace Shooter.Root
         
         private IWeapon _weapon;
         private SystemUpdate _systemUpdate;
-        private readonly List<BulletsFactory> _weaponFactories = new();
-        
+
         public override void Compose()
         {
             _systemUpdate = new SystemUpdate();
-            _weaponFactories.AddRange(_bulletsFactory, _shotgunBulletsFactory, _explosiveBulletsFactory);
-            _weaponFactories.ForEach(factory => factory.Init(_systemUpdate));
-
             IWeaponFactory factory = new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _weaponData);
             var inventory = new Inventory<IWeapon>(_inventoryView);
             _weapon = factory.Create();

@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5980f2d360034166b184ced3390fff98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionView: {fileID: 0}
+  _explosionView: {fileID: 8589735900294023207}
   _healthTransformView: {fileID: 2450762097572860696}
   _health: 15
 --- !u!114 &8589735900294023207
@@ -158,4 +158,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particlePrefab: {fileID: 8976503813493468718, guid: 854e31ca019074f45b3789984b498305, type: 3}
   _sound: {fileID: 0}
-  _explosion: {fileID: 0}
+  _explosion: {fileID: 3558312835779736951, guid: 6b218d14c43805046a8ef735d3d862c8, type: 3}

@@ -19,7 +19,7 @@ namespace Shooter.Model.Inventory
         public bool ObjectIsWeapon(out IWeapon weapon)
         {
             weapon = Object as IWeapon;
-            return weapon is null;
+            return weapon is not null;
         }
     }
 }

@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using Shooter.Model;
+using Shooter.Tools;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
     public sealed class Explosion : MonoBehaviour
     {
-        [SerializeField, Range(1, 100)] private int _damage = 10;
         [SerializeField, Min(0.1f)] private float _radius = 1.5f;
 
-        public void Thunder()
+        public void Thunder(int damage)
         {
             var colliders = new Collider[2000];
             var count = Physics.OverlapSphereNonAlloc(transform.position, _radius, colliders);
@@ -18,20 +18,20 @@ namespace Shooter.GameLogic
             {
                 foreach (var collider in colliders.Where(collider1 => collider1 is not null))
                 {
-                    Debug.Log(collider.gameObject.name);
                     if (collider.TryGetComponent(out IHealthTransformView healthTransformView))
                     {
-                        Debug.Log("check");
-                        TryDamage(healthTransformView.Health);
+                        TryDamage(healthTransformView.Health, damage);
                     }
                 }
             }
         }
 
-        private void TryDamage(IHealth health)
+        private void TryDamage(IHealth health, int damage)
         {
+            damage.TryThrowLessThanOrEqualsToZeroException();
+            
             if (health.IsAlive)
-                health.TakeDamage(_damage);
+                health.TakeDamage(damage);
         }
 
         private void OnDrawGizmosSelected()

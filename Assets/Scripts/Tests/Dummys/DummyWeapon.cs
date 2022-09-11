@@ -1,13 +1,24 @@
 ﻿using Shooter.Model;
-using Shooter.Test;
 
-public sealed class DummyWeapon : IWeapon
+namespace Shooter.Test
 {
-    public void Shoot()
+    public sealed class DummyWeapon : IWeapon
     {
-        
-    }
+        public void Shoot()
+        {
+        }
 
-    public bool CanShoot => true;
-    
+        public void VisualizeBullets()
+        {
+            
+        }
+
+        public bool CanShoot => true;
+
+        public void AddBullets(int bullets)
+        {
+        }
+
+        public int Bullets { get; }
+    }
 }

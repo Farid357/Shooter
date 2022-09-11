@@ -9,11 +9,12 @@ namespace Shooter.GameLogic
 {
     public sealed class StandartEnemyFactory : SerializedMonoBehaviour, IFactory<IEnemyMovement>
     {
-        [SerializeField] private ICharacterTransform _character;
-        [SerializeField] private IHealthTransformView _characterTransformView;
+        [SerializeField] private ICharacterMovement _character;
+        [SerializeField] private IHealthTransformView _characterHealthTransformView;
+
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Enemy _prefab;
-        
+
         private IndependentPool<Enemy> _pool;
         private IWallet _wallet;
 
@@ -29,7 +30,7 @@ namespace Shooter.GameLogic
             var enemy = _pool.Get();
             enemy.transform.position = _spawnPoint.position;
             enemy.gameObject.SetActive(true);
-            enemy.Init(_character, _characterTransformView, _wallet);
+            enemy.Init(_character, _characterHealthTransformView.Health, _characterHealthTransformView, _wallet);
             return enemy.Movement;
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using Shooter.GameLogic;
 using Shooter.Model;
+using UnityEngine;
 
 namespace Shooter.Player
 {
@@ -18,6 +19,7 @@ namespace Shooter.Player
         public void SwitchWeapon(IWeapon weapon)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
+            _weapon.VisualizeBullets();
         }
 
         public void Update(float deltaTime)

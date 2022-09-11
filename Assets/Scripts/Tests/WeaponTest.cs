@@ -8,7 +8,7 @@ namespace Shooter.Test
         [Test]
         public void WeaponWithRollbackCalculateBulletsCorrectly()
         {
-            var weapon = new WeaponWithRollback(new DummyWeapon(), new DummyBulletsView(), 10);
+            var weapon = new Weapon(new DummyBulletsFactory(), new DummyShotView(), new DummyBulletsView(), 10);
             weapon.Shoot();
             Assert.That(weapon.Bullets == 9);
         }
@@ -17,7 +17,7 @@ namespace Shooter.Test
         public void WeaponVisualizeBulletsCorrectly()
         {
             var view = new DummyBulletsView();
-            var weapon = new WeaponWithRollback(new DummyWeapon(), view, 10);
+            var weapon = new Weapon(new DummyBulletsFactory(), new DummyShotView(), view, 10);
             weapon.Shoot();
             Assert.That(view.Bullets == 9);
         }

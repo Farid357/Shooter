@@ -21,7 +21,7 @@ namespace Shooter.GameLogic.Inventory
             _lastSelectedItem = startSelectedItem;
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
             _keypadNumbers = keypadNumbers ?? throw new ArgumentNullException(nameof(keypadNumbers));
-            _player = player ?? throw  new ArgumentNullException(nameof(player));
+            _player = player ?? throw new ArgumentNullException(nameof(player));
         }
 
         public void Update(float deltaTime)
@@ -36,7 +36,7 @@ namespace Shooter.GameLogic.Inventory
                         var item = _inventory.Items.ElementAt(number);
                         item.View.Show();
                         _lastSelectedItem = item;
-                        
+
                         if (item.ObjectIsWeapon(out var weapon))
                             _player.SwitchWeapon(weapon);
                     }
