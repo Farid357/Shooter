@@ -1,10 +1,7 @@
-﻿using Shooter.Model;
-
-namespace Shooter.GameLogic
+﻿namespace Shooter.GameLogic
 {
-    public sealed class ShotgunPickup : WeaponWithRollbackAndShootWaitingPickup, IWeaponPickup
+    public sealed class ShotgunPickup : WeaponPickup
     {
-        protected override IWeapon Create(IWeapon weapon) => new Shotgun(weapon);
         
     }
 }

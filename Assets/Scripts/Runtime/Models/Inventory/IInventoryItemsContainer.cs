@@ -4,9 +4,8 @@ namespace Shooter.Model.Inventory
 {
     public interface IInventoryItemsContainer<T>
     {
-        public IEnumerable<Item<T>> Items { get; }
+        public IEnumerable<(IItemSelector<T> Selector, Item<T> Item)> Slots { get; }
 
         public bool Contains(int index);
-        
     }
 }

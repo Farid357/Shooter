@@ -11,21 +11,23 @@ namespace Shooter.Test
     public sealed class InventoryTest
     {
         private Inventory<IWeapon> _inventory;
-        private ItemData _itemData;
         private DummyInventoryView _inventoryView = new();
-
+        private (IItemSelector<IWeapon>, Item<IWeapon>) _slot;
+        
         [SetUp]
         public void Setup()
         {
             _inventory = new Inventory<IWeapon>(_inventoryView);
-            _itemData = ScriptableObject.CreateInstance<ItemData>();
+            var itemData = ScriptableObject.CreateInstance<ItemData>();
+            var item = new Item<IWeapon>(itemData, new DummyWeapon(), new DummyItemView());
+            _slot = (new DummyItemSelector<IWeapon>(), item);
         }
             
         [Test]
         public void InventoryAddsItemCorrect()
         {
-            _inventory.Add(new Item<IWeapon>(_itemData, new DummyWeapon(), new DummyItemView()), 1);
-            Assert.That(_inventory.Items.Count() == 1);
+            _inventory.Add(_slot, 1);
+            Assert.That(_inventory.Slots.Count() == 1);
         }
 
         [Test]
@@ -33,7 +35,7 @@ namespace Shooter.Test
         {
             for (var i = 0; i < 10; i++)
             {
-                _inventory.Add(new Item<IWeapon>(_itemData, new DummyWeapon(), new DummyItemView()), 1);
+                _inventory.Add(_slot, 1);
             }
             
             Assert.That(_inventory.IsFull);
@@ -42,7 +44,7 @@ namespace Shooter.Test
         [Test]
         public void InventoryVisualizeNewItem()
         {
-            _inventory.Add(new Item<IWeapon>(_itemData, new DummyWeapon(), new DummyItemView()), 1);
+            _inventory.Add(_slot, 1);
             Assert.That(_inventoryView.IsVisualized);
         }
     }

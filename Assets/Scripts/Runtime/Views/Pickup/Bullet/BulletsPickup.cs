@@ -1,31 +1,33 @@
 ﻿using System;
+using System.Linq;
 using Shooter.GameLogic;
+using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public abstract class BulletsPickup : MonoBehaviour, IBulletsPickup
+public sealed class BulletsPickup : MonoBehaviour, IBulletsPickup
 {
     [SerializeField, Min(1)] private int _addBullets = 10;
+    [SerializeField] private ItemData _weaponTypeForAddBullets;
 
-    private IInventory<IWeapon> _inventory;
+    private IInventory<(IWeapon, IWeaponInput)> _inventory;
 
-    protected abstract Type WeaponTypeForAddBullets { get; }
-
-    public void Init(IInventory<IWeapon> inventory)
+    public void Init(IInventory<(IWeapon, IWeaponInput)> inventory)
     {
         _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<CharacterMovement>())
+        if (collision.gameObject.GetComponent<CharacterMovement>() != null)
         {
-            foreach (var item in _inventory.Items)
+            foreach (var item in _inventory.Slots.Select(slot => slot.Item))
             {
-                if (WeaponTypeForAddBullets == item.Object.GetType())
+                if (item.Data.Name == _weaponTypeForAddBullets.Name)
                 {
-                    item.Object.AddBullets(_addBullets);
+                    var weapon = item.Model.Item1;
+                    weapon.AddBullets(_addBullets);
                 }
             }
 

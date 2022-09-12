@@ -7,6 +7,8 @@ namespace Shooter.Root
         public void Add(IUpdateble updateble);
 
         public void Add(params IUpdateble[] updatebles);
+
+        public void Remove(IUpdateble updateble);
         
     }
 }

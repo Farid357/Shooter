@@ -6,7 +6,7 @@ namespace Shooter.Model
     {
         public bool IsFull { get; }
         
-        public void Add(Item<T> item, int count);
+        public void Add((IItemSelector<T> Selector, Item<T> Item) slot, int itemCount);
         
     }
 }

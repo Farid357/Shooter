@@ -24,9 +24,18 @@ namespace Shooter.Root
             _updatebles.AddRange(updatebles);
         }
 
-        public void Update(float deltaTime)
+        public void Remove(IUpdateble updateble)
         {
-            _updatebles.ForEach(updateble => updateble.Update(deltaTime));
+            if (_updatebles.Contains(updateble) == false)
+                throw new InvalidOperationException(nameof(Remove));
+            
+            if(updateble is null)
+                throw new ArgumentNullException(nameof(updateble));
+
+            _updatebles.Remove(updateble);
         }
+
+        public void Update(float deltaTime) => _updatebles.ForEach(updateble => updateble.Update(deltaTime));
+        
     }
 }
