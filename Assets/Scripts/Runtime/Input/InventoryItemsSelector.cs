@@ -1,42 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Shooter.Model;
-using Shooter.Model.Inventory;
-using UnityEngine;
 
-namespace Shooter.GameLogic.Inventory
+namespace Shooter.Model.Inventory
 {
-    public sealed class InventoryItemsSelector<T> : IUpdateble
+    public sealed class InventoryItemsSelector<TItem> : IInventoryItemsSelector
     {
-        private readonly IInventoryItemsContainer<T> _inventory;
-        private readonly IReadOnlyDictionary<KeyCode, int> _keypadNumbers;
-        private Item<T> _lastSelectedItem;
+        private readonly IReadOnlyInventory<TItem> _inventory;
+        private Item<TItem> _lastSelectedItem;
 
-        public InventoryItemsSelector(Item<T> startSelectedItem, IInventoryItemsContainer<T> inventory, IReadOnlyDictionary<KeyCode, int> keypadNumbers)
+        public InventoryItemsSelector(IReadOnlyInventory<TItem> inventory)
         {
-            _lastSelectedItem = startSelectedItem;
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
-            _keypadNumbers = keypadNumbers ?? throw new ArgumentNullException(nameof(keypadNumbers));
         }
 
-        public void Update(float deltaTime)
+        public void Select(int index)
         {
-            foreach (var (key, number) in _keypadNumbers)
-            {
-                if (Input.GetKeyDown(key))
-                {
-                    if (_inventory.Contains(number))
-                    {
-                        _lastSelectedItem.View.Hide();
-                        var item = _inventory.Slots.ElementAt(number).Item;
-                        var selector = _inventory.Slots.ElementAt(number).Selector;
-                        item.View.Show();
-                        selector.Select(item.Model);
-                        _lastSelectedItem = item;
-                    }
-                }
-            }
+            if (CanSelect(index) == false)
+                throw new InvalidOperationException(nameof(Select));
+            
+            _lastSelectedItem.View?.Hide();
+            var slot = _inventory.Slots.ElementAt(index);
+            slot.Item.View.Show();
+            slot.ItemSelector.Select(slot.Item.Model);
+            _lastSelectedItem = slot.Item;
         }
+
+        public bool CanSelect(int index) => _inventory.Contains(index);
     }
 }

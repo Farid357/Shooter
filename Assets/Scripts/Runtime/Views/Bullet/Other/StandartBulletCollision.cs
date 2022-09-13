@@ -37,6 +37,9 @@ namespace Shooter.GameLogic
         
         private async UniTaskVoid StartIncreaseDamageForSeconds(int damage, float seconds)
         {
+            if (_damage >= damage || CanIncreaseDamage == false)
+                throw new InvalidOperationException(nameof(StartIncreaseDamageForSeconds));
+            
             var startDamage = Damage;
             SetDamage(damage, false);
             await UniTask.Delay(TimeSpan.FromSeconds(seconds));

@@ -32,7 +32,7 @@ namespace Shooter.GameLogic
                 if (_inventory.IsFull == false && _enable)
                 {
                     var item = new Item<(IWeapon, IWeaponInput)>(_itemData, _weapon, _itemView);
-                    var slot = (new WeaponSelector(_playerRoot), item);
+                    var slot = new InventorySlot<(IWeapon, IWeaponInput)>(new WeaponSelector(_playerRoot), item);
                     _inventory.Add(slot, 1);
                     gameObject.SetActive(false);
                     _enable = false;

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.GameLogic
@@ -28,7 +29,7 @@ namespace Shooter.GameLogic
 
         public override void IncreaseDamageForSeconds(int damage, float seconds)
         {
-         
+            throw new InvalidOperationException("This bullet can't increase damage!");
         }
     }
 }

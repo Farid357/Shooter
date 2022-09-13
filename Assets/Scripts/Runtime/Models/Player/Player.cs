@@ -1,25 +1,18 @@
 using System;
 using Shooter.GameLogic;
 using Shooter.Model;
-using UnityEngine;
 
 namespace Shooter.Player
 {
-    public sealed class Player : IPlayer, IUpdateble
+    public sealed class Player : IUpdateble
     {
         private readonly IWeaponInput _weaponInput;
-        private IWeapon _weapon;
+        private readonly IWeapon _weapon;
 
         public Player(IWeaponInput weaponInput, IWeapon weapon)
         {
             _weaponInput = weaponInput ?? throw new ArgumentNullException(nameof(weaponInput));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-        }
-
-        public void SwitchWeapon(IWeapon weapon)
-        {
-            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            _weapon.VisualizeBullets();
         }
 
         public void Update(float deltaTime)

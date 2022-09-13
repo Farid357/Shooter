@@ -7,14 +7,14 @@ namespace Shooter.Tools
         public static Transform SetRotationZ(this Transform transform, float z)
         {
             var rotation = transform.rotation;
-            transform.rotation = new Quaternion(rotation.x, rotation.y, z, rotation.w);
+            transform.rotation = Quaternion.Euler(new Vector3(rotation.x, rotation.y, z));
             return transform;
         }
 
         public static Transform SetRotationX(this Transform transform, float x)
         {
             var rotation = transform.rotation;
-            transform.rotation = new Quaternion(x, rotation.y, rotation.z, rotation.w);
+            transform.rotation =  Quaternion.Euler(new Vector3(x, rotation.y, rotation.z));
             return transform;
         }
     }

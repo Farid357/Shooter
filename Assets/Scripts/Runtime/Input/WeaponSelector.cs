@@ -16,8 +16,10 @@ namespace Shooter.GameLogic.Inventory
 
         public void Select((IWeapon, IWeaponInput) item)
         {
-            var (weapon, weaponInput) = item;
-            _playerRoot.Compose(weapon, weaponInput);
+            var input = item.Item2;
+            var weapon = item.Item1;
+            _playerRoot.Compose(weapon, input);
+            weapon.VisualizeBullets();
         }
     }
 }

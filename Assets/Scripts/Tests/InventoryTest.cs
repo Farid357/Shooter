@@ -12,7 +12,7 @@ namespace Shooter.Test
     {
         private Inventory<IWeapon> _inventory;
         private DummyInventoryView _inventoryView = new();
-        private (IItemSelector<IWeapon>, Item<IWeapon>) _slot;
+        private InventorySlot<IWeapon> _slot;
         
         [SetUp]
         public void Setup()
@@ -20,7 +20,7 @@ namespace Shooter.Test
             _inventory = new Inventory<IWeapon>(_inventoryView);
             var itemData = ScriptableObject.CreateInstance<ItemData>();
             var item = new Item<IWeapon>(itemData, new DummyWeapon(), new DummyItemView());
-            _slot = (new DummyItemSelector<IWeapon>(), item);
+            _slot = new InventorySlot<IWeapon>(new DummyItemSelector<IWeapon>(), item);
         }
             
         [Test]

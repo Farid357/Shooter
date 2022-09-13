@@ -11,7 +11,7 @@ namespace Shooter.Root
         private readonly SystemUpdate _systemUpdate = new();
         private Player.Player _lastPlayer;
 
-        public IPlayer Compose(IWeapon weapon, IWeaponInput weaponInput)
+        public void Compose(IWeapon weapon, IWeaponInput weaponInput)
         {
             if (_lastPlayer is not null)
                 _systemUpdate.Remove(_lastPlayer);
@@ -19,7 +19,6 @@ namespace Shooter.Root
             var player = new Player.Player(weaponInput, weapon);
             _systemUpdate.Add(player);
             _lastPlayer = player;
-            return player;
         }
 
         private void Update() => _systemUpdate.Update(Time.deltaTime);

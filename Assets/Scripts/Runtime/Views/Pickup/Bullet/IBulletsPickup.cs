@@ -1,7 +1,10 @@
-﻿using Shooter.GameLogic;
-using Shooter.Model;
+﻿using Shooter.Model;
+using Shooter.Model.Inventory;
 
-public interface IBulletsPickup
+namespace Shooter.GameLogic.Inventory
 {
-    public void Init(IInventory<(IWeapon, IWeaponInput)> inventory);
+    public interface IBulletsPickup
+    {
+        public void Init(IReadOnlyInventory<(IWeapon, IWeaponInput)> inventory);
+    }
 }

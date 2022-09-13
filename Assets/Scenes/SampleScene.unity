@@ -599,9 +599,9 @@ MonoBehaviour:
     SerializationNodes: []
   _bullets: 3
   _prefab: {fileID: 8631178659134956742, guid: dd9915cd146f20644912751cceca7ec4, type: 3}
-  _minZRotation: 65
+  _minZRotation: -130
   _maxZRotation: 130
-  _xOffset: 0.2
+  _xOffset: 0.45
   _spawnPoint: {fileID: 293930643}
 --- !u!4 &65647204
 Transform:
@@ -10141,6 +10141,7 @@ GameObject:
   - component: {fileID: 1466578216}
   - component: {fileID: 1466578218}
   - component: {fileID: 1466578219}
+  - component: {fileID: 1466578220}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -10480,7 +10481,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 3
-      Data: 265
+      Data: 57
     - Name: $v
       Entry: 3
       Data: 9
@@ -10493,14 +10494,10 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _bulletsFactory: {fileID: 318032927}
   _shotgunBulletsFactory: {fileID: 65647203}
   _playerRoot: {fileID: 1466578219}
   _explosiveBulletsFactory: {fileID: 1299250593}
-  _rpgData: {fileID: 2009644647}
-  _pistolData: {fileID: 1972527820}
-  _shotgunData: {fileID: 480878658}
-  _ak74Data: {fileID: 360475567}
+  _pickupsRoot: {fileID: 1466578220}
   _weaponItemData: {fileID: 11400000, guid: a344bdd28acb5c64c93b136926bf00e2, type: 2}
   _weaponItemViewPrefab: {fileID: 6000020599734007912, guid: a43013573537f114ba1c073fb74f1960, type: 3}
   _startWeaponData: {fileID: 1466578217}
@@ -10526,6 +10523,26 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!114 &1466578220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466578210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d037d5f2b2c04ac39510a94a02b3f5d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletsFactory: {fileID: 318032927}
+  _shotgunBulletsFactory: {fileID: 65647203}
+  _rpgData: {fileID: 2009644647}
+  _pistolData: {fileID: 1972527820}
+  _shotgunData: {fileID: 480878658}
+  _ak74Data: {fileID: 360475567}
+  _explosiveBulletsFactory: {fileID: 1299250593}
+  _playerRoot: {fileID: 1466578219}
 --- !u!1001 &1468272102
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ namespace Shooter.GameLogic
 
         private async UniTaskVoid StartIncreaseSpeedForSeconds(float increaseSpeed, float seconds)
         {
-            if (CanIncreaseSpeed == false)
+            if (CanIncreaseSpeed == false || _speed >= increaseSpeed)
                 throw new InvalidOperationException(nameof(StartIncreaseSpeedForSeconds));
             
             var startSpeed = _speed;
