@@ -19,7 +19,7 @@ namespace Shooter.Model
         
         public int Value { get; private set; }
 
-        public void Heal(in int amount)
+        public void Heal(int amount)
         {
             if (IsAlive == false)
                 throw new InvalidOperationException("Health is not alive!");
@@ -31,11 +31,11 @@ namespace Shooter.Model
             _view.Visualize(Value);
         }
 
-        public bool CanHeal(in int amount) => Value + amount <= StartValue && IsAlive;
+        public bool CanHeal(int amount) => Value + amount <= StartValue && IsAlive;
 
         public bool IsAlive => Value > 0;
 
-        public void TakeDamage(in int damage)
+        public void TakeDamage(int damage)
         {
             if (IsAlive == false)
                 throw new InvalidOperationException("Health is not alive!");

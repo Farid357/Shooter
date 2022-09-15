@@ -47,7 +47,7 @@ namespace Shooter.GameLogic
             _navMesh.SetDestination(_character.Position);
         }
 
-        private async UniTask Rotate()
+        private async UniTaskVoid Rotate()
         {
             while (transform.rotation != _character.Rotation)
             {

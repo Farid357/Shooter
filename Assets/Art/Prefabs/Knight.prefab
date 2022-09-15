@@ -1715,6 +1715,8 @@ GameObject:
   - component: {fileID: 6500019009003649193}
   - component: {fileID: -3487531795680843037}
   - component: {fileID: 7959488039114093564}
+  - component: {fileID: 4756501893366018169}
+  - component: {fileID: 4090216670378948980}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -1730,13 +1732,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7337382032467732511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.4, y: -36.76, z: 16.4}
+  m_LocalScale: {x: 5.738043, y: 4.171138, z: 4.337454}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1308467126285705787}
   - {fileID: 6679149537199838135}
   - {fileID: 7463428137724017439}
+  - {fileID: 7835867451206628565}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1796,8 +1799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 15
   _attackAnimation: {fileID: 86605088875889185}
-  _radius: 0.5
-  _center: {fileID: 0}
+  _radius: 6.6
+  _center: {fileID: 7835867451206628565}
 --- !u!114 &828202209477806023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,7 +1847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggerSeconds: 0.7
-  _name: Knight Attack
+  _name: KnightAttack
 --- !u!195 &3110800727256099063
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1879,11 +1882,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f626fa46654043ba5176dd59036f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4756501893366018169}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _enemyHealthView
+      Entry: 10
+      Data: 0
   _attack: {fileID: 2600266487463633084}
   _healthCount: 25
-  _health: {fileID: 0}
-  _enemyHealthView: {fileID: 6500019009003649193}
-  <Movement>k__BackingField: {fileID: 828202209477806023}
+  _health: {fileID: 4090216670378948980}
+  _movement: {fileID: 828202209477806023}
+  _protection: 0
+  <Score>k__BackingField: 1
 --- !u!114 &6500019009003649193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1922,6 +1939,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.56, y: 2.34, z: 1}
   m_Center: {x: 0, y: 1.08, z: 0}
+--- !u!114 &4756501893366018169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337382032467732511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3384f998ee04766891b20f191f9412c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathView: {fileID: -3487531795680843037}
+--- !u!114 &4090216670378948980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337382032467732511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd2343020c241a7b81df91e918179ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7357643161733517285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,6 +2219,37 @@ Transform:
   - {fileID: 5472172134338479059}
   m_Father: {fileID: 3875198920585967668}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8401512141514079771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7835867451206628565}
+  m_Layer: 0
+  m_Name: KnightCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7835867451206628565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401512141514079771}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.08, y: 0.74, z: 0}
+  m_LocalScale: {x: 5.73804, y: 4.1711397, z: 4.33745}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7969206100331524773}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8446617572545762098
 GameObject:

@@ -8,10 +8,10 @@
         
         public int Value { get; }
 
-        public void TakeDamage(in int damage);
+        public void TakeDamage(int damage);
         
-        public void Heal(in int amount);
+        public void Heal(int amount);
         
-        public bool CanHeal(in int amount);
+        public bool CanHeal(int amount);
     }
 }

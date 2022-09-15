@@ -7,31 +7,39 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class StandartEnemyFactory : SerializedMonoBehaviour, IFactory<IEnemyMovement>
+    public sealed class StandartEnemyFactory : SerializedMonoBehaviour, IEnemyFactory
     {
         [SerializeField] private ICharacterMovement _character;
         [SerializeField] private IHealthTransformView _characterHealthTransformView;
 
-        [SerializeField] private Transform _spawnPoint;
+        [SerializeField] private Transform[] _spawnPoints;
         [SerializeField] private Enemy _prefab;
 
         private IndependentPool<Enemy> _pool;
-        private IWallet _wallet;
+        private IRewardFactory _rewardFactory;
+        private ISystemUpdate _systemUpdate;
+        private IScore _score;
 
-        public void Init(ISystemUpdate systemUpdate, IWallet wallet)
+        public void Init(ISystemUpdate systemUpdate, IRewardFactory rewardFactory, IScore score)
         {
-            _wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
+            _rewardFactory = rewardFactory ?? throw new ArgumentNullException(nameof(rewardFactory));
             _pool = new IndependentPool<Enemy>(new GameObjectsFactory<Enemy>(_prefab, transform));
-            systemUpdate.Add(_pool);
+
+            _systemUpdate = systemUpdate ?? throw new ArgumentNullException(nameof(systemUpdate));
+            _score = score ?? throw new ArgumentNullException(nameof(score));
+            _systemUpdate.Add(_pool);
         }
 
-        public IEnemyMovement Create()
+        public IEnemy Create()
         {
             var enemy = _pool.Get();
-            enemy.transform.position = _spawnPoint.position;
-            enemy.gameObject.SetActive(true);
-            enemy.Init(_character, _characterHealthTransformView.Health, _characterHealthTransformView, _wallet);
-            return enemy.Movement;
+            enemy.Init(_character, _characterHealthTransformView);
+            var reward = _rewardFactory.Create();
+            var enemyReward = new HealthDeathReward(enemy.Health, reward);
+            var scoreEnemyReward = new HealthDeathReward(enemy.Health, new ScoreReward(_score, enemy.Score));
+            enemy.transform.position = _spawnPoints.GetRandomFromArray().position;
+            _systemUpdate.Add(enemyReward, scoreEnemyReward);
+            return enemy;
         }
     }
 }

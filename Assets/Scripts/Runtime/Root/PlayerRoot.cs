@@ -21,6 +21,6 @@ namespace Shooter.Root
             _lastPlayer = player;
         }
 
-        private void Update() => _systemUpdate.Update(Time.deltaTime);
+        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
     }
 }

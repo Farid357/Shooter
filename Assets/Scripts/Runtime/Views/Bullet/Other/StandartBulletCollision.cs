@@ -12,7 +12,7 @@ namespace Shooter.GameLogic
     {
         [SerializeField, ProgressBar(2, 100)] private int _damage = 2;
         private bool _canIncreaseDamage;
-        
+
         public override bool CanIncreaseDamage => _canIncreaseDamage;
 
         public override int Damage => _damage;
@@ -27,23 +27,24 @@ namespace Shooter.GameLogic
             gameObject.SetActive(false);
         }
 
-        public override void IncreaseDamageForSeconds(int damage, float seconds) => StartIncreaseDamageForSeconds(damage, seconds);
+        public override void IncreaseDamageForSeconds(int damage, float seconds)
+        {
+            UniTask.Create(async () =>
+            {
+                if (_damage >= damage || CanIncreaseDamage == false)
+                    throw new InvalidOperationException(nameof(IncreaseDamageForSeconds));
+
+                var startDamage = Damage;
+                SetDamage(damage, false);
+                await UniTask.Delay(TimeSpan.FromSeconds(seconds));
+                SetDamage(startDamage, true);
+            });
+        }
 
         private void Attack(IHealth health)
         {
             if (health.IsAlive)
                 health.TakeDamage(Damage);
-        }
-        
-        private async UniTaskVoid StartIncreaseDamageForSeconds(int damage, float seconds)
-        {
-            if (_damage >= damage || CanIncreaseDamage == false)
-                throw new InvalidOperationException(nameof(StartIncreaseDamageForSeconds));
-            
-            var startDamage = Damage;
-            SetDamage(damage, false);
-            await UniTask.Delay(TimeSpan.FromSeconds(seconds));
-            SetDamage(startDamage, true);
         }
 
         private void SetDamage(int damage, bool canIncreaseDamage)

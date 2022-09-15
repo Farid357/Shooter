@@ -43,17 +43,18 @@ namespace Shooter.GameLogic
 
         public void Rotate(Vector3 euler) => transform.rotation = Quaternion.Euler(euler);
         
-        public void IncreaseSpeedForSeconds(float increaseSpeed, float seconds) => StartIncreaseSpeedForSeconds(increaseSpeed, seconds);
-
-        private async UniTaskVoid StartIncreaseSpeedForSeconds(float increaseSpeed, float seconds)
+        public void IncreaseSpeedForSeconds(float increaseSpeed, float seconds)
         {
-            if (CanIncreaseSpeed == false || _speed >= increaseSpeed)
-                throw new InvalidOperationException(nameof(StartIncreaseSpeedForSeconds));
+            UniTask.Create(async () =>
+            {
+                if (CanIncreaseSpeed == false || _speed >= increaseSpeed)
+                    throw new InvalidOperationException(nameof(IncreaseSpeedForSeconds));
             
-            var startSpeed = _speed;
-            SetSpeed(increaseSpeed, false);
-            await UniTask.Delay(TimeSpan.FromSeconds(seconds));
-            SetSpeed(startSpeed, true);
+                var startSpeed = _speed;
+                SetSpeed(increaseSpeed, false);
+                await UniTask.Delay(TimeSpan.FromSeconds(seconds));
+                SetSpeed(startSpeed, true);
+            });
         }
 
         private void SetSpeed(float speed, bool canIncreaseSpeed)

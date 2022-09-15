@@ -6,8 +6,8 @@ namespace Shooter.Model
     public sealed class Regeneration : IUpdateble
     {
         private readonly IHealth _health;
+        private readonly ITimer _timer;
         private readonly int _value;
-        private ITimer _timer;
 
         public Regeneration(IHealth health, ITimer timer, int value)
         {
@@ -16,20 +16,18 @@ namespace Shooter.Model
             _value = value.TryThrowLessThanOrEqualsToZeroException();
         }
 
-        public async void Update(float deltaTime)
+        public void Update(float deltaTime)
         {
             if (_health.Value < _health.StartValue)
             {
-                await _timer.End();
-                Heal(_health);
-                _timer = _timer.Restart();
+                if (_timer.IsEnded)
+                    Heal(_health);
             }
         }
 
         private void Heal(IHealth health)
         {
             var difference = health.StartValue - health.Value;
-            UnityEngine.Debug.Log(difference);
             health.Heal(difference < _value ? difference : _value);
         }
     }

@@ -1,38 +1,39 @@
 ﻿using System;
 using System.Linq;
-using Shooter.GameLogic;
-using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public sealed class BulletsPickup : MonoBehaviour, IBulletsPickup
+namespace Shooter.GameLogic.Inventory
 {
-    [SerializeField, Min(1)] private int _addBullets = 10;
-    [SerializeField] private ItemData _weaponTypeForAddBullets;
-
-    private IReadOnlyInventory<(IWeapon, IWeaponInput)> _inventory;
-
-    public void Init(IReadOnlyInventory<(IWeapon, IWeaponInput)> inventory)
+    [RequireComponent(typeof(Collider))]
+    public sealed class BulletsPickup : MonoBehaviour, IBulletsPickup
     {
-        _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
-    }
+        [SerializeField, Min(1)] private int _addBullets = 10;
+        [SerializeField] private ItemData _weaponTypeForAddBullets;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<CharacterMovement>() != null)
+        private IReadOnlyInventory<(IWeapon, IWeaponInput)> _inventory;
+
+        public void Init(IReadOnlyInventory<(IWeapon, IWeaponInput)> inventory)
         {
-            foreach (var item in _inventory.Slots.Select(slot => slot.Item))
+            _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.GetComponent<CharacterMovement>() != null)
             {
-                if (item.Data == _weaponTypeForAddBullets)
+                foreach (var item in _inventory.Slots.Select(slot => slot.Item))
                 {
-                    var weapon = item.Model.Item1;
-                    weapon.AddBullets(_addBullets);
+                    if (item.Data == _weaponTypeForAddBullets)
+                    {
+                        var weapon = item.Model.Item1;
+                        weapon.AddBullets(_addBullets);
+                    }
                 }
+
+                gameObject.SetActive(false);
             }
-            
-            gameObject.SetActive(false);
         }
     }
 }

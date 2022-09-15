@@ -27,11 +27,12 @@ namespace Shooter.Root
             _characterDeathView.Init(_soundToggle);
             var health = new Health(_characterHealth, _healthView);
             _characterTransformView.Init(health);
-            IUpdateble regeneration = new Regeneration(health, new Timer(_regenerationSpeed), _regeneration);
-            _systemUpdate.Add(_movementInput);
+            var timer = new Timer(_regenerationSpeed);
+            IUpdateble regeneration = new Regeneration(health, timer, _regeneration);
+            _systemUpdate.Add(_movementInput, timer, regeneration);
         }
         
-        private void Update() => _systemUpdate.Update(Time.deltaTime);
+        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
 
         private void FixedUpdate() => _movementInput.FixedUpdate(Time.fixedDeltaTime);
     }

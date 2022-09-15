@@ -55,6 +55,6 @@ namespace Shooter.Root
             inventoryItemsSelector.Select(0);
         }
 
-        private void Update() => _systemUpdate.Update(Time.deltaTime);
+        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
     }
 }

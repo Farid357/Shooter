@@ -19,7 +19,13 @@ namespace Shooter.SaveSystem
 
         public bool HasSave() => _storage.Exists(_path);
 
-        public TStoreValue Load() => _storage.Load<TStoreValue>(_path);
+        public TStoreValue Load()
+        {
+            if (HasSave() == false)
+                throw new InvalidOperationException("Storage doesn't have save");
+            
+            return _storage.Load<TStoreValue>(_path);
+        }
 
         public void Save(TStoreValue self) => _storage.Save(_path, self);
     }

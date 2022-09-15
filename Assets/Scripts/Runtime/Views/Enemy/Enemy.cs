@@ -4,33 +4,32 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class Enemy : SerializedMonoBehaviour
+    public sealed class Enemy : SerializedMonoBehaviour, IEnemy
     {
         [SerializeField] private EnemyAttack _attack;
         [SerializeField, Min(10)] private int _healthCount = 10;
         [SerializeField] private HealthTransformView _health;
         [SerializeField] private IHealthView _enemyHealthView;
-        [SerializeField, Min(5)] private int _moneyReward = 5;
-        [SerializeField] private IAbilityView _speedBoostAbility;
-        [SerializeField] private IAbilityView _bulletsDamageAbility;
-        [SerializeField] private IAbilityView _regenerationAbility;
+        [SerializeField] private StandartEnemyMovement _movement;
 
-        [field: SerializeField] public StandartEnemyMovement Movement { get; private set; }
+        [SerializeField, Min(0), Tooltip("Can be 0!")]
+        private int _protection;
+        
+        public IEnemyMovement Movement => _movement;
 
-        public void Init(ICharacterMovement character, IHealth characterHealth, IHealthTransformView characterHealthTransformView, IWallet wallet)
+        public IHealth Health { get; private set; }
+        
+        [field: SerializeField, Range(1, 100000)] public int Score { get; private set; }
+
+        public void Init(ICharacterMovement character, IHealthTransformView characterHealthTransformView)
         {
-            var abilities = new IAbility[]
-            {
-                new CharacterSpeedBoostAbility(_speedBoostAbility, character, 6f),
-                new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, FindObjectsOfType<BulletCollision>(), 6f),
-                new CharacterHealthRegenerationAbility(_regenerationAbility, characterHealth)
-            };
-
-            IRewardFactory factory = new RandomRewardFactory(abilities, new IReward[] { new MoneyReward(wallet, _moneyReward) });
-            var health = new EnemyHealth(new Health(_healthCount, _enemyHealthView), factory.Create());
-            _health.Init(health);
-            Movement.Init(character);
+            var health = new Health(_healthCount, _enemyHealthView);
+            Health = _protection > 0 ? new HealthShield(health, _protection) : health ;
+            _health.Init(Health);
+            _movement.Init(character);
             _attack.Init(characterHealthTransformView);
         }
+
+        public void Enable() => gameObject.SetActive(true);
     }
 }
