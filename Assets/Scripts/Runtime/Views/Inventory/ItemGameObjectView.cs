@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Shooter.GameLogic.Inventory
 {
-    public sealed class ItemGameObjectView : MonoBehaviour, IItemView
+    public sealed class ItemGameObjectView : MonoBehaviour, IGameObjectItemView
     {
-        public void Show() => gameObject.SetActive(true);
+        public async Task Show()
+        {
+            gameObject.SetActive(true);
+            await Task.Yield();
+        }
 
-        public void Hide() => gameObject.SetActive(false);
-        
+        public async Task Hide()
+        {
+            gameObject.SetActive(false);
+            await Task.Yield();
+        }
     }
 }

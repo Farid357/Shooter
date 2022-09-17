@@ -2,9 +2,14 @@
 
 namespace Shooter.Test
 {
-    public sealed class DummyItemSelector<T> : IItemSelector<T>
+    public sealed class DummyItemSelector<T> : IInventoryItemSelector<T>
     {
-        public void Select(T item)
+        public void Select(T grenade)
+        {
+            
+        }
+
+        public void Unselect()
         {
             
         }

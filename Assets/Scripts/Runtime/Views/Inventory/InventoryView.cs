@@ -1,5 +1,4 @@
 ﻿using Shooter.Model.Inventory;
-using TMPro;
 using UnityEngine;
 
 namespace Shooter.GameLogic.Inventory

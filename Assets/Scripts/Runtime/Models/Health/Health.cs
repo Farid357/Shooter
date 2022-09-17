@@ -21,9 +21,6 @@ namespace Shooter.Model
 
         public void Heal(int amount)
         {
-            if (IsAlive == false)
-                throw new InvalidOperationException("Health is not alive!");
-
             if (CanHeal(amount) == false)
                 throw new InvalidOperationException(nameof(Heal));
             

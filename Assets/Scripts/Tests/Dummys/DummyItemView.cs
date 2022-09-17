@@ -1,12 +1,15 @@
-﻿using Shooter.GameLogic.Inventory;
-public sealed class DummyItemView : IItemView
+﻿using System.Threading.Tasks;
+using Shooter.GameLogic.Inventory;
+
+public sealed class DummyItemView : IGameObjectItemView
 {
-    public void Show()
+    public async Task Show()
     {
-        
+        await Task.Yield();
     }
 
-    public void Hide()
+    public async Task Hide()
     {
+        await Task.Yield();
     }
 }

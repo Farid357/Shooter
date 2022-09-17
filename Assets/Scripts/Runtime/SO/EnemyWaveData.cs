@@ -22,8 +22,8 @@ namespace Shooter.Model
         {
             _factory = enemyFactory ?? throw new ArgumentNullException(nameof(enemyFactory));
             EnemiesCount = enemiesCount.TryThrowLessThanOrEqualsToZeroException();
-            CreateDelaySeconds = createDelaySeconds.TryThrowLessOrEqualsToZeroException();
-            SecondsAfterEnd = secondsAfterEnd.TryThrowLessOrEqualsToZeroException();
+            CreateDelaySeconds = createDelaySeconds.TryThrowLessThanOrEqualsToZeroException();
+            SecondsAfterEnd = secondsAfterEnd.TryThrowLessThanOrEqualsToZeroException();
         }
         
         public EnemyWaveData CreateNext()

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Shooter.GameLogic.Inventory
 {
     [RequireComponent(typeof(Collider))]
-    public sealed class BulletsPickup : MonoBehaviour, IBulletsPickup
+    public sealed class BulletsPickup : Pickup, IBulletsPickup
     {
         [SerializeField, Min(1)] private int _addBullets = 10;
         [SerializeField] private ItemData _weaponTypeForAddBullets;
@@ -19,20 +19,16 @@ namespace Shooter.GameLogic.Inventory
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected override void OnPicked()
         {
-            if (collision.gameObject.GetComponent<CharacterMovement>() != null)
+            foreach (var item in _inventory.Slots.Select(slot => slot.Item))
             {
-                foreach (var item in _inventory.Slots.Select(slot => slot.Item))
+                if (item.Data == _weaponTypeForAddBullets)
                 {
-                    if (item.Data == _weaponTypeForAddBullets)
-                    {
-                        var weapon = item.Model.Item1;
-                        weapon.AddBullets(_addBullets);
-                    }
+                    var weapon = item.Model.Item1;
+                    weapon.AddBullets(_addBullets);
+                    gameObject.SetActive(false);
                 }
-
-                gameObject.SetActive(false);
             }
         }
     }

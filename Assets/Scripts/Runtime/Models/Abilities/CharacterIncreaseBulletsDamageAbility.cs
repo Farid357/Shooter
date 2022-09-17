@@ -12,7 +12,7 @@ namespace Shooter.Model
         
         public CharacterIncreaseBulletsDamageAbility(IAbilityView view, IBulletCollision[] bullets, float applySeconds)
         {
-            _applySeconds = applySeconds.TryThrowLessOrEqualsToZeroException();
+            _applySeconds = applySeconds.TryThrowLessThanOrEqualsToZeroException();
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _bullets = bullets ?? throw new ArgumentNullException(nameof(bullets));
         }

@@ -9,7 +9,7 @@ namespace Shooter.Model
 
         public Timer(float cooldown)
         {
-            _cooldown = cooldown.TryThrowLessOrEqualsToZeroException();
+            _cooldown = cooldown.TryThrowLessThanOrEqualsToZeroException();
         }
 
         public Timer(IFactory<IEnemyMovement> factory) : this(1.2f)

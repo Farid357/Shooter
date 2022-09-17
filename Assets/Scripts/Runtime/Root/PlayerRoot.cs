@@ -1,17 +1,15 @@
 ﻿using Shooter.GameLogic;
 using Shooter.Model;
-using Shooter.Player;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.Root
 {
-    public sealed class PlayerRoot : SerializedMonoBehaviour, IPlayerRoot
+    public sealed class PlayerRoot : MonoBehaviour, IPlayerRoot
     {
         private readonly SystemUpdate _systemUpdate = new();
         private Player.Player _lastPlayer;
 
-        public void Compose(IWeapon weapon, IWeaponInput weaponInput)
+        public void Compose(IShootingWeapon weapon, IWeaponInput weaponInput)
         {
             if (_lastPlayer is not null)
                 _systemUpdate.Remove(_lastPlayer);
@@ -21,6 +19,6 @@ namespace Shooter.Root
             _lastPlayer = player;
         }
 
-        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
+        private void Update() => _systemUpdate.Update(Time.deltaTime);
     }
 }

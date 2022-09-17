@@ -7,9 +7,9 @@ namespace Shooter.Player
     public sealed class Player : IUpdateble
     {
         private readonly IWeaponInput _weaponInput;
-        private readonly IWeapon _weapon;
+        private readonly IShootingWeapon _weapon;
 
-        public Player(IWeaponInput weaponInput, IWeapon weapon)
+        public Player(IWeaponInput weaponInput, IShootingWeapon weapon)
         {
             _weaponInput = weaponInput ?? throw new ArgumentNullException(nameof(weaponInput));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));

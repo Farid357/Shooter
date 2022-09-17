@@ -20,7 +20,7 @@ namespace Shooter.Model
         {
             if (_health.Value < _health.StartValue)
             {
-                if (_timer.IsEnded)
+                if (_timer.IsEnded && _health.IsAlive)
                     Heal(_health);
             }
         }

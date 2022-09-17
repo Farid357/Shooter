@@ -2,7 +2,7 @@
 {
     public static class FloatUtils
     {
-        public static float TryThrowLessOrEqualsToZeroException(this float number)
+        public static float TryThrowLessThanOrEqualsToZeroException(this float number)
         {
             if (number <= 0)
                 throw new LessThanOrEqualsToZeroException(nameof(number));

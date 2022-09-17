@@ -13,7 +13,7 @@ namespace Shooter.Model
         public WeaponWithShotWaiting(IWeapon weapon, float waitingSeconds)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
-            _waitingSeconds = waitingSeconds.TryThrowLessOrEqualsToZeroException();
+            _waitingSeconds = waitingSeconds.TryThrowLessThanOrEqualsToZeroException();
         }
 
         public bool CanShoot => _weapon.CanShoot && _notNeedWaiting;

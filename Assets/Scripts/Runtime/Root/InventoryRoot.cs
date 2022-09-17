@@ -1,38 +1,38 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Shooter.GameLogic;
 using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
+using Shooter.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Shooter.Root
 {
     public sealed class InventoryRoot : CompositeRoot
     {
-        [SerializeField] private ShotgunBulletsFactory _shotgunBulletsFactory;
+        [SerializeField] private IFactory<IBullet> _shotgunBulletsFactory;
         [SerializeField] private IInventoryView _inventoryView;
         [SerializeField] private Dictionary<KeyCode, int> _keypadNumbers;
         [SerializeField] private PlayerRoot _playerRoot;
-        [SerializeField] private StandartBulletsFactory _explosiveBulletsFactory;
         [SerializeField] private PickupsRoot _pickupsRoot;
+        [SerializeField] private IInventoryView _grenadesInventoryView;
+        [SerializeField] private GrenadeView _grenade;
+        [SerializeField] private ItemData _grenadeItem;
+        [SerializeField] private Dictionary<KeyCode,int> _grenadeInventoryKeypadNumbers;
         
         [VerticalGroup("Start Weapon")] [SerializeField]
         private ItemData _weaponItemData;
 
         [VerticalGroup("Start Weapon")] [SerializeField]
-        private InventoryItemView _weaponItemViewPrefab;
-
-        [FormerlySerializedAs("_weaponData")] [VerticalGroup("Start Weapon")] [SerializeField]
         private WeaponData _startWeaponData;
 
         [VerticalGroup("Start Weapon")] [SerializeField]
-        private ItemGameObjectView _itemGameObjectView;
-
-        private IWeapon _weapon;
+        private ItemGameObjectView _weaponView;
+        
         private SystemUpdate _systemUpdate;
-        private readonly IWeaponInput _standartWeaponInput = new StandartWeaponInput();
+        private IWeaponInput _standartWeaponInput = new StandartWeaponInput();
 
         public override void Compose()
         {
@@ -40,21 +40,27 @@ namespace Shooter.Root
             IWeaponFactory factory = new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _startWeaponData);
             var inventory = new Inventory<(IWeapon, IWeaponInput)>(_inventoryView);
             var weaponSelector = new WeaponSelector(_playerRoot);
-            var itemView = Instantiate(_weaponItemViewPrefab);
-            _weapon = factory.Create();
-            var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (_weapon, _standartWeaponInput), itemView);
+            var weapon = factory.Create();
+            var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, _standartWeaponInput), _weaponView);
             var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item);
+            var grenadeInventory = new Inventory<IGrenade>(_grenadesInventoryView);
+            var grenadeItem = new Item<IGrenade>(_grenadeItem, _grenade, _grenade.ItemView);
+            var grenadeSlot = new InventorySlot<IGrenade>(new GrenadeSelector(_playerRoot), grenadeItem);
+            grenadeInventory.Add(grenadeSlot, 2);
             inventory.Add(slot, 1);
             var inventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(inventory);
-            var weaponInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, inventoryItemsSelector);
+            var grenadeInventorySelector = new InventoryItemsSelectorFromAnother<IGrenade>(grenadeInventory, inventoryItemsSelector);
 
-            itemView.Init(_itemGameObjectView);
-            itemView.Show();
-            _systemUpdate.Add(weaponInputSelector);
-            _pickupsRoot.Compose(inventory);
+            var weaponInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, inventoryItemsSelector);
+            _weaponView.Show();
+            
+            _systemUpdate.Add(weaponInputSelector, new InventoryItemsSelectorInput(_grenadeInventoryKeypadNumbers, grenadeInventorySelector));
+            _pickupsRoot.Compose(inventory, grenadeInventory);
             inventoryItemsSelector.Select(0);
+            _systemUpdate.Add(new BulletsAdderAfterCooldown(inventory.Slots.Select(model => model.Item.Model.Item1), new Timer(10)));
         }
 
-        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
+        
+        private void Update() => _systemUpdate.Update(Time.deltaTime);
     }
 }

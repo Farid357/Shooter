@@ -14,7 +14,7 @@ namespace Shooter.Model
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _movement = movement ?? throw new ArgumentNullException(nameof(movement));
-            _applySeconds = applySeconds.TryThrowLessOrEqualsToZeroException();
+            _applySeconds = applySeconds.TryThrowLessThanOrEqualsToZeroException();
         }
 
         public void Apply()

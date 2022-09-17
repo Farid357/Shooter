@@ -48,7 +48,7 @@ namespace Shooter.Root
             _waveFactory.SpawnNextLoop();
         }
 
-        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
+        private void Update() => _systemUpdate.Update(Time.deltaTime);
         
     }
 }

@@ -32,7 +32,7 @@ namespace Shooter.Root
             _systemUpdate.Add(_movementInput, timer, regeneration);
         }
         
-        private void Update() => _systemUpdate.TryUpdateAll(Time.deltaTime);
+        private void Update() => _systemUpdate.Update(Time.deltaTime);
 
         private void FixedUpdate() => _movementInput.FixedUpdate(Time.fixedDeltaTime);
     }

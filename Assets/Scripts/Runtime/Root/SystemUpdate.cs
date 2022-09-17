@@ -4,7 +4,7 @@ using Shooter.Model;
 
 namespace Shooter.Root
 {
-    public sealed class SystemUpdate : ISystemUpdate
+    public sealed class SystemUpdate : ISystemUpdate, IUpdateble
     {
         private readonly List<IUpdateble> _updatebles = new();
         
@@ -27,7 +27,7 @@ namespace Shooter.Root
             _updatebles.Remove(updateble);
         }
 
-        public void TryUpdateAll(float deltaTime) => _updatebles.ForEach(updateble => updateble.Update(deltaTime));
+        public void Update(float deltaTime) => _updatebles.ForEach(updateble => updateble.Update(deltaTime));
         
     }
 }

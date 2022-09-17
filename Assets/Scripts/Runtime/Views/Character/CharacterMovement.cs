@@ -59,7 +59,7 @@ namespace Shooter.GameLogic
 
         private void SetSpeed(float speed, bool canIncreaseSpeed)
         {
-            _speed = speed.TryThrowLessOrEqualsToZeroException();
+            _speed = speed.TryThrowLessThanOrEqualsToZeroException();
             CanIncreaseSpeed = canIncreaseSpeed == CanIncreaseSpeed ? throw new InvalidOperationException(nameof(SetSpeed)) : canIncreaseSpeed;
         }
     }
