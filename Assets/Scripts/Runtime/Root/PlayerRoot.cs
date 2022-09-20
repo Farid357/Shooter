@@ -13,7 +13,7 @@ namespace Shooter.Root
         {
             if (_lastPlayer is not null)
                 _systemUpdate.Remove(_lastPlayer);
-
+            
             var player = new Player.Player(weaponInput, weapon);
             _systemUpdate.Add(player);
             _lastPlayer = player;

@@ -22,8 +22,9 @@ namespace Shooter.Root
         [SerializeField] private IAbilityView _bulletsDamageAbility;
         [SerializeField] private IAbilityView _regenerationAbility;
         [SerializeField] private INavMeshBaker _navMeshBaker;
-        [SerializeField] private List<EnemyWaveData> _waveDatas;
+        [SerializeField] private List<EnemyWaveData> _wavesData;
         [SerializeField] private IScoreRoot _scoreRoot;
+        [SerializeField] private IView<float> _waveTimerSecondsView;
         
         private SystemUpdate _systemUpdate;
         private WaveFactory _waveFactory;
@@ -44,8 +45,10 @@ namespace Shooter.Root
             _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore());
             _bulletsFactories.ForEach(factory => factory.Init(_systemUpdate));
             IEnemiesSimulation simulation = new EnemySimulation(_navMeshBaker);
-            _waveFactory = new WaveFactory(new EnemyWaves(simulation), _waveDatas);
-            _waveFactory.SpawnNextLoop();
+            var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
+            _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));
+            _waveFactory.SpawnNextLoop().Forget();
+            _systemUpdate.Add(waitNextWaveTimer);
         }
 
         private void Update() => _systemUpdate.Update(Time.deltaTime);

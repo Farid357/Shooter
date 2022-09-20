@@ -13,7 +13,7 @@ namespace Shooter.Model
         }
 
         public IReadOnlyEnemiesSimulation Simulation => _simulation;
-        
+
         public async void CreateNext(EnemyWaveData wave)
         {
             for (var i = 0; i < wave.EnemiesCount; i++)

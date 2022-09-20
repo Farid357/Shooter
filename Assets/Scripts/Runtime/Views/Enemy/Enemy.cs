@@ -12,7 +12,8 @@ namespace Shooter.GameLogic
         [SerializeField] private IHealthView _enemyHealthView;
         [SerializeField] private StandartEnemyMovement _movement;
 
-        [SerializeField, Min(0), Tooltip("Can be 0!")]
+        [SerializeField] private EnemyType _type;
+        [SerializeField, Min(0), ShowIf("_type", EnemyType.WithShield)]
         private int _protection;
         
         public IEnemyMovement Movement => _movement;
@@ -24,12 +25,20 @@ namespace Shooter.GameLogic
         public void Init(ICharacterMovement character, IHealthTransformView characterHealthTransformView)
         {
             var health = new Health(_healthCount, _enemyHealthView);
-            Health = _protection > 0 ? new HealthShield(health, _protection) : health ;
+            Health = _type == EnemyType.WithShield ? new HealthShield(health, _protection) : health;
+            Health = _type == EnemyType.WithPoison ? new PoisonHealth(health) : health;
             _health.Init(Health);
             _movement.Init(character);
             _attack.Init(characterHealthTransformView);
         }
 
         public void Enable() => gameObject.SetActive(true);
+        
+        private enum EnemyType
+        {
+            WithShield,
+            WithPoison,
+            Standart
+        }
     }
 }

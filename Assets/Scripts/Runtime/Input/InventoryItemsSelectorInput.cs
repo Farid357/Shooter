@@ -19,12 +19,18 @@ namespace Shooter.GameLogic.Inventory
 
         public void Update(float deltaTime)
         {
+            if(Input.anyKeyDown == false)
+                return;
+
             foreach (var (key, number) in _keypadNumbers)
             {
                 if (Input.GetKeyDown(key))
                 {
                     if (_itemsSelector.CanSelect(number))
                     {
+                        if(_itemsSelector.CanUnselect)
+                            _itemsSelector.Unselect();
+                        
                         _itemsSelector.Select(number);
                     }
                 }

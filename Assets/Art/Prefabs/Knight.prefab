@@ -1899,8 +1899,9 @@ MonoBehaviour:
   _healthCount: 25
   _health: {fileID: 4090216670378948980}
   _movement: {fileID: 828202209477806023}
+  _type: 1
   _protection: 0
-  <Score>k__BackingField: 1
+  <Score>k__BackingField: 5
 --- !u!114 &6500019009003649193
 MonoBehaviour:
   m_ObjectHideFlags: 0

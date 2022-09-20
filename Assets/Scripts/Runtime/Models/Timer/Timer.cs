@@ -1,32 +1,27 @@
-﻿using Shooter.Tools;
+﻿using System;
+using Shooter.Tools;
 
 namespace Shooter.Model
 {
     public sealed class Timer : IUpdateble, ITimer
     {
-        private readonly float _cooldown;
+        private readonly IView<float> _view;
         private float _seconds;
 
-        public Timer(float cooldown)
+        public Timer(IView<float> view, float cooldown = 1.2f)
         {
-            _cooldown = cooldown.TryThrowLessThanOrEqualsToZeroException();
+            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _seconds = cooldown.TryThrowLessThanOrEqualsToZeroException();
         }
-
-        public Timer(IFactory<IEnemyMovement> factory) : this(1.2f)
-        {
-            
-        }
-
+        
         public bool IsEnded => _seconds == 0;
+        
+        public void Restart(float newTime) => _seconds = newTime.TryThrowLessThanOrEqualsToZeroException();
 
         public void Update(float deltaTime)
         {
-            _seconds += deltaTime;
-
-            if (_seconds >= _cooldown)
-            {
-                _seconds = 0;
-            }
+            _seconds = Math.Max(0, _seconds - deltaTime);
+            _view.Visualize(_seconds);
         }
     }
 }

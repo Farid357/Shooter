@@ -13,10 +13,10 @@ namespace Shooter.Model.Inventory
             _playerRoot = playerRoot ?? throw new ArgumentNullException(nameof(playerRoot));
         }
 
-        public void Select((IWeapon, IWeaponInput) grenade)
+        public void Select((IWeapon, IWeaponInput) item)
         {
-            var input = grenade.Item2;
-            var weapon = grenade.Item1;
+            var input = item.Item2;
+            var weapon = item.Item1;
             _playerRoot.Compose(weapon, input);
             weapon.VisualizeBullets();
         }

@@ -22,10 +22,16 @@ namespace Shooter.Model
         
         public void TakeDamage(int damage)
         {
+            damage.TryThrowLessThanOrEqualsToZeroException();
+            
             if (_protection > 0)
             {
-                damage -= _protection;
                 _protection -= damage;
+                damage = Math.Max(0, damage - _protection);
+                
+                if(damage == 0)
+                    return;
+                
             }
 
             _health.TakeDamage(damage);

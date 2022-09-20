@@ -13,8 +13,6 @@ namespace Shooter.Root
         [SerializeField] private HealthTransformView _characterTransformView;
         [SerializeField] private IToggle _soundToggle;
         [SerializeField] private CharacterMovement _movement;
-        [SerializeField, Range(10, 90)] private int _regeneration = 10;
-        [SerializeField, Range(2f, 10f)] private float _regenerationSpeed = 2;
 
         private SystemUpdate _systemUpdate;
         private CharacterMovementInput _movementInput;
@@ -27,9 +25,7 @@ namespace Shooter.Root
             _characterDeathView.Init(_soundToggle);
             var health = new Health(_characterHealth, _healthView);
             _characterTransformView.Init(health);
-            var timer = new Timer(_regenerationSpeed);
-            IUpdateble regeneration = new Regeneration(health, timer, _regeneration);
-            _systemUpdate.Add(_movementInput, timer, regeneration);
+            _systemUpdate.Add(_movementInput);
         }
         
         private void Update() => _systemUpdate.Update(Time.deltaTime);

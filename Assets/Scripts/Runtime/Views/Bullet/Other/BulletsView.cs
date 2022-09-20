@@ -10,6 +10,7 @@ namespace Shooter.GameLogic
         [SerializeField] private IView<int> _view;
         [SerializeField] private Color _zeroBullets = Color.red;
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private TMP_Text _bulletsEnded;
         private Color _startColor;
 
         private void OnEnable() => _startColor = _text.color;
@@ -18,6 +19,7 @@ namespace Shooter.GameLogic
         {
             _text.color = bullets == 0 ? _zeroBullets : _startColor;
             _view.Visualize(bullets);
+            _bulletsEnded.gameObject.SetActive(bullets == 0);
         }
     }
 }

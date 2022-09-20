@@ -42,22 +42,23 @@ namespace Shooter.Root
             var weaponSelector = new WeaponSelector(_playerRoot);
             var weapon = factory.Create();
             var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, _standartWeaponInput), _weaponView);
-            var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item);
-            var grenadeInventory = new Inventory<IGrenade>(_grenadesInventoryView);
+            var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item, 1);
+            var grenadeInventory = new Inventory<IGrenade>(_grenadesInventoryView, 3);
             var grenadeItem = new Item<IGrenade>(_grenadeItem, _grenade, _grenade.ItemView);
-            var grenadeSlot = new InventorySlot<IGrenade>(new GrenadeSelector(_playerRoot), grenadeItem);
-            grenadeInventory.Add(grenadeSlot, 2);
-            inventory.Add(slot, 1);
-            var inventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(inventory);
-            var grenadeInventorySelector = new InventoryItemsSelectorFromAnother<IGrenade>(grenadeInventory, inventoryItemsSelector);
+            var grenadeSlot = new InventorySlot<IGrenade>(new GrenadeSelector(_playerRoot), grenadeItem, 2);
+            grenadeInventory.Add(grenadeSlot);
+            inventory.Add(slot);
+            var inventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(inventory, new DummyItemsSelector());
+            var grenadeInventorySelector = new InventoryItemsSelector<IGrenade>(grenadeInventory, inventoryItemsSelector);
 
             var weaponInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, inventoryItemsSelector);
+            var grenadeInputSelector = new InventoryItemsSelectorInput(_grenadeInventoryKeypadNumbers, grenadeInventorySelector);
             _weaponView.Show();
             
-            _systemUpdate.Add(weaponInputSelector, new InventoryItemsSelectorInput(_grenadeInventoryKeypadNumbers, grenadeInventorySelector));
+            _systemUpdate.Add(weaponInputSelector, grenadeInputSelector);
             _pickupsRoot.Compose(inventory, grenadeInventory);
             inventoryItemsSelector.Select(0);
-            _systemUpdate.Add(new BulletsAdderAfterCooldown(inventory.Slots.Select(model => model.Item.Model.Item1), new Timer(10)));
+            _systemUpdate.Add(new BulletsAdderAfterCooldown(inventory.Slots.Select(model => model.Item.Model.Item1), new IndependentTimer(new DummySecondsView(), 10)));
         }
 
         

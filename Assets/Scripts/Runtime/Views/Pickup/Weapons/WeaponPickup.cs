@@ -27,8 +27,8 @@ namespace Shooter.GameLogic
             if (_inventory.IsFull == false && enabled)
             {
                 var weapon = new Item<(IWeapon, IWeaponInput)>(_itemData, _weapon, _itemView);
-                var slot = new InventorySlot<(IWeapon, IWeaponInput)>(_selector, weapon);
-                _inventory.Add(slot, 1);
+                var slot = new InventorySlot<(IWeapon, IWeaponInput)>(_selector, weapon, 1);
+                _inventory.Add(slot);
                 gameObject.SetActive(false);
             }
         }

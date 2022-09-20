@@ -27,8 +27,8 @@ namespace Shooter.GameLogic.Inventory
             {
                 var grenade = _factory.Create();
                 var item = new Item<IGrenade>(_itemData, grenade, grenade.ItemView);
-                var slot = new InventorySlot<IGrenade>(_selector, item);
-                _inventory.Add(slot, _count);
+                var slot = new InventorySlot<IGrenade>(_selector, item, _count);
+                _inventory.Add(slot);
                 gameObject.SetActive(false);
             }
         }

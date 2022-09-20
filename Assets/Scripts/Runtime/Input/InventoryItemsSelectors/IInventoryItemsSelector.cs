@@ -4,11 +4,11 @@
     {
         void Select(int index);
 
-        void UnselectLast();
+        void Unselect();
         
         bool CanSelect(int index);
         
-        bool CanUnselectLast { get; }
+        bool CanUnselect { get; }
 
     }
 }

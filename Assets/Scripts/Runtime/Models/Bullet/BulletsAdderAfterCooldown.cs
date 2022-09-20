@@ -7,9 +7,9 @@ namespace Shooter.Model
     public sealed class BulletsAdderAfterCooldown : IUpdateble
     {
         private readonly IEnumerable<IWeapon> _weapons;
-        private readonly ITimer _timer;
+        private readonly IIndependentTimer _timer;
 
-        public BulletsAdderAfterCooldown(IEnumerable<IWeapon> weapons, ITimer timer)
+        public BulletsAdderAfterCooldown(IEnumerable<IWeapon> weapons, IIndependentTimer timer)
         {
             _weapons = weapons ?? throw new ArgumentNullException(nameof(weapons));
             _timer = timer ?? throw new ArgumentNullException(nameof(timer));

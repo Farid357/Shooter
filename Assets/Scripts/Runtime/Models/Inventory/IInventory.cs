@@ -4,6 +4,6 @@
     {
         public bool IsFull { get; }
         
-        public void Add(InventorySlot<TItem> slot, int itemCount);
+        public void Add(InventorySlot<TItem> slot);
     }
 }

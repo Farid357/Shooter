@@ -9,6 +9,7 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private BulletMovement _prefab;
+        [SerializeField] private Transform _cursor;
         
         private IndependentPool<BulletMovement> _pool;
 
