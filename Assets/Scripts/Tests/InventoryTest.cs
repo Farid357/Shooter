@@ -11,9 +11,10 @@ namespace Shooter.Test
     public sealed class InventoryTest
     {
         private Inventory<IWeapon> _inventory;
-        private DummyInventoryView _inventoryView = new();
         private InventorySlot<IWeapon> _slot;
-        
+        private readonly InventoryDropTest _inventoryDropTest;
+        private readonly DummyInventoryView _inventoryView = new();
+
         [SetUp]
         public void Setup()
         {

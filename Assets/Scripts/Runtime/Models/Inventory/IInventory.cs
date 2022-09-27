@@ -1,9 +1,13 @@
-﻿namespace Shooter.Model.Inventory
+﻿using Shooter.GameLogic.Inventory;
+
+namespace Shooter.Model.Inventory
 {
     public interface IInventory<TItem> : IReadOnlyInventory<TItem>
     {
         public bool IsFull { get; }
         
         public void Add(InventorySlot<TItem> slot);
+
+        public void Drop(InventorySlot<TItem> slot);
     }
 }

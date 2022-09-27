@@ -1799,7 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 15
   _attackAnimation: {fileID: 86605088875889185}
-  _radius: 6.6
+  _radius: 7
   _center: {fileID: 7835867451206628565}
 --- !u!114 &828202209477806023
 MonoBehaviour:

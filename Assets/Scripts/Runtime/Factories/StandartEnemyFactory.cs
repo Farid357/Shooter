@@ -24,10 +24,8 @@ namespace Shooter.GameLogic
         {
             _rewardFactory = rewardFactory ?? throw new ArgumentNullException(nameof(rewardFactory));
             _pool = new IndependentPool<Enemy>(new GameObjectsFactory<Enemy>(_prefab, transform));
-
             _systemUpdate = systemUpdate ?? throw new ArgumentNullException(nameof(systemUpdate));
             _score = score ?? throw new ArgumentNullException(nameof(score));
-            _systemUpdate.Add(_pool);
         }
 
         public IEnemy Create()

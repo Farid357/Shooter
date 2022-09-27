@@ -13,6 +13,11 @@
         {
         }
 
+        public void ReplaceAnotherSelector(IInventoryItemsSelector selector)
+        {
+            
+        }
+
         public bool CanSelect(int index) => true;
         
     }

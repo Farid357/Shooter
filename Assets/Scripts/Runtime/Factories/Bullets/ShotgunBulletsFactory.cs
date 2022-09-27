@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Shooter.Model;
-using Shooter.Root;
 using Shooter.Tools;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ namespace Shooter.GameLogic
         private float _rotationZOffset;
         private IndependentPool<BulletMovement> _pool;
 
-        public override void Init(ISystemUpdate systemUpdate)
+        private void Awake()
         {
             if (_minZRotation > _maxZRotation)
                 throw new ArgumentOutOfRangeException("Min rotation is higher than max!");
@@ -27,7 +26,6 @@ namespace Shooter.GameLogic
             var factory = new GameObjectsFactory<BulletMovement>(_prefab, transform);
             _pool = new IndependentPool<BulletMovement>(factory);
             _rotationZOffset = (_maxZRotation - _minZRotation) / _bullets;
-            systemUpdate.Add();
         }
 
         public override IBullet Create()

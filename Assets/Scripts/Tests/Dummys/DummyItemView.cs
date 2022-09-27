@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Shooter.GameLogic.Inventory;
 
-public sealed class DummyItemView : IGameObjectItemView
+public sealed class DummyItemView : IInventoryItemGameObjectView
 {
     public async Task Show()
     {

@@ -1,5 +1,4 @@
 ﻿using Shooter.Model;
-using Shooter.Root;
 using Shooter.Tools;
 using UnityEngine;
 
@@ -13,10 +12,9 @@ namespace Shooter.GameLogic
         
         private IndependentPool<BulletMovement> _pool;
 
-        public override void Init(ISystemUpdate systemUpdate)
+        private void Awake()
         {
             _pool = new IndependentPool<BulletMovement>(new GameObjectsFactory<BulletMovement>(_prefab, transform));
-            systemUpdate.Add(_pool);
         }
 
         public override IBullet Create()

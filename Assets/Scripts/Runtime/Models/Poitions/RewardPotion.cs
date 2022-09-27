@@ -15,11 +15,14 @@ namespace Shooter.Model
 
         public bool CanShoot { get; private set; } = true;
         
+        public bool HasShot { get; private set; }
+
         public async void Shoot()
         {
             if (CanShoot == false)
                 throw new InvalidOperationException(nameof(Shoot));
-            
+
+            HasShot = true;
             CanShoot = false;
             await _view.VisualizeShot();
             _reward.Apply();

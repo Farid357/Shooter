@@ -21,6 +21,8 @@ namespace Shooter.Root
         [SerializeField] private GrenadeView _grenade;
         [SerializeField] private ItemData _grenadeItem;
         [SerializeField] private Dictionary<KeyCode,int> _grenadeInventoryKeypadNumbers;
+        [SerializeField] private IFactory<IInventoryItemGameObjectView> _grenadeGameObjectViewFactory;
+        [SerializeField] private IFactory<IGrenade> _grenadeFactory;
         
         [VerticalGroup("Start Weapon")] [SerializeField]
         private ItemData _weaponItemData;
@@ -38,9 +40,9 @@ namespace Shooter.Root
         {
             _systemUpdate = new SystemUpdate();
             IWeaponFactory factory = new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _startWeaponData);
+            var weapon = factory.Create();
             var inventory = new Inventory<(IWeapon, IWeaponInput)>(_inventoryView);
             var weaponSelector = new WeaponSelector(_playerRoot);
-            var weapon = factory.Create();
             var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, _standartWeaponInput), _weaponView);
             var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item, 1);
             var grenadeInventory = new Inventory<IGrenade>(_grenadesInventoryView, 3);
@@ -48,17 +50,19 @@ namespace Shooter.Root
             var grenadeSlot = new InventorySlot<IGrenade>(new GrenadeSelector(_playerRoot), grenadeItem, 2);
             grenadeInventory.Add(grenadeSlot);
             inventory.Add(slot);
-            var inventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(inventory, new DummyItemsSelector());
-            var grenadeInventorySelector = new InventoryItemsSelector<IGrenade>(grenadeInventory, inventoryItemsSelector);
-
-            var weaponInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, inventoryItemsSelector);
-            var grenadeInputSelector = new InventoryItemsSelectorInput(_grenadeInventoryKeypadNumbers, grenadeInventorySelector);
+            
+            var weaponInventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(inventory);
+            var grenadeInventorySelector = new InventoryItemsSelector<IGrenade>(grenadeInventory);
+            var selectors = new List<IInventoryItemsSelector>{ grenadeInventorySelector, weaponInventoryItemsSelector };
+            var inventoryItemsInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, selectors, weaponInventoryItemsSelector);
+            var grenadeInputSelector = new InventoryItemsSelectorInput(_grenadeInventoryKeypadNumbers, selectors, grenadeInventorySelector);
             _weaponView.Show();
             
-            _systemUpdate.Add(weaponInputSelector, grenadeInputSelector);
+            _systemUpdate.Add(inventoryItemsInputSelector, grenadeInputSelector);
             _pickupsRoot.Compose(inventory, grenadeInventory);
-            inventoryItemsSelector.Select(0);
-            _systemUpdate.Add(new BulletsAdderAfterCooldown(inventory.Slots.Select(model => model.Item.Model.Item1), new IndependentTimer(new DummySecondsView(), 10)));
+            weaponInventoryItemsSelector.Select(0);
+            _systemUpdate.Add(new BulletsAdderAfterCooldown(inventory.Slots.Select(model => model.Item.Model.Item1), 
+                new IndependentTimer(new DummySecondsView(), 10)), new InventoryItemsDrop(grenadeInventory));
         }
 
         

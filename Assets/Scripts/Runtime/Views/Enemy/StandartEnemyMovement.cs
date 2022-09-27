@@ -25,9 +25,7 @@ namespace Shooter.GameLogic
                 Move();
 
             if (_needRotate)
-            {
-                Rotate();
-            }
+                Rotate().Forget();
         }
 
         public void Init(ICharacterTransform character)

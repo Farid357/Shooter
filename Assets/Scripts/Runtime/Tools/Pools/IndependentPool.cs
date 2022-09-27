@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Shooter.Tools
 {
-    public sealed class IndependentPool<T> : IUpdateble, IPool<T> where T : MonoBehaviour
+    public sealed class IndependentPool<T> : IPool<T> where T : MonoBehaviour
     {
         private readonly IPool<T> _pool;
         private readonly IGameObjectsContainerFactory<T> _factory;
@@ -24,9 +24,7 @@ namespace Shooter.Tools
 
         public void Release(T obj) => _pool.Release(obj);
 
-        public T Get() => _pool.Get();
-
-        public void Update(float deltaTime)
+        public T Get()
         {
             foreach (var item in CreatedObjects)
             {
@@ -41,6 +39,7 @@ namespace Shooter.Tools
                         _releasedObjects.Remove(item);
                 }
             }
+            return _pool.Get();
         }
     }
 }

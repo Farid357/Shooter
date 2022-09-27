@@ -3,18 +3,28 @@ using Shooter.Tools;
 
 namespace Shooter.Model.Inventory
 {
-    public readonly struct InventorySlot<TItem>
+    public sealed class InventorySlot<TItem>
     {
-        public readonly IInventoryItemSelector<TItem> ItemSelector;
-        public readonly Item<TItem> Item;
-        public readonly int ItemsCount;
-        
         public InventorySlot(IInventoryItemSelector<TItem> selector, Item<TItem> item, int itemsCount)
         {
             Item = item;
             ItemsCount = itemsCount.TryThrowLessThanOrEqualsToZeroException();
             ItemSelector = selector ?? throw new ArgumentNullException(nameof(selector));
         }
+        
+        public IInventoryItemSelector<TItem> ItemSelector { get; }
+        public Item<TItem> Item { get; }
+        
+        public int ItemsCount { get; private set; }
 
+        public void DropOneItem()
+        {
+            if (CanDropOneItem() == false)
+                throw new InvalidOperationException(nameof(DropOneItem));
+
+            ItemsCount--;
+        }
+
+        public bool CanDropOneItem() => ItemsCount - 1 > 0;
     }
 }

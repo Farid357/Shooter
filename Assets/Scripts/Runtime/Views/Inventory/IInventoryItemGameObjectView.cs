@@ -2,7 +2,7 @@
 
 namespace Shooter.GameLogic.Inventory
 {
-    public interface IGameObjectItemView
+    public interface IInventoryItemGameObjectView
     {
         public Task Show();
 

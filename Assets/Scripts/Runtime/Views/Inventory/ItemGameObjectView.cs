@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Shooter.GameLogic.Inventory
 {
-    public sealed class ItemGameObjectView : MonoBehaviour, IGameObjectItemView
+    public sealed class ItemGameObjectView : MonoBehaviour, IInventoryItemGameObjectView
     {
         public async Task Show()
         {

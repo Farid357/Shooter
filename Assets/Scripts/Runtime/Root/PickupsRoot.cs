@@ -29,7 +29,7 @@ namespace Shooter.Root
             InitPickups<Ak74Pickup>(new WeaponFactoryWithShootWaitingAndRollback(_bulletsFactory, _ak74Data), inventory, _standartWeaponInput);
             InitPickups<ShotgunPickup>(new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData), inventory, _standartWeaponInput);
             InitPickups<RpgPickup>(new WeaponFactoryWithShootWaitingAndRollback(_explosiveBulletsFactory, _rpgData), inventory, _standartWeaponInput);
-            InitPickups<PistolPickup>(new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData), inventory, _standartWeaponInput);
+            InitPickups<PistolPickup>(new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData), inventory, new BurstWeaponInput());
             InitPickups<BulletsPickup>(inventory);
             InitPickups<GrenadePickup>(grenadeInventory, new GrenadeSelector(_playerRoot), _grenadeFactory);
         }

@@ -5,7 +5,5 @@ namespace Shooter.Model.Inventory
     public interface IReadOnlyInventory<TItem>
     {
         public IEnumerable<InventorySlot<TItem>> Slots { get; }
-
-        public bool Contains(int index);
     }
 }

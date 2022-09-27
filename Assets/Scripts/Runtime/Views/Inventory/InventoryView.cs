@@ -1,4 +1,5 @@
-﻿using Shooter.Model.Inventory;
+﻿using System.Collections.Generic;
+using Shooter.Model.Inventory;
 using UnityEngine;
 
 namespace Shooter.GameLogic.Inventory
@@ -8,19 +9,34 @@ namespace Shooter.GameLogic.Inventory
         [SerializeField] private Transform _content;
         [SerializeField] private InventoryItemView _prefab;
         [SerializeField] private Transform _secondInventoryContent;
-        private int _visualizedItemsCount;
-        private const int ItemsCountOnOneInventory = 5;
+        [SerializeField, Min(1)] private int _itemsCountOnOneInventory = 5;
         
-        public void VisualizeItem(ItemData item, int count)
+        private int _visualizedItemsCount;
+        private readonly Dictionary<ItemData, InventoryItemView> _items = new();
+        
+        public void VisualizeNewItem(ItemData item, int count)
         {
             _visualizedItemsCount++;
-            Visualize(item, count, _visualizedItemsCount < ItemsCountOnOneInventory ? _content : _secondInventoryContent);
+            Visualize(item, count, _visualizedItemsCount < _itemsCountOnOneInventory ? _content : _secondInventoryContent);
+        }
+
+        public void VisualizeItemsCount(ItemData item, int count)
+        {
+            _items[item].Visualize(item.Sprite, count);
+        }
+
+        public void DropItem(ItemData item)
+        {
+            var createdItem = _items[item].gameObject;
+            _items.Remove(item);
+            Destroy(createdItem);
         }
 
         private void Visualize(ItemData item, int count, Transform parent)
         {
             var itemView = Instantiate(_prefab, parent);
             itemView.Visualize(item.Sprite, count);
+            _items.Add(item, itemView);
         }
     }
 }

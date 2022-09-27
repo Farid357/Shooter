@@ -18,10 +18,12 @@ namespace Shooter.GameLogic
         [SerializeField] private ItemGameObjectView _itemView;
         private Rigidbody _rigidbody;
         
-        public IGameObjectItemView ItemView => _itemView;
+        public IInventoryItemGameObjectView ItemView => _itemView;
 
         public bool CanShoot => gameObject.activeInHierarchy;
         
+        public bool HasShot { get; private set; }
+
         private void OnEnable()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -33,14 +35,17 @@ namespace Shooter.GameLogic
             transform.parent = null;
             _rigidbody.isKinematic = false;
             _rigidbody.AddForce(_throwDirection * _force);
+            HasShot = true;
 
             UniTask.Create(async () =>
             {
+                await UniTask.Delay(TimeSpan.FromSeconds(Time.deltaTime));
+                HasShot = false;
                 await UniTask.Delay(TimeSpan.FromSeconds(_explosionSeconds));
                 var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
                 Instantiate(_explosionParticlePrefab, transform.position, Quaternion.identity).Play();
                 explosion.Thunder(_damage);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             });
         }
 

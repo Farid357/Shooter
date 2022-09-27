@@ -3,17 +3,12 @@ using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.SaveSystem;
 using Shooter.Tools;
-using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Shooter.Root
 {
     public sealed class EnemyRoot : CompositeRoot
     {
-        [FormerlySerializedAs("_factories")] [SerializeField]
-        private BulletsFactory[] _bulletsFactories;
-
         [SerializeField] private StandartEnemyFactory _enemyFactory;
         [SerializeField] private ICharacterMovement _characterMovement;
         [SerializeField] private IView<int> _moneyView;
@@ -43,7 +38,6 @@ namespace Shooter.Root
             IRewardFactory rewardFactory = new RandomRewardFactory(abilities, new IReward[] { new MoneyReward(wallet, 5) });
             _systemUpdate = new SystemUpdate();
             _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore());
-            _bulletsFactories.ForEach(factory => factory.Init(_systemUpdate));
             IEnemiesSimulation simulation = new EnemySimulation(_navMeshBaker);
             var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
             _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));

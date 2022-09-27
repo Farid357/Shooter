@@ -4,6 +4,10 @@ namespace Shooter.Model.Inventory
 {
     public interface IInventoryView
     {
-        public void VisualizeItem(ItemData item, int count);
+        public void VisualizeNewItem(ItemData item, int count);
+
+        public void VisualizeItemsCount(ItemData item, int count);
+
+        public void DropItem(ItemData item);
     }
 }
