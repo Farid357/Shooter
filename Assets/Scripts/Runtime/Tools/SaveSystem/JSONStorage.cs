@@ -5,7 +5,7 @@ namespace Shooter.SaveSystem
 {
     public sealed class JsonStorage : IStorage
     {
-        public bool Exists(string name) => File.Exists(CreatePath(name));
+        public bool Exists(string key) => File.Exists(CreatePath(key));
 
         public T Load<T>(string name)
         {

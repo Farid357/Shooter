@@ -29,7 +29,7 @@ namespace Shooter.SaveSystem
             return default;
         }
 
-        public bool Exists(string name) => File.Exists(CreatePath(name));
+        public bool Exists(string key) => File.Exists(CreatePath(key));
 
         public void Save<T>(string path, T saveObject)
         {

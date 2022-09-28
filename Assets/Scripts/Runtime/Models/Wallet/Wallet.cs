@@ -8,29 +8,30 @@ namespace Shooter.Model
     {
         private readonly IView<int> _view;
         private readonly StorageWithNameSaveObject<Wallet, int> _storage;
-        private int _money;
 
         public Wallet(IView<int> view, IStorage storage)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _storage = new StorageWithNameSaveObject<Wallet, int>(storage);
         }
+        
+        public int Money { get; private set; }
 
         public void Put(int money)
         {
-            _money += money.TryThrowLessThanOrEqualsToZeroException();
-            VisualizeAndSave(_money);
+            Money += money.TryThrowLessThanOrEqualsToZeroException();
+            VisualizeAndSave(Money);
         }
 
-        public bool CanTake(int money) => _money - money >= 0;
+        public bool CanTake(int money) => Money - money >= 0;
 
         public void Take(int money)
         {
             if (CanTake(money) == false)
                 throw new InvalidOperationException(nameof(Take));
 
-            _money -= money.TryThrowLessThanOrEqualsToZeroException();
-            VisualizeAndSave(_money);
+            Money -= money.TryThrowLessThanOrEqualsToZeroException();
+            VisualizeAndSave(Money);
         }
 
         private void VisualizeAndSave(int money)

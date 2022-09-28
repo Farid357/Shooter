@@ -2,7 +2,7 @@
 
 namespace Shooter.Model
 {
-    public sealed class RewardPotion : IShootingWeapon
+    public sealed class RewardPotion : IPotion
     {
         private readonly IPotionView _view;
         private readonly IReward _reward;

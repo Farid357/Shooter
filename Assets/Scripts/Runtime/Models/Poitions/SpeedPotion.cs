@@ -2,7 +2,7 @@
 
 namespace Shooter.Model
 {
-    public sealed class SpeedPotion : IShootingWeapon
+    public sealed class SpeedPotion : IPotion
     {
         private readonly ICharacterMovement _movement;
         private readonly IPotionView _view;

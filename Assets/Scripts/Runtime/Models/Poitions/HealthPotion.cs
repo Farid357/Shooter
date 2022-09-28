@@ -2,7 +2,7 @@ using System;
 
 namespace Shooter.Model
 {
-    public sealed class HealthPotion : IShootingWeapon
+    public sealed class HealthPotion : IPotion
     {
         private readonly IHealth _health;
         private readonly IPotionView _view;

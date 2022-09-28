@@ -2,7 +2,7 @@
 
 namespace Shooter.Model
 {
-    public sealed class NegativeHealthPotion : IShootingWeapon
+    public sealed class NegativeHealthPotion : IPotion
     {
         private readonly IHealth _health;
         private readonly IPotionView _view;
