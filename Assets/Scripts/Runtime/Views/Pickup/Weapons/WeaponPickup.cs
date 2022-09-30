@@ -8,27 +8,24 @@ namespace Shooter.GameLogic
 {
     public abstract class WeaponPickup : Pickup
     {
-        [SerializeField] private ItemData _itemData;
-        [SerializeField] private ItemGameObjectView _itemView;
-
         private IInventory<(IWeapon, IWeaponInput)> _inventory;
-        private IInventoryItemSelector<(IWeapon, IWeaponInput)> _selector;
-        private (IWeapon Model, IWeaponInput Input) _weapon;
+        private InventorySlot<(IWeapon, IWeaponInput)> _inventorySlot;
 
-        public void Init(IInventory<(IWeapon, IWeaponInput)> inventory, IInventoryItemSelector<(IWeapon, IWeaponInput)> selector, (IWeapon Model, IWeaponInput Input) weapon)
+        [field: SerializeField] public ItemData ItemData { get; private set; }
+        
+        [field:  SerializeField] public ItemGameObjectView ItemGameObjectView { get; private set; }
+        
+        public void Init(IInventory<(IWeapon, IWeaponInput)> inventory, InventorySlot<(IWeapon, IWeaponInput)> inventorySlot)
         {
-            _weapon = weapon;
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
-            _selector = selector ?? throw new ArgumentNullException(nameof(selector));
+            _inventorySlot = inventorySlot ?? throw new ArgumentNullException(nameof(inventorySlot));
         }
 
         protected override void OnPicked()
         {
             if (_inventory.IsFull == false && enabled)
             {
-                var weapon = new Item<(IWeapon, IWeaponInput)>(_itemData, _weapon, _itemView);
-                var slot = new InventorySlot<(IWeapon, IWeaponInput)>(_selector, weapon, 1);
-                _inventory.Add(slot);
+                _inventory.Add(_inventorySlot);
                 gameObject.SetActive(false);
             }
         }

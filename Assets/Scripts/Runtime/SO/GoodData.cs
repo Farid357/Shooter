@@ -7,7 +7,7 @@ namespace Shooter.Shop
     {
         [field: SerializeField] public string Name { get; private set; }
 
-        [field: SerializeField, HideLabel, PreviewField, LabelWidth(70f)] public Sprite Sprite { get; private set; }
+        [field: SerializeField, PreviewField, LabelWidth(100f)] public Sprite Sprite { get; private set; }
         
         [field: SerializeField, MinValue(1)] public int Price { get; private set; }
 

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.SaveSystem;
 using Shooter.Shop;
-using Shooter.Tools;
 using UnityEngine;
 
 namespace Shooter.Root
@@ -12,20 +10,27 @@ namespace Shooter.Root
     public sealed class ShopRoot : CompositeRoot
     {
         [SerializeField] private WeaponGoodData[] _weaponGoodData;
-        [SerializeField] private GoodViewsFactory _goodViewsFactory;
         [SerializeField] private ShoppingCartView _shoppingCartView;
-        [SerializeField] private IEnoughMoneyView _enoughMoneyView;
+        [SerializeField] private INotEnoughMoneyView _notEnoughMoneyView;
         [SerializeField] private IView<int> _moneyView;
         [SerializeField] private BuyGoodButton _buyGoodButton;
         [SerializeField] private ClearingGoodsButton _clearingGoodsButton;
+        [SerializeField] private SwitchingRightGoodButton _switchingGoodRightButton;
+        [SerializeField] private SwitchingLeftGoodButton _switchingGoodLeftButton;
+        [SerializeField] private GoodSwitchingView _goodSwitchingView;
         
         public override void Compose()
         {
             IShoppingCart shoppingCart = new ShoppingCart(_shoppingCartView);
+            _goodSwitchingView.Init(shoppingCart);
             _shoppingCartView.Init(new RemovingGoodButtonActionFactory(shoppingCart));
-            IClient client = new Client(_enoughMoneyView, new Wallet(_moneyView, new BinaryStorage()), shoppingCart);
+            IClient client = new Client(_notEnoughMoneyView, new Wallet(_moneyView, new BinaryStorage()), shoppingCart);
             _buyGoodButton.Subscribe(new BuyGoodButtonAction(client));
-            _goodViewsFactory.Create(CreateWeaponGoods(), shoppingCart);
+            var goods = CreateWeaponGoods();
+            _switchingGoodLeftButton.Subscribe(new SwitchingLeftGoodAction(_goodSwitchingView, goods));
+            var switchingRightGoodAction = new SwitchingRightGoodAction(_goodSwitchingView, goods);
+            _switchingGoodRightButton.Subscribe(switchingRightGoodAction);
+            switchingRightGoodAction.OnClick();
             _clearingGoodsButton.Subscribe(new ClearingGoodsButtonAction(shoppingCart));
         }
 

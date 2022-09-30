@@ -6,13 +6,13 @@ namespace Shooter.Shop
 {
     public sealed class Client : IClient
     {
-        private readonly IEnoughMoneyView _enoughMoneyView;
+        private readonly INotEnoughMoneyView _notEnoughMoneyView;
         private readonly IWallet _wallet;
         private readonly IShoppingCart _shoppingCart;
 
-        public Client(IEnoughMoneyView enoughMoneyView, IWallet wallet, IShoppingCart shoppingCart)
+        public Client(INotEnoughMoneyView notEnoughMoneyView, IWallet wallet, IShoppingCart shoppingCart)
         {
-            _enoughMoneyView = enoughMoneyView ?? throw new ArgumentNullException(nameof(enoughMoneyView));
+            _notEnoughMoneyView = notEnoughMoneyView ?? throw new ArgumentNullException(nameof(notEnoughMoneyView));
             _wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
             _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
         }
@@ -36,7 +36,7 @@ namespace Shooter.Shop
 
             else
             {
-                _enoughMoneyView.Visualize(totalPrice, _wallet.Money);
+                _notEnoughMoneyView.Visualize(totalPrice, _wallet.Money);
             }
         }
     }

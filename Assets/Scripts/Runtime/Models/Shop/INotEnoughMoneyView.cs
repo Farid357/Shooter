@@ -1,6 +1,6 @@
 ﻿namespace Shooter.Shop
 {
-    public interface IEnoughMoneyView
+    public interface INotEnoughMoneyView
     {
         void Visualize(int needMoney, int currentMoney);
     }

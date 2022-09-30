@@ -20,6 +20,7 @@ namespace Shooter.Root
         [SerializeField] private List<EnemyWaveData> _wavesData;
         [SerializeField] private IScoreRoot _scoreRoot;
         [SerializeField] private IView<float> _waveTimerSecondsView;
+        [SerializeField] private IView<int> _diedEnemiesView;
         
         private SystemUpdate _systemUpdate;
         private WaveFactory _waveFactory;
@@ -35,7 +36,9 @@ namespace Shooter.Root
                 new CharacterHealthRegenerationAbility(_regenerationAbility, _characterHealthTransformView.Health)
             };
 
-            IRewardFactory rewardFactory = new RandomRewardFactory(abilities, new IReward[] { new MoneyReward(wallet, 5) });
+            IRewardFactory rewardFactory = new RandomRewardFactory(abilities, new IReward[] {new MoneyReward(wallet, 5), 
+                new DiedHealthsCounterReward(_diedEnemiesView)});
+            
             _systemUpdate = new SystemUpdate();
             _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore());
             IEnemiesSimulation simulation = new EnemySimulation(_navMeshBaker);

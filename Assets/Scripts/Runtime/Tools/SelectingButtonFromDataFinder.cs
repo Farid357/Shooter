@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shooter.Shop
 {
-    public sealed class SelectingButtonFromDataFinder :ISelectingButtonFromDataFinder
+    public sealed class SelectingButtonFromDataFinder : ISelectingButtonFromDataFinder
     {
         public IButton Find(GoodData data)
         {

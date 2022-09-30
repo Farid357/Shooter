@@ -44,7 +44,8 @@ namespace Shooter.Root
         {
             var pickups = FindObjectsOfType<T>();
             var weapon = weaponFactory.Create();
-            pickups.ForEach(pickup => pickup.Init(inventory, new WeaponSelector(_playerRoot), (weapon, weaponInput)));
+            pickups.ForEach(pickup => pickup.Init(inventory,  new InventorySlot<(IWeapon, IWeaponInput)>(
+                new WeaponSelector(_playerRoot), new Item<(IWeapon, IWeaponInput)>(pickup.ItemData, (weapon, weaponInput), pickup.ItemGameObjectView), 1)));
         }
 
         private void InitPickups<T>(IReadOnlyInventory<(IWeapon, IWeaponInput)> inventory) where T : MonoBehaviour, IBulletsPickup
