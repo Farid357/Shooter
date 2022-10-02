@@ -11,7 +11,7 @@ namespace Shooter.Test
         {
             IHealth health = new PoisonHealth(new Health(10, new DummyHealthView()));
             health.TakeDamage(5);
-            Assert.That(health.IsAlive == false);
+            Assert.That(health.IsDied);
         }
     }
 }

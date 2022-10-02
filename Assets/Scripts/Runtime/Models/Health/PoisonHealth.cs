@@ -11,6 +11,8 @@ namespace Shooter.Model
             _health = health ?? throw new ArgumentNullException(nameof(health));
         }
 
+        public bool IsDied => _health.IsDied;
+        
         public bool IsAlive => _health.IsAlive;
         
         public int StartValue => _health.StartValue;

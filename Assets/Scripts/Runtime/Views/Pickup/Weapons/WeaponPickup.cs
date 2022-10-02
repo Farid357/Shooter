@@ -6,14 +6,12 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public abstract class WeaponPickup : Pickup
+    public sealed class WeaponPickup : Pickup
     {
         private IInventory<(IWeapon, IWeaponInput)> _inventory;
         private InventorySlot<(IWeapon, IWeaponInput)> _inventorySlot;
 
         [field: SerializeField] public ItemData ItemData { get; private set; }
-        
-        [field:  SerializeField] public ItemGameObjectView ItemGameObjectView { get; private set; }
         
         public void Init(IInventory<(IWeapon, IWeaponInput)> inventory, InventorySlot<(IWeapon, IWeaponInput)> inventorySlot)
         {
@@ -23,10 +21,9 @@ namespace Shooter.GameLogic
 
         protected override void OnPicked()
         {
-            if (_inventory.IsFull == false && enabled)
+            if (_inventory.IsFull == false)
             {
                 _inventory.Add(_inventorySlot);
-                gameObject.SetActive(false);
             }
         }
     }

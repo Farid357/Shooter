@@ -1,10 +1,10 @@
-﻿using Shooter.GameLogic;
-using Shooter.GameLogic.Inventory;
+﻿using System.Collections.Generic;
+using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.Model.Inventory;
+using Shooter.Shop;
 using Shooter.Tools;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Shooter.Root
@@ -21,37 +21,33 @@ namespace Shooter.Root
         [SerializeField, VerticalGroup("Weapon Data")] private readonly IFactory<IBullet> _explosiveBulletsFactory;
         [SerializeField] private PlayerRoot _playerRoot;
         [SerializeField] private readonly IFactory<IGrenade> _grenadeFactory;
-        
-        private readonly IWeaponInput _standartWeaponInput = new StandartWeaponInput();
-        
+        [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
+        [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
+
         public void Compose(IInventory<(IWeapon, IWeaponInput)> inventory, IInventory<IGrenade> grenadeInventory)
         {
-            InitPickups<Ak74Pickup>(new WeaponFactoryWithShootWaitingAndRollback(_bulletsFactory, _ak74Data), inventory, _standartWeaponInput);
-            InitPickups<ShotgunPickup>(new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData), inventory, _standartWeaponInput);
-            InitPickups<RpgPickup>(new WeaponFactoryWithShootWaitingAndRollback(_explosiveBulletsFactory, _rpgData), inventory, _standartWeaponInput);
-            InitPickups<PistolPickup>(new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData), inventory, new BurstWeaponInput());
-            InitPickups<BulletsPickup>(inventory);
-            InitPickups<GrenadePickup>(grenadeInventory, new GrenadeSelector(_playerRoot), _grenadeFactory);
-        }
+            _grenadePickupsFactory.Init(grenadeInventory);
+            _grenadePickupsFactory.SpawnLoop().Forget();
+            var weaponSpawnTypes = new List<WeaponType> { WeaponType.Ak74 , WeaponType.Pistol};
+            
+            var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>
+            {
+                { WeaponType.Ak74, new WeaponFactoryWithShootWaitingAndRollback(_bulletsFactory, _ak74Data) },
+                { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData) },
+                { WeaponType.Rpg, new WeaponFactoryWithShootWaitingAndRollback(_explosiveBulletsFactory, _rpgData) }, 
+                { WeaponType.Shotgun, new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData)}
+            };
 
-        private void InitPickups<T>(IInventory<IGrenade> inventory, GrenadeSelector selector, IFactory<IGrenade> factory) where T : GrenadePickup
-        {
-            var pickups = FindObjectsOfType<T>();
-            pickups.ForEach(pickup => pickup.Init(inventory, selector, factory));
-        }
-
-        private void InitPickups<T>(IWeaponFactory weaponFactory, IInventory<(IWeapon, IWeaponInput)> inventory, IWeaponInput weaponInput) where T : WeaponPickup
-        {
-            var pickups = FindObjectsOfType<T>();
-            var weapon = weaponFactory.Create();
-            pickups.ForEach(pickup => pickup.Init(inventory,  new InventorySlot<(IWeapon, IWeaponInput)>(
-                new WeaponSelector(_playerRoot), new Item<(IWeapon, IWeaponInput)>(pickup.ItemData, (weapon, weaponInput), pickup.ItemGameObjectView), 1)));
-        }
-
-        private void InitPickups<T>(IReadOnlyInventory<(IWeapon, IWeaponInput)> inventory) where T : MonoBehaviour, IBulletsPickup
-        {
-            var pickups = FindObjectsOfType<T>();
-            pickups.ForEach(pickup => pickup.Init(inventory));
+            var inputs = new Dictionary<WeaponType, IWeaponInput>
+            {
+                { WeaponType.Ak74, new StandartWeaponInput() },
+                { WeaponType.Pistol, new BurstWeaponInput() },
+                { WeaponType.Rpg, new StandartWeaponInput() },
+                { WeaponType.Shotgun, new BurstWeaponInput() }
+            };
+            
+            _weaponPickupsFactory.Init(weaponSpawnTypes, inventory, factoriesContainer, inputs);
+            _weaponPickupsFactory.SpawnLoop().Forget();
         }
     }
 }

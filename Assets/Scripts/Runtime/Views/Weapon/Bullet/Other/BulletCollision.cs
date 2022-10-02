@@ -9,5 +9,6 @@ namespace Shooter.GameLogic
         public abstract bool CanIncreaseDamage { get; }
         
         public abstract int Damage { get; }
+        
     }
 }

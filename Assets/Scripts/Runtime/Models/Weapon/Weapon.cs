@@ -6,19 +6,20 @@ namespace Shooter.Model
     public sealed class Weapon : IWeapon
     {
         private readonly IFactory<IBullet> _bulletsFactory;
-        private readonly IShotView _shotView;
         private readonly IBulletsView _bulletsView;
 
-        public Weapon(IFactory<IBullet> bulletsFactory, IShotView shotView, IBulletsView bulletsView, int bullets)
+        public Weapon(IFactory<IBullet> bulletsFactory, IBulletsView bulletsView, int bullets)
         {
             _bulletsFactory = bulletsFactory ?? throw new ArgumentNullException(nameof(bulletsFactory));
-            _shotView = shotView ?? throw new ArgumentNullException(nameof(shotView));
             Bullets = bullets.TryThrowLessThanOrEqualsToZeroException();
             _bulletsView = bulletsView ?? throw new ArgumentNullException(nameof(bulletsView));
+            StartBullets = Bullets;
             _bulletsView.Visualize(Bullets);
         }
         
         public int Bullets { get; private set; }
+        
+        public int StartBullets { get; }
 
         public bool CanShoot => Bullets > 0;
         
@@ -30,7 +31,6 @@ namespace Shooter.Model
             _bulletsFactory.Create().Throw();
             Bullets--;
             _bulletsView.Visualize(Bullets);
-            _shotView.Visualize();
         }
 
         public void VisualizeBullets() => _bulletsView.Visualize(Bullets);

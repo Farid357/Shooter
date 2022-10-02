@@ -8,6 +8,8 @@ namespace Shooter.Test
         {
         }
 
+        public int StartBullets { get; }
+
         public void VisualizeBullets()
         {
             

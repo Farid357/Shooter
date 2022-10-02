@@ -2,16 +2,18 @@
 {
     public interface IHealth
     {
-        public bool IsAlive { get; }
+        bool IsDied { get; }
         
-        public int StartValue { get; }
-        
-        public int Value { get; }
+        bool IsAlive { get; }
+       
+        int StartValue { get; }
+       
+        int Value { get; }
 
-        public void TakeDamage(int damage);
-        
-        public void Heal(int amount);
-        
-        public bool CanHeal(int amount);
+        void TakeDamage(int damage);
+       
+        void Heal(int amount);
+       
+        bool CanHeal(int amount);
     }
 }

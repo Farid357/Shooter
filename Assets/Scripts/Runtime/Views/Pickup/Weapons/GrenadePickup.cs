@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Shooter.GameLogic.Inventory
 {
-    public class GrenadePickup : Pickup
+    public sealed class GrenadePickup : Pickup
     {
         [SerializeField, Min(1)] private int _count = 1;
         [SerializeField] private ItemData _itemData;
@@ -29,7 +29,6 @@ namespace Shooter.GameLogic.Inventory
                 var item = new Item<IGrenade>(_itemData, grenade, grenade.ItemView);
                 var slot = new InventorySlot<IGrenade>(_selector, item, _count);
                 _inventory.Add(slot);
-                gameObject.SetActive(false);
             }
         }
     }

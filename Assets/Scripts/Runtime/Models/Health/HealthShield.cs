@@ -14,6 +14,8 @@ namespace Shooter.Model
             _protection = protection.TryThrowLessThanOrEqualsToZeroException();
         }
 
+        public bool IsDied => _health.IsDied;
+        
         public bool IsAlive => _health.IsAlive;
 
         public int StartValue => _health.StartValue;
@@ -31,7 +33,6 @@ namespace Shooter.Model
                 
                 if(damage == 0)
                     return;
-                
             }
 
             _health.TakeDamage(damage);

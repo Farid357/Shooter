@@ -6,6 +6,5 @@
         Pistol,
         Rpg,
         Ak74,
-        Grenade
     }
 }

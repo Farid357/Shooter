@@ -24,11 +24,11 @@ namespace Shooter.Test
         }
 
         [Test]
-        public void HealthBoolIsAliveWorksCorrectly()
+        public void HealthBoolIsDiedWorksCorrectly()
         {
             IHealth health = new Health(100, new DummyHealthView());
             health.TakeDamage(100);
-            Assert.That(health.IsAlive == false);
+            Assert.That(health.IsDied);
         }
 
         [Test]

@@ -1,4 +1,5 @@
-﻿using Shooter.Model;
+﻿using System;
+using Shooter.Model;
 using Shooter.Tools;
 using UnityEngine;
 
@@ -8,9 +9,10 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private BulletMovement _prefab;
-        [SerializeField] private Transform _cursor;
-        
+
         private IndependentPool<BulletMovement> _pool;
+        
+        public override event Action<BulletMovement> OnCreated;
 
         private void Awake()
         {
@@ -22,7 +24,9 @@ namespace Shooter.GameLogic
             var bullet = _pool.Get();
             bullet.transform.position = _spawnPoint.position;
             bullet.gameObject.SetActive(true);
+            OnCreated?.Invoke(bullet);
             return bullet;
         }
+
     }
 }

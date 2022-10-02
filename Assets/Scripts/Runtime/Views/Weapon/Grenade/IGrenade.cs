@@ -5,7 +5,7 @@ namespace Shooter.GameLogic
 {
     public interface IGrenade : IShootingWeapon
     {
-        public IInventoryItemGameObjectView ItemView { get; }
+        IInventoryItemGameObjectView ItemView { get; }
         
     }
 }

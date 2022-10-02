@@ -6,12 +6,10 @@ namespace Shooter.GameLogic
 {
     public sealed class WeaponData : SerializedMonoBehaviour
     {
-        [field: SerializeField] public float WaitSeconds { get; private set; }
+        [field: SerializeField, MinValue(0.01f)] public float WaitSeconds { get; private set; } = 0.01f;
 
         [field: SerializeField] public IBulletsView BulletsView { get; private set; }
 
-        [field: SerializeField] public IShotView ShotView { get; private set; }
-
-        [field: SerializeField] public int Bullets { get; private set; }
+        [field: SerializeField, MinValue(1)] public int Bullets { get; private set; } = 1;
     }
 }

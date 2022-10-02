@@ -11,7 +11,6 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private ICharacterMovement _character;
         [SerializeField] private IHealthTransformView _characterHealthTransformView;
-
         [SerializeField] private Transform[] _spawnPoints;
         [SerializeField] private Enemy _prefab;
 

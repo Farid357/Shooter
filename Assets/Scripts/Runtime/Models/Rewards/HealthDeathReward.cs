@@ -16,7 +16,7 @@ namespace Shooter.Model
         
         public void Update(float deltaTime)
         {
-            if (_health.IsAlive == false && _notEarnedReward)
+            if (_health.IsDied && _notEarnedReward)
             {
                 _reward.Apply();
                 _notEarnedReward = false;

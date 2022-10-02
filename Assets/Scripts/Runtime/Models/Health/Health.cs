@@ -18,6 +18,10 @@ namespace Shooter.Model
         public int StartValue { get; }
         
         public int Value { get; private set; }
+        
+        public bool IsDied => Value == 0;
+        
+        public bool IsAlive => Value > 0;
 
         public void Heal(int amount)
         {
@@ -30,12 +34,10 @@ namespace Shooter.Model
 
         public bool CanHeal(int amount) => Value + amount <= StartValue && IsAlive;
 
-        public bool IsAlive => Value > 0;
-
         public void TakeDamage(int damage)
         {
-            if (IsAlive == false)
-                throw new InvalidOperationException("Health is not alive!");
+            if (IsDied)
+                throw new InvalidOperationException("Health is died!");
 
             damage.TryThrowLessThanOrEqualsToZeroException();
             Value = Math.Max(0, Value - damage);

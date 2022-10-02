@@ -5,7 +5,7 @@ namespace Shooter.Model.Inventory
 {
     public sealed class InventorySlot<TItem>
     {
-        public InventorySlot(IInventoryItemSelector<TItem> selector, Item<TItem> item, int itemsCount)
+        public InventorySlot(IInventoryItemSelector<TItem> selector, Item<TItem> item, int itemsCount = 1)
         {
             Item = item;
             ItemsCount = itemsCount.TryThrowLessThanOrEqualsToZeroException();
@@ -13,6 +13,7 @@ namespace Shooter.Model.Inventory
         }
         
         public IInventoryItemSelector<TItem> ItemSelector { get; }
+        
         public Item<TItem> Item { get; }
         
         public int ItemsCount { get; private set; }

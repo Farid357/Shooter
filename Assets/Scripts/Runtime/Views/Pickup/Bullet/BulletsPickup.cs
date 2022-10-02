@@ -27,7 +27,6 @@ namespace Shooter.GameLogic.Inventory
                 {
                     var weapon = item.Model.Item1;
                     weapon.AddBullets(_addBullets);
-                    gameObject.SetActive(false);
                 }
             }
         }

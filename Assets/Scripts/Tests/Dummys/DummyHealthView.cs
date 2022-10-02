@@ -1,11 +1,14 @@
 ﻿using Shooter.Model;
 
-public sealed class DummyHealthView : IHealthView
+namespace Shooter.Test
 {
-    public bool HasVusualized { get; private set; }
-    
-    public void Visualize(int health)
+    public sealed class DummyHealthView : IHealthView
     {
-        HasVusualized = true;
+        public bool HasVusualized { get; private set; }
+
+        public void Visualize(int health)
+        {
+            HasVusualized = true;
+        }
     }
 }

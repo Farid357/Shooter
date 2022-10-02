@@ -15,6 +15,5 @@ namespace Shooter.Model
         }
 
         public void Apply() => _wallet.Put(_addMoney);
-        
     }
 }

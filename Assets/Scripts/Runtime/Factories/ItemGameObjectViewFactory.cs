@@ -11,7 +11,7 @@ namespace Shooter.GameLogic.Inventory
         
         public IInventoryItemGameObjectView Create()
         {
-            var inventoryItemGameObjectView = Instantiate(_prefab, _spawnPoint.position, Quaternion.identity, _parent);
+            var inventoryItemGameObjectView = Instantiate(_prefab, _spawnPoint.position, _prefab.transform.rotation, _parent);
             inventoryItemGameObjectView.gameObject.SetActive(false);
             return inventoryItemGameObjectView;
         }

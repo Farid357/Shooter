@@ -17,6 +17,8 @@ namespace Shooter.GameLogic
 
         private float _rotationZOffset;
         private IndependentPool<BulletMovement> _pool;
+        
+        public override event Action<BulletMovement> OnCreated;
 
         private void Awake()
         {
@@ -34,6 +36,7 @@ namespace Shooter.GameLogic
             return new Bullets(bulletsEnumerable);
         }
 
+
         private IEnumerable<IBullet> CreateBullets()
         {
             var zRotation = _minZRotation;
@@ -47,6 +50,7 @@ namespace Shooter.GameLogic
                 bullet.gameObject.SetActive(true);
                 xPosition += _xOffset;
                 zRotation += _rotationZOffset;
+                OnCreated?.Invoke(bullet);
                 yield return bullet;
             }
         }

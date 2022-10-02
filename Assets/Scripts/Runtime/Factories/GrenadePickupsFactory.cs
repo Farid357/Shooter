@@ -21,6 +21,14 @@ namespace Shooter.GameLogic
         
         private IInventory<IGrenade> _inventory;
 
+        public void Init(IInventory<IGrenade> inventory)
+        {
+            if (_inventory is not null)
+                throw new InvalidOperationException($"{nameof(GrenadePickupsFactory)} already inited");
+            
+            _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
+        }
+        
         public async UniTaskVoid SpawnLoop()
         {
             while (true)

@@ -14,7 +14,7 @@ namespace Shooter.Model
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _storage = new StorageWithNameSaveObject<Wallet, int>(storage);
         }
-        
+
         public int Money { get; private set; }
 
         public void Put(int money)
@@ -41,4 +41,3 @@ namespace Shooter.Model
         }
     }
 }
-

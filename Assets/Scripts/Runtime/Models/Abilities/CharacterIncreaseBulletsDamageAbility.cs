@@ -1,33 +1,47 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Shooter.GameLogic;
 using Shooter.Tools;
+using Sirenix.Utilities;
 
 namespace Shooter.Model
 {
-    public sealed class CharacterIncreaseBulletsDamageAbility : IAbility
+    public sealed class CharacterIncreaseBulletsDamageAbility : IAbility, IDisposable
     {
         private readonly IAbilityView _view;
-        private readonly IBulletCollision[] _bullets;
+        private readonly IBulletsFactory[] _bulletsFactories;
         private readonly float _applySeconds;
-        
-        public CharacterIncreaseBulletsDamageAbility(IAbilityView view, IBulletCollision[] bullets, float applySeconds)
+        private bool _hasApplied;
+
+        public CharacterIncreaseBulletsDamageAbility(IAbilityView view, IBulletsFactory[] bulletsFactories, float applySeconds)
         {
             _applySeconds = applySeconds.TryThrowLessThanOrEqualsToZeroException();
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _bullets = bullets ?? throw new ArgumentNullException(nameof(bullets));
+            _bulletsFactories = bulletsFactories ?? throw new ArgumentNullException(nameof(bulletsFactories));
+            _bulletsFactories.ForEach(factory => factory.OnCreated += BulletsFactoryOnCreated);
         }
 
-        public void Apply()
+        private void BulletsFactoryOnCreated(BulletMovement bullet)
         {
-            foreach (var bullet in _bullets)
+            if (_hasApplied)
             {
-                if (bullet.CanIncreaseDamage)
+                if (bullet.TryGetComponent(out IBulletCollision bulletCollision) && bulletCollision.CanIncreaseDamage)
                 {
-                    var increaseDamage = bullet.Damage * 2;
-                    bullet.IncreaseDamageForSeconds(increaseDamage, _applySeconds);
+                    var increaseDamage = bulletCollision.Damage * 2;
+                    bulletCollision.IncreaseDamageForSeconds(increaseDamage, _applySeconds);
                     _view.VisualizeApply(_applySeconds);
                 }
             }
         }
+
+        public async void Apply()
+        {
+            _hasApplied = true;
+            await Task.Delay(TimeSpan.FromSeconds(_applySeconds));
+            _hasApplied = false;
+        }
+
+        public void Dispose() => _bulletsFactories.ForEach(factory => factory.OnCreated -= BulletsFactoryOnCreated);
+
     }
 }
