@@ -1,9 +1,14 @@
 ﻿namespace Shooter.Model
 {
-    public interface ISwitchingGoodAction : IButtonClickAction
+    public interface ISwitchingGoodAction
     {
-        int Index { get; }
+        bool CanSwitchLeft();
+
+        bool CanSwitchRight();
         
-        bool CanSwitch(int index);
+        void SwitchLeft();
+        
+        void SwitchRight();
+
     }
 }

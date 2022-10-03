@@ -11,25 +11,17 @@ namespace Shooter.GameLogic
         [SerializeField] private Color _zeroBullets = Color.red;
         [SerializeField] private TMP_Text _text;
         [SerializeField] private TMP_Text _bulletsEnded;
-        [SerializeField] private AudioSource _audio;
-        [SerializeField] private ParticleSystem _particle;
         private Color _startColor;
-        private bool _isNotFirstVisualize;
+        
+        [field: SerializeField] public IShotView ShotView { get; private set; }
         
         private void OnEnable() => _startColor = _text.color;
 
         public void Visualize(int bullets)
         {
-            if (_isNotFirstVisualize)
-            {
-                _audio.PlayOneShot(_audio.clip);
-                _particle.Play();
-            }
-            
             _text.color = bullets == 0 ? _zeroBullets : _startColor;
             _view.Visualize(bullets);
             _bulletsEnded.gameObject.SetActive(bullets == 0);
-            _isNotFirstVisualize = true;
         }
     }
 }

@@ -1,26 +1,17 @@
 ﻿using Shooter.Model;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class PistolBulletsView : MonoBehaviour, IBulletsView
+    public sealed class PistolBulletsView : SerializedMonoBehaviour, IBulletsView
     {
         [SerializeField] private TMP_Text _text;
-        [SerializeField] private AudioSource _audio;
-        [SerializeField] private ParticleSystem _particle;
-        private bool _isNotFirstVisualize;
+
+        [field: SerializeField] public IShotView ShotView { get; private set; }
+
+        public void Visualize(int bullets) => _text.text = "\u221E";
         
-        public void Visualize(int bullets)
-        {
-            if (_isNotFirstVisualize)
-            {
-                _audio.PlayOneShot(_audio.clip);
-                _particle.Play();
-            }
-            
-            _text.text = "\u221E";
-            _isNotFirstVisualize = true;
-        }
     }
 }

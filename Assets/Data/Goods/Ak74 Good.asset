@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf41a7d23a10458ea02ad55b3602b2f6, type: 3}
-  m_Name: Good
+  m_Name: Ak74 Good
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Pistol
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 182d89bd51e73924baed74474cdfe924, type: 3}
-  <Price>k__BackingField: 100
-  <Type>k__BackingField: 1
+  <Name>k__BackingField: Ak74
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 9c59b26f03f0caf40bea3ae9559f1aec, type: 3}
+  <Price>k__BackingField: 500
+  <Type>k__BackingField: 3

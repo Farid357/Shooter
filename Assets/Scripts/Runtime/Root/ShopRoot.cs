@@ -15,7 +15,7 @@ namespace Shooter.Root
         [SerializeField] private IView<int> _moneyView;
         [SerializeField] private BuyGoodButton _buyGoodButton;
         [SerializeField] private ClearingGoodsButton _clearingGoodsButton;
-        [SerializeField] private SwitchingRightGoodButton _switchingGoodRightButton;
+        [SerializeField] private SwitchingRightGoodButton _switchingRightGoodButton;
         [SerializeField] private SwitchingLeftGoodButton _switchingGoodLeftButton;
         [SerializeField] private GoodSwitchingView _goodSwitchingView;
         
@@ -27,18 +27,19 @@ namespace Shooter.Root
             IClient client = new Client(_notEnoughMoneyView, new Wallet(_moneyView, new BinaryStorage()), shoppingCart);
             _buyGoodButton.Subscribe(new BuyGoodButtonAction(client));
             var goods = CreateWeaponGoods();
-            _switchingGoodLeftButton.Subscribe(new SwitchingLeftGoodAction(_goodSwitchingView, goods));
-            var switchingRightGoodAction = new SwitchingRightGoodAction(_goodSwitchingView, goods);
-            _switchingGoodRightButton.Subscribe(switchingRightGoodAction);
-            switchingRightGoodAction.OnClick();
+            var switchingGoodAction = new SwitchingGoodAction(_goodSwitchingView, goods);
+            _switchingGoodLeftButton.Subscribe(switchingGoodAction);
+            _switchingRightGoodButton.Subscribe(switchingGoodAction);
             _clearingGoodsButton.Subscribe(new ClearingGoodsButtonAction(shoppingCart));
+            switchingGoodAction.SwitchRight();
+            switchingGoodAction.SwitchLeft();
         }
 
         private IEnumerable<IGood> CreateWeaponGoods()
         {
             foreach (var weaponGoodData in _weaponGoodData)
             {
-                yield return new WeaponGood(new Good(weaponGoodData), weaponGoodData.Type, new CollectionStorage<WeaponType>(new BinaryStorage()));
+                yield return new WeaponGood(new Good(_goodSwitchingView.GoodView, weaponGoodData), weaponGoodData.Type, new CollectionStorage<WeaponType>(new BinaryStorage()));
             }
         }
     }

@@ -7,5 +7,7 @@
         void Remove(IGood good);
 
         void Clear();
+        
+        void VisualizeTotalPrice(int totalPrice);
     }
 }

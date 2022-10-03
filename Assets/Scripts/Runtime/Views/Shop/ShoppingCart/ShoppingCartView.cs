@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Shooter.Model;
 using Shooter.Tools;
 using Sirenix.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace Shooter.Shop
@@ -11,6 +12,8 @@ namespace Shooter.Shop
     {
         [SerializeField] private Transform _content;
         [SerializeField] private GoodInShoppingCartView _prefab;
+        [SerializeField] private TMP_Text _totalPrice;
+        
         private readonly Dictionary<GoodData, GoodView> _goodViews = new();
         private IRemovingGoodButtonOnClickActionFactory _removingButtonActionFactory;
 
@@ -32,5 +35,6 @@ namespace Shooter.Shop
 
         public void Clear() => _goodViews.ForEach(good => Destroy(good.Value));
         
+        public void VisualizeTotalPrice(int totalPrice) => _totalPrice.text = totalPrice.ToString();
     }
 }

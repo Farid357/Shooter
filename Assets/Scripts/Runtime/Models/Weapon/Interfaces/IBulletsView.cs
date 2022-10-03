@@ -2,6 +2,8 @@
 {
     public interface IBulletsView
     {
-        public void Visualize(int bullets);
+        IShotView ShotView { get; }
+        
+        void Visualize(int bullets);
     }
 }

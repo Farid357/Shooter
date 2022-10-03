@@ -17,9 +17,9 @@ namespace Shooter.GameLogic
 
         private void TryClick()
         {
-            if (_switchingGoodAction.CanSwitch(_switchingGoodAction.Index - 1))
+            if (_switchingGoodAction.CanSwitchLeft())
             {
-                _switchingGoodAction.OnClick();
+                _switchingGoodAction.SwitchLeft();
             }
         }
 

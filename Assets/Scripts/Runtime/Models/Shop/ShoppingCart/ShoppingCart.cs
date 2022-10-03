@@ -25,6 +25,7 @@ namespace Shooter.Shop
 
             _goods.Add(good);
             _view.Visualize(good);
+            _view.VisualizeTotalPrice(TotalPrice);
         }
 
         public void Remove(IGood good)
@@ -37,12 +38,14 @@ namespace Shooter.Shop
 
             _goods.Remove(good);
             _view.Remove(good);
+            _view.VisualizeTotalPrice(TotalPrice);
         }
         
         public void Clear()
         {
             _goods.Clear();
             _view.Clear();
+            _view.VisualizeTotalPrice(TotalPrice);
         }
     }
 }

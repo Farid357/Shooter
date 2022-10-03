@@ -2,7 +2,6 @@
 using Cysharp.Threading.Tasks;
 using Shooter.Model;
 using Shooter.Tools;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.GameLogic
@@ -10,13 +9,10 @@ namespace Shooter.GameLogic
     [RequireComponent(typeof(Collider))]
     public sealed class StandartBulletCollision : BulletCollision, IBulletCollision
     {
-        [SerializeField, ProgressBar(2, 100)] private int _damage = 2;
         private bool _canIncreaseDamage;
 
         public override bool CanIncreaseDamage => _canIncreaseDamage;
-
-        public override int Damage => _damage;
-
+        
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))
@@ -31,7 +27,7 @@ namespace Shooter.GameLogic
         {
             UniTask.Create(async () =>
             {
-                if (_damage >= damage || CanIncreaseDamage == false)
+                if (Damage >= damage || CanIncreaseDamage == false)
                     throw new InvalidOperationException(nameof(IncreaseDamageForSeconds));
 
                 var startDamage = Damage;
@@ -49,7 +45,7 @@ namespace Shooter.GameLogic
 
         private void SetDamage(int damage, bool canIncreaseDamage)
         {
-            _damage = damage.TryThrowLessThanOrEqualsToZeroException();
+            Damage = damage.TryThrowLessThanOrEqualsToZeroException();
             _canIncreaseDamage = canIncreaseDamage == CanIncreaseDamage ? throw new InvalidOperationException(nameof(SetDamage)) : canIncreaseDamage;
         }
     }

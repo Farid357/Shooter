@@ -31,6 +31,7 @@ namespace Shooter.Model
             _bulletsFactory.Create().Throw();
             Bullets--;
             _bulletsView.Visualize(Bullets);
+            _bulletsView.ShotView.VisualizeShot();
         }
 
         public void VisualizeBullets() => _bulletsView.Visualize(Bullets);

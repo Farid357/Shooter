@@ -13,6 +13,7 @@ namespace Shooter.Root
     {
         [SerializeField] private readonly IFactory<IBullet> _bulletsFactory;
         [SerializeField] private readonly IFactory<IBullet> _shotgunBulletsFactory;
+        [SerializeField] private readonly IFactory<IBullet> _fireBulletsFactory;
         
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _rpgData;
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _pistolData;
@@ -35,7 +36,8 @@ namespace Shooter.Root
                 { WeaponType.Ak74, new WeaponFactoryWithShootWaitingAndRollback(_bulletsFactory, _ak74Data) },
                 { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData) },
                 { WeaponType.Rpg, new WeaponFactoryWithShootWaitingAndRollback(_explosiveBulletsFactory, _rpgData) }, 
-                { WeaponType.Shotgun, new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData)}
+                { WeaponType.Shotgun, new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData)},
+                { WeaponType.PistolWithFireBullets,new WeaponFactoryWithShootWaitingAndRollback(_fireBulletsFactory, _shotgunData)}
             };
 
             var inputs = new Dictionary<WeaponType, IWeaponInput>
@@ -43,7 +45,9 @@ namespace Shooter.Root
                 { WeaponType.Ak74, new StandartWeaponInput() },
                 { WeaponType.Pistol, new BurstWeaponInput() },
                 { WeaponType.Rpg, new StandartWeaponInput() },
-                { WeaponType.Shotgun, new BurstWeaponInput() }
+                { WeaponType.Shotgun, new BurstWeaponInput() },
+                { WeaponType.PistolWithFireBullets, new BurstWeaponInput()}
+
             };
             
             _weaponPickupsFactory.Init(weaponSpawnTypes, inventory, factoriesContainer, inputs);
