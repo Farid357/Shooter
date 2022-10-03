@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7180092018112306850}
   - component: {fileID: 1329245791635572522}
   - component: {fileID: 8631178659134956742}
-  - component: {fileID: -4237947039909150356}
+  - component: {fileID: 6536806288004000452}
   m_Layer: 0
-  m_Name: ExplosiveBullet
+  m_Name: FireBullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3658940862770858746}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.06187, y: 0.01040001, z: -0.03334}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.1989925, y: 0.09407833, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f13cec898e8876a4cb6c7cb7f0f9f073, type: 2}
+  - {fileID: 2100000, guid: 16c5722f57cbec2429b02e7dce5ce955, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwForce: 10
---- !u!114 &-4237947039909150356
+--- !u!114 &6536806288004000452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,9 +139,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3658940862770858746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a5fde1f1ad4038b34f35efa7424bd3, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ace0b1c02c45a7bd22e4f8fc545997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 66
-  _explosionPrefab: {fileID: 3558312835779736951, guid: 6b218d14c43805046a8ef735d3d862c8, type: 3}
-  _explosionParticlePrefab: {fileID: 8976503813493468718, guid: 854e31ca019074f45b3789984b498305, type: 3}
+  <Damage>k__BackingField: 5
+  _attackCooldown: 0.1
