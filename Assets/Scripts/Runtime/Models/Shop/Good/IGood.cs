@@ -2,7 +2,7 @@
 {
     public interface IGood
     {
-        GoodData Data { get; }
+        IGoodData Data { get; }
         
         void Use();
     }

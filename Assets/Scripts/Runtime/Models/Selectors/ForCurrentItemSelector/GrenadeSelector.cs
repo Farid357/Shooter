@@ -15,12 +15,12 @@ namespace Shooter.Model.Inventory
         
         public void Select(IGrenade grenade)
         {
-            _playerRoot.Compose(grenade, new StandartWeaponInput());
+            _playerRoot.Compose(new StandartWeaponInput(), grenade);
         }
 
         public void Unselect()
         {
-            _playerRoot.Compose(new DummyWeapon(), new DummyWeaponInput());
+            _playerRoot.Compose(new DummyWeaponInput(), new DummyWeapon());
         }
     }
 }

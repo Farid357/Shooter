@@ -4,12 +4,12 @@ using Shooter.Model;
 
 namespace Shooter.Player
 {
-    public sealed class Player : IUpdateble
+    public sealed class PlayerWeapon : IUpdateble
     {
         private readonly IWeaponInput _weaponInput;
         private readonly IShootingWeapon _weapon;
 
-        public Player(IWeaponInput weaponInput, IShootingWeapon weapon)
+        public PlayerWeapon(IWeaponInput weaponInput, IShootingWeapon weapon)
         {
             _weaponInput = weaponInput ?? throw new ArgumentNullException(nameof(weaponInput));
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));

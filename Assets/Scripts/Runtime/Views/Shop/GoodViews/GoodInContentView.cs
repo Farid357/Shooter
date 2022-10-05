@@ -23,7 +23,7 @@ namespace Shooter.Shop
             SelectingButton = selectingGoodButton ?? throw new ArgumentNullException(nameof(selectingGoodButton));
         }
 
-        protected override void VisualizeFeedback(GoodData goodData)
+        protected override void VisualizeFeedback(IGoodData goodData)
         {
             _image.sprite = goodData.Sprite;
             

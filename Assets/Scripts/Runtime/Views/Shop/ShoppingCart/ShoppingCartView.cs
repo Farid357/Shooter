@@ -14,7 +14,7 @@ namespace Shooter.Shop
         [SerializeField] private GoodInShoppingCartView _prefab;
         [SerializeField] private TMP_Text _totalPrice;
         
-        private readonly Dictionary<GoodData, GoodView> _goodViews = new();
+        private readonly Dictionary<IGoodData, GoodView> _goodViews = new();
         private IRemovingGoodButtonOnClickActionFactory _removingButtonActionFactory;
 
         public void Init(IRemovingGoodButtonOnClickActionFactory removingButtonActionFactory)

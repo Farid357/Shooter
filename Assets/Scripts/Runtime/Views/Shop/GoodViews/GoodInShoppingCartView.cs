@@ -11,7 +11,7 @@ namespace Shooter.Shop
 
         [field: SerializeField] public RemovingGoodButton RemovingButton { get; private set; }
 
-        protected override void VisualizeFeedback(GoodData goodData)
+        protected override void VisualizeFeedback(IGoodData goodData)
         {
             _priceText.text = goodData.Price.ToString();
             _nameText.text = goodData.Name;

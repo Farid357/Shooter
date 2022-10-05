@@ -6,13 +6,13 @@ namespace Shooter.Shop
     {
         private readonly IGoodUsingView _usingView;
 
-        public Good(IGoodUsingView usingView, GoodData data)
+        public Good(IGoodUsingView usingView, IGoodData data)
         {
             _usingView = usingView ?? throw new ArgumentNullException(nameof(usingView));
             Data = data ?? throw new ArgumentNullException(nameof(data));
         }
         
-        public GoodData Data { get; }
+        public IGoodData Data { get; }
 
         public void Use() => _usingView.VisualizeUsing();
     }

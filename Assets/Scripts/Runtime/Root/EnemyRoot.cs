@@ -28,6 +28,8 @@ namespace Shooter.Root
         private WaveFactory _waveFactory;
         private CharacterIncreaseBulletsDamageAbility _characterIncreaseBulletsDamageAbility;
 
+        public IWaveFactory WaveFactory => _waveFactory;
+        
         public override void Compose()
         {
             var wallet = new Wallet(_moneyView, new BinaryStorage());

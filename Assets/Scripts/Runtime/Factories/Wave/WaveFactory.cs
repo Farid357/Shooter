@@ -4,7 +4,7 @@ using Shooter.Model;
 
 namespace Shooter.GameLogic
 {
-    public sealed class WaveFactory
+    public sealed class WaveFactory : IWaveFactory
     {
         private readonly IEnemyWaves _waves;
         private readonly ITimer _waitNextWaveTimer;
@@ -17,6 +17,8 @@ namespace Shooter.GameLogic
             _wavesData = wavesData ?? throw new ArgumentNullException(nameof(wavesData));
         }
 
+        public bool IsCreatingNext { get; private set; }
+        
         private bool NeedCreateNext => _waves.Simulation.NotContainsAliveEnemy;
 
         public async UniTaskVoid SpawnNextLoop()
@@ -29,9 +31,11 @@ namespace Shooter.GameLogic
                     _waitNextWaveTimer.Restart(waveData.SecondsAfterEnd);
                     await UniTask.Delay(TimeSpan.FromSeconds(waveData.SecondsAfterEnd));
                     _waves.CreateNext(waveData);
+                    IsCreatingNext = true;
                 }
 
                 await UniTask.Yield();
+                IsCreatingNext = false;
             }
         }
     }

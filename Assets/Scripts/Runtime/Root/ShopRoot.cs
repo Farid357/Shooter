@@ -24,8 +24,8 @@ namespace Shooter.Root
             IShoppingCart shoppingCart = new ShoppingCart(_shoppingCartView);
             _goodSwitchingView.Init(shoppingCart);
             _shoppingCartView.Init(new RemovingGoodButtonActionFactory(shoppingCart));
-            IClient client = new Client(_notEnoughMoneyView, new Wallet(_moneyView, new BinaryStorage()), shoppingCart);
-            _buyGoodButton.Subscribe(new BuyGoodButtonAction(client));
+            IClient client = new Client(new Wallet(_moneyView, new BinaryStorage()), shoppingCart);
+            _buyGoodButton.Subscribe(new BuyGoodButtonAction(client, _notEnoughMoneyView));
             var goods = CreateWeaponGoods();
             var switchingGoodAction = new SwitchingGoodAction(_goodSwitchingView, goods);
             _switchingGoodLeftButton.Subscribe(switchingGoodAction);

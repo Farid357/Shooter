@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Shooter.Shop
+﻿namespace Shooter.Shop
 {
-    public interface IShoppingCart
+    public interface IShoppingCart : IReadOnlyShoppingCart
     {
-        IEnumerable<IGood> Goods { get; }
-        
-        int TotalPrice { get; }
-
         void Add(IGood good);
 
         void Remove(IGood good);

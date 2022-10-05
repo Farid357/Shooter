@@ -16,7 +16,7 @@ namespace Shooter.Shop
             _weaponStorage = weaponStorage ?? throw new ArgumentNullException(nameof(weaponStorage));
         }
 
-        public GoodData Data => _good.Data;
+        public IGoodData Data => _good.Data;
         
         public void Use()
         {

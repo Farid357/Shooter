@@ -7,9 +7,9 @@ namespace Shooter.Model
     {
         private readonly ISelectingButtonFromDataFinder _selectingButtonFinder;
         private readonly IButtonClickAction _buttonClickAction;
-        private readonly GoodData _data;
+        private readonly IGoodData _data;
 
-        public EnableGoodSelectingButtonAction(ISelectingButtonFromDataFinder selectingButtonFinder, GoodData data, IButtonClickAction buttonClickAction)
+        public EnableGoodSelectingButtonAction(ISelectingButtonFromDataFinder selectingButtonFinder, IGoodData data, IButtonClickAction buttonClickAction)
         {
             _selectingButtonFinder = selectingButtonFinder ?? throw new ArgumentNullException(nameof(selectingButtonFinder));
             _data = data ?? throw new ArgumentNullException(nameof(data));

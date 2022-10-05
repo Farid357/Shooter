@@ -4,6 +4,6 @@ namespace Shooter.Shop
 {
     public interface ISelectingButtonFromDataFinder
     {
-        IButton Find(GoodData data);
+        IButton Find(IGoodData data);
     }
 }

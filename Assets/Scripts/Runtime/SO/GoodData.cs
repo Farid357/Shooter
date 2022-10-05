@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Shooter.Shop
 {
-    public abstract class GoodData : ScriptableObject
+    public abstract class GoodData : ScriptableObject, IGoodData
     {
         [field: SerializeField] public string Name { get; private set; }
 

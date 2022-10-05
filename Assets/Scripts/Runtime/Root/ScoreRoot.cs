@@ -11,13 +11,15 @@ namespace Shooter.Root
         [SerializeField] private IView<int> _scoreView;
         [SerializeField, Min(1)] private int _scoreAddAmount = 40;
 
+        public IScore Score { get; private set; }
+
         public IScore ComposeScore()
         {
             IScoreBestRecord scoreBestRecord = new ScoreBestRecord(_scoreBestRecordView,
                 new StorageWithNameSaveObject<ScoreBestRecord, int>());
-            var score = new Score(_scoreView, scoreBestRecord);
-            new ScoreAfterRandomTimeAdder(score, _scoreAddAmount).TryAddLoop();
-            return score;
+            Score = new Score(_scoreView, scoreBestRecord);
+            new ScoreAfterRandomTimeAdder(Score, _scoreAddAmount).TryAddLoop().Forget();
+            return Score;
         }
 
     }

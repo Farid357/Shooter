@@ -17,13 +17,13 @@ namespace Shooter.Model.Inventory
         {
             var input = item.Item2;
             var weapon = item.Item1;
-            _playerRoot.Compose(weapon, input);
+            _playerRoot.Compose(input, weapon);
             weapon.VisualizeBullets();
         }
 
         public void Unselect()
         {
-            _playerRoot.Compose(new DummyWeapon(), new DummyWeaponInput());
+            _playerRoot.Compose(new DummyWeaponInput(), new DummyWeapon());
         }
     }
 }

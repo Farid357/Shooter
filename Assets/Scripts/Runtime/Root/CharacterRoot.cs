@@ -16,7 +16,6 @@ namespace Shooter.Root
 
         private SystemUpdate _systemUpdate;
         private CharacterMovementInput _movementInput;
-
         
         public override void Compose()
         {
