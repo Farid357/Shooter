@@ -32,18 +32,16 @@ namespace Shooter.Root
 
         [VerticalGroup("Start Weapon")] [SerializeField]
         private ItemGameObjectView _weaponView;
-        
-        private SystemUpdate _systemUpdate;
-        private IWeaponInput _standartWeaponInput = new StandartWeaponInput();
+
+        private readonly SystemUpdate _systemUpdate = new();
 
         public override void Compose()
         {
-            _systemUpdate = new SystemUpdate();
             IWeaponFactory factory = new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _startWeaponData);
             var weapon = factory.Create();
             var inventory = new Inventory<(IWeapon, IWeaponInput)>(_inventoryView);
             var weaponSelector = new WeaponSelector(_playerRoot);
-            var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, _standartWeaponInput), _weaponView);
+            var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, new BurstWeaponInput()), _weaponView);
             var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item, 1);
             var grenadeInventory = new Inventory<IGrenade>(_grenadesInventoryView, 3);
             var grenadeItem = new Item<IGrenade>(_grenadeItem, _grenade, _grenade.ItemView);

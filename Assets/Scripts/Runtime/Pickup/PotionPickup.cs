@@ -15,6 +15,8 @@ namespace Shooter.GameLogic.Inventory
 
         [field: SerializeField] public ItemData ItemData { get; private set; }
 
+        [field: SerializeField] public MovementAlongSpline Movement { get; private set; }
+        
         public void Init(IInventory<IPotion> inventory, InventorySlot<IPotion> inventorySlot)
         {
             _inventorySlot = inventorySlot ?? throw new ArgumentNullException(nameof(inventorySlot));

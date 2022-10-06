@@ -16,15 +16,14 @@ namespace Shooter.GameLogic
             if (healthCount == 0)
             {
                 var colliders = Physics.OverlapSphere(transform.position, _healRadius, _healMask.value);
+                _audio.Play();
+                Instantiate(_particlePrefab, transform.position, Quaternion.identity).Play();
                 TryHeal(colliders);
             }
         }
 
         private void TryHeal(Collider[] colliders)
         {
-            _audio.Play();
-            Instantiate(_particlePrefab, transform.position, Quaternion.identity).Play();
-
             foreach (var collider in colliders)
             {
                 if (collider.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))

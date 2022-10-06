@@ -35,7 +35,7 @@ namespace Shooter.GameLogic
         
         public async UniTaskVoid SpawnLoop()
         {
-            while (true)
+            while (_weaponSpawnTypes.Count > 0)
             {
                 var delay = Random.Range(_minDelay, _maxDelay);
                 await UniTask.Delay(TimeSpan.FromSeconds(delay));
@@ -48,6 +48,7 @@ namespace Shooter.GameLogic
                 var item = new Item<(IWeapon, IWeaponInput)>(pickup.ItemData, (weapon, _weaponInputs[weaponSpawnType]),_weaponPickups[weaponSpawnType].Item2.Create());
                 var slot = new InventorySlot<(IWeapon, IWeaponInput)>(new WeaponSelector(_playerRoot), item);
                 pickup.Init(_inventory, slot);
+                _weaponSpawnTypes.Remove(weaponSpawnType);
             }
         }
     }

@@ -3,26 +3,37 @@ using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.SaveSystem;
 using Shooter.Tools;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.Root
 {
     public sealed class EnemyRoot : CompositeRoot
     {
-        [SerializeField] private StandartEnemyFactory _enemyFactory;
-        [SerializeField] private ICharacterMovement _characterMovement;
+        [Title("Views")]
+        [SerializeField] private IView<float> _waveTimerSecondsView;
+        [SerializeField] private IView<int> _diedEnemiesView;
         [SerializeField] private IView<int> _moneyView;
+        [SerializeField] private IView<int> _aliveEnemiesView;
+
+        [Title("Factories")]
+        [SerializeField] private StandartEnemyFactory _enemyFactory;
+        [SerializeField] private List<IBulletsFactory> _bulletsFactories;
+        
+        [Title("Character")]
+        [SerializeField] private ICharacterMovement _characterMovement;
         [SerializeField] private IHealthTransformView _characterHealthTransformView;
+        
+        [Title("Abilities")]
         [SerializeField] private IAbilityView _speedBoostAbility;
         [SerializeField] private IAbilityView _bulletsDamageAbility;
         [SerializeField] private IAbilityView _regenerationAbility;
+        
+        [Title("Other", titleAlignment: TitleAlignments.Centered)]
         [SerializeField] private INavMeshBaker _navMeshBaker;
-        [SerializeField] private List<EnemyWaveData> _wavesData;
         [SerializeField] private IScoreRoot _scoreRoot;
-        [SerializeField] private IView<float> _waveTimerSecondsView;
-        [SerializeField] private IView<int> _diedEnemiesView;
         [SerializeField] private IEnergyShield _energyShield;
-        [SerializeField] private List<IBulletsFactory> _bulletsFactories;
+        [SerializeField] private List<EnemyWaveData> _wavesData;
         
         private readonly SystemUpdate _systemUpdate = new();
         private WaveFactory _waveFactory;
@@ -66,11 +77,11 @@ namespace Shooter.Root
             );
 
             _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore());
-            IEnemiesSimulation simulation = new EnemySimulation(_navMeshBaker);
+            var simulation = new EnemySimulation(_navMeshBaker, _aliveEnemiesView);
             var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
             _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));
             _waveFactory.SpawnNextLoop().Forget();
-            _systemUpdate.Add(waitNextWaveTimer);
+            _systemUpdate.Add(waitNextWaveTimer, simulation);
         }
 
         private void Update() => _systemUpdate.Update(Time.deltaTime);

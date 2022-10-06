@@ -13,6 +13,8 @@ namespace Shooter.Model
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _storage = new StorageWithNameSaveObject<Wallet, int>(storage);
+            Money = _storage.HasSave() ? _storage.Load() : 0;
+            _view.Visualize(Money);
         }
 
         public int Money { get; private set; }

@@ -12,6 +12,9 @@ namespace Shooter.GameLogic.Inventory
     {
         [SerializeField] private PotionPickup _prefab;
         [SerializeField] private IPlayerRoot _playerRoot;
+        [SerializeField] private ISpline _spine;
+        [SerializeField] private Transform _spawnPoint;
+        
         private IFactory<(IPotion, IInventoryItemGameObjectView)> _potionFactory;
         private IInventory<IPotion> _inventory;
         private IInventoryItemSelector<IPotion> _potionSelector;
@@ -35,7 +38,8 @@ namespace Shooter.GameLogic.Inventory
 
         private void CreatePickup()
         {
-            var potionPickup = Instantiate(_prefab, transform.position, _prefab.transform.rotation);
+            var potionPickup = Instantiate(_prefab, _spawnPoint.position, _prefab.transform.rotation, transform);
+            potionPickup.Movement.Init(_spine);
             var tuple = _potionFactory.Create();
             var item = new Item<IPotion>(potionPickup.ItemData, tuple.Item1, tuple.Item2);
             potionPickup.Init(_inventory, new InventorySlot<IPotion>(_potionSelector, item));

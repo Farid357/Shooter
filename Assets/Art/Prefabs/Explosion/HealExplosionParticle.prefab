@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8976503813493468718}
   - component: {fileID: 3567934750511486574}
   m_Layer: 0
-  m_Name: ExplosionParticle
+  m_Name: HealExplosionParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

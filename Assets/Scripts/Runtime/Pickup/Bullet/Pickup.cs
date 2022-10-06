@@ -4,9 +4,9 @@ namespace Shooter.GameLogic.Inventory
 {
     public abstract class Pickup : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (other.GetComponent<CharacterMovement>() != null)
+            if (collision.gameObject.GetComponent<CharacterMovement>() != null)
             {
                 OnPicked();
                 gameObject.SetActive(false);
