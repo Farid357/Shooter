@@ -1,6 +1,4 @@
-﻿using Shooter.GameLogic.Inventory;
-
-namespace Shooter.Model.Inventory
+﻿namespace Shooter.Model.Inventory
 {
     public interface IInventory<TItem> : IReadOnlyInventory<TItem>
     {

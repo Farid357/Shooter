@@ -1,4 +1,5 @@
-﻿using Shooter.Model;
+﻿using System;
+using Shooter.Model;
 using UnityEngine;
 
 namespace Shooter.GameLogic
@@ -10,15 +11,12 @@ namespace Shooter.GameLogic
 
         public void Subscribe(IButtonClickAction buttonClickAction)
         {
-            _buttonClickAction = buttonClickAction;
+            _buttonClickAction = buttonClickAction ?? throw new ArgumentNullException(nameof(buttonClickAction));
             _button.onClick.AddListener(buttonClickAction.OnClick);
         }
 
-        public void Enable()
-        {
-            _button.interactable = true;
-        }
-        
+        public void Enable() => _button.interactable = true;
+
         private void OnDestroy() => _button.onClick.RemoveListener(_buttonClickAction.OnClick);
     }
 }

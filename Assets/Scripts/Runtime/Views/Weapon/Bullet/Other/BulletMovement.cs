@@ -1,4 +1,5 @@
-﻿using Shooter.Model;
+﻿using System;
+using Shooter.Model;
 using UnityEngine;
 
 namespace Shooter.GameLogic
@@ -8,15 +9,27 @@ namespace Shooter.GameLogic
     {
         [SerializeField, Min(1)] private int _throwForce = 100;
         private Rigidbody _rigidbody;
+        private Camera _camera;
         
         private void OnEnable()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            _camera ??= Camera.main;
+            _rigidbody ??= GetComponent<Rigidbody>();
         }
 
         public void Throw()
-        { 
-            _rigidbody.AddForce(Vector3.forward * _throwForce, ForceMode.Impulse);
+        {
+            var centerOfScreen = new Vector3(0.5f, 0.5f, 0f);
+            var ray = _camera.ViewportPointToRay(centerOfScreen);
+            _rigidbody.AddForce(ray.direction * _throwForce, ForceMode.Impulse);
+        }
+        
+        public void Throw(Vector3 direction)
+        {
+            if (direction == Vector3.zero)
+                throw new ArgumentOutOfRangeException(nameof(direction));
+            
+            _rigidbody.AddForce(direction * _throwForce / 2f, ForceMode.Impulse);
         }
     }
 }

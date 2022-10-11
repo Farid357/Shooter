@@ -24,9 +24,9 @@ namespace Shooter.Root
         [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
         
-        public void Compose(IInventory<(IWeapon, IWeaponInput)> inventory, IInventory<IGrenade> grenadeInventory)
+        public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
         {
-            _grenadePickupsFactory.Init(grenadeInventory);
+            _grenadePickupsFactory.Init(grenadesInventory);
             _grenadePickupsFactory.SpawnLoop().Forget();
             var weaponSpawnTypes = new List<WeaponType> { WeaponType.Ak74 , WeaponType.Pistol};
             
@@ -36,7 +36,7 @@ namespace Shooter.Root
                 { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData) },
                 { WeaponType.Rpg, new WeaponFactoryWithShootWaitingAndRollback(_explosiveBulletsFactory, _rpgData) }, 
                 { WeaponType.Shotgun, new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData)},
-                { WeaponType.PistolWithFireBullets,new WeaponFactoryWithShootWaitingAndRollback(_fireBulletsFactory, _shotgunData)}
+                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaitingAndRollback(_fireBulletsFactory, _shotgunData)}
             };
 
             var inputs = new Dictionary<WeaponType, IWeaponInput>
@@ -49,7 +49,7 @@ namespace Shooter.Root
 
             };
             
-            _weaponPickupsFactory.Init(weaponSpawnTypes, inventory, factoriesContainer, inputs);
+            _weaponPickupsFactory.Init(weaponSpawnTypes, weaponsInventory, factoriesContainer, inputs);
             _weaponPickupsFactory.SpawnLoop().Forget();
         }
     }

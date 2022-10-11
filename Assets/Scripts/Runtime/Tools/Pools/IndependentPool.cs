@@ -33,6 +33,7 @@ namespace Shooter.Tools
                     _releasedObjects.Add(item);
                     Release(item);
                 }
+                
                 else
                 {
                     if (_releasedObjects.Contains(item))

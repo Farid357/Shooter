@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Game
   m_EditorClassIdentifier: 
   _scene: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
-  <Name>k__BackingField: SampleScene
+  <Name>k__BackingField: Game

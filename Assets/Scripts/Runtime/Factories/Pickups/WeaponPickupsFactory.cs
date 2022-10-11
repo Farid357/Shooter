@@ -15,7 +15,7 @@ namespace Shooter.GameLogic
 {
     public sealed class WeaponPickupsFactory : SerializedMonoBehaviour
     {
-        [SerializeField] private Dictionary<WeaponType, (WeaponPickup, ItemGameObjectViewFactory)> _weaponPickups;
+        [SerializeField] private Dictionary<WeaponType, WeaponPickupData> _weaponPickups;
         [SerializeField, Min(0.1f)] private float _minDelay = 1.2f;
         [SerializeField, Min(0.1f)] private float _maxDelay = 1.5f;
         [SerializeField] private Transform[] _spawnPoints;
@@ -41,11 +41,11 @@ namespace Shooter.GameLogic
                 await UniTask.Delay(TimeSpan.FromSeconds(delay));
                 var randomTypeIndex = Random.Range(0, _weaponSpawnTypes.Count);
                 var weaponSpawnType = _weaponSpawnTypes[randomTypeIndex];
-                var pickupPrefab = _weaponPickups[weaponSpawnType].Item1;
+                var pickupPrefab = _weaponPickups[weaponSpawnType].Pickup;
                 var position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
                 var pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
                 var weapon = _factoriesContainer[weaponSpawnType].Create();
-                var item = new Item<(IWeapon, IWeaponInput)>(pickup.ItemData, (weapon, _weaponInputs[weaponSpawnType]),_weaponPickups[weaponSpawnType].Item2.Create());
+                var item = new Item<(IWeapon, IWeaponInput)>(pickup.ItemData, (weapon, _weaponInputs[weaponSpawnType]), _weaponPickups[weaponSpawnType].GameObjectViewFactory.Create());
                 var slot = new InventorySlot<(IWeapon, IWeaponInput)>(new WeaponSelector(_playerRoot), item);
                 pickup.Init(_inventory, slot);
                 _weaponSpawnTypes.Remove(weaponSpawnType);

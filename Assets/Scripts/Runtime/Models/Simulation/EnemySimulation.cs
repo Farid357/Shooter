@@ -28,7 +28,6 @@ namespace Shooter.Model
             enemy.Movement.RotateToCharacter();
             _navMeshBaker.Bake();
             _aliveEnemies.Add(enemy);
-            _aliveEnemiesCountView.Visualize(_aliveEnemies.Count);
         }
 
         public void Update(float deltaTime)
@@ -39,7 +38,7 @@ namespace Shooter.Model
 
                 if (enemy.Health.IsDied)
                 {
-                    _aliveEnemies.Remove(enemy);
+                    _aliveEnemies.RemoveAt(i);
                     _aliveEnemiesCountView.Visualize(_aliveEnemies.Count);
                 }
             }

@@ -9,6 +9,7 @@ namespace Shooter.GameLogic
     [RequireComponent(typeof(Collider))]
     public sealed class StandartBulletCollision : BulletCollision, IBulletCollision
     {
+        [SerializeField] private bool _needDisableOnEnteredCollision = true;
         private bool _canIncreaseDamage;
 
         public override bool CanIncreaseDamage => _canIncreaseDamage;
@@ -20,7 +21,8 @@ namespace Shooter.GameLogic
                 Attack(healthTransformView.Health);
             }
 
-            gameObject.SetActive(false);
+            if (_needDisableOnEnteredCollision)
+                gameObject.SetActive(false);
         }
 
         public override void IncreaseDamageForSeconds(int damage, float seconds)

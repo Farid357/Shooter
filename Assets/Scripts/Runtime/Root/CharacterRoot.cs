@@ -9,9 +9,7 @@ namespace Shooter.Root
     {
         [SerializeField] private IHealthView _healthView;
         [SerializeField, ProgressBar(10, 100)] private int _characterHealth;
-        [SerializeField] private CharacterDeathView _characterDeathView;
         [SerializeField] private HealthTransformView _characterTransformView;
-        [SerializeField] private IToggle _soundToggle;
         [SerializeField] private CharacterMovement _movement;
 
         private SystemUpdate _systemUpdate;
@@ -21,7 +19,6 @@ namespace Shooter.Root
         {
             _systemUpdate = new SystemUpdate();
             _movementInput = new CharacterMovementInput(_movement);
-            _characterDeathView.Init(_soundToggle);
             var health = new Health(_characterHealth, _healthView);
             _characterTransformView.Init(health);
             _systemUpdate.Add(_movementInput);

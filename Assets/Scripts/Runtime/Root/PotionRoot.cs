@@ -1,21 +1,26 @@
-﻿using Shooter.GameLogic.Inventory;
+﻿using System.Collections.Generic;
+using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.Root
 {
-    public sealed class PotionRoot : CompositeRoot
+    public sealed class PotionRoot : SerializedMonoBehaviour
     {
         [SerializeField] private EnemyRoot _enemyRoot;
         [SerializeField] private PotionPickupsFactory _potionPickupsFactory;
         [SerializeField] private IHealthTransformView _character;
         [SerializeField] private IPotionView _healthPotionView;
         [SerializeField] private IScoreRoot _scoreRoot;
-        [SerializeField] private IInventoryView _potionInventoryView;
         [SerializeField] private ItemGameObjectViewFactory _potionGameObjectViewFactory;
         
-        public override void Compose()
+        [field: SerializeField] public IReadOnlyDictionary<KeyCode,int> KeypadNumbers { get; private set; }
+
+        [field: SerializeField] public IInventoryView InventoryView { get; private set; }
+        
+        public void Compose(IInventory<IPotion> inventory)
         {
             var potions = new IPotion[]
             {
@@ -25,7 +30,6 @@ namespace Shooter.Root
             };
             
             var potionFactory = new PotionFactory(potions, _potionGameObjectViewFactory);
-            var inventory = new Inventory<IPotion>(_potionInventoryView, 5);
             _potionPickupsFactory.Init(potionFactory, inventory, _enemyRoot.WaveFactory);
         }
     }

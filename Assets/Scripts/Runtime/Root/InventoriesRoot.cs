@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Shooter.Root
 {
-    public sealed class InventoryRoot : CompositeRoot
+    public sealed class InventoriesRoot : CompositeRoot
     {
         [SerializeField] private IFactory<IBullet> _shotgunBulletsFactory;
         [SerializeField] private IInventoryView _inventoryView;
@@ -23,6 +23,7 @@ namespace Shooter.Root
         [SerializeField] private Dictionary<KeyCode,int> _grenadeInventoryKeypadNumbers;
         [SerializeField] private IFactory<IInventoryItemGameObjectView> _grenadeGameObjectViewFactory;
         [SerializeField] private IFactory<IGrenade> _grenadeFactory;
+        [SerializeField] private PotionRoot _potionRoot;
         
         [VerticalGroup("Start Weapon")] [SerializeField]
         private ItemData _weaponItemData;
@@ -51,12 +52,16 @@ namespace Shooter.Root
             
             var weaponInventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(inventory);
             var grenadeInventorySelector = new InventoryItemsSelector<IGrenade>(grenadeInventory);
-            var selectors = new List<IInventoryItemsSelector>{ grenadeInventorySelector, weaponInventoryItemsSelector };
+            var potionInventory = new Inventory<IPotion>(_potionRoot.InventoryView, 3);
+            _potionRoot.Compose(potionInventory);
+            var potionInventorySelector = new InventoryItemsSelector<IPotion>(potionInventory);
+            var selectors = new List<IInventoryItemsSelector>{ grenadeInventorySelector, weaponInventoryItemsSelector, potionInventorySelector };
             var inventoryItemsInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, selectors, weaponInventoryItemsSelector);
             var grenadeInputSelector = new InventoryItemsSelectorInput(_grenadeInventoryKeypadNumbers, selectors, grenadeInventorySelector);
+            var potionInputSelector = new InventoryItemsSelectorInput(_potionRoot.KeypadNumbers, selectors, potionInventorySelector);
+
             _weaponView.Show();
-            
-            _systemUpdate.Add(inventoryItemsInputSelector, grenadeInputSelector);
+            _systemUpdate.Add(inventoryItemsInputSelector, grenadeInputSelector, potionInputSelector);
             _pickupsRoot.Compose(inventory, grenadeInventory);
             weaponInventoryItemsSelector.Select(0);
             _systemUpdate.Add(new BulletsAdderAfterCooldown(inventory.Slots.Select(model => model.Item.Model.Item1), 

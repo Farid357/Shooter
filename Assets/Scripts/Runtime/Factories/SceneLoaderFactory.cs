@@ -16,8 +16,8 @@ namespace Shooter.LoadSystem
                 throw new InvalidEnumArgumentException(nameof(sceneLoadMode), (int)sceneLoadMode, typeof(SceneLoadMode));
             
             _sceneLoadMode = sceneLoadMode;
-            _screenFade = screenFade ?? throw new ArgumentNullException(nameof(screenFade));
-            _loaderScene = loaderScene ?? throw new ArgumentNullException(nameof(loaderScene));
+            _screenFade = screenFade;
+            _loaderScene = loaderScene;
         }
         
 
