@@ -8,7 +8,7 @@ namespace Shooter.Test.Storages
         private const string Path = "prefs";
 
         [Test]
-        public void PlayerPrefsStorageSavesCorrectly()
+        public void SavesCorrectly()
         {
             IStorage storage = new PlayerPrefsStorage();
             const int count = 54;

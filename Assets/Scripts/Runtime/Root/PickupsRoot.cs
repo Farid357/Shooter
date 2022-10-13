@@ -23,6 +23,7 @@ namespace Shooter.Root
         [SerializeField] private readonly IFactory<IGrenade> _grenadeFactory;
         [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
+        [SerializeField] private HandWeaponFactory _handWeaponFactory;
         
         public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
         {
@@ -36,7 +37,7 @@ namespace Shooter.Root
                 { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData) },
                 { WeaponType.Rpg, new WeaponFactoryWithShootWaitingAndRollback(_explosiveBulletsFactory, _rpgData) }, 
                 { WeaponType.Shotgun, new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _shotgunData)},
-                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaitingAndRollback(_fireBulletsFactory, _shotgunData)}
+                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaitingAndRollback(_fireBulletsFactory, _shotgunData)},
             };
 
             var inputs = new Dictionary<WeaponType, IWeaponInput>
@@ -45,7 +46,8 @@ namespace Shooter.Root
                 { WeaponType.Pistol, new BurstWeaponInput() },
                 { WeaponType.Rpg, new StandartWeaponInput() },
                 { WeaponType.Shotgun, new BurstWeaponInput() },
-                { WeaponType.PistolWithFireBullets, new BurstWeaponInput()}
+                { WeaponType.PistolWithFireBullets, new BurstWeaponInput()},
+                {WeaponType.Sword, new StandartWeaponInput()}
 
             };
             

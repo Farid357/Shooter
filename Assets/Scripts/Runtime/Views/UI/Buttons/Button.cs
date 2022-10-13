@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Shooter.Model;
 using UnityEngine;
 
@@ -7,16 +8,25 @@ namespace Shooter.GameLogic
     public abstract class Button : MonoBehaviour, IButton
     {
         [SerializeField] private UnityEngine.UI.Button _button;
-        private IButtonClickAction _buttonClickAction;
-
+        private readonly List<IButtonClickAction> _buttonClickActions = new();
+        
         public void Subscribe(IButtonClickAction buttonClickAction)
         {
-            _buttonClickAction = buttonClickAction ?? throw new ArgumentNullException(nameof(buttonClickAction));
+            if (buttonClickAction is null)
+                throw new ArgumentNullException(nameof(buttonClickAction));
+
+            _buttonClickActions.Add(buttonClickAction);
             _button.onClick.AddListener(buttonClickAction.OnClick);
         }
 
         public void Enable() => _button.interactable = true;
 
-        private void OnDestroy() => _button.onClick.RemoveListener(_buttonClickAction.OnClick);
+        private void OnDestroy()
+        {
+            foreach (var buttonClickAction in _buttonClickActions)
+            {
+                _button.onClick.RemoveListener(buttonClickAction.OnClick);
+            }
+        }
     }
 }

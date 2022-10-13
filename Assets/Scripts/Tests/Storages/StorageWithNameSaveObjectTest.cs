@@ -6,7 +6,7 @@ namespace Shooter.Test.Storages
     public sealed class StorageWithNameSaveObjectTest
     {
         [Test]
-        public void StorageWithNameSaveObjectSaveCorrectly()
+        public void SaveCorrectly()
         {
             var storage = new StorageWithNameSaveObject<StorageWithNameSaveObjectTest, int>();
             const int count = 44;

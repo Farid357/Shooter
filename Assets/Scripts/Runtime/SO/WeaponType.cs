@@ -6,6 +6,7 @@
         Pistol,
         Rpg,
         Ak74,
-        PistolWithFireBullets
+        PistolWithFireBullets,
+        Sword
     }
 }

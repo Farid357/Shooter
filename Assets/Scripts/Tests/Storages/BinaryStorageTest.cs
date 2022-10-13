@@ -8,7 +8,7 @@ namespace Shooter.Test.Storages
         private const string Path = "54";
 
         [Test]
-        public void BinaryStorageSavesCorrectly()
+        public void SavesCorrectly()
         {
             IStorage storage = new BinaryStorage();
             const int count = 44;

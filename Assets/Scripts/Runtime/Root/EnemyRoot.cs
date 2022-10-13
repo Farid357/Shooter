@@ -41,11 +41,15 @@ namespace Shooter.Root
         public override void Compose()
         {
             var wallet = new Wallet(_moneyView, new BinaryStorage());
-            _characterIncreaseBulletsDamageAbility = new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, _bulletsFactories.ToArray(), 6f);
+            var storageCharacterIncreaseBulletsSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
+            var characterIncreaseBulletsDamageSeconds  = storageCharacterIncreaseBulletsSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 3f;
+            _characterIncreaseBulletsDamageAbility = new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, _bulletsFactories.ToArray(), characterIncreaseBulletsDamageSeconds );
+            var storageCharacterSpeedBoostSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
+            var characterSpeedBoostSeconds  = storageCharacterSpeedBoostSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 4f;
             
             var abilities = new IAbility[]
             {
-                new CharacterSpeedBoostAbility(_speedBoostAbility, _characterMovement, 6f),
+                new CharacterSpeedBoostAbility(_speedBoostAbility, _characterMovement, characterSpeedBoostSeconds),
                 _characterIncreaseBulletsDamageAbility,
                 new CharacterHealthRegenerationAbility(_regenerationAbility, _characterHealthTransformView.Health)
             };

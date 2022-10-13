@@ -8,7 +8,7 @@ namespace Shooter.Test.Storages
         private const string Path = "mono";
 
         [Test]
-        public void JsonStorageSavesCorrectly()
+        public void SavesCorrectly()
         {
             IStorage storage = new JsonStorage();
             const int count = 45;

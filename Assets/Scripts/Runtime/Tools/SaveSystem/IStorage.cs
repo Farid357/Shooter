@@ -7,10 +7,7 @@ namespace Shooter.SaveSystem
         public void Save<T>(string key, T saveObject);
         
         public bool Exists(string key);
-    }
-
-    public interface IDeletable
-    {
-        public void TryDelete(string path);
+        
+        public void DeleteSave(string path);
     }
 }

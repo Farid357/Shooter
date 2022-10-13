@@ -13,5 +13,9 @@ namespace Shooter.Test
 
         public bool Exists(string key) => false;
         
+        public void DeleteSave(string path)
+        {
+            
+        }
     }
 }

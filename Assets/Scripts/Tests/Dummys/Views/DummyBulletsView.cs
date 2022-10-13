@@ -6,7 +6,7 @@ namespace Shooter.Test
     {
         public int Bullets { get; private set; }
 
-        public IShotView ShotView { get; }
+        public IShotView ShotView => new DummyShotView();
 
         public void Visualize(int bullets)
         {

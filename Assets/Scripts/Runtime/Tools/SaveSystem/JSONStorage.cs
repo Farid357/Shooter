@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.IO;
 
 namespace Shooter.SaveSystem
@@ -7,16 +8,25 @@ namespace Shooter.SaveSystem
     {
         public bool Exists(string key) => File.Exists(CreatePath(key));
 
+        public void DeleteSave(string path)
+        {
+            var allPath = CreatePath(path);
+
+            if (Exists(allPath) == false)
+                throw new InvalidOperationException(nameof(DeleteSave));
+
+            File.Delete(allPath);
+        }
+
         public T Load<T>(string name)
         {
             var jsonPath = CreatePath(name);
 
-            if (Exists(name))
-            {
-                var saveJson = File.ReadAllText(jsonPath);
-                return JsonUtility.FromJson<T>(saveJson);
-            }
-            return default;
+            if (Exists(name) == false)
+                throw new InvalidOperationException(nameof(Load));
+
+            var saveJson = File.ReadAllText(jsonPath);
+            return JsonUtility.FromJson<T>(saveJson);
         }
 
         public void Save<T>(string name, T saveObject)
@@ -26,9 +36,6 @@ namespace Shooter.SaveSystem
             File.WriteAllText(jsonPath, saveJson);
         }
 
-        private string CreatePath(string name)
-        {
-            return Path.Combine(Application.persistentDataPath, name);
-        }
+        private string CreatePath(string name) => Path.Combine(Application.persistentDataPath, name);
     }
 }
