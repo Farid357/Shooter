@@ -13,19 +13,19 @@ namespace Shooter.GameLogic
         [SerializeField] private SelectingGoodButton _selectingGoodButton;
         private IShoppingCart _shoppingCart;
         
-        [field: SerializeField] public GoodInContentView GoodView { get; private set; }
+        [field: SerializeField] public GoodInContentView UsingGoodView { get; private set; }
 
         public void Init(IShoppingCart shoppingCart)
         {
             _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
-            GoodView.Init(_selectingGoodButton);
+            UsingGoodView.Init(_selectingGoodButton);
         }
         
         public void Switch(IGood good)
         {
             _priceText.text = good.Data.Price.ToString();
             _nameText.text = good.Data.Name;
-            GoodView.Visualize(good.Data);
+            UsingGoodView.Visualize(good.Data);
             _selectingGoodButton.Subscribe(new SelectingGoodButtonAction(good, _shoppingCart));
         }
     }

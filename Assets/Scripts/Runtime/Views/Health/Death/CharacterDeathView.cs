@@ -7,14 +7,14 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private AudioSource _sound;
         [SerializeField] private DeathWindow _window;
-        [SerializeField] private GameObject _character;
+        [SerializeField] private CharacterMovement _character;
         [SerializeField] private CharacterCamera _camera;
 
         public void VisualizeDeath()
         {
             _sound.Play();
             _window.Show();
-            _character.SetActive(false);
+            _character.gameObject.SetActive(false);
             _camera.ClearParent();
         }
     }

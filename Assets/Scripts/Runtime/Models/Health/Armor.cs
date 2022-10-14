@@ -3,15 +3,18 @@ using Shooter.Tools;
 
 namespace Shooter.Model
 {
-    public sealed class HealthShield : IHealth
+    public sealed class Armor : IHealth
     {
         private readonly IHealth _health;
+        private readonly IArmorView _armorView;
         private int _protection;
 
-        public HealthShield(IHealth health, int protection)
+        public Armor(IHealth health, IArmorView armorView, int protection)
         {
             _health = health ?? throw new ArgumentNullException(nameof(health));
+            _armorView = armorView ?? throw new ArgumentNullException(nameof(armorView));
             _protection = protection.TryThrowLessThanOrEqualsToZeroException();
+            _armorView.Visualize(_protection);
         }
 
         public bool IsDied => _health.IsDied;
@@ -34,7 +37,8 @@ namespace Shooter.Model
                 if(damage == 0)
                     return;
             }
-
+            
+            _armorView.Visualize(_protection);
             _health.TakeDamage(damage);
 
         }

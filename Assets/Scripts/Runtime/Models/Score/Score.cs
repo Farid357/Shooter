@@ -7,7 +7,6 @@ namespace Shooter.Model
     {
         private readonly IView<int> _view;
         private readonly IScoreBestRecord _bestRecord;
-        private int _amount;
 
         public Score(IView<int> view, IScoreBestRecord bestRecord)
         {
@@ -15,13 +14,15 @@ namespace Shooter.Model
             _bestRecord = bestRecord ?? throw new ArgumentNullException(nameof(bestRecord));
         }
         
+        public int Amount { get; private set; }
+        
         public void Add(int amount)
         {
-            _amount += amount.TryThrowLessThanOrEqualsToZeroException();
-            _view.Visualize(_amount);
+            Amount += amount.TryThrowLessThanOrEqualsToZeroException();
+            _view.Visualize(Amount);
             
-            if(_bestRecord.CanIncrease(_amount))
-                _bestRecord.Increase(_amount);
+            if(_bestRecord.CanIncrease(Amount))
+                _bestRecord.Increase(Amount);
         }
     }
 }

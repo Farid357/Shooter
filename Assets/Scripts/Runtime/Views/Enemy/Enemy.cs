@@ -25,7 +25,7 @@ namespace Shooter.GameLogic
         public void Init(ICharacterMovement character, IHealthTransformView characterHealthTransformView)
         {
             var health = new Health(_healthCount, _enemyHealthView);
-            Health = _type == EnemyType.WithShield ? new HealthShield(health, _protection) : health;
+            Health = _type == EnemyType.WithShield ? new Armor(health, new DummyArmorView(), _protection) : health;
             Health = _type == EnemyType.WithPoison ? new PoisonHealth(health) : health;
             _health.Init(Health);
             _movement.Init(character);

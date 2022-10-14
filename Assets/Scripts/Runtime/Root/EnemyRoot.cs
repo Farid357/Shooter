@@ -44,7 +44,7 @@ namespace Shooter.Root
             var storageCharacterIncreaseBulletsSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
             var characterIncreaseBulletsDamageSeconds  = storageCharacterIncreaseBulletsSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 3f;
             _characterIncreaseBulletsDamageAbility = new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, _bulletsFactories.ToArray(), characterIncreaseBulletsDamageSeconds );
-            var storageCharacterSpeedBoostSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
+            var storageCharacterSpeedBoostSeconds = new StorageWithNameSaveObject<CharacterSpeedBoostAbility, float>(new BinaryStorage());
             var characterSpeedBoostSeconds  = storageCharacterSpeedBoostSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 4f;
             
             var abilities = new IAbility[]
@@ -67,7 +67,7 @@ namespace Shooter.Root
                 }
             );
 
-            _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore(), new DiedHealthsCounterReward(_diedEnemiesView));
+            _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore(), new DiedHealthsCounter(_diedEnemiesView));
             var simulation = new EnemySimulation(_navMeshBaker, _aliveEnemiesView);
             var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
             _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));

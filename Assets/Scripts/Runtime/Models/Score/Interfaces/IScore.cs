@@ -1,6 +1,6 @@
 ﻿namespace Shooter.Model
 {
-    public interface IScore 
+    public interface IScore : IReadOnlyCounter
     {
         void Add(int amount);
     }
