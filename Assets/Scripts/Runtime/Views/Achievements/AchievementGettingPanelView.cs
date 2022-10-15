@@ -14,9 +14,9 @@ namespace Shooter.Model
         [SerializeField, Min(0.1f)] private float _showSpeed = 1.5f;
         [SerializeField, Min(0.1f)] private float _hideSpeed = 0.4f;
 
-        public void Show(string name)
+        public void Show()
         {
-            _text.text = name;
+            _text.text = "You got an achievement!";
             _image.DOFillAmount(1, _showSpeed).OnComplete(() => Hide().Forget());
         }
 

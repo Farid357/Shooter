@@ -24,13 +24,14 @@ namespace Shooter.Root
             var armorStorage = new StorageWithNameSaveObject<CharacterHealthView, int>(new BinaryStorage());
             IHealth health;
 
-            if (armorStorage.HasSave())
-            {
-                health = new Health(_characterHealth, _healthView);
-            }
-            else
+            if(armorStorage.HasSave())
             {
                 health = new Armor(new Health(_characterHealth, _healthView), _characterArmorView, armorStorage.Load());
+            }
+            
+            else
+            {
+                health = new Health(_characterHealth, _healthView);
             }
             
             _characterTransformView.Init(health);

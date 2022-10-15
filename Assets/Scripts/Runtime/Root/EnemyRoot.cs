@@ -12,7 +12,6 @@ namespace Shooter.Root
     {
         [Title("Views")] [SerializeField] private IView<float> _waveTimerSecondsView;
         [SerializeField] private IView<int> _diedEnemiesView;
-        [SerializeField] private IView<int> _moneyView;
         [SerializeField] private IView<int> _aliveEnemiesView;
 
         [Title("Factories")] [SerializeField] private StandartEnemyFactory _enemyFactory;
@@ -28,6 +27,7 @@ namespace Shooter.Root
         [Title("Other", titleAlignment: TitleAlignments.Centered)] [SerializeField]
         private INavMeshBaker _navMeshBaker;
 
+        [SerializeField] private IWalletRoot _walletRoot;
         [SerializeField] private IScoreRoot _scoreRoot;
         [SerializeField] private IEnergyShield _energyShield;
         [SerializeField] private List<EnemyWaveData> _wavesData;
@@ -40,7 +40,7 @@ namespace Shooter.Root
 
         public override void Compose()
         {
-            var wallet = new Wallet(_moneyView, new BinaryStorage());
+            var wallet = _walletRoot.Wallet();
             var storageCharacterIncreaseBulletsSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
             var characterIncreaseBulletsDamageSeconds  = storageCharacterIncreaseBulletsSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 3f;
             _characterIncreaseBulletsDamageAbility = new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, _bulletsFactories.ToArray(), characterIncreaseBulletsDamageSeconds );
@@ -67,7 +67,7 @@ namespace Shooter.Root
                 }
             );
 
-            _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.ComposeScore(), new DiedHealthsCounter(_diedEnemiesView));
+            _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.Score(), new DiedHealthsCounter(_diedEnemiesView));
             var simulation = new EnemySimulation(_navMeshBaker, _aliveEnemiesView);
             var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
             _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));

@@ -11,7 +11,7 @@ namespace Shooter.GameLogic
         public void Visualize(int protection)
         {
             _scrollbar.gameObject.SetActive(protection != 0);
-            _scrollbar.value = protection / 100f;
+            _scrollbar.size = protection / 100f;
         }
     }
 }

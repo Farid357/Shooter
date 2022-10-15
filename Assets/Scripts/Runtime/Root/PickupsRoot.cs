@@ -23,7 +23,7 @@ namespace Shooter.Root
         [SerializeField] private readonly IFactory<IGrenade> _grenadeFactory;
         [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
-        [SerializeField] private HandWeaponFactory _handWeaponFactory;
+      //  [SerializeField] private HandWeaponFactory _handWeaponFactory;
         
         public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
         {

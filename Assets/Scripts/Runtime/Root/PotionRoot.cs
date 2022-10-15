@@ -25,7 +25,7 @@ namespace Shooter.Root
             var potions = new IPotion[]
             {
                 new HealthPotion(_character.Health, _healthPotionView),
-                new RewardPotion(_healthPotionView, new ScoreReward(_scoreRoot.Score, 1000)),
+                new RewardPotion(_healthPotionView, new ScoreReward(_scoreRoot.Score(), 1000)),
                 new NegativeHealthPotion(_character.Health, _healthPotionView)
             };
             
