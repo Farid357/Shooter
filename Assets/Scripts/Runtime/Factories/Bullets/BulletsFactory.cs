@@ -8,6 +8,6 @@ namespace Shooter.GameLogic
     {
         public abstract IBullet Create();
 
-        public abstract event Action<BulletMovement> OnCreated;
+        public abstract event Action<Bullet> OnCreated;
     }
 }

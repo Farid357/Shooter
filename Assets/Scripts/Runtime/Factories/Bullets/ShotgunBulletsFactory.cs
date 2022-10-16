@@ -9,24 +9,24 @@ namespace Shooter.GameLogic
     public sealed class ShotgunBulletsFactory : BulletsFactory
     {
         [SerializeField, Min(2)] private int _bullets = 3;
-        [SerializeField] private BulletMovement _prefab;
+        [SerializeField] private Bullet _prefab;
         [SerializeField] private float _minZRotation;
         [SerializeField] private float _maxZRotation;
         [SerializeField] private float _xOffset;
         [SerializeField] private Transform _spawnPoint;
 
         private float _rotationZOffset;
-        private IndependentPool<BulletMovement> _pool;
+        private IndependentPool<Bullet> _pool;
         
-        public override event Action<BulletMovement> OnCreated;
+        public override event Action<Bullet> OnCreated;
 
         private void Awake()
         {
             if (_minZRotation > _maxZRotation)
                 throw new ArgumentOutOfRangeException("Min rotation is higher than max!");
 
-            var factory = new GameObjectsFactory<BulletMovement>(_prefab, transform);
-            _pool = new IndependentPool<BulletMovement>(factory);
+            var factory = new GameObjectsFactory<Bullet>(_prefab, transform);
+            _pool = new IndependentPool<Bullet>(factory);
             _rotationZOffset = (_maxZRotation - _minZRotation) / _bullets;
         }
 

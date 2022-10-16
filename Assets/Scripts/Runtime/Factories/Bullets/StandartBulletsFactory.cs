@@ -8,15 +8,15 @@ namespace Shooter.GameLogic
     public sealed class StandartBulletsFactory : BulletsFactory
     {
         [SerializeField] private Transform _spawnPoint;
-        [SerializeField] private BulletMovement _prefab;
+        [SerializeField] private Bullet _prefab;
 
-        private IndependentPool<BulletMovement> _pool;
+        private IndependentPool<Bullet> _pool;
         
-        public override event Action<BulletMovement> OnCreated;
+        public override event Action<Bullet> OnCreated;
 
         private void Awake()
         {
-            _pool = new IndependentPool<BulletMovement>(new GameObjectsFactory<BulletMovement>(_prefab, transform));
+            _pool = new IndependentPool<Bullet>(new GameObjectsFactory<Bullet>(_prefab, transform));
         }
 
         public override IBullet Create()

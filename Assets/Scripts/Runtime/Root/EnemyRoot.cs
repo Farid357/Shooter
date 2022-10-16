@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Shooter.GameLogic;
 using Shooter.Model;
-using Shooter.SaveSystem;
 using Shooter.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,23 +9,20 @@ namespace Shooter.Root
 {
     public sealed class EnemyRoot : CompositeRoot
     {
-        [Title("Views")] [SerializeField] private IView<float> _waveTimerSecondsView;
+        [Title("Views")] 
+        [SerializeField] private IView<float> _waveTimerSecondsView;
         [SerializeField] private IView<int> _diedEnemiesView;
         [SerializeField] private IView<int> _aliveEnemiesView;
 
-        [Title("Factories")] [SerializeField] private StandartEnemyFactory _enemyFactory;
-        [SerializeField] private List<IBulletsFactory> _bulletsFactories;
+        [SerializeField] private StandartEnemyFactory _enemyFactory;
 
-        [Title("Character")] [SerializeField] private ICharacterMovement _characterMovement;
+        [Title("Character")] 
+        [SerializeField] private ICharacterMovement _characterMovement;
         [SerializeField] private IHealthTransformView _characterHealthTransformView;
-
-        [Title("Abilities")] [SerializeField] private IAbilityView _speedBoostAbility;
-        [SerializeField] private IAbilityView _bulletsDamageAbility;
-        [SerializeField] private IAbilityView _regenerationAbility;
-
-        [Title("Other", titleAlignment: TitleAlignments.Centered)] [SerializeField]
-        private INavMeshBaker _navMeshBaker;
-
+        
+        [Title("Other", titleAlignment: TitleAlignments.Centered)] 
+        [SerializeField] private INavMeshBaker _navMeshBaker;
+        [SerializeField] private IAbilityRoot _abilityRoot;
         [SerializeField] private IWalletRoot _walletRoot;
         [SerializeField] private IScoreRoot _scoreRoot;
         [SerializeField] private IEnergyShield _energyShield;
@@ -34,27 +30,14 @@ namespace Shooter.Root
 
         private readonly SystemUpdate _systemUpdate = new();
         private WaveFactory _waveFactory;
-        private CharacterIncreaseBulletsDamageAbility _characterIncreaseBulletsDamageAbility;
 
         public IWaveFactory WaveFactory => _waveFactory;
 
         public override void Compose()
         {
             var wallet = _walletRoot.Wallet();
-            var storageCharacterIncreaseBulletsSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
-            var characterIncreaseBulletsDamageSeconds  = storageCharacterIncreaseBulletsSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 3f;
-            _characterIncreaseBulletsDamageAbility = new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, _bulletsFactories.ToArray(), characterIncreaseBulletsDamageSeconds );
-            var storageCharacterSpeedBoostSeconds = new StorageWithNameSaveObject<CharacterSpeedBoostAbility, float>(new BinaryStorage());
-            var characterSpeedBoostSeconds  = storageCharacterSpeedBoostSeconds.HasSave() ? storageCharacterIncreaseBulletsSeconds.Load() : 4f;
             
-            var abilities = new IAbility[]
-            {
-                new CharacterSpeedBoostAbility(_speedBoostAbility, _characterMovement, characterSpeedBoostSeconds),
-                _characterIncreaseBulletsDamageAbility,
-                new CharacterHealthRegenerationAbility(_regenerationAbility, _characterHealthTransformView.Health)
-            };
-
-            IRewardFactory rewardFactory = new RandomRewardFactory(abilities, new IReward[]
+            IRewardFactory rewardFactory = new RandomRewardFactory(_abilityRoot.Abilities(), new IReward[]
                 {
                     new MoneyReward(wallet, 5),
                     new EnergyShieldActivateReward(_energyShield),
@@ -76,7 +59,5 @@ namespace Shooter.Root
         }
 
         private void Update() => _systemUpdate.Update(Time.deltaTime);
-
-        private void OnDestroy() => _characterIncreaseBulletsDamageAbility.Dispose();
     }
 }

@@ -15,6 +15,10 @@ namespace Shooter.GameLogic
             if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView) && _attackCooldown == 0)
             {
                 Attack(healthTransformView.Health);
+            }
+            
+            else
+            {
                 gameObject.SetActive(false);
             }
         }

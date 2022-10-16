@@ -21,7 +21,7 @@ namespace Shooter.Model
             _bulletsFactories.ForEach(factory => factory.OnCreated += BulletsFactoryOnCreated);
         }
 
-        private void BulletsFactoryOnCreated(BulletMovement bullet)
+        private void BulletsFactoryOnCreated(Bullet bullet)
         {
             if (_hasApplied)
             {

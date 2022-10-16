@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1129880162026656044}
   - component: {fileID: 2647132479837839378}
-  - component: {fileID: 6426790726485467809}
   - component: {fileID: 5475575362224835234}
+  - component: {fileID: 7587334026901586478}
   m_Layer: 0
   m_Name: Conveyor
   m_TagString: Untagged
@@ -49,19 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _points:
   - {fileID: 0}
---- !u!65 &6426790726485467809
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300921605223317730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 77.63008, y: 4.3199997, z: 20.517876}
-  m_Center: {x: -160.4011, y: 4.13, z: 21.071735}
 --- !u!54 &5475575362224835234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78,6 +65,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!64 &7587334026901586478
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300921605223317730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &343870300927168997
 PrefabInstance:
   m_ObjectHideFlags: 0

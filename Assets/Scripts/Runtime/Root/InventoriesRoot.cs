@@ -38,7 +38,7 @@ namespace Shooter.Root
 
         public override void Compose()
         {
-            IWeaponFactory factory = new WeaponFactoryWithShootWaitingAndRollback(_shotgunBulletsFactory, _startWeaponData);
+            IWeaponFactory factory = new WeaponFactoryWithShootWaiting(_shotgunBulletsFactory, _startWeaponData);
             var weapon = factory.Create();
             var inventory = new Inventory<(IWeapon, IWeaponInput)>(_inventoryView);
             var weaponSelector = new WeaponSelector(_playerRoot);

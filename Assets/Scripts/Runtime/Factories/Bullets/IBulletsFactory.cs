@@ -6,6 +6,6 @@ namespace Shooter.GameLogic
 {
     public interface IBulletsFactory : IFactory<IBullet>
     {
-        event Action<BulletMovement> OnCreated;
+        event Action<Bullet> OnCreated;
     }
 }

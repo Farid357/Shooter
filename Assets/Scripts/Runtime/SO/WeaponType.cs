@@ -7,6 +7,7 @@
         Rpg,
         Ak74,
         PistolWithFireBullets,
-        Sword
+        Sword,
+        LaserGun
     }
 }

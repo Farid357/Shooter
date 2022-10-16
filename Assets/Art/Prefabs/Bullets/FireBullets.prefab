@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3658940862770858746}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.06187, y: 0.01040001, z: -0.03334}
-  m_LocalScale: {x: 0.1989925, y: 0.09407833, z: 0.25}
+  m_LocalScale: {x: 0.1989925, y: 0.15439196, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26152cb4bafb4fa99bcdfacd26d950f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwForce: 10
+  _throwForce: 60
 --- !u!114 &6536806288004000452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ace0b1c02c45a7bd22e4f8fc545997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 5
+  <Damage>k__BackingField: 15
   _attackCooldown: 0.1
