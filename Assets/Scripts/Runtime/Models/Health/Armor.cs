@@ -29,7 +29,7 @@ namespace Shooter.Model
         {
             damage.TryThrowLessThanOrEqualsToZeroException();
             
-            if (_protection > 0)
+            if (_protection > 0 && _protection - damage >= 0)
             {
                 _protection -= damage;
                 damage = Math.Max(0, damage - _protection);

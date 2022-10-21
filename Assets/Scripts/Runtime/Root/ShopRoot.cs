@@ -33,8 +33,9 @@ namespace Shooter.Root
             IShoppingCart shoppingCart = new ShoppingCart(_shoppingCartView);
             _goodSwitchingView.Init(shoppingCart);
             _shoppingCartView.Init(new RemovingGoodButtonActionFactory(shoppingCart));
-            IClient client = new Client(_walletRoot.Wallet(), shoppingCart);
-            _buyGoodButton.Subscribe(new BuyGoodButtonAction(client, _notEnoughMoneyView));
+            IClient client = new Client(_walletRoot.CoinsWallet(), shoppingCart);
+            IClient clientWithDiamondsWallet = new Client(_walletRoot.DiamondsWallet(), shoppingCart);
+            _buyGoodButton.Subscribe(new BuyGoodButtonAction(new []{client, clientWithDiamondsWallet}, _notEnoughMoneyView));
             var goods = CreateGoods();
             var switchingGoodAction = new SwitchingGoodAction(_goodSwitchingView, goods);
             _switchingGoodLeftButton.Subscribe(switchingGoodAction);

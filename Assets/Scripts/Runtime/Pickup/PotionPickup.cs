@@ -9,8 +9,6 @@ namespace Shooter.GameLogic.Inventory
     public sealed class PotionPickup : Pickup
     {
         private IInventory<IPotion> _inventory;
-        private IInventoryItemSelector<IPotion> _potionSelector;
-        private IFactory<(IPotion, IInventoryItemGameObjectView)> _potionFactory;
         private InventorySlot<IPotion> _inventorySlot;
 
         [field: SerializeField] public ItemData ItemData { get; private set; }

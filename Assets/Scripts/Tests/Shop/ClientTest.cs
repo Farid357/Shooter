@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Runtime;
 using Shooter.Model;
 using Shooter.Shop;
 
@@ -16,7 +17,7 @@ namespace Shooter.Test
         public void SetUp()
         {
             _shoppingCart = new ShoppingCart(new DummyShoppingCartView());
-            _wallet = new Wallet(new DummyCountView(), new DummyStorage());
+            _wallet = new Wallet<IAbility>(new DummyCountView(), new DummyStorage());
             _client = new Client(_wallet, _shoppingCart);
         }
         

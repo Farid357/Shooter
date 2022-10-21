@@ -4,15 +4,15 @@ using Shooter.Tools;
 
 namespace Shooter.Model
 {
-    public sealed class Wallet : IWallet
+    public sealed class Wallet<TWalletType> : IWallet
     {
         private readonly IView<int> _view;
-        private readonly StorageWithNameSaveObject<Wallet, int> _storage;
+        private readonly StorageWithNameSaveObject<TWalletType, int> _storage;
 
         public Wallet(IView<int> view, IStorage storage)
         {
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _storage = new StorageWithNameSaveObject<Wallet, int>(storage);
+            _storage = new StorageWithNameSaveObject<TWalletType, int>(storage);
             Money = _storage.HasSave() ? _storage.Load() : 0;
             _view.Visualize(Money);
         }

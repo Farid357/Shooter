@@ -1,8 +1,7 @@
 ﻿namespace Shooter.Tools
 {
-    public static class IntUlils
+    public static class IntUtils
     {
-
         public static int TryThrowLessThanOrEqualsToZeroException(this int number)
         {
             if (number <= 0)

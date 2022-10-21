@@ -14,6 +14,12 @@ namespace Shooter.Root
         [SerializeField] private IAbilityView _speedBoostAbility;
         [SerializeField] private IAbilityView _bulletsDamageAbility;
         [SerializeField] private IAbilityView _regenerationAbility;
+        [SerializeField] private IAbilityView _enemiesSlowdownAbilityView;
+        
+        [Title("Enemies Slowdown")]
+        [SerializeField] private IEnemiesInRadiusFinder _enemiesFinder;
+        [SerializeField] private float _enemiesInSlowdownSpeed;
+        [SerializeField] private float _enemiesInSlowdownSeconds;
         
         [Title("Other")]
         [SerializeField] private List<IBulletsFactory> _bulletsFactories;
@@ -23,6 +29,7 @@ namespace Shooter.Root
         private CharacterIncreaseBulletsDamageAbility _characterIncreaseBulletsDamageAbility;
         private IEnumerable<IAbility> _abilities;
         
+
         private IEnumerable<IAbility> Compose()
         {
             var storageCharacterIncreaseBulletsSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());
@@ -33,6 +40,7 @@ namespace Shooter.Root
             yield return new CharacterSpeedBoostAbility(_speedBoostAbility, _characterMovement, characterSpeedBoostSeconds);
             yield return _characterIncreaseBulletsDamageAbility = new CharacterIncreaseBulletsDamageAbility(_bulletsDamageAbility, _bulletsFactories.ToArray(), characterIncreaseBulletsDamageSeconds );;
             yield return new CharacterHealthRegenerationAbility(_regenerationAbility, _characterHealthTransformView.Health);
+            yield return new EnemiesInRadiusSlowdownAbility(_enemiesSlowdownAbilityView, _enemiesFinder, _enemiesInSlowdownSeconds, _enemiesInSlowdownSpeed);
         }
 
         public IEnumerable<IAbility> Abilities()
@@ -41,6 +49,6 @@ namespace Shooter.Root
             return _abilities;
         }
 
-        private void OnDestroy() => _characterIncreaseBulletsDamageAbility.Dispose();
+        private void OnDestroy() => _characterIncreaseBulletsDamageAbility?.Dispose();
     }
 }

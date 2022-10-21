@@ -35,8 +35,8 @@ namespace Shooter.Root
 
         public override void Compose()
         {
-            var wallet = _walletRoot.Wallet();
-            
+            var wallet = _walletRoot.CoinsWallet();
+
             IRewardFactory rewardFactory = new RandomRewardFactory(_abilityRoot.Abilities(), new IReward[]
                 {
                     new MoneyReward(wallet, 5),

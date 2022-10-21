@@ -1,29 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using Shooter.Shop;
 
 namespace Shooter.Model
 {
     public sealed class BuyGoodButtonAction : IButtonClickAction
     {
-        private readonly IClient _client;
+        private readonly IEnumerable<IClient> _clients;
         private readonly INotEnoughMoneyView _notEnoughMoneyView;
 
-        public BuyGoodButtonAction(IClient client, INotEnoughMoneyView notEnoughMoneyView)
+        public BuyGoodButtonAction(IEnumerable<IClient> clients, INotEnoughMoneyView notEnoughMoneyView)
         {
-            _client = client ?? throw new ArgumentNullException(nameof(client));
+            _clients = clients ?? throw new ArgumentNullException(nameof(clients));
             _notEnoughMoneyView = notEnoughMoneyView ?? throw new ArgumentNullException(nameof(notEnoughMoneyView));
         }
 
         public void OnClick()
         {
-            if (_client.CanBuyItems())
+            foreach (var client in _clients)
             {
-                _client.BuyItems();
-            }
+                if (client.CanBuyItems())
+                {
+                    client.BuyItems();
+                }
 
-            else
-            {
-                _notEnoughMoneyView.Visualize(_client.ShoppingCart.TotalPrice, _client.Wallet.Money);
+                else
+                {
+                    _notEnoughMoneyView.Visualize(client.ShoppingCart.TotalPrice, client.Wallet.Money);
+                }
             }
         }
     }

@@ -21,5 +21,10 @@ namespace Shooter.Model
             _screen.DOColor(_usingColor, 0.2f).OnComplete(() => _screen.DOColor(startColor, 0.2f));
             await Task.Delay(TimeSpan.FromSeconds(0.4f));
         }
+
+        public void TranslateTo(Vector3 position)
+        {
+            
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Shooter.Model.Inventory
     {
         private readonly IPlayerRoot _playerRoot;
         private readonly IPotionInput _potionInput;
-        
+
         public PotionSelector(IPlayerRoot playerRoot, IPotionInput potionInput)
         {
             _playerRoot = playerRoot ?? throw new ArgumentNullException(nameof(playerRoot));

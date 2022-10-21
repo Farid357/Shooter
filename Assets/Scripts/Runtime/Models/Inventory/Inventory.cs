@@ -4,7 +4,7 @@ using Shooter.Tools;
 
 namespace Shooter.Model.Inventory
 {
-    public sealed class Inventory<TItem> : IInventory<TItem>
+    public class Inventory<TItem> : IInventory<TItem>
     {
         private readonly IInventoryView _view;
         private readonly int _maxSlotsCount;

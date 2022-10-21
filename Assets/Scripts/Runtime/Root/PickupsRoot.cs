@@ -27,11 +27,9 @@ namespace Shooter.Root
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _laserData;
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _pistolWithFireBullets;
         
-        [SerializeField] private readonly IFactory<IGrenade> _grenadeFactory;
         [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
-
-        //  [SerializeField] private HandWeaponFactory _handWeaponFactory;
+        [SerializeField] private HandWeaponFactory _handWeaponFactory;
         
         public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
         {
@@ -39,7 +37,7 @@ namespace Shooter.Root
             _grenadePickupsFactory.SpawnLoop().Forget();
             var weaponTypesStorage = new CollectionStorage<WeaponType>(new BinaryStorage());
             var weaponSpawnTypes = weaponTypesStorage.Exists(WeaponsKey.Value) ? weaponTypesStorage.Load(WeaponsKey.Value)
-                : new List<WeaponType> { WeaponType.LaserGun, WeaponType.PistolWithFireBullets};
+                : new List<WeaponType> { WeaponType.Sword, WeaponType.PistolWithFireBullets};
             
             var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>
             {
@@ -49,6 +47,7 @@ namespace Shooter.Root
                 { WeaponType.Shotgun, new WeaponFactoryWithShootWaiting(_shotgunBulletsFactory, _shotgunData)},
                 { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaiting(_fireBulletsFactory, _pistolWithFireBullets)},
                 { WeaponType.LaserGun, new WeaponFactoryWithShootWaiting(_laserBulletsFactory, _laserData)},
+                { WeaponType.Sword, new DummyFactoryFromShootingWeapon(_handWeaponFactory)}
             };
 
             var inputs = new Dictionary<WeaponType, IWeaponInput>
@@ -59,7 +58,7 @@ namespace Shooter.Root
                 { WeaponType.Shotgun, new BurstWeaponInput() },
                 { WeaponType.PistolWithFireBullets, new BurstWeaponInput()},
                 { WeaponType.Sword, new StandartWeaponInput()},
-                { WeaponType.LaserGun, new StandartWeaponInput()}
+                { WeaponType.LaserGun, new StandartWeaponInput()},
             };
             
             _weaponPickupsFactory.Init(weaponSpawnTypes.ToList(), weaponsInventory, factoriesContainer, inputs);

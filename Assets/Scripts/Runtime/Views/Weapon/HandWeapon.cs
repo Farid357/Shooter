@@ -19,7 +19,11 @@ namespace Shooter.GameLogic
         
         private void Awake() => _time = _attackCooldown;
 
-        private void Update() => _time = Mathf.Max(0, _time - Time.deltaTime);
+        private void Update()
+        {
+            _time = Mathf.Max(0, _time - Time.deltaTime);
+            Debug.DrawRay(transform.position,transform.forward, Color.red);
+        }
 
         public void Shoot()
         {
@@ -27,7 +31,7 @@ namespace Shooter.GameLogic
                 throw new InvalidOperationException(nameof(CanShoot));
 
             _time = _attackCooldown;
-            var ray = new Ray(transform.position, transform.forward);
+            var ray = new Ray(transform.position, -transform.forward);
             if (Physics.Raycast(ray, out var hit, _attackDistance))
             {
                 if (hit.collider != null && hit.collider.TryGetComponent(out IHealthTransformView healthTransformView))
@@ -37,6 +41,5 @@ namespace Shooter.GameLogic
                 }
             }
         }
-
     }
 }

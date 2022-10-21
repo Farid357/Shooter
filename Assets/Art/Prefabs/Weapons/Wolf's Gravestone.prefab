@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2484197819510269827}
   - component: {fileID: 404571388027163465}
   - component: {fileID: 3016600746170524385}
+  - component: {fileID: 5058625914515897220}
   m_Layer: 0
   m_Name: Wolf's Gravestone
   m_TagString: Untagged
@@ -115,6 +116,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6abf8009ab34513b4df76ebe39a048d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDistance: 1.5
+  _attackDistance: 5
   _attackCooldown: 1.5
   _damage: 30
+--- !u!114 &5058625914515897220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206112874769347228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e129575e0a1e405d87f621e76cbeecd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

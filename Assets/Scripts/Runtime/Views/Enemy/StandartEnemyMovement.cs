@@ -12,12 +12,20 @@ namespace Shooter.GameLogic
     {
         [SerializeField, Min(1f)] private float _rotateSpeed = 2.5f;
 
-        private NavMeshAgent _navMesh;
         private ICharacterTransform _character;
+        private NavMeshAgent _navMesh;
         private bool _needMove;
         private bool _needRotate;
 
-        private void OnEnable() => _navMesh = GetComponent<NavMeshAgent>();
+        public IEnemyNavMeshAgent Agent { get; private set; }
+
+        public void Init(ICharacterTransform character)
+        {
+            _character ??= character ?? throw new ArgumentNullException(nameof(character));
+            Agent ??= new EnemyNavMeshAgent(_navMesh);
+        }
+        
+        private void OnEnable() => _navMesh ??= GetComponent<NavMeshAgent>();
 
         private void Update()
         {
@@ -27,12 +35,7 @@ namespace Shooter.GameLogic
             if (_needRotate)
                 Rotate().Forget();
         }
-
-        public void Init(ICharacterTransform character)
-        {
-            _character = character ?? throw new ArgumentNullException(nameof(character));
-        }
-
+        
         public void MoveToCharacter() => _needMove = true;
 
         public void RotateToCharacter() => _needRotate = true;

@@ -9,5 +9,13 @@
 
             return number;
         }
+
+        public static float Positive(this float number)
+        {
+            if (number < 0)
+                number = -number;
+
+            return number;
+        }
     }
 }

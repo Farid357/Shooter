@@ -10,5 +10,10 @@ namespace Shooter.Tools
             transform.position = new Vector3(x, position.y, position.z);
             return transform;
         }
+
+        public static Vector3 Positive(this Vector3 vector)
+        {
+            return new Vector3(vector.x.Positive(), vector.y.Positive(), vector.z.Positive());
+        }
     }
 }

@@ -3,9 +3,9 @@ using Shooter.Model;
 
 namespace Shooter.GameLogic
 {
-    public interface IGrenade : IShootingWeapon
+    public interface IGrenade : IDroppingWeapon
     {
         IInventoryItemGameObjectView ItemView { get; }
-        
+
     }
 }

@@ -10,4 +10,14 @@
 
         public void Take(int money);
     }
+
+    public interface ICoins
+    {
+        
+    }
+
+    public interface IDiamonds
+    {
+        
+    }
 }

@@ -8,17 +8,18 @@ namespace Shooter.Root
     public sealed class WalletRoot : SerializedMonoBehaviour, IWalletRoot
     {
         [SerializeField] private IView<int> _moneyView;
-        private IWallet _wallet;
+        [SerializeField] private IView<int> _diamondsView;
 
-        private IWallet Compose()
+        private IWallet _coinsWallet;
+        private IWallet _diamondsWallet;
+
+        private IWallet Compose<TWalletType>(IView<int> countView)
         {
-            return new Wallet(_moneyView, new BinaryStorage());
+            return new Wallet<TWalletType>(countView, new BinaryStorage());
         }
 
-        public IWallet Wallet()
-        {
-            _wallet ??= Compose();
-            return _wallet;
-        }
+        public IWallet CoinsWallet() => _coinsWallet ??= Compose<ICoins>(_moneyView);
+
+        public IWallet DiamondsWallet() => _diamondsWallet ??= Compose<IDiamonds>(_diamondsView);
     }
 }

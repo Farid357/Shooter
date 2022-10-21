@@ -41,7 +41,7 @@ namespace Shooter.Root
             {
                 _achievements.Add(new CountAchievement(_scoreRoot.Score(),
                     new Achievement(CreateView(achievementData), 
-                        new MoneyReward(_walletRoot.Wallet(), achievementData.MoneyReward)), achievementData.NeedAmount));
+                        new MoneyReward(_walletRoot.CoinsWallet(), achievementData.MoneyReward)), achievementData.NeedAmount));
             }
         }
 

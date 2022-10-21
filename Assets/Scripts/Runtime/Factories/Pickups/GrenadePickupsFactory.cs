@@ -35,7 +35,7 @@ namespace Shooter.GameLogic
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_spawnDelay));
                 var position = new Vector3(_character.Position.x, _character.Position.y * _yOffset, _character.Position.z);
-                Instantiate(_grenade, position, Quaternion.identity).Init(_inventory, new GrenadeSelector(_playerRoot), _grenadesFactory);
+                Instantiate(_grenade, position, Quaternion.identity).Init(_inventory, new GrenadeSelector(_playerRoot, _grenadesFactory), _grenadesFactory);
             }
         }
     }

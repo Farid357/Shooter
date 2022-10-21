@@ -6,7 +6,6 @@
         
         public bool CanShoot { get; }
 
-        public bool HasShot => false;
         
     }
 }

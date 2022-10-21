@@ -4,6 +4,8 @@ namespace Shooter.Root
 {
     public interface IWalletRoot
     {
-        IWallet Wallet();
+        IWallet CoinsWallet();
+
+        IWallet DiamondsWallet();
     }
 }

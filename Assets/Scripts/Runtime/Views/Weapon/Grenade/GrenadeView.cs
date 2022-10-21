@@ -19,10 +19,12 @@ namespace Shooter.GameLogic
         private Rigidbody _rigidbody;
         
         public IInventoryItemGameObjectView ItemView => _itemView;
+        
+        public void TranslateTo(Vector3 position) => transform.position = position;
 
         public bool CanShoot => gameObject.activeInHierarchy;
         
-        public bool HasShot { get; private set; }
+        public bool HasDropped { get; private set; }
 
         private void OnEnable()
         {
@@ -35,12 +37,11 @@ namespace Shooter.GameLogic
             transform.parent = null;
             _rigidbody.isKinematic = false;
             _rigidbody.AddForce(_throwDirection * _force);
-            HasShot = true;
+            HasDropped = true;
 
             UniTask.Create(async () =>
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(Time.deltaTime));
-                HasShot = false;
                 await UniTask.Delay(TimeSpan.FromSeconds(_explosionSeconds));
                 var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
                 Instantiate(_explosionParticlePrefab, transform.position, Quaternion.identity).Play();

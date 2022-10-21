@@ -4,6 +4,7 @@ namespace Shooter.Model
 {
     public interface IPotionView
     {
-        public Task VisualizeShot();
+        Task VisualizeShot();
+
     }
 }

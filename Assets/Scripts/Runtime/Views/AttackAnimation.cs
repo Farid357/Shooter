@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Shooter.GameLogic
 {
     [RequireComponent(typeof(Animator))]
-    public sealed class AttackAnimation : MonoBehaviour
+    public sealed class AttackAnimation : MonoBehaviour, IAttackAnimation
     {
         [SerializeField, Min(0.1f)] private float _triggerSeconds = 0.7f;
         [SerializeField] private string _name = "Enemy Attack";

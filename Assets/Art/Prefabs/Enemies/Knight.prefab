@@ -1717,6 +1717,7 @@ GameObject:
   - component: {fileID: 7959488039114093564}
   - component: {fileID: 4756501893366018169}
   - component: {fileID: 4090216670378948980}
+  - component: {fileID: 1887448828550689855}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -1797,10 +1798,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef6390ac09dc437993da27146ed51df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 86605088875889185}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _attackAnimation
+      Entry: 10
+      Data: 0
+  _chaser: {fileID: 1887448828550689855}
   _damage: 15
-  _attackAnimation: {fileID: 86605088875889185}
-  _radius: 7
-  _center: {fileID: 7835867451206628565}
 --- !u!114 &828202209477806023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1858,7 +1870,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1886,22 +1898,29 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 2600266487463633084}
     - {fileID: 4756501893366018169}
+    - {fileID: 828202209477806023}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _enemyHealthView
+    - Name: _attack
       Entry: 10
       Data: 0
-  _attack: {fileID: 2600266487463633084}
+    - Name: _enemyHealthView
+      Entry: 10
+      Data: 1
+    - Name: <Movement>k__BackingField
+      Entry: 10
+      Data: 2
   _healthCount: 25
   _health: {fileID: 4090216670378948980}
-  _movement: {fileID: 828202209477806023}
-  _type: 1
+  _chaser: {fileID: 1887448828550689855}
+  _type: 2
   _protection: 0
-  <Score>k__BackingField: 5
+  <Score>k__BackingField: 15
 --- !u!114 &6500019009003649193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,6 +1985,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd2343020c241a7b81df91e918179ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1887448828550689855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7337382032467732511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3642d6a39bef4e26809cdd6cb9f00fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 6.5
+  _center: {fileID: 7835867451206628565}
 --- !u!1 &7357643161733517285
 GameObject:
   m_ObjectHideFlags: 0

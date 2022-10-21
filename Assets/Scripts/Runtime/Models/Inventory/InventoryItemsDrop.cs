@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Shooter.GameLogic;
 
 namespace Shooter.Model.Inventory
 {
-    public sealed class InventoryItemsDrop : IUpdateble
+    public sealed class InventoryItemsDrop<TItem> : IUpdateble where TItem : IDroppingWeapon
     {
-        private readonly IInventory<IGrenade> _inventory;
+        private readonly IInventory<TItem> _inventory;
 
-        public InventoryItemsDrop(IInventory<IGrenade> inventory)
+        public InventoryItemsDrop(IInventory<TItem> inventory)
         {
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
         }
@@ -19,7 +18,7 @@ namespace Shooter.Model.Inventory
             {
                 var weapon = slot.Item.Model;
 
-                if (weapon.HasShot)
+                if (weapon.HasDropped)
                 {
                     _inventory.Drop(slot);
                 }
