@@ -41,7 +41,8 @@ namespace Shooter.Root
                 {
                     new MoneyReward(wallet, 5),
                     new EnergyShieldActivateReward(_energyShield),
-
+                    new MoneyReward(_walletRoot.DiamondsWallet(), 1),
+                    
                     new Rewards(new IReward[]
                     {
                         new MoneyReward(wallet, 25),

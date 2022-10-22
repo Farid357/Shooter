@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Shooter.Model;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.Shop
@@ -11,5 +12,6 @@ namespace Shooter.Shop
         
         [field: SerializeField, MinValue(1)] public int Price { get; private set; }
 
+        [field: SerializeField] public WalletType WalletForPay { get; private set; }
     }
 }

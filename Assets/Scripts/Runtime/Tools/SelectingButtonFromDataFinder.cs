@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Shooter.GameLogic;
+using Shooter.Model;
 using UnityEngine;
 
 namespace Shooter.Shop

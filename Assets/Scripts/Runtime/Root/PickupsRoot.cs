@@ -37,7 +37,7 @@ namespace Shooter.Root
             _grenadePickupsFactory.SpawnLoop().Forget();
             var weaponTypesStorage = new CollectionStorage<WeaponType>(new BinaryStorage());
             var weaponSpawnTypes = weaponTypesStorage.Exists(WeaponsKey.Value) ? weaponTypesStorage.Load(WeaponsKey.Value)
-                : new List<WeaponType> { WeaponType.Sword, WeaponType.PistolWithFireBullets};
+                : new List<WeaponType> { WeaponType.Shotgun};
             
             var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>
             {

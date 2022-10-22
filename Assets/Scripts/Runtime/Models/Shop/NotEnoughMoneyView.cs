@@ -12,7 +12,11 @@ namespace Shooter.Shop
         
         public async void Visualize(int needMoney, int currentMoney)
         {
-            _text.text = $"You don't have enough money! You need {needMoney} money, but you have {currentMoney}!";
+            if (currentMoney > needMoney)
+                throw new InvalidOperationException("Current money greater than need money!");
+            
+            _text.text = $"You don't have enough money! You need {needMoney - currentMoney}!";
+            
             await UniTask.Create(async () =>
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_showSeconds));

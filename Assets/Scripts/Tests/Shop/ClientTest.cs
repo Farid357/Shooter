@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Runtime;
 using Shooter.Model;
 using Shooter.Shop;
 
@@ -26,7 +25,7 @@ namespace Shooter.Test
         {
             _wallet.Put(600);
             _shoppingCart.Add(new DummyGood());
-            _client.BuyItems();
+            _client.BuyGoods();
             Assert.That(_shoppingCart.Goods.Count() == 0 && _wallet.Money == 100);
         }
         
@@ -35,9 +34,9 @@ namespace Shooter.Test
         {
             _wallet.Put(500);
             _shoppingCart.Add(new DummyGood());
-            _client.BuyItems();
+            _client.BuyGoods();
             _shoppingCart.Add(new DummyGood());
-            Assert.That(_client.CanBuyItems() == false);
+            Assert.That(_client.CanBuyGoods() == false);
         }
     }
 }

@@ -18,14 +18,14 @@ namespace Shooter.Shop
 
         public IReadOnlyShoppingCart ShoppingCart => _shoppingCart;
         
-        public bool CanBuyItems() => Wallet.CanTake(_shoppingCart.TotalPrice);
+        public bool CanBuyGoods() => Wallet.CanTake(_shoppingCart.TotalPrice);
 
-        public void BuyItems()
+        public void BuyGoods()
         {
             if (_shoppingCart.Goods.Count() == 0)
                 throw new InvalidOperationException("No goods for buying!");
 
-            if (CanBuyItems() == false)
+            if (CanBuyGoods() == false)
                 throw new InvalidOperationException("Can't buy items!");
 
             var totalPrice = _shoppingCart.TotalPrice;

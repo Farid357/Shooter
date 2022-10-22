@@ -1,10 +1,9 @@
-﻿using Shooter.Model;
-
-namespace Shooter.GameLogic
+﻿namespace Shooter.Model
 {
     public interface IButton
     {
-        
         void Enable();
+        
+        void Disable();
     }
 }

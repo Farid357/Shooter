@@ -12,33 +12,40 @@ namespace Shooter.Shop
         [SerializeField] private Image _image;
         [SerializeField] private Image _usingCheckmark;
         [SerializeField, Min(0.1f)] private float _usingFade = 0.25f;
-        
-        private const string Key = "GoodInContentViewHasVisualized";
         private readonly IStorage _storage = new BinaryStorage();
-        
-        public SelectingGoodButton SelectingButton { get; private set; }
 
+        public SelectingGoodButton SelectingButton { get; private set; }
+        
         public void Init(SelectingGoodButton selectingGoodButton)
         {
             SelectingButton = selectingGoodButton ?? throw new ArgumentNullException(nameof(selectingGoodButton));
         }
 
-        protected override void VisualizeFeedback(IGoodData goodData)
+        public void VisualizeUsing(IGoodData goodData)
         {
-            _image.sprite = goodData.Sprite;
-            
-            if (_storage.Exists(Key) && _storage.Load<bool>(Key))
-            {
-                VisualizeUsing();
-            }
-        }
-
-        public void VisualizeUsing()
-        {
-            _storage.Save(Key, true);
+            _storage.Save(CreateKey(goodData), true);
             _image.raycastTarget = false;
             _usingCheckmark.gameObject.SetActive(true);
             _image.DOFade(_usingFade, 0.01f);
         }
+        
+        protected override void VisualizeFeedback(IGoodData goodData)
+        {
+            _image.sprite = goodData.Sprite;
+            
+            if (HasUsed(goodData))
+            {
+                VisualizeUsing(goodData);
+            }
+        }
+        
+        private bool HasUsed(IGoodData good)
+        {
+            var key = CreateKey(good);
+            return _storage.Exists(key) && _storage.Load<bool>(key);
+        }
+        
+        private string CreateKey(IGoodData goodData) => $"{goodData.Name} {goodData.Price} {goodData.Sprite.name} {goodData.Name}";
+        
     }
 }

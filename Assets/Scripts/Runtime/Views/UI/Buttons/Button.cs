@@ -19,14 +19,18 @@ namespace Shooter.GameLogic
             _button.onClick.AddListener(buttonClickAction.OnClick);
         }
 
-        public void Enable() => _button.interactable = true;
-
-        private void OnDestroy()
+        public void DeleteAllSubscribers()
         {
             foreach (var buttonClickAction in _buttonClickActions)
             {
                 _button.onClick.RemoveListener(buttonClickAction.OnClick);
             }
         }
+
+        public void Enable() => _button.interactable = true;
+        
+        public void Disable() => _button.interactable = false;
+
+        private void OnDestroy() => DeleteAllSubscribers();
     }
 }

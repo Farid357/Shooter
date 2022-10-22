@@ -4,12 +4,12 @@ using Shooter.Shop;
 
 namespace Shooter.Model
 {
-    public sealed class BuyGoodButtonAction : IButtonClickAction
+    public sealed class BuyGoodsButtonAction : IButtonClickAction
     {
         private readonly IEnumerable<IClient> _clients;
         private readonly INotEnoughMoneyView _notEnoughMoneyView;
 
-        public BuyGoodButtonAction(IEnumerable<IClient> clients, INotEnoughMoneyView notEnoughMoneyView)
+        public BuyGoodsButtonAction(IEnumerable<IClient> clients, INotEnoughMoneyView notEnoughMoneyView)
         {
             _clients = clients ?? throw new ArgumentNullException(nameof(clients));
             _notEnoughMoneyView = notEnoughMoneyView ?? throw new ArgumentNullException(nameof(notEnoughMoneyView));
@@ -19,9 +19,9 @@ namespace Shooter.Model
         {
             foreach (var client in _clients)
             {
-                if (client.CanBuyItems())
+                if (client.CanBuyGoods())
                 {
-                    client.BuyItems();
+                    client.BuyGoods();
                 }
 
                 else

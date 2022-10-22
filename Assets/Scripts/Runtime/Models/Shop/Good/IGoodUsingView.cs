@@ -2,6 +2,6 @@
 {
     public interface IGoodUsingView
     {
-        void VisualizeUsing();
+        void VisualizeUsing(IGoodData goodData);
     }
 }

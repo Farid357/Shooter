@@ -8,8 +8,8 @@ namespace Shooter.Shop
         
         IWallet Wallet { get; }
         
-        bool CanBuyItems();
+        bool CanBuyGoods();
         
-        void BuyItems();
+        void BuyGoods();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Shooter.GameLogic
 {
-    public sealed class BuyGoodButton : Button
+    public sealed class BuyGoodsButton : Button
     {
         
     }

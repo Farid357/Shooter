@@ -1,4 +1,4 @@
-﻿using Shooter.GameLogic;
+﻿using Shooter.Model;
 
 namespace Shooter.Shop
 {

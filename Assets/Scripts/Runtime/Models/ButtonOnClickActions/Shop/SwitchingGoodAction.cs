@@ -8,10 +8,10 @@ namespace Shooter.Model
     public sealed class SwitchingGoodAction : ISwitchingGoodAction
     {
         private readonly IGoodSwitchingView _goodSwitchingView;
-        private readonly IEnumerable<IGood> _goods;
+        private readonly IEnumerable<(IGood Self, WalletType WalletType)> _goods;
         private int _index;
 
-        public SwitchingGoodAction(IGoodSwitchingView goodSwitchingView, IEnumerable<IGood> goods)
+        public SwitchingGoodAction(IGoodSwitchingView goodSwitchingView, IEnumerable<(IGood, WalletType)> goods)
         {
             _goodSwitchingView = goodSwitchingView ?? throw new ArgumentNullException(nameof(goodSwitchingView));
             _goods = goods ?? throw new ArgumentNullException(nameof(goods));
@@ -27,7 +27,7 @@ namespace Shooter.Model
                 throw new InvalidOperationException(nameof(CanSwitchLeft));
             
             _index--;
-            _goodSwitchingView.Switch(_goods.ElementAt(_index));
+            _goodSwitchingView.Switch(_goods.ElementAt(_index).Self, _goods.ElementAt(_index).WalletType);
         }
 
         public void SwitchRight()
@@ -36,7 +36,7 @@ namespace Shooter.Model
                 throw new InvalidOperationException(nameof(CanSwitchRight));
             
             _index++;
-            _goodSwitchingView.Switch(_goods.ElementAt(_index));
+            _goodSwitchingView.Switch(_goods.ElementAt(_index).Self, _goods.ElementAt(_index).WalletType);
         }
         
     }

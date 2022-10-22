@@ -14,6 +14,6 @@ namespace Shooter.Shop
         
         public IGoodData Data { get; }
 
-        public void Use() => _usingView.VisualizeUsing();
+        public void Use() => _usingView.VisualizeUsing(Data);
     }
 }
