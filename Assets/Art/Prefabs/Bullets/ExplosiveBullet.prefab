@@ -129,6 +129,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26152cb4bafb4fa99bcdfacd26d950f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _throwForce: 10
 --- !u!114 &-4237947039909150356
 MonoBehaviour:
@@ -144,4 +153,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 66
   _explosionPrefab: {fileID: 3558312835779736951, guid: 6b218d14c43805046a8ef735d3d862c8, type: 3}
-  _explosionParticlePrefab: {fileID: 8976503813493468718, guid: 854e31ca019074f45b3789984b498305, type: 3}
+  _explosionParticlePrefab: {fileID: 8976503813493468718, guid: 98e0235cc32aed646a9ff49bcd8d08bd, type: 3}

@@ -8,7 +8,8 @@ namespace Shooter.GameLogic
     {
         [SerializeField, Min(0.1f)] private float _radius = 0.5f;
         [SerializeField] private Transform _center;
-
+        [SerializeField] private bool _showGizmas;
+        
         public IHealthTransformView Character { get; private set; }
 
         public void Init(IHealthTransformView character)
@@ -20,6 +21,15 @@ namespace Shooter.GameLogic
         {
             var distance = (_center.position - Character.Position).sqrMagnitude;
             return distance <= _radius * _radius;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (_showGizmas)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawSphere(_center.position, _radius);
+            }
         }
     }
 }

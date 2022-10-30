@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Shooter.Shop;
 
 namespace Shooter.Model
@@ -15,11 +17,11 @@ namespace Shooter.Model
             _notEnoughMoneyView = notEnoughMoneyView ?? throw new ArgumentNullException(nameof(notEnoughMoneyView));
         }
 
-        public void OnClick()
+        public async void OnClick()
         {
             foreach (var client in _clients)
             {
-                if (client.CanBuyGoods())
+                if (client.CanBuyGoods() && client.ShoppingCart.Goods.Count() > 0)
                 {
                     client.BuyGoods();
                 }
@@ -27,6 +29,7 @@ namespace Shooter.Model
                 else
                 {
                     _notEnoughMoneyView.Visualize(client.ShoppingCart.TotalPrice, client.Wallet.Money);
+                    await Task.Delay(TimeSpan.FromSeconds(1.35f));
                 }
             }
         }

@@ -6,6 +6,6 @@
         
         public void Add(InventorySlot<TItem> slot);
 
-        public void Drop(InventorySlot<TItem> slot);
+        public void Drop(TItem model);
     }
 }

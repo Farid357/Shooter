@@ -17,11 +17,8 @@ namespace Shooter.Model
             _button = button ?? throw new ArgumentNullException(nameof(button));
             _button.Enable();
 
-            if (_shoppingCart.Goods.Contains(good))
-            {
+            if (_shoppingCart.Goods.Any(g => g.Data.Name == good.Data.Name))
                 _button.Disable();
-                UnityEngine.Debug.Log("disable");
-            }
         }
 
         public void OnClick()

@@ -3,6 +3,7 @@ using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.Tools;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Shooter.Root
@@ -13,9 +14,7 @@ namespace Shooter.Root
         [SerializeField] private IView<float> _waveTimerSecondsView;
         [SerializeField] private IView<int> _diedEnemiesView;
         [SerializeField] private IView<int> _aliveEnemiesView;
-
-        [SerializeField] private StandartEnemyFactory _enemyFactory;
-
+        
         [Title("Character")] 
         [SerializeField] private ICharacterMovement _characterMovement;
         [SerializeField] private IHealthTransformView _characterHealthTransformView;
@@ -51,7 +50,7 @@ namespace Shooter.Root
                 }
             );
 
-            _enemyFactory.Init(_systemUpdate, rewardFactory, _scoreRoot.Score(), new DiedHealthsCounter(_diedEnemiesView));
+            FindObjectsOfType<StandartEnemyFactory>().ForEach(factory => factory.Init(_systemUpdate, rewardFactory, _scoreRoot.Score(), new DiedHealthsCounter(_diedEnemiesView)));
             var simulation = new EnemySimulation(_navMeshBaker, _aliveEnemiesView);
             var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
             _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));

@@ -6,8 +6,10 @@ namespace Shooter.Root
 {
     public interface IPlayerRoot
     {
-        public void Compose(IWeaponInput weaponInput, IShootingWeapon weapon);
+        void Compose(IWeaponInput weaponInput, IShootingWeapon weapon);
 
-        public void Compose(IPotionInput potionInput, IPotion potion);
+        void Compose(IPotionInput potionInput, IPotion potion);
+
+        void Compose(IWeaponInput weaponInput, IGrenade grenade);
     }
 }

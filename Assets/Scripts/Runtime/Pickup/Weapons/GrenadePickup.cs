@@ -1,4 +1,5 @@
 using System;
+using Shooter.Model;
 using Shooter.Model.Inventory;
 using Shooter.Tools;
 using UnityEngine;

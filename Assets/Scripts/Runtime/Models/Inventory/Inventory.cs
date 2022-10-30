@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shooter.Tools;
+using System.Linq;
 
 namespace Shooter.Model.Inventory
 {
@@ -29,13 +30,14 @@ namespace Shooter.Model.Inventory
             _slots.Add(slot);
         }
 
-        public void Drop(InventorySlot<TItem> slot)
+        public void Drop(TItem model)
         {
+            var slot = _slots.Find(s => s.Item.Model.Equals(model));
+            var slotIndex = _slots.IndexOf(slot);
+            
             if (_slots.Contains(slot) == false)
                 throw new InvalidOperationException("Inventory doesn't contain this slot!");
-
-            var slotIndex = _slots.IndexOf(slot);
-
+            
             if (slot.CanDropOneItem())
             {
                 _slots[slotIndex].DropOneItem();

@@ -1,12 +1,11 @@
 ﻿using Shooter.Model;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class ExplosiveBarrelExplosionView : MonoBehaviour, IHealthView
+    public sealed class ExplosiveBarrelExplosionView : SerializedMonoBehaviour, IHealthView
     {
-        [SerializeField] private ParticleSystem _particlePrefab;
-        [SerializeField] private AudioSource _sound;
         [SerializeField] private Explosion _explosion;
         [SerializeField, Range(1, 100)] private int _damage = 2;
         
@@ -14,10 +13,8 @@ namespace Shooter.GameLogic
         {
             if (health == 0)
             {
-                gameObject.SetActive(false);
-                Instantiate(_particlePrefab, transform.position, Quaternion.identity).Play();
-                _sound.PlayOneShot(_sound.clip);
                 _explosion.Thunder(_damage);
+                gameObject.SetActive(false);
             }
         }
     }

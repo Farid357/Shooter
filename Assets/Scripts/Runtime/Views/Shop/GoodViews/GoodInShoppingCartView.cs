@@ -10,7 +10,7 @@ namespace Shooter.Shop
         [SerializeField] private TMP_Text _nameText;
 
         [field: SerializeField] public RemovingGoodButton RemovingButton { get; private set; }
-
+        
         protected override void VisualizeFeedback(IGoodData goodData)
         {
             _priceText.text = goodData.Price.ToString();

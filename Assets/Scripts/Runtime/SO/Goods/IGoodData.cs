@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Shooter.Model;
+using UnityEngine;
 
 namespace Shooter.Shop
 {
@@ -9,5 +10,7 @@ namespace Shooter.Shop
         Sprite Sprite { get; }
         
         int Price { get; }
+        
+        WalletType WalletForPay { get; }
     }
 }

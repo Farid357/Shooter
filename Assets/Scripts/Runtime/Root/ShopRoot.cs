@@ -20,7 +20,10 @@ namespace Shooter.Root
         [Title("Views")]
         [SerializeField] private INotEnoughMoneyView _notEnoughMoneyView;
         [SerializeField] private ShoppingCartView _shoppingCartView;
+        [SerializeField] private ShoppingCartView _diamondsShoppingCartView;
         [SerializeField] private GoodSwitchingView _goodSwitchingView;
+        [SerializeField] private Transform _shoppingCartContent;
+        [SerializeField] private GoodInShoppingCartView _prefab;
 
         [Title("Buttons")] 
         [SerializeField] private BuyGoodsButton _buyGoodsButton;
@@ -31,7 +34,7 @@ namespace Shooter.Root
         public override void Compose()
         {
             IShoppingCart shoppingCart = new ShoppingCart(_shoppingCartView);
-            IShoppingCart diamondsShoppingCart = new ShoppingCart(_shoppingCartView);
+            IShoppingCart diamondsShoppingCart = new ShoppingCart(_diamondsShoppingCartView);
             _goodSwitchingView.Init(new Dictionary<WalletType, IShoppingCart>
                 {
                     { WalletType.WithCoins, shoppingCart },
@@ -39,7 +42,8 @@ namespace Shooter.Root
                 }
             );
             
-            _shoppingCartView.Init(new RemovingGoodButtonActionFactory(shoppingCart));
+            _diamondsShoppingCartView.Init(new GoodInShoppingCartViewFactory(_prefab, _shoppingCartContent, diamondsShoppingCart));
+            _shoppingCartView.Init(new GoodInShoppingCartViewFactory(_prefab, _shoppingCartContent, shoppingCart));
             IClient client = new Client(_walletRoot.CoinsWallet(), shoppingCart);
             IClient clientWithDiamondsWallet = new Client(_walletRoot.DiamondsWallet(), diamondsShoppingCart);
             _buyGoodsButton.Subscribe(new BuyGoodsButtonAction(new[] { client, clientWithDiamondsWallet }, _notEnoughMoneyView));
@@ -52,28 +56,27 @@ namespace Shooter.Root
             switchingGoodAction.SwitchLeft();
         }
 
-        private IEnumerable<(IGood, WalletType)> CreateGoods()
+        private IEnumerable<IGood> CreateGoods()
         {
             foreach (var weaponGoodData in _weaponGoodData)
             {
-                yield return (new WeaponGood(new Good(_goodSwitchingView.GoodView, weaponGoodData), weaponGoodData.Type,
-                        new CollectionStorage<WeaponType>(new BinaryStorage())), weaponGoodData.WalletForPay);
+                yield return new WeaponGood(new Good(_goodSwitchingView.GoodView, weaponGoodData), weaponGoodData.Type,
+                    new CollectionStorage<WeaponType>(new BinaryStorage()));
             }
 
             foreach (var goodData in _characterSpeedBoostAbilityGoodData)
             {
-                yield return (CreateGoodAbility<CharacterSpeedBoostAbility>(goodData), goodData.WalletForPay);
+                yield return CreateGoodAbility<CharacterSpeedBoostAbility>(goodData);
             }
 
             foreach (var goodData in _increaseBulletsAbilityGoodData)
             {
-                yield return (CreateGoodAbility<CharacterIncreaseBulletsReward>(goodData), goodData.WalletForPay);
+                yield return CreateGoodAbility<CharacterIncreaseBulletsReward>(goodData);
             }
 
             foreach (var goodData in _armorGoodData)
             {
-                yield return (new SaveGood<CharacterHealthView, int>(new Good(_goodSwitchingView.GoodView, goodData),
-                        goodData.Protection, new BinaryStorage()), goodData.WalletForPay);
+                yield return new SaveGood<CharacterHealthView, int>(new Good(_goodSwitchingView.GoodView, goodData), goodData.Protection, new BinaryStorage());
             }
         }
 

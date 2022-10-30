@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Shooter.GameLogic.Inventory;
+using Shooter.Model;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,17 +14,14 @@ namespace Shooter.GameLogic
         [SerializeField] private Vector3 _throwDirection;
         [SerializeField, MinValue(0.4f)] private float _explosionSeconds = 1.2f;
         [SerializeField, ProgressBar(1, 100, G = 0, R = 1, B = 0)] private int _damage = 10;
-        [SerializeField] private Explosion _explosionPrefab;
-        [SerializeField] private ParticleSystem _explosionParticlePrefab;
+        [SerializeField] private StandartExplosion _explosionPrefab;
         [SerializeField] private ItemGameObjectView _itemView;
         private Rigidbody _rigidbody;
-        
+
         public IInventoryItemGameObjectView ItemView => _itemView;
-        
-        public void TranslateTo(Vector3 position) => transform.position = position;
 
         public bool CanShoot => gameObject.activeInHierarchy;
-        
+
         public bool HasDropped { get; private set; }
 
         private void OnEnable()
@@ -32,23 +30,16 @@ namespace Shooter.GameLogic
             _rigidbody.isKinematic = true;
         }
 
-        public void Shoot()
+        public async void Shoot()
         {
             transform.parent = null;
             _rigidbody.isKinematic = false;
             _rigidbody.AddForce(_throwDirection * _force);
             HasDropped = true;
-
-            UniTask.Create(async () =>
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(Time.deltaTime));
-                await UniTask.Delay(TimeSpan.FromSeconds(_explosionSeconds));
-                var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-                Instantiate(_explosionParticlePrefab, transform.position, Quaternion.identity).Play();
-                explosion.Thunder(_damage);
-                gameObject.SetActive(false);
-            });
+            await UniTask.Delay(TimeSpan.FromSeconds(_explosionSeconds));
+            var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            explosion.Thunder(_damage);
+            gameObject.SetActive(false);
         }
-
     }
 }

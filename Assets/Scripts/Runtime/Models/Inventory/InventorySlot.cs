@@ -26,6 +26,6 @@ namespace Shooter.Model.Inventory
             ItemsCount--;
         }
 
-        public bool CanDropOneItem() => ItemsCount - 1 > 0;
+        public bool CanDropOneItem() => ItemsCount - 1 >= 0;
     }
 }

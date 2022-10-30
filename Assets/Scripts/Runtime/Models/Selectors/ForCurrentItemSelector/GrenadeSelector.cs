@@ -22,15 +22,17 @@ namespace Shooter.Model.Inventory
             if (_lastGrenade is not null && _lastGrenade.HasDropped)
             {
                 var newGrenade  = _grenadesFactory.Create();
-                _playerRoot.Compose(new StandartWeaponInput(), newGrenade);
+                _playerRoot.Compose(new BurstWeaponInput(), newGrenade);
                 _lastGrenade = newGrenade;
             }
             
             else
             {
                 _lastGrenade = grenade;
-                _playerRoot.Compose(new StandartWeaponInput(), grenade);
+                _playerRoot.Compose(new BurstWeaponInput(), grenade);
             }
+
+            _lastGrenade?.ItemView.Show();
         }
 
         public void Unselect()

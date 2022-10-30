@@ -73,9 +73,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -83,23 +81,14 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.02319
+        value: 0.29545453
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.84972394
-        value: 0.75000274
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -151,8 +140,6 @@ GameObject:
   - component: {fileID: 4114948217439995033}
   - component: {fileID: 1059718168838949692}
   - component: {fileID: 2976904946290311158}
-  - component: {fileID: -3065171368452248745}
-  - component: {fileID: 5216364007565696850}
   - component: {fileID: 7660851401281590485}
   m_Layer: 6
   m_Name: Laser Bullet
@@ -227,36 +214,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &-3065171368452248745
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625656319527296547}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
---- !u!136 &5216364007565696850
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625656319527296547}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.00036558468
-  m_Height: 0.0036522194
-  m_Direction: 2
-  m_Center: {x: -0.00002293812, y: -0.000038450624, z: -0.0015091911}
 --- !u!114 &7660851401281590485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,5 +236,5 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _line: {fileID: 5659342023612127984}
-  _maxDistance: 50
+  _maxDistance: 200
   _damage: 25

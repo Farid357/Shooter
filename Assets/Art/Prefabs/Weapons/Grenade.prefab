@@ -825,7 +825,6 @@ MonoBehaviour:
   _explosionSeconds: 3
   _damage: 40
   _explosionPrefab: {fileID: 3558312835779736951, guid: 6b218d14c43805046a8ef735d3d862c8, type: 3}
-  _explosionParticlePrefab: {fileID: 8976503813493468718, guid: 854e31ca019074f45b3789984b498305, type: 3}
   _itemView: {fileID: -7652198109404347037}
 --- !u!114 &-7652198109404347037
 MonoBehaviour:
@@ -849,10 +848,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.6054128
+  m_Radius: 0.33140472
+  m_Height: 0.85418487
   m_Direction: 1
-  m_Center: {x: 0.020000005, y: 0.29178077, z: 0.07999998}
+  m_Center: {x: 0.020000005, y: 0.25901222, z: 0.14115375}
 --- !u!1 &8772010853927263244
 GameObject:
   m_ObjectHideFlags: 0

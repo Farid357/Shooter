@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6244249522400097004}
   - component: {fileID: 3558312835779736951}
+  - component: {fileID: 3918167102794952259}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -44,5 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace9e4a4c61e49639ce675a6050effbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 40
-  _radius: 9.6
+  _rayCastInSphereObjectsFinder: {fileID: 3918167102794952259}
+  _explosionParticlePrefab: {fileID: 8976503813493468718, guid: 98e0235cc32aed646a9ff49bcd8d08bd, type: 3}
+  _explosionAudio: {fileID: 2611589349079565606, guid: bc302ca00b1a4c944a23c758424dfabd, type: 3}
+  _mixerGroup: {fileID: 24300002, guid: ed2935d2e2b9ffa48a53c3ff59e50a63, type: 2}
+--- !u!114 &3918167102794952259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981099088651048068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7c9e222849411daeff8c429c598469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 279
+  <Radius>k__BackingField: 5

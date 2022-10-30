@@ -1,7 +1,6 @@
 ﻿using Shooter.GameLogic.Inventory;
-using Shooter.Model;
 
-namespace Shooter.GameLogic
+namespace Shooter.Model
 {
     public interface IGrenade : IDroppingWeapon
     {

@@ -16,9 +16,12 @@ namespace Shooter.Model
 
         public async void CreateNext(EnemyWaveData wave)
         {
+            var random = new Random();
+            
             for (var i = 0; i < wave.EnemiesCount; i++)
             {
-                var enemy = wave.EnemyFactory.Create();
+                var randomIndex = random.Next(0, wave.EnemyFactories.Length);
+                var enemy = wave.EnemyFactories[randomIndex].Create();
                 _simulation.Add(enemy);
                 await Task.Delay(TimeSpan.FromSeconds(wave.CreateDelaySeconds));
             }

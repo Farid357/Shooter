@@ -4,6 +4,6 @@ namespace Shooter.Model
 {
     public interface IGoodSwitchingView
     {
-        void Switch(IGood good, WalletType forPayment);
+        void Switch(IGood good);
     }
 }

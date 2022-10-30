@@ -8,7 +8,7 @@ namespace Shooter.Model
     [Serializable]
     public sealed class EnemyWaveData
     {
-        [SerializeField] private StandartEnemyFactory _factory;
+        [SerializeField] private StandartEnemyFactory[] _factories;
         
         [field: SerializeField, Range(1, 1000)] public int EnemiesCount { get; private set; }
         
@@ -16,11 +16,11 @@ namespace Shooter.Model
 
         [field: SerializeField, Min(0.1f)] public float SecondsAfterEnd { get; private set; }
         
-        public IEnemyFactory EnemyFactory => _factory;
+        public IEnemyFactory[] EnemyFactories => _factories;
         
-        public EnemyWaveData(int enemiesCount, StandartEnemyFactory enemyFactory, float createDelaySeconds, float secondsAfterEnd)
+        public EnemyWaveData(int enemiesCount, StandartEnemyFactory[] enemyFactory, float createDelaySeconds, float secondsAfterEnd)
         {
-            _factory = enemyFactory ?? throw new ArgumentNullException(nameof(enemyFactory));
+            _factories = enemyFactory ?? throw new ArgumentNullException(nameof(enemyFactory));
             EnemiesCount = enemiesCount.TryThrowLessThanOrEqualsToZeroException();
             CreateDelaySeconds = createDelaySeconds.TryThrowLessThanOrEqualsToZeroException();
             SecondsAfterEnd = secondsAfterEnd.TryThrowLessThanOrEqualsToZeroException();
@@ -28,7 +28,7 @@ namespace Shooter.Model
         
         public EnemyWaveData CreateNext()
         {
-            return new EnemyWaveData(EnemiesCount + 1, _factory, CreateDelaySeconds, SecondsAfterEnd);
+            return new EnemyWaveData(EnemiesCount + 1, _factories, CreateDelaySeconds, SecondsAfterEnd);
         }
     }
 }

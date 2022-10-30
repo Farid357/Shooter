@@ -1,4 +1,5 @@
-﻿using Shooter.Shop;
+﻿using Shooter.Model;
+using Shooter.Shop;
 using UnityEngine;
 
 namespace Shooter.Test
@@ -10,5 +11,7 @@ namespace Shooter.Test
         public Sprite Sprite { get; }
 
         public int Price => 500;
+        
+        public WalletType WalletForPay => WalletType.WithCoins;
     }
 }

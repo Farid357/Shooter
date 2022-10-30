@@ -14,7 +14,6 @@ namespace Shooter.Model
             Bullets = bullets.TryThrowLessThanOrEqualsToZeroException();
             _bulletsView = bulletsView ?? throw new ArgumentNullException(nameof(bulletsView));
             StartBullets = Bullets;
-            _bulletsView.Visualize(Bullets);
         }
         
         public int Bullets { get; private set; }

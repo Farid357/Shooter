@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shooter.Model;
-using Shooter.Tools;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
@@ -10,36 +8,32 @@ namespace Shooter.Shop
 {
     public sealed class ShoppingCartView : MonoBehaviour, IShoppingCartView
     {
-        [SerializeField] private Transform _content;
-        [SerializeField] private GoodInShoppingCartView _prefab;
         [SerializeField] private TMP_Text _totalPrice;
         
-        private readonly Dictionary<IGoodData, GoodView> _goodViews = new();
-        private IRemovingGoodButtonOnClickActionFactory _removingButtonActionFactory;
+        private readonly Dictionary<IGoodData, IGoodView> _goodViews = new();
+        private IGoodInShoppingCartViewFactory _goodViewFactory;
 
-        public void Init(IRemovingGoodButtonOnClickActionFactory removingButtonActionFactory)
+        public void Init(IGoodInShoppingCartViewFactory goodViewFactory)
         {
-            _removingButtonActionFactory = removingButtonActionFactory ?? throw new ArgumentNullException(nameof(removingButtonActionFactory));
+            _goodViewFactory = goodViewFactory ?? throw new ArgumentNullException(nameof(goodViewFactory));
         }
         
         public void Visualize(IGood good)
         {
-            var goodView = Instantiate(_prefab, _content);
+            var goodView = _goodViewFactory.Create(good);
             goodView.Visualize(good.Data);
-            goodView.RemovingButton.Subscribe(new EnableGoodSelectingButtonAction(new SelectingButtonFromDataFinder(), good.Data,
-                _removingButtonActionFactory.Create(good)));
             _goodViews.Add(good.Data, goodView);
         }
 
         public void Remove(IGood good)
         {
-            Destroy(_goodViews[good.Data].gameObject);
+            _goodViews[good.Data].Destroy();
             _goodViews.Remove(good.Data);
         }
 
         public void Clear()
         {
-            _goodViews.ForEach(good => Destroy(good.Value.gameObject));
+            _goodViews.ForEach(good => good.Value.Destroy());
             _goodViews.Clear();
         }
 

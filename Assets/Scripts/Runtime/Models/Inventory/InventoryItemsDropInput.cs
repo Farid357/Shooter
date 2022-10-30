@@ -46,8 +46,8 @@ namespace Shooter.Model.Inventory
 
                 if (containsItem)
                 {
-                    var slot = _inventory.Slots.ElementAt(_keypadNumbers[keydown]);
-                    _inventory.Drop(slot);
+                    var model = _inventory.Slots.ElementAt(_keypadNumbers[keydown]).Item.Model;
+                    _inventory.Drop(model);
                     await System.Threading.Tasks.Task.Yield();
                 }
             }

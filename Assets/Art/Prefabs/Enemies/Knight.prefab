@@ -1715,7 +1715,6 @@ GameObject:
   - component: {fileID: 6500019009003649193}
   - component: {fileID: -3487531795680843037}
   - component: {fileID: 7959488039114093564}
-  - component: {fileID: 4756501893366018169}
   - component: {fileID: 4090216670378948980}
   - component: {fileID: 1887448828550689855}
   m_Layer: 0
@@ -1858,8 +1857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
-  _name: KnightAttack
+  _playSeconds: 0.7
+  _name: Knight Attack
 --- !u!195 &3110800727256099063
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1878,8 +1877,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
+  m_Height: 2.6
+  m_BaseOffset: 0.13
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &8935593083389849282
@@ -1898,23 +1897,19 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 2600266487463633084}
-    - {fileID: 4756501893366018169}
+    - {fileID: 6500019009003649193}
     - {fileID: 828202209477806023}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _attack
-      Entry: 10
-      Data: 0
     - Name: _enemyHealthView
       Entry: 10
-      Data: 1
+      Data: 0
     - Name: <Movement>k__BackingField
       Entry: 10
-      Data: 2
+      Data: 1
   _healthCount: 25
   _health: {fileID: 4090216670378948980}
   _chaser: {fileID: 1887448828550689855}
@@ -1933,7 +1928,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3384f998ee04766891b20f191f9412c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathView: {fileID: -3487531795680843037}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: -3487531795680843037}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _deathView
+      Entry: 10
+      Data: 0
 --- !u!114 &-3487531795680843037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,21 +1965,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.56, y: 2.34, z: 1}
-  m_Center: {x: 0, y: 1.08, z: 0}
---- !u!114 &4756501893366018169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7337382032467732511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3384f998ee04766891b20f191f9412c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _deathView: {fileID: -3487531795680843037}
+  m_Size: {x: 1.56, y: 2.34, z: 1.7323928}
+  m_Center: {x: 0, y: 1.0799999, z: 0.24040079}
 --- !u!114 &4090216670378948980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,8 +1991,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3642d6a39bef4e26809cdd6cb9f00fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 6.5
+  _radius: 10.03
   _center: {fileID: 7835867451206628565}
+  _showGizmas: 0
 --- !u!1 &7357643161733517285
 GameObject:
   m_ObjectHideFlags: 0

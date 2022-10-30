@@ -8,6 +8,7 @@
         Ak74,
         PistolWithFireBullets,
         Sword,
-        LaserGun
+        LaserGun,
+        HealRpg
     }
 }

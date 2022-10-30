@@ -13,7 +13,7 @@ namespace Shooter.GameLogic
         private bool _canIncreaseDamage;
 
         public override bool CanIncreaseDamage => _canIncreaseDamage;
-        
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.TryGetComponent(out IHealthTransformView healthTransformView))
@@ -25,18 +25,15 @@ namespace Shooter.GameLogic
                 gameObject.SetActive(false);
         }
 
-        public override void IncreaseDamageForSeconds(int damage, float seconds)
+        public override async void IncreaseDamageForSeconds(int damage, float seconds)
         {
-            UniTask.Create(async () =>
-            {
-                if (Damage >= damage || CanIncreaseDamage == false)
-                    throw new InvalidOperationException(nameof(IncreaseDamageForSeconds));
+            if (Damage >= damage || CanIncreaseDamage == false)
+                throw new InvalidOperationException(nameof(IncreaseDamageForSeconds));
 
-                var startDamage = Damage;
-                SetDamage(damage, false);
-                await UniTask.Delay(TimeSpan.FromSeconds(seconds));
-                SetDamage(startDamage, true);
-            });
+            var startDamage = Damage;
+            SetDamage(damage, false);
+            await UniTask.Delay(TimeSpan.FromSeconds(seconds));
+            SetDamage(startDamage, true);
         }
 
         private void Attack(IHealth health)
@@ -48,7 +45,7 @@ namespace Shooter.GameLogic
         private void SetDamage(int damage, bool canIncreaseDamage)
         {
             Damage = damage.TryThrowLessThanOrEqualsToZeroException();
-            _canIncreaseDamage = canIncreaseDamage == CanIncreaseDamage ? throw new InvalidOperationException(nameof(SetDamage)) : canIncreaseDamage;
+            _canIncreaseDamage = canIncreaseDamage;
         }
     }
 }
