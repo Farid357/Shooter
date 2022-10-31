@@ -2,13 +2,13 @@
 {
     public interface IWeapon : IShootingWeapon
     {
-        public int Bullets { get; }
+        int Bullets { get; }
         
-        public int StartBullets { get; }
+        int StartBullets { get; }
         
-        public void VisualizeBullets();
+        void VisualizeBullets();
         
-        public void AddBullets(int bullets);
+        void AddBullets(int bullets);
         
 
     }

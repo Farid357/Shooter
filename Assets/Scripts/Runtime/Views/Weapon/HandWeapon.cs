@@ -9,22 +9,19 @@ namespace Shooter.GameLogic
     {
         [SerializeField, Min(0.01f)] private float _attackDistance = 1.5f;
         [SerializeField, Min(0.01f)] private float _attackCooldown = 1.5f;
-
-        [SerializeField, ProgressBar(0, 100, 1, 0, 0)]
-        private int _damage = 50;
+        [SerializeField, ProgressBar(0, 100, 1, 0, 0)] private int _damage = 50;
         
         private float _time;
-        
+        private AudioSource _sliceAudio;
+
         public bool CanShoot => _time == 0;
         
         private void Awake() => _time = _attackCooldown;
 
-        private void Update()
-        {
-            _time = Mathf.Max(0, _time - Time.deltaTime);
-            Debug.DrawRay(transform.position,transform.forward, Color.red);
-        }
+        private void Update() => _time = Mathf.Max(0, _time - Time.deltaTime);
 
+        public void Init(AudioSource sliceAudio) => _sliceAudio = sliceAudio ?? throw new ArgumentNullException(nameof(sliceAudio));
+        
         public void Shoot()
         {
             if (CanShoot == false)
@@ -32,6 +29,8 @@ namespace Shooter.GameLogic
 
             _time = _attackCooldown;
             var ray = new Ray(transform.position, -transform.forward);
+            _sliceAudio.PlayOneShot(_sliceAudio.clip);
+            
             if (Physics.Raycast(ray, out var hit, _attackDistance))
             {
                 if (hit.collider != null && hit.collider.TryGetComponent(out IHealthTransformView healthTransformView))
@@ -40,6 +39,12 @@ namespace Shooter.GameLogic
                         healthTransformView.Health.TakeDamage(_damage);
                 }
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawRay(transform.position,transform.forward);
         }
     }
 }

@@ -23,15 +23,12 @@ namespace Shooter.Root
         [SerializeField] private IFactory<IInventoryItemGameObjectView> _grenadeGameObjectViewFactory;
         [SerializeField] private IFactory<IGrenade> _grenadeFactory;
         [SerializeField] private PotionRoot _potionRoot;
+        [SerializeField] private IBulletsView _secondWeaponBulletsView;
+        [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
         
-        [VerticalGroup("Start Weapon")] [SerializeField]
-        private ItemData _weaponItemData;
-
-        [VerticalGroup("Start Weapon")] [SerializeField]
-        private WeaponData _startWeaponData;
-
-        [VerticalGroup("Start Weapon")] [SerializeField]
-        private ItemGameObjectView _weaponView;
+        [VerticalGroup("Start Weapon")] [SerializeField] private ItemData _weaponItemData;
+        [VerticalGroup("Start Weapon")] [SerializeField] private WeaponData _startWeaponData;
+        [VerticalGroup("Start Weapon")] [SerializeField] private ItemGameObjectView _weaponView;
 
         private readonly SystemUpdate _systemUpdate = new();
 
@@ -40,13 +37,13 @@ namespace Shooter.Root
             IWeaponFactory factory = new WeaponFactoryWithShootWaiting(_shotgunBulletsFactory, _startWeaponData);
             var weapon = factory.Create();
             var weaponsInventory = new Inventory<(IWeapon, IWeaponInput)>(_inventoryView);
-            var weaponSelector = new WeaponSelector(_playerRoot);
+            var weaponSelector = new WeaponSelector(_playerRoot, _secondWeaponBulletsView);
             var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, new BurstWeaponInput()), _weaponView);
             var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item, 1);
             var grenadesInventory = new Inventory<IGrenade>(_grenadesInventoryView, 3);
             var grenade = _grenadeFactory.Create();
             var grenadeItem = new Item<IGrenade>(_grenadeItem, grenade, grenade.ItemView);
-            var grenadeSlot = new InventorySlot<IGrenade>(new GrenadeSelector(_playerRoot, _grenadeFactory), grenadeItem, 2);
+            var grenadeSlot = new InventorySlot<IGrenade>(_grenadeSelectorRoot.Compose(), grenadeItem, 2);
             grenadesInventory.Add(grenadeSlot);
             weaponsInventory.Add(slot);
             var weaponInventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(weaponsInventory);

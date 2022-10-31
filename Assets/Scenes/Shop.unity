@@ -3802,6 +3802,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4b6548a3a38c1b04086fd453b14a6353, type: 2}
   - {fileID: 11400000, guid: b7a3180e776a05f438a7b56a15b08985, type: 2}
   - {fileID: 11400000, guid: a2830a82096e2d5418c92820336c6408, type: 2}
+  - {fileID: 11400000, guid: a2e4aaa7bda26d349b9b7dd039225986, type: 2}
   _characterSpeedBoostAbilityGoodData:
   - {fileID: 11400000, guid: da5e82e8ed5c79e47a7ea10658398634, type: 2}
   - {fileID: 11400000, guid: bc98a91e42473f8448fe1ef3d85eb168, type: 2}

@@ -19,7 +19,9 @@ namespace Shooter.GameLogic
         [SerializeField, Min(0.1f)] private float _minDelay = 1.2f;
         [SerializeField, Min(0.1f)] private float _maxDelay = 1.5f;
         [SerializeField] private Transform[] _spawnPoints;
+        [SerializeField] private IBulletsView _secondWeaponBulletsView;
         [SerializeField] private IPlayerRoot _playerRoot;
+        
         private List<WeaponType> _weaponSpawnTypes;
         private IInventory<(IWeapon, IWeaponInput)> _inventory;
         private IReadOnlyDictionary<WeaponType,IFactory<IWeapon>> _factoriesContainer;
@@ -46,7 +48,7 @@ namespace Shooter.GameLogic
                 var pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
                 var weapon = _factoriesContainer[weaponSpawnType].Create();
                 var item = new Item<(IWeapon, IWeaponInput)>(pickup.ItemData, (weapon, _weaponInputs[weaponSpawnType]), _weaponPickups[weaponSpawnType].GameObjectViewFactory.Create());
-                var slot = new InventorySlot<(IWeapon, IWeaponInput)>(new WeaponSelector(_playerRoot), item);
+                var slot = new InventorySlot<(IWeapon, IWeaponInput)>(new WeaponSelector(_playerRoot, _secondWeaponBulletsView), item);
                 pickup.Init(_inventory, slot);
                 _weaponSpawnTypes.Remove(weaponSpawnType);
             }

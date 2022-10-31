@@ -13,14 +13,6 @@ namespace Shooter.Root
 {
     public sealed class PickupsRoot : SerializedMonoBehaviour
     {
-        [Title("Bullets Factories")]
-        [SerializeField] private readonly IFactory<IBullet> _bulletsFactory;
-        [SerializeField] private readonly IFactory<IBullet> _shotgunBulletsFactory;
-        [SerializeField] private readonly IFactory<IBullet> _fireBulletsFactory;
-        [SerializeField] private readonly IFactory<IBullet> _explosiveBulletsFactory;
-        [SerializeField] private readonly IFactory<IBullet> _laserBulletsFactory;
-        [SerializeField] private IFactory<IBullet> _healBulletsFactory;
-        
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _rpgData;
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _pistolData;
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _shotgunData;
@@ -28,34 +20,37 @@ namespace Shooter.Root
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _laserData;
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _pistolWithFireBullets;
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _healRpgData;
-        
+        [SerializeField, VerticalGroup("Weapon Data")] private DualWeaponData _dualPistolsData;
+
         [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
         [SerializeField] private HandWeaponFactory _handWeaponFactory;
+        [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
 
         private readonly List<WeaponType> _defaultWeapons = new()
         {
             WeaponType.Shotgun
         };
-
+        
         public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
         {
-            _grenadePickupsFactory.Init(grenadesInventory);
+            _grenadePickupsFactory.Init(grenadesInventory, _grenadeSelectorRoot.Compose());
             _grenadePickupsFactory.SpawnLoop().Forget();
             var weaponTypesStorage = new CollectionStorage<WeaponType>(new BinaryStorage());
           //  var weaponSpawnTypes = weaponTypesStorage.Exists(WeaponsKey.Value)? CreateWeaponsList(weaponTypesStorage.Load(WeaponsKey.Value)): _defaultWeapons;
-          var weaponSpawnTypes = new List<WeaponType>() { WeaponType.HealRpg, WeaponType.LaserGun };
+          var weaponSpawnTypes = new List<WeaponType> { WeaponType.DualPistols, WeaponType.LaserGun };
           
             var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>
             {
-                { WeaponType.Ak74, new WeaponFactoryWithShootWaiting(_bulletsFactory, _ak74Data) },
-                { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_bulletsFactory, _pistolData) },
-                { WeaponType.Rpg, new WeaponFactoryWithShootWaiting(_explosiveBulletsFactory, _rpgData) }, 
-                { WeaponType.Shotgun, new WeaponFactoryWithShootWaiting(_shotgunBulletsFactory, _shotgunData)},
-                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaiting(_fireBulletsFactory, _pistolWithFireBullets)},
-                { WeaponType.LaserGun, new WeaponFactoryWithShootWaiting(_laserBulletsFactory, _laserData)},
+                { WeaponType.Ak74, new WeaponFactoryWithShootWaiting(_ak74Data.BulletsFactory, _ak74Data) },
+                { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_pistolData.BulletsFactory, _pistolData) },
+                { WeaponType.Rpg, new WeaponFactoryWithShootWaiting(_rpgData.BulletsFactory, _rpgData) }, 
+                { WeaponType.Shotgun, new WeaponFactoryWithShootWaiting(_shotgunData.BulletsFactory, _shotgunData)},
+                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaiting(_pistolWithFireBullets.BulletsFactory, _pistolWithFireBullets)},
+                { WeaponType.LaserGun, new WeaponFactoryWithShootWaiting(_laserData.BulletsFactory, _laserData)},
                 { WeaponType.Sword, new DummyFactoryFromShootingWeapon(_handWeaponFactory)},
-                { WeaponType.HealRpg, new WeaponFactoryWithShootWaiting(_healBulletsFactory, _healRpgData)}
+                { WeaponType.HealRpg, new WeaponFactoryWithShootWaiting(_healRpgData.BulletsFactory, _healRpgData)},
+                { WeaponType.DualPistols, new DualWeaponFactory(new WeaponFactoryWithShootWaiting(_dualPistolsData.FirstData.BulletsFactory, _dualPistolsData.FirstData), new WeaponFactoryWithShootWaiting(_dualPistolsData.SecondData.BulletsFactory, _dualPistolsData.SecondData))}
             };
 
             var inputs = new Dictionary<WeaponType, IWeaponInput>
@@ -67,7 +62,8 @@ namespace Shooter.Root
                 { WeaponType.PistolWithFireBullets, new BurstWeaponInput()},
                 { WeaponType.Sword, new StandartWeaponInput()},
                 { WeaponType.LaserGun, new StandartWeaponInput()},
-                { WeaponType.HealRpg, new BurstWeaponInput()}
+                { WeaponType.HealRpg, new BurstWeaponInput()},
+                { WeaponType.DualPistols, new BurstWeaponInput()}
             };
             
             _weaponPickupsFactory.Init(weaponSpawnTypes.ToList(), weaponsInventory, factoriesContainer, inputs);

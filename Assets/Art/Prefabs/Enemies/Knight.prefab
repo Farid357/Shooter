@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playSeconds: 0.7
+  _triggerSeconds: 0.7
   _name: Knight Attack
 --- !u!195 &3110800727256099063
 NavMeshAgent:
@@ -1965,8 +1965,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.56, y: 2.34, z: 1.7323928}
-  m_Center: {x: 0, y: 1.0799999, z: 0.24040079}
+  m_Size: {x: 1.56, y: 2.3905244, z: 1.732393}
+  m_Center: {x: 0, y: 1.0547377, z: 0.24040078}
 --- !u!114 &4090216670378948980
 MonoBehaviour:
   m_ObjectHideFlags: 0

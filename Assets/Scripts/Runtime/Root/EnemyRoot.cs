@@ -3,7 +3,6 @@ using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.Tools;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Shooter.Root

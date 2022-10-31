@@ -1,6 +1,7 @@
 ﻿using System;
 using Shooter.Model;
 using Shooter.Tools;
+using ArgumentNullException = System.ArgumentNullException;
 
 namespace Shooter.GameLogic
 {

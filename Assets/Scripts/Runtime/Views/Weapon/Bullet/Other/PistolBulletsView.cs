@@ -11,7 +11,12 @@ namespace Shooter.GameLogic
 
         [field: SerializeField] public IShotView ShotView { get; private set; }
 
-        public void Visualize(int bullets) => _text.text = "\u221E";
-        
+        public void Visualize(int bullets)
+        {
+            _text.gameObject.SetActive(true);
+            _text.text = "\u221E";
+        }
+
+        public void Disable() => _text.gameObject.SetActive(false);
     }
 }

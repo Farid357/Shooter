@@ -17,16 +17,17 @@ namespace Shooter.GameLogic
         [SerializeField] private GrenadePickup _grenade;
         [SerializeField] private ICharacterTransform _character;
         [SerializeField] private IFactory<IGrenade> _grenadesFactory;
-        [SerializeField] private IPlayerRoot _playerRoot;
-        
-        private IInventory<IGrenade> _inventory;
 
-        public void Init(IInventory<IGrenade> inventory)
+        private IInventory<IGrenade> _inventory;
+        private IInventoryItemSelector<IGrenade> _grenadeSelector;
+
+        public void Init(IInventory<IGrenade> inventory, IInventoryItemSelector<IGrenade> grenadeSelector)
         {
             if (_inventory is not null)
                 throw new InvalidOperationException($"{nameof(GrenadePickupsFactory)} already inited");
             
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
+            _grenadeSelector = grenadeSelector ?? throw new ArgumentNullException(nameof(grenadeSelector));
         }
         
         public async UniTaskVoid SpawnLoop()
@@ -35,7 +36,7 @@ namespace Shooter.GameLogic
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_spawnDelay));
                 var position = new Vector3(_character.Position.x, _character.Position.y * _yOffset, _character.Position.z);
-                Instantiate(_grenade, position, Quaternion.identity).Init(_inventory, new GrenadeSelector(_playerRoot, _grenadesFactory), _grenadesFactory);
+                Instantiate(_grenade, position, Quaternion.identity).Init(_inventory, _grenadeSelector, _grenadesFactory);
             }
         }
     }

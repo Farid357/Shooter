@@ -5,5 +5,7 @@
         IShotView ShotView { get; }
         
         void Visualize(int bullets);
+        
+        void Disable();
     }
 }

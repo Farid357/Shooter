@@ -12,5 +12,10 @@ namespace Shooter.Test
         {
             Bullets = bullets;
         }
+
+        public void Disable()
+        {
+            
+        }
     }
 }

@@ -19,9 +19,12 @@ namespace Shooter.GameLogic
 
         public void Visualize(int bullets)
         {
+            _text.gameObject.SetActive(true);
             _text.color = bullets == 0 ? _zeroBullets : _startColor;
             _view.Visualize(bullets);
             _bulletsEnded.gameObject.SetActive(bullets == 0);
         }
+
+        public void Disable() => _text.gameObject.SetActive(false);
     }
 }

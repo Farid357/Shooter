@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Shooter.GameLogic;
 using Shooter.Tools;
-using Sirenix.Utilities;
 
 namespace Shooter.Model
 {

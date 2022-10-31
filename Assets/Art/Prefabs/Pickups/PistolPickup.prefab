@@ -136,6 +136,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6894234568067217854}
     m_Modifications:
+    - target: {fileID: 8008785808388175707, guid: 980c051cad5404f40867ea9643db53be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d11b32b6382b5c429bf9844e4257209, type: 2}
     - target: {fileID: 8368831816937051790, guid: 980c051cad5404f40867ea9643db53be, type: 3}
       propertyPath: m_Name
       value: Pistol 1

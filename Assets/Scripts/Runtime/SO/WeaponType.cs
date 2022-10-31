@@ -9,6 +9,7 @@
         PistolWithFireBullets,
         Sword,
         LaserGun,
-        HealRpg
+        HealRpg,
+        DualPistols
     }
 }
