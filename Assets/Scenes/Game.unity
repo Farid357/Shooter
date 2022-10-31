@@ -7860,6 +7860,7 @@ Transform:
   - {fileID: 1298473877}
   - {fileID: 1362595607}
   - {fileID: 1282067434}
+  - {fileID: 1641612917}
   m_Father: {fileID: 2136499326}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9498,8 +9499,10 @@ MonoBehaviour:
   - _factoriesData:
     - <Factory>k__BackingField: {fileID: 1298473878}
       <EnemiesCount>k__BackingField: 2
+    - <Factory>k__BackingField: {fileID: 1641612918}
+      <EnemiesCount>k__BackingField: 2
     <CreateDelaySeconds>k__BackingField: 0.3
-    <SecondsAfterEnd>k__BackingField: 0.1
+    <SecondsAfterEnd>k__BackingField: 6
   - _factoriesData:
     - <Factory>k__BackingField: {fileID: 1362595609}
       <EnemiesCount>k__BackingField: 3
@@ -9516,6 +9519,17 @@ MonoBehaviour:
       <EnemiesCount>k__BackingField: 3
     - <Factory>k__BackingField: {fileID: 1298473878}
       <EnemiesCount>k__BackingField: 5
+    <CreateDelaySeconds>k__BackingField: 0.75
+    <SecondsAfterEnd>k__BackingField: 7
+  - _factoriesData:
+    - <Factory>k__BackingField: {fileID: 1362595609}
+      <EnemiesCount>k__BackingField: 7
+    - <Factory>k__BackingField: {fileID: 1282067436}
+      <EnemiesCount>k__BackingField: 3
+    - <Factory>k__BackingField: {fileID: 1298473878}
+      <EnemiesCount>k__BackingField: 5
+    - <Factory>k__BackingField: {fileID: 1641612918}
+      <EnemiesCount>k__BackingField: 2
     <CreateDelaySeconds>k__BackingField: 0.75
     <SecondsAfterEnd>k__BackingField: 7
 --- !u!4 &1389440168
@@ -11456,6 +11470,70 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1641612916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1641612917}
+  - component: {fileID: 1641612918}
+  m_Layer: 0
+  m_Name: SkeletonFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1641612917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641612916}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.7, y: 2.1, z: -13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1193737808}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1641612918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641612916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ca2dc63e5e45b491db5273b5ee5a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1957502692}
+    - {fileID: 1957502694}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _character
+      Entry: 10
+      Data: 0
+    - Name: _characterHealthTransformView
+      Entry: 10
+      Data: 1
+  _spawnPoints:
+  - {fileID: 1641612917}
+  _prefab: {fileID: 3503444301925772418, guid: 151454d8d2746b148a1a3a4e9878bff2, type: 3}
 --- !u!1 &1648017569
 GameObject:
   m_ObjectHideFlags: 0
