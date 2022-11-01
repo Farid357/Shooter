@@ -16,10 +16,10 @@ namespace Shooter.Test
             var weapon = new DummyWeapon();
             var slot = new InventorySlot<IWeapon>(new DummyItemSelector<IWeapon>(), new Item<IWeapon>(ScriptableObject.CreateInstance<ItemData>(), weapon, new DummyItemView()),3);
             inventory.Add(slot);
-            inventory.Drop(weapon);
+            inventory.Drop(slot);
             Assert.That(inventory.Slots.Count() == 1 && inventory.Slots.ElementAt(0).ItemsCount == 2);
-            inventory.Drop(weapon);
-            inventory.Drop(weapon);
+            inventory.Drop(slot);
+            inventory.Drop(slot);
             Assert.That(inventory.Slots.Count() == 0);
         }
     }

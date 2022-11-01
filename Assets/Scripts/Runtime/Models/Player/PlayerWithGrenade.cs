@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.Model.Inventory;
@@ -23,7 +24,7 @@ namespace Shooter.Root
             if (_input.IsPressingLeftMouseButton && _grenade.CanShoot)
             {
                 _grenade.Shoot();
-                _inventory.Drop(_grenade);
+                _inventory.Drop(_inventory.Slots.First(slot => slot.Item.Model == _grenade));
             }
         }
     }

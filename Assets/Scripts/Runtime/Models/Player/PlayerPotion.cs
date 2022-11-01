@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Shooter.GameLogic;
 using Shooter.Model.Inventory;
 
@@ -22,7 +23,7 @@ namespace Shooter.Model
             if (_potionInput.HasInputed && _potion.CanShoot)
             {
                 _potion.Shoot();
-                _inventory.Drop(_potion);
+                _inventory.Drop(_inventory.Slots.First(slot => slot.Item.Model == _potion));
             }
         }
     }

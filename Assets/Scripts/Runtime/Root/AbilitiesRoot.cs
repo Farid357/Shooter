@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.SaveSystem;
@@ -29,7 +28,6 @@ namespace Shooter.Root
         private CharacterIncreaseBulletsDamageAbility _characterIncreaseBulletsDamageAbility;
         private IEnumerable<IAbility> _abilities;
         
-
         private IEnumerable<IAbility> Compose()
         {
             var storageCharacterIncreaseBulletsSeconds = new StorageWithNameSaveObject<CharacterIncreaseBulletsDamageAbility, float>(new BinaryStorage());

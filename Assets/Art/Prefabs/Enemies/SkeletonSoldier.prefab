@@ -1226,6 +1226,151 @@ Transform:
   m_Father: {fileID: 6497638003861938888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -25.658527, y: 51.548504, z: -88.501396}
+--- !u!1 &4219798544954530782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5609146964155195651}
+  - component: {fileID: 4929083444939343890}
+  - component: {fileID: 4834126571316456991}
+  - component: {fileID: 1235456135480608710}
+  - component: {fileID: 9072089742663974705}
+  - component: {fileID: 1512126472377320851}
+  m_Layer: 0
+  m_Name: EnemyDeathView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5609146964155195651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219798544954530782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8414212073672694174}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4929083444939343890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219798544954530782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad8c91a19d2409291c72caf67af2d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4834126571316456991}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _deathView
+      Entry: 10
+      Data: 0
+  _animator: {fileID: 2574436324499254027}
+  _dieAnimationName: Death
+  _beforeDieSeconds: 1.5
+--- !u!114 &4834126571316456991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219798544954530782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f35bcf25c6d041ca8ca91468a1d07257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1235456135480608710}
+    - {fileID: 9072089742663974705}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _deathViews
+      Entry: 7
+      Data: 0|Shooter.Model.IDeathView[], Shooter
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &1235456135480608710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219798544954530782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcaebdb19d34c11837eb5f56415edf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particlePrefab: {fileID: 2092196140396782754, guid: 5e9df50f1b6beda4eb13c0361763208a, type: 3}
+--- !u!114 &9072089742663974705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219798544954530782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5641e3ef8a41d69a5e805846aa68ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemySound: {fileID: 1512126472377320851}
+  _enemy: {fileID: 3503444301925772418}
+--- !u!114 &1512126472377320851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219798544954530782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd760ca509864bd28de6829f3f9acadf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 1582774678861231216, guid: ad29f7dfa5b212f42af92423ff79b5f1, type: 3}
 --- !u!1 &4275148233927838961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,7 +3261,7 @@ GameObject:
   - component: {fileID: 989396998209213194}
   - component: {fileID: 6151464610766036684}
   - component: {fileID: 8101529703121817261}
-  - component: {fileID: 1066737434374837067}
+  - component: {fileID: 1679257504401548175}
   m_Layer: 0
   m_Name: SkeletonSoldier
   m_TagString: Untagged
@@ -3132,7 +3277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9191453078717465380}
   m_LocalRotation: {x: -0, y: -0.9996289, z: -0, w: -0.027243724}
-  m_LocalPosition: {x: 1.07, y: -119.59, z: -7.07}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3144498, y: 0.21518, z: 0.24114}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3141,6 +3286,7 @@ Transform:
   - {fileID: 5790947959822367749}
   - {fileID: 1904657354531415035}
   - {fileID: 2293177606634603722}
+  - {fileID: 5609146964155195651}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -183.122, z: 0}
@@ -3186,8 +3332,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 9191453078717465380}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 5.94
-  m_Speed: 3.5
+  m_Radius: 6.68
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3211,7 +3357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d6abe08a284706b9440318428efb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 3
+  _rotateSpeed: 1.75
 --- !u!114 &3503444301925772418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3274,6 +3420,7 @@ MonoBehaviour:
       Data: 0
   _chaser: {fileID: 3317094750519824691}
   _damage: 15
+  _enemyAttackSound: {fileID: 1679257504401548175}
 --- !u!114 &3317094750519824691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3342,7 +3489,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 1066737434374837067}
+    - {fileID: 4929083444939343890}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -3368,7 +3515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerSeconds: 0.7
   _name: Attack
---- !u!114 &1066737434374837067
+--- !u!114 &1679257504401548175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3377,7 +3524,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9191453078717465380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfcaebdb19d34c11837eb5f56415edf7, type: 3}
+  m_Script: {fileID: 11500000, guid: dd760ca509864bd28de6829f3f9acadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particlePrefab: {fileID: 2092196140396782754, guid: 5e9df50f1b6beda4eb13c0361763208a, type: 3}
+  _prefab: {fileID: 1582774678861231216, guid: a5104f1ba2723594886c2474c24ff1ce, type: 3}

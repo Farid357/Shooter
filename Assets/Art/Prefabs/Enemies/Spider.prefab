@@ -3814,7 +3814,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303359299648268627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65, y: -118.82, z: -7.28}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3854,8 +3854,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1303359299648268627}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 3.52
-  m_Speed: 3.5
+  m_Radius: 8.09
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3863,7 +3863,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 5.12
+  m_Height: 8.92
   m_BaseOffset: 0.75
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -3879,7 +3879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d6abe08a284706b9440318428efb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 2.5
+  _rotateSpeed: 2
 --- !u!114 &5980716149815665511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3922,6 +3922,7 @@ MonoBehaviour:
       Data: 0
   _chaser: {fileID: 5980716149815665511}
   _damage: 30
+  _enemyAttackSound: {fileID: 0}
 --- !u!114 &3910359349198425257
 MonoBehaviour:
   m_ObjectHideFlags: 0
