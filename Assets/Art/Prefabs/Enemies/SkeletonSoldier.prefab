@@ -3319,7 +3319,7 @@ BoxCollider:
   m_GameObject: {fileID: 9191453078717465380}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 8.9, y: 26.498585, z: 8.696541}
   m_Center: {x: 9.545008e-10, y: 11.589425, z: 0.18368289}
@@ -3331,8 +3331,8 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9191453078717465380}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 6.68
+  m_AgentTypeID: -334000983
+  m_Radius: 6.96
   m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
@@ -3342,7 +3342,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 26.41
-  m_BaseOffset: 1.59
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3961041845745558163
@@ -3513,7 +3513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 1.2
   _name: Attack
 --- !u!114 &1679257504401548175
 MonoBehaviour:

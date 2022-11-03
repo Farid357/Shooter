@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using Shooter.Model.Inventory;
 using UnityEngine;
 
 namespace Shooter.GameLogic.Inventory
 {
-    public sealed class ItemGameObjectView : MonoBehaviour, IInventoryItemGameObjectView
+    public sealed class InventoryItemGameObjectView : MonoBehaviour, IInventoryItemGameObjectView
     {
         public async Task Show()
         {

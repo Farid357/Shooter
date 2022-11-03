@@ -2102,7 +2102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3057221213120768244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.04, y: 2.83, z: 2.34}
+  m_LocalPosition: {x: -2.04, y: 7.51, z: 2.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3154,6 +3154,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 7944683408878158774}
     - {fileID: 412698933616027901}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -3161,11 +3162,11 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: _enemyHealthView
-      Entry: 6
-      Data: 
-    - Name: <Movement>k__BackingField
       Entry: 10
       Data: 0
+    - Name: <Movement>k__BackingField
+      Entry: 10
+      Data: 1
   _healthCount: 250
   _health: {fileID: 4503307694093474401}
   _chaser: {fileID: 9099093031193026824}
@@ -3467,7 +3468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 3
   _name: Attack 1
 --- !u!1 &4630643419864933890
 GameObject:

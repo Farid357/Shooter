@@ -35,9 +35,9 @@ namespace Shooter.Model.Inventory
                 throw new InvalidOperationException("Inventory doesn't contain this slot!");
 
             var slotIndex = _slots.IndexOf(slot);
-
             if (slot.CanDropOneItem())
             {
+            
                 _slots[slotIndex].DropOneItem();
                 _view.VisualizeItemsCount(_slots[slotIndex].Item.Data, _slots[slotIndex].ItemsCount);
             }

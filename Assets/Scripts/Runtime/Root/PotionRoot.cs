@@ -15,13 +15,18 @@ namespace Shooter.Root
         [SerializeField] private IPotionView _healthPotionView;
         [SerializeField] private IScoreRoot _scoreRoot;
         [SerializeField] private ItemGameObjectViewFactory _potionGameObjectViewFactory;
+        [SerializeField] private IPlayerRoot _playerRoot;
+        [SerializeField] private IBulletsView[] _bulletsViews;
+        [SerializeField] private IInventoryView _inventoryView;
+
+        public IInventoryItemSelector<IPotion> Selector { get; private set; }
         
         [field: SerializeField] public IReadOnlyDictionary<KeyCode,int> KeypadNumbers { get; private set; }
 
-        [field: SerializeField] public IInventoryView InventoryView { get; private set; }
         
-        public void Compose(IInventory<IPotion> inventory)
+        public IInventory<IPotion> Compose()
         {
+            var potionsInventory = new Inventory<IPotion>(_inventoryView, 3);
             var potions = new IPotion[]
             {
                 new HealthPotion(_character.Health, _healthPotionView),
@@ -29,8 +34,10 @@ namespace Shooter.Root
                 new NegativeHealthPotion(_character.Health, _healthPotionView)
             };
             
-            var potionFactory = new PotionFactory(potions, _potionGameObjectViewFactory);
-            _potionPickupsFactory.Init(potionFactory, inventory, _enemyRoot.WaveFactory);
+            var potionFactory = new PotionFactory(potions);
+            Selector = new DroppingWeaponSelector(_playerRoot, potionFactory, _bulletsViews);
+            _potionPickupsFactory.Init(potionFactory, _potionGameObjectViewFactory, potionsInventory, _enemyRoot.WaveFactory, Selector);
+            return potionsInventory;
         }
     }
 }

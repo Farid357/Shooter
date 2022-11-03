@@ -11,12 +11,12 @@ namespace Shooter.Root
     {
         [SerializeField] private IPlayerRoot _playerRoot;
         [SerializeField] private GameObjectFactory<GrenadeView, CharacterMovement> _grenadesFactory;
-        [SerializeField] private IBulletsView _bulletsView;
+        [SerializeField] private IBulletsView[] _bulletsViews;
         private IInventoryItemSelector<IGrenade> _grenadesSelector;
 
         public IInventoryItemSelector<IGrenade> Compose()
         {
-            return _grenadesSelector ??= new GrenadeSelector(_playerRoot, _grenadesFactory, _bulletsView);
+            return _grenadesSelector ??= new DroppingWeaponSelector(_playerRoot, _grenadesFactory, _bulletsViews);
         }
     }
 }

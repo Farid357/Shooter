@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Shooter.GameLogic.Inventory;
+using Shooter.Model.Inventory;
 
 public sealed class DummyItemView : IInventoryItemGameObjectView
 {

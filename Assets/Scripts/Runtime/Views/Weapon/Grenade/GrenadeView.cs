@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Shooter.GameLogic.Inventory;
 using Shooter.Model;
+using Shooter.Model.Inventory;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Shooter.GameLogic
         [SerializeField, MinValue(0.4f)] private float _explosionSeconds = 1.2f;
         [SerializeField, ProgressBar(1, 100, G = 0, R = 1, B = 0)] private int _damage = 10;
         [SerializeField] private StandartExplosion _explosionPrefab;
-        [SerializeField] private ItemGameObjectView _itemView;
+        [SerializeField] private InventoryItemGameObjectView _itemView;
         private Rigidbody _rigidbody;
 
         public IInventoryItemGameObjectView ItemView => _itemView;
@@ -32,10 +33,10 @@ namespace Shooter.GameLogic
 
         public async void Shoot()
         {
+            HasDropped = true;
             transform.parent = null;
             _rigidbody.isKinematic = false;
             _rigidbody.AddForce(_throwDirection * _force);
-            HasDropped = true;
             await UniTask.Delay(TimeSpan.FromSeconds(_explosionSeconds));
             var explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
             explosion.Thunder(_damage);

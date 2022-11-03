@@ -1059,6 +1059,9 @@ ModelImporter:
   - first:
       137: 13700024
     second: Rikayon_MeshPart9
+  - first:
+      74: -2158876766978920714
+    second: Armature|Walk_Cycle_1 (1)
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -1099,15 +1102,15 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Rest_1
-      takeName: Rest_1
+      name: Armature|Walk_Cycle_1 (1)
+      takeName: Armature|Walk_Cycle_1
       internalID: 0
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
-      cycleOffset: 0
+      cycleOffset: 0.18
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
@@ -1792,7 +1795,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.03
+    globalScale: 3
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

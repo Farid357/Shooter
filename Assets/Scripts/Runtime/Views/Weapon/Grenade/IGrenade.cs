@@ -1,4 +1,4 @@
-﻿using Shooter.GameLogic.Inventory;
+﻿using Shooter.Model.Inventory;
 
 namespace Shooter.Model
 {

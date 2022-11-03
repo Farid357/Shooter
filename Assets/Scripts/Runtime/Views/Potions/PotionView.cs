@@ -21,10 +21,20 @@ namespace Shooter.Model
             _screen.DOColor(_usingColor, 0.2f).OnComplete(() => _screen.DOColor(startColor, 0.2f));
             await Task.Delay(TimeSpan.FromSeconds(0.4f));
         }
+    }
+    
+    public sealed class PotionGameObjectView : MonoBehaviour, IPotion
+    {
+        private IPotion _potion;
 
-        public void TranslateTo(Vector3 position)
+        public void Init(IPotion potion)
         {
-            
+            _potion = potion ?? throw new ArgumentNullException(nameof(potion));
         }
+        
+        public bool CanShoot => _potion.CanShoot;
+        
+        public void Shoot() => _potion.Shoot();
+
     }
 }

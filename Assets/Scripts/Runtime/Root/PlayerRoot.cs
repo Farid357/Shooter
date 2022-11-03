@@ -3,44 +3,49 @@ using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.Model.Inventory;
 using Shooter.Player;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Shooter.Root
 {
-    public sealed class PlayerRoot : MonoBehaviour, IPlayerRoot
+    public sealed class PlayerRoot : SerializedMonoBehaviour, IPlayerRoot
     {
+        [SerializeField] private PotionRoot _potionRoot;
+        [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
         private readonly SystemUpdate _systemUpdate = new();
         private IUpdateble _lastPlayer;
-        private IInventory<IPotion> _potionsInventory;
         private IInventory<IGrenade> _grenadesInventory;
+        private IInventory<(IWeapon, IWeaponInput)> _weaponsInventory;
+        private IInventoryItemSelector<(IWeapon, IWeaponInput)> _weaponSelector;
 
-        public void Init(IInventory<IPotion> potionsInventory, IInventory<IGrenade> grenadesInventory)
+        public IDroppingWeapon ComposedDroppingWeapon { get; private set; }
+        
+        public void Init(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory, IInventoryItemSelector<(IWeapon, IWeaponInput)> weaponSelector)
         {
-            _potionsInventory = potionsInventory ?? throw new ArgumentNullException(nameof(potionsInventory));
+            _weaponSelector = weaponSelector ?? throw new ArgumentNullException(nameof(weaponSelector));
+            _weaponsInventory = weaponsInventory ?? throw new ArgumentNullException(nameof(weaponsInventory));
             _grenadesInventory = grenadesInventory ?? throw new ArgumentNullException(nameof(grenadesInventory));
         }
         
-        public void Compose(IWeaponInput weaponInput, IShootingWeapon weapon)
+        public void Compose(IWeaponInput weaponInput, IWeapon weapon)
         {
             TryRemove(_lastPlayer);
             var player = new PlayerWithWeapon(weaponInput, weapon);
             Add(player);
         }
 
-        public void Compose(IPotionInput potionInput, IPotion potion)
+        public void Compose(IWeaponInput potionInput, IPotion potion) => Compose(potionInput, potion, _potionRoot.Compose(), _potionRoot.Selector);
+
+        public void Compose(IWeaponInput weaponInput, IGrenade grenade) => Compose(weaponInput, grenade, _grenadesInventory, _grenadeSelectorRoot.Compose());
+
+        private void Compose<TWeapon>(IWeaponInput weaponInput, TWeapon weapon, IInventory<TWeapon> inventory, IInventoryItemSelector<TWeapon> droppingWeaponSelector) where TWeapon : IDroppingWeapon
         {
             TryRemove(_lastPlayer);
-            var player = new PlayerPotion(potionInput, potion, _potionsInventory);
+            var player = new PlayerWithDroppingWeapon<TWeapon>(weapon, weaponInput, inventory, _weaponsInventory, droppingWeaponSelector, _weaponSelector);
+            ComposedDroppingWeapon = weapon;
             Add(player);
         }
-
-        public void Compose(IWeaponInput weaponInput, IGrenade grenade)
-        {
-            TryRemove(_lastPlayer);
-            var player = new PlayerWithGrenade(grenade, weaponInput, _grenadesInventory);
-            Add(player);
-        }
-
+        
         private void Add(IUpdateble updateble)
         {
             _systemUpdate.Add(updateble);

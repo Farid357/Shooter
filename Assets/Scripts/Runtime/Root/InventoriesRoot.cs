@@ -22,13 +22,13 @@ namespace Shooter.Root
         [SerializeField] private Dictionary<KeyCode,int> _grenadeInventoryKeypadNumbers;
         [SerializeField] private IFactory<IInventoryItemGameObjectView> _grenadeGameObjectViewFactory;
         [SerializeField] private IFactory<IGrenade> _grenadeFactory;
-        [SerializeField] private PotionRoot _potionRoot;
         [SerializeField] private IBulletsView _secondWeaponBulletsView;
+        [SerializeField] private PotionRoot _potionRoot;
         [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
-        
+
         [VerticalGroup("Start Weapon")] [SerializeField] private ItemData _weaponItemData;
         [VerticalGroup("Start Weapon")] [SerializeField] private WeaponData _startWeaponData;
-        [VerticalGroup("Start Weapon")] [SerializeField] private ItemGameObjectView _weaponView;
+        [VerticalGroup("Start Weapon")] [SerializeField] private InventoryItemGameObjectView _weaponView;
 
         private readonly SystemUpdate _systemUpdate = new();
 
@@ -48,9 +48,8 @@ namespace Shooter.Root
             weaponsInventory.Add(slot);
             var weaponInventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(weaponsInventory);
             var grenadeInventorySelector = new InventoryItemsSelector<IGrenade>(grenadesInventory);
-            var potionsInventory = new Inventory<IPotion>(_potionRoot.InventoryView, 3);
-            _playerRoot.Init(potionsInventory, grenadesInventory);
-            _potionRoot.Compose(potionsInventory);
+            var potionsInventory = _potionRoot.Compose();
+            _playerRoot.Init(weaponsInventory, grenadesInventory, weaponSelector);
             var potionInventorySelector = new InventoryItemsSelector<IPotion>(potionsInventory);
             var selectors = new List<IInventoryItemsSelector>{ grenadeInventorySelector, weaponInventoryItemsSelector, potionInventorySelector };
             var inventoryItemsInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, selectors, weaponInventoryItemsSelector);

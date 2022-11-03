@@ -18,16 +18,29 @@ namespace Shooter.Root
 
         public void Remove(IUpdateble updateble)
         {
+            if(updateble is null)
+                throw new ArgumentNullException(nameof(updateble));
+            
             if (_updatebles.Contains(updateble) == false)
                 throw new InvalidOperationException(nameof(Remove));
             
-            if(updateble is null)
-                throw new ArgumentNullException(nameof(updateble));
-
             _updatebles.Remove(updateble);
         }
 
-        public void Update(float deltaTime) => _updatebles.ForEach(updateble => updateble.Update(deltaTime));
-        
+        public void Update(float deltaTime)
+        {
+            try
+            {
+                for (var i = 0; i < _updatebles.Count; i++)
+                {
+                    _updatebles[i].Update(deltaTime);
+                }
+            }
+            
+            catch (Exception e)
+            {
+                // ignored
+            }
+        }
     }
 }

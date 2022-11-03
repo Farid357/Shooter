@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-namespace Shooter.GameLogic.Inventory
+namespace Shooter.Model.Inventory
 {
     public interface IInventoryItemGameObjectView
     {
-        public Task Show();
+        Task Show();
 
-        public Task Hide();
+        Task Hide();
     }
 }

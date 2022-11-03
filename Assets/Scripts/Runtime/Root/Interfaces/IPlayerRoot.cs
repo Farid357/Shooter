@@ -1,14 +1,13 @@
 ﻿using Shooter.GameLogic;
 using Shooter.Model;
-using Shooter.Player;
 
 namespace Shooter.Root
 {
     public interface IPlayerRoot
     {
-        void Compose(IWeaponInput weaponInput, IShootingWeapon weapon);
-
-        void Compose(IPotionInput potionInput, IPotion potion);
+        IDroppingWeapon ComposedDroppingWeapon { get; }
+        
+        void Compose(IWeaponInput weaponInput, IWeapon weapon);
 
         void Compose(IWeaponInput weaponInput, IGrenade grenade);
     }

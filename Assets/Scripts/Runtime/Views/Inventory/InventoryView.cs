@@ -8,16 +8,14 @@ namespace Shooter.GameLogic.Inventory
     {
         [SerializeField] private Transform _content;
         [SerializeField] private InventoryItemView _prefab;
-        [SerializeField] private Transform _secondInventoryContent;
-        [SerializeField, Min(1)] private int _itemsCountOnOneInventory = 5;
-        
-        private int _visualizedItemsCount;
+
         private readonly Dictionary<ItemData, InventoryItemView> _items = new();
         
         public void VisualizeNewItem(ItemData item, int count)
         {
-            _visualizedItemsCount++;
-            Visualize(item, count, _visualizedItemsCount < _itemsCountOnOneInventory ? _content : _secondInventoryContent);
+            var itemView = Instantiate(_prefab, _content);
+            itemView.Visualize(item.Sprite, count);
+            _items.Add(item, itemView);
         }
 
         public void VisualizeItemsCount(ItemData item, int count)
@@ -30,13 +28,6 @@ namespace Shooter.GameLogic.Inventory
             var createdItem = _items[item].gameObject;
             _items.Remove(item);
             Destroy(createdItem);
-        }
-
-        private void Visualize(ItemData item, int count, Transform parent)
-        {
-            var itemView = Instantiate(_prefab, parent);
-            itemView.Visualize(item.Sprite, count);
-            _items.Add(item, itemView);
         }
     }
 }

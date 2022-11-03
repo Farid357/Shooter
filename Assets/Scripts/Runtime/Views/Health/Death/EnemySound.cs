@@ -8,7 +8,7 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private AudioSource _prefab;
 
-        public async void Play()
+        public async UniTaskVoid Play()
         {
             var audio = Instantiate(_prefab);
             audio.Play();

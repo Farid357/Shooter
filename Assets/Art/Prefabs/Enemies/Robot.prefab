@@ -664,7 +664,7 @@ MonoBehaviour:
       Data: 0
   _chaser: {fileID: 2501694195732720788}
   _line: {fileID: 7029269791267100097}
-  _maxLaserDistance: 50
+  _maxLaserDistance: 35
   _distanceBetweenHitPositionAndAttack: 6
   _laserStartPoint: {fileID: 663952372015815545}
   _damage: 19
@@ -772,7 +772,7 @@ MonoBehaviour:
   _health: {fileID: 3069979073971750422}
   _chaser: {fileID: 2501694195732720788}
   _type: 0
-  _protection: 10
+  _protection: 30
   <Score>k__BackingField: 500
 --- !u!114 &3069979073971750422
 MonoBehaviour:
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 2.5
+  _triggerSeconds: 2.8
   _name: Attack
 --- !u!65 &5626646474052116647
 BoxCollider:
@@ -1385,7 +1385,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 15107d3b488ad704e938f7c1700d0ace, type: 2}
+  - {fileID: -876546973899608171, guid: 4bb95fbc387d09d4582bb2951e84d741, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1416,8 +1416,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.027827764
-        value: 0.17045419
+        time: 0
+        value: 0.21590996
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1429,9 +1429,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.2584905, b: 0.2584905, a: 1}
-      key1: {r: 0.6037736, g: 0.013670328, b: 0.013670328, a: 1}
-      key2: {r: 0.4528302, g: 0.018796705, b: 0.018796705, a: 0}
+      key0: {r: 1, g: 0.19245279, b: 0.19245279, a: 1}
+      key1: {r: 1, g: 0.107547104, b: 0.107547104, a: 1}
+      key2: {r: 1, g: 0.135849, b: 0.135849, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -1453,7 +1453,7 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 37

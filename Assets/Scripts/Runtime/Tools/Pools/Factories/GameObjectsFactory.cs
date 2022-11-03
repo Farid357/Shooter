@@ -17,9 +17,6 @@ namespace Shooter.Tools
 
         public GameObjectsFactory(T prefab, Vector3 spawnPosition, Transform parent = null) : this(prefab, parent)
         {
-            if (_spawnPosition == Vector3.zero)
-                throw new ArgumentOutOfRangeException(nameof(spawnPosition));
-            
             _spawnPosition = spawnPosition;
         }
         

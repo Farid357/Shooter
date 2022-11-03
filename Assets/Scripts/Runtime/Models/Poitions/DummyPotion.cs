@@ -9,5 +9,9 @@
             
         }
 
+        public void Disable()
+        {
+            
+        }
     }
 }

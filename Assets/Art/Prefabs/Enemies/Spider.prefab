@@ -3799,6 +3799,7 @@ GameObject:
   - component: {fileID: 1083162076837494113}
   - component: {fileID: 5256900964436775695}
   - component: {fileID: 2385706820874346458}
+  - component: {fileID: 7522881707416711776}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -3855,7 +3856,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 8.09
-  m_Speed: 4
+  m_Speed: 4.45
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3892,7 +3893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3642d6a39bef4e26809cdd6cb9f00fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 11.48
+  _radius: 14.3
   _center: {fileID: 661460762895586221}
   _showGizmas: 0
 --- !u!114 &4453032934195102819
@@ -3921,8 +3922,8 @@ MonoBehaviour:
       Entry: 10
       Data: 0
   _chaser: {fileID: 5980716149815665511}
-  _damage: 30
-  _enemyAttackSound: {fileID: 0}
+  _damage: 60
+  _enemyAttackSound: {fileID: 7522881707416711776}
 --- !u!114 &3910359349198425257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3989,7 +3990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 2
   _name: Attack_1
 --- !u!114 &1307486555212349271
 MonoBehaviour:
@@ -4003,7 +4004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 2
   _name: Attack_2
 --- !u!114 &1193769578912648380
 MonoBehaviour:
@@ -4017,7 +4018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 2
   _name: Attack_3
 --- !u!114 &818768898674883049
 MonoBehaviour:
@@ -4031,7 +4032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 2
   _name: Attack_4
 --- !u!114 &1836638616147931684
 MonoBehaviour:
@@ -4045,7 +4046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerSeconds: 0.7
+  _triggerSeconds: 2
   _name: Attack_5
 --- !u!114 &1373298829966836458
 MonoBehaviour:
@@ -4208,6 +4209,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.63, y: 8.392967, z: 12.93}
   m_Center: {x: 0, y: 4.0707817, z: 0}
+--- !u!114 &7522881707416711776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303359299648268627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd760ca509864bd28de6829f3f9acadf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 1582774678861231216, guid: 7889a655cee7e0f4894aed5f939d6797, type: 3}
 --- !u!1 &1303362742435863841
 GameObject:
   m_ObjectHideFlags: 0
