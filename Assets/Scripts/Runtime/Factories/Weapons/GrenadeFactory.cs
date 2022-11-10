@@ -1,6 +1,6 @@
 namespace Shooter.GameLogic
 {
-    public sealed class GrenadeFactory : GameObjectFactory<GrenadeView, CharacterMovement>
+    public sealed class GrenadeFactory : GameObjectFactory<ThrowingWeaponView, CharacterMovement>
     {
 
     }

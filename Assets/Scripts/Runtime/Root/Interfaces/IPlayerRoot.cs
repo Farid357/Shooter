@@ -9,6 +9,6 @@ namespace Shooter.Root
         
         void Compose(IWeaponInput weaponInput, IWeapon weapon);
 
-        void Compose(IWeaponInput weaponInput, IGrenade grenade);
+        void Compose(IWeaponInput weaponInput, IThrowingWeapon throwingWeapon);
     }
 }

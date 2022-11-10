@@ -13,9 +13,9 @@ namespace Shooter.GameLogic
         [SerializeField, Min(0.2f)] private float _addNewCountDelay = 15f;
         [SerializeField] private int _addAmount = 1;
 
-        private IInventory<IGrenade> _inventory;
+        private IInventory<IThrowingWeapon> _inventory;
         
-        public void Init(IInventory<IGrenade> inventory)
+        public void Init(IInventory<IThrowingWeapon> inventory)
         {
             if (_inventory is not null)
                 throw new InvalidOperationException($"{nameof(ThrowingWeaponsCountAdder)} already inited");

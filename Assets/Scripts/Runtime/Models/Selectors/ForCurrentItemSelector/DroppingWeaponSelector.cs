@@ -36,7 +36,7 @@ namespace Shooter.Model.Inventory
 
         public void Unselect()
         {
-            _playerRoot.Compose(new DummyWeaponInput(), new DummyGrenade());
+            _playerRoot.Compose(new DummyWeaponInput(), new DummyThrowingWeapon());
         }
     }
 }

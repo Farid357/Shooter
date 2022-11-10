@@ -31,7 +31,7 @@ namespace Shooter.Root
 
         private readonly List<WeaponType> _defaultWeapons = new() { WeaponType.Shotgun };
 
-        public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
+        public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IThrowingWeapon> grenadesInventory)
         {
             _throwingWeaponsCountAdder.Init(grenadesInventory);
             var throwingWeaponTypesStorage = new CollectionStorage<ThrowingWeaponType>(new BinaryStorage());
@@ -39,7 +39,7 @@ namespace Shooter.Root
              //   ? CreateThrowingWeaponsList(throwingWeaponTypesStorage.Load(WeaponsKey.Value))
                // : new[] { ThrowingWeaponType.Standart };
 
-            var throwingWeaponTypes = new [] { ThrowingWeaponType.Standart };
+            var throwingWeaponTypes = new [] { ThrowingWeaponType.Knife };
             _throwingWeaponsTypeAdder.Init(grenadesInventory, _grenadeSelectorRoot.Compose(), throwingWeaponTypes);
             _throwingWeaponsCountAdder.SpawnLoop().Forget();
             _throwingWeaponsTypeAdder.SpawnNewGrenadeTypeLoop().Forget();

@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class ThrowingKnife : SerializedMonoBehaviour, IGrenade
+    public sealed class ThrowingKnife : ThrowingWeaponView
     {
         [SerializeField, MinValue(0.2)] private float _force = 0.2f;
         [SerializeField] private Vector3 _throwDirection;
         [SerializeField] private InventoryItemGameObjectView _itemView;
         private Rigidbody _rigidbody;
 
-        public IInventoryItemGameObjectView ItemView => _itemView;
+        public override IInventoryItemGameObjectView ItemView => _itemView;
 
-        public bool CanShoot => gameObject.activeInHierarchy;
+        public override bool CanShoot => gameObject.activeInHierarchy;
 
         public bool HasDropped { get; private set; }
 
@@ -25,7 +25,7 @@ namespace Shooter.GameLogic
             _rigidbody.isKinematic = true;
         }
 
-        public void Shoot()
+        public override void Shoot()
         {
             HasDropped = true;
             transform.parent = null;

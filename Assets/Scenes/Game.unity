@@ -4328,6 +4328,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598608012}
   m_CullTransparentMesh: 1
+--- !u!1 &613877067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 613877068}
+  - component: {fileID: 613877069}
+  m_Layer: 0
+  m_Name: KnifeFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &613877068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613877067}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2136499326}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &613877069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613877067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b86d38e41fb0544a8b13ad6aa2468be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _prefab: {fileID: 8485551615330865347, guid: a22983b881a2e864bb5ebdb97ebeeec6, type: 3}
+  _parent: {fileID: 1957502692}
+  _spawnPoint: {fileID: 8755954945248160481}
 --- !u!1001 &625265823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8855,7 +8911,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _spawnPoint: {fileID: 293930643}
+  _spawnPoint: {fileID: 1508959982}
   _prefab: {fileID: 8631178659134956742, guid: fb8e09213da9f16458a2e48dd040e1e2, type: 3}
 --- !u!4 &1299250594
 Transform:
@@ -9570,7 +9626,7 @@ MonoBehaviour:
   - _factoriesData:
     - <Factory>k__BackingField: {fileID: 1282067436}
       <EnemiesCount>k__BackingField: 2
-    - <Factory>k__BackingField: {fileID: 1362595609}
+    - <Factory>k__BackingField: {fileID: 1298473878}
       <EnemiesCount>k__BackingField: 2
     <CreateDelaySeconds>k__BackingField: 0.3
     <SecondsAfterEnd>k__BackingField: 6
@@ -9860,6 +9916,8 @@ GameObject:
   - component: {fileID: 1430124519}
   - component: {fileID: 1430124520}
   - component: {fileID: 1430124521}
+  - component: {fileID: 1430124522}
+  - component: {fileID: 1430124523}
   m_Layer: 0
   m_Name: Pickups
   m_TagString: Untagged
@@ -10194,18 +10252,17 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 2969791875130954861, guid: 40d3aea4927afff45b34e842bd28b76e, type: 3}
-    - {fileID: 4737274803978416411, guid: 95ee5a9c87926a84d9c947e633079c9f, type: 3}
-    - {fileID: 1314992903}
+    - {fileID: 1430124522}
+    - {fileID: 1430124523}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _prefabs
+    - Name: _data
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[Shooter.Model.ThrowingWeaponType,
-        Shooter],[Shooter.GameLogic.Inventory.GrenadePickup, Shooter]], mscorlib
+        Shooter],[Shooter.GameLogic.ThrowingWeaponData, Shooter]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Shooter.Model.ThrowingWeaponType,
@@ -10252,12 +10309,60 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: _grenadesFactory
-      Entry: 10
-      Data: 2
   _addNewTypeDelay: 5
-  _grenadesFactory: {fileID: 1314992903}
   _spawnPoint: {fileID: 985850551}
+--- !u!114 &1430124522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430124517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07c03b6254c4ffca458ceb949709b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1314992903}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <Factory>k__BackingField
+      Entry: 10
+      Data: 0
+  <Prefab>k__BackingField: {fileID: 2969791875130954861, guid: 40d3aea4927afff45b34e842bd28b76e, type: 3}
+--- !u!114 &1430124523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430124517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f07c03b6254c4ffca458ceb949709b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 613877069}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <Factory>k__BackingField
+      Entry: 10
+      Data: 0
+  <Prefab>k__BackingField: {fileID: 4737274803978416411, guid: 95ee5a9c87926a84d9c947e633079c9f, type: 3}
 --- !u!1 &1466578210
 GameObject:
   m_ObjectHideFlags: 0
@@ -14591,6 +14696,7 @@ Transform:
   - {fileID: 282305673}
   - {fileID: 1193737808}
   - {fileID: 1527656678}
+  - {fileID: 613877068}
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18583,7 +18689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1573585118595557414, guid: c6c95de326dcf39498d791f222dfb71d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.8
+      value: 11.45
       objectReference: {fileID: 0}
     - target: {fileID: 1573585118595557414, guid: c6c95de326dcf39498d791f222dfb71d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18913,6 +19019,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1430124518}
     m_Modifications:
+    - target: {fileID: 1811813806846158626, guid: 40d3aea4927afff45b34e842bd28b76e, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1811813806846158626, guid: 40d3aea4927afff45b34e842bd28b76e, type: 3}
     - target: {fileID: 2969791875130954850, guid: 40d3aea4927afff45b34e842bd28b76e, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -24815,6 +24925,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 543450651742468362}
     m_Modifications:
+    - target: {fileID: 1869780798330526299, guid: 9df4e25812811174aa4810bb142f307b, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1869780798330526299, guid: 9df4e25812811174aa4810bb142f307b, type: 3}
     - target: {fileID: 3756186389801634977, guid: 9df4e25812811174aa4810bb142f307b, type: 3}
       propertyPath: serializationData.Prefab
       value: 

@@ -10,11 +10,11 @@ namespace Shooter.Root
     public sealed class GrenadeSelectorRoot : SerializedMonoBehaviour
     {
         [SerializeField] private IPlayerRoot _playerRoot;
-        [SerializeField] private GameObjectFactory<GrenadeView, CharacterMovement> _grenadesFactory;
+        [SerializeField] private GameObjectFactory<ThrowingWeaponView, CharacterMovement> _grenadesFactory;
         [SerializeField] private IBulletsView[] _bulletsViews;
-        private IInventoryItemSelector<IGrenade> _grenadesSelector;
+        private IInventoryItemSelector<IThrowingWeapon> _grenadesSelector;
 
-        public IInventoryItemSelector<IGrenade> Compose()
+        public IInventoryItemSelector<IThrowingWeapon> Compose()
         {
             return _grenadesSelector ??= new DroppingWeaponSelector(_playerRoot, _grenadesFactory, _bulletsViews);
         }

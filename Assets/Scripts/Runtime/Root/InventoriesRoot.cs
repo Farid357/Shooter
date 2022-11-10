@@ -21,7 +21,7 @@ namespace Shooter.Root
         [SerializeField] private ItemData _grenadeItem;
         [SerializeField] private Dictionary<KeyCode,int> _grenadeInventoryKeypadNumbers;
         [SerializeField] private IFactory<IInventoryItemGameObjectView> _grenadeGameObjectViewFactory;
-        [SerializeField] private IFactory<IGrenade> _grenadeFactory;
+        [SerializeField] private IFactory<IThrowingWeapon> _grenadeFactory;
         [SerializeField] private IBulletsView _secondWeaponBulletsView;
         [SerializeField] private PotionRoot _potionRoot;
         [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
@@ -40,14 +40,14 @@ namespace Shooter.Root
             var weaponSelector = new WeaponSelector(_playerRoot, _secondWeaponBulletsView);
             var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, new BurstWeaponInput()), _weaponView);
             var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item, 1);
-            var grenadesInventory = new Inventory<IGrenade>(_grenadesInventoryView, 3);
+            var grenadesInventory = new Inventory<IThrowingWeapon>(_grenadesInventoryView, 3);
             var grenade = _grenadeFactory.Create();
-            var grenadeItem = new Item<IGrenade>(_grenadeItem, grenade, grenade.ItemView);
-            var grenadeSlot = new InventorySlot<IGrenade>(_grenadeSelectorRoot.Compose(), grenadeItem, 2);
+            var grenadeItem = new Item<IThrowingWeapon>(_grenadeItem, grenade, grenade.ItemView);
+            var grenadeSlot = new InventorySlot<IThrowingWeapon>(_grenadeSelectorRoot.Compose(), grenadeItem, 2);
             grenadesInventory.Add(grenadeSlot);
             weaponsInventory.Add(slot);
             var weaponInventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(weaponsInventory);
-            var grenadeInventorySelector = new InventoryItemsSelector<IGrenade>(grenadesInventory);
+            var grenadeInventorySelector = new InventoryItemsSelector<IThrowingWeapon>(grenadesInventory);
             var potionsInventory = _potionRoot.Compose();
             _playerRoot.Init(weaponsInventory, grenadesInventory, weaponSelector);
             var potionInventorySelector = new InventoryItemsSelector<IPotion>(potionsInventory);

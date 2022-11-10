@@ -11,11 +11,11 @@ namespace Shooter.GameLogic.Inventory
         [SerializeField, Min(1)] private int _count = 1;
         [SerializeField] private ItemData _itemData;
 
-        private IInventory<IGrenade> _inventory;
-        private IFactory<IGrenade> _factory;
-        private IInventoryItemSelector<IGrenade> _selector;
+        private IInventory<IThrowingWeapon> _inventory;
+        private IFactory<IThrowingWeapon> _factory;
+        private IInventoryItemSelector<IThrowingWeapon> _selector;
 
-        public void Init(IInventory<IGrenade> inventory, IInventoryItemSelector<IGrenade> selector, IFactory<IGrenade> factory)
+        public void Init(IInventory<IThrowingWeapon> inventory, IInventoryItemSelector<IThrowingWeapon> selector, IFactory<IThrowingWeapon> factory)
         {
             _selector = selector ?? throw new ArgumentNullException(nameof(selector));
             _inventory = inventory ?? throw new ArgumentNullException(nameof(inventory));
@@ -27,8 +27,8 @@ namespace Shooter.GameLogic.Inventory
             if (_inventory.IsFull == false)
             {
                 var grenade = _factory.Create();
-                var item = new Item<IGrenade>(_itemData, grenade, grenade.ItemView);
-                var slot = new InventorySlot<IGrenade>(_selector, item, _count);
+                var item = new Item<IThrowingWeapon>(_itemData, grenade, grenade.ItemView);
+                var slot = new InventorySlot<IThrowingWeapon>(_selector, item, _count);
                 _inventory.Add(slot);
             }
         }

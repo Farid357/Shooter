@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using Shooter.GameLogic.Inventory;
 using Shooter.Model;
 using Shooter.Model.Inventory;
-using Shooter.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,18 +11,17 @@ namespace Shooter.GameLogic
 {
     public sealed class ThrowingWeaponsTypeAdder : SerializedMonoBehaviour
     {
-        [SerializeField] private Dictionary<ThrowingWeaponType, GrenadePickup> _prefabs;
+        [SerializeField] private Dictionary<ThrowingWeaponType, ThrowingWeaponData> _data;
         [SerializeField, Min(0.2f)] private float _addNewTypeDelay = 15f;
-        [SerializeField] private GameObjectFactory<GrenadeView, CharacterMovement> _grenadesFactory;
         [SerializeField] private Transform _spawnPoint;
 
-        private IInventoryItemSelector<IGrenade> _grenadeSelector;
-        private IInventory<IGrenade> _inventory;
+        private IInventoryItemSelector<IThrowingWeapon> _grenadeSelector;
+        private IInventory<IThrowingWeapon> _inventory;
         private List<ThrowingWeaponType> _throwingWeaponTypes;
 
-        public void Init(IInventory<IGrenade> inventory, IInventoryItemSelector<IGrenade> grenadeSelector, IEnumerable<ThrowingWeaponType> throwingWeaponTypes)
+        public void Init(IInventory<IThrowingWeapon> inventory, IInventoryItemSelector<IThrowingWeapon> grenadeSelector, IEnumerable<ThrowingWeaponType> throwingWeaponTypes)
         {
-            if ( throwingWeaponTypes is null || throwingWeaponTypes.Any(type => _prefabs.ContainsKey(type) == false))
+            if ( throwingWeaponTypes is null || throwingWeaponTypes.Any(type => _data.ContainsKey(type) == false))
             {
                 throw new ArgumentOutOfRangeException(nameof(throwingWeaponTypes));
             }
@@ -41,7 +38,7 @@ namespace Shooter.GameLogic
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(_addNewTypeDelay));
                 var throwingWeaponType = _throwingWeaponTypes[0];
-                Instantiate(_prefabs[throwingWeaponType], _spawnPoint.position, Quaternion.identity).Init(_inventory, _grenadeSelector, _grenadesFactory);
+                Instantiate(_data[throwingWeaponType], _spawnPoint.position, Quaternion.identity).Prefab.Init(_inventory, _grenadeSelector, _data[throwingWeaponType].Factory);
                 _throwingWeaponTypes.RemoveAt(0);
             }
         }

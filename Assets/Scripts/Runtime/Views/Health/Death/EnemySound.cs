@@ -1,5 +1,5 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using Shooter.Tools;
 using UnityEngine;
 
 namespace Shooter.GameLogic
@@ -8,12 +8,11 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private AudioSource _prefab;
 
-        public async UniTaskVoid Play()
+        public void Play()
         {
             var audio = Instantiate(_prefab);
             audio.Play();
-            await UniTask.Delay(TimeSpan.FromSeconds(audio.clip.length));
-            Destroy(audio.gameObject);
+            audio.DestroyOnEnded().Forget();
         }
     }
 }

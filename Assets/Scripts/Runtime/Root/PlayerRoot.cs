@@ -14,13 +14,13 @@ namespace Shooter.Root
         [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
         private readonly SystemUpdate _systemUpdate = new();
         private IUpdateble _lastPlayer;
-        private IInventory<IGrenade> _grenadesInventory;
+        private IInventory<IThrowingWeapon> _grenadesInventory;
         private IInventory<(IWeapon, IWeaponInput)> _weaponsInventory;
         private IInventoryItemSelector<(IWeapon, IWeaponInput)> _weaponSelector;
 
         public IDroppingWeapon ComposedDroppingWeapon { get; private set; }
         
-        public void Init(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory, IInventoryItemSelector<(IWeapon, IWeaponInput)> weaponSelector)
+        public void Init(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IThrowingWeapon> grenadesInventory, IInventoryItemSelector<(IWeapon, IWeaponInput)> weaponSelector)
         {
             _weaponSelector = weaponSelector ?? throw new ArgumentNullException(nameof(weaponSelector));
             _weaponsInventory = weaponsInventory ?? throw new ArgumentNullException(nameof(weaponsInventory));
@@ -36,7 +36,7 @@ namespace Shooter.Root
 
         public void Compose(IWeaponInput potionInput, IPotion potion) => Compose(potionInput, potion, _potionRoot.Compose(), _potionRoot.Selector);
 
-        public void Compose(IWeaponInput weaponInput, IGrenade grenade) => Compose(weaponInput, grenade, _grenadesInventory, _grenadeSelectorRoot.Compose());
+        public void Compose(IWeaponInput weaponInput, IThrowingWeapon throwingWeapon) => Compose(weaponInput, throwingWeapon, _grenadesInventory, _grenadeSelectorRoot.Compose());
 
         private void Compose<TWeapon>(IWeaponInput weaponInput, TWeapon weapon, IInventory<TWeapon> inventory, IInventoryItemSelector<TWeapon> droppingWeaponSelector) where TWeapon : IDroppingWeapon
         {

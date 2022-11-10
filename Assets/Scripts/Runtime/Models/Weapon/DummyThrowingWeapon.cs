@@ -1,6 +1,6 @@
 ﻿namespace Shooter.Model.Inventory
 {
-    public sealed class DummyGrenade : IGrenade
+    public sealed class DummyThrowingWeapon : IThrowingWeapon
     {
         public void Shoot()
         {
