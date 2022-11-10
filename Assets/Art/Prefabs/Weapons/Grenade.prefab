@@ -760,6 +760,7 @@ GameObject:
   - component: {fileID: 1869780798330526299}
   - component: {fileID: -7652198109404347037}
   - component: {fileID: 5410098301845199565}
+  - component: {fileID: 3756186389801634977}
   m_Layer: 0
   m_Name: Grenade
   m_TagString: Untagged
@@ -820,12 +821,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd60bb7c1d92463a9187f117258a910b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 60
-  _throwDirection: {x: 0, y: 0.5, z: 1}
+  _throwingKnife: {fileID: 3756186389801634977}
   _explosionSeconds: 3
   _damage: 40
   _explosionPrefab: {fileID: 3558312835779736951, guid: 6b218d14c43805046a8ef735d3d862c8, type: 3}
-  _itemView: {fileID: -7652198109404347037}
 --- !u!114 &-7652198109404347037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +851,30 @@ CapsuleCollider:
   m_Height: 0.85418487
   m_Direction: 1
   m_Center: {x: 0.020000005, y: 0.25901222, z: 0.14115375}
+--- !u!114 &3756186389801634977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7839516165108861654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5ee65d1f4a497cbc82b382b47a6b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _force: 15
+  _throwDirection: {x: 0, y: 0.5, z: 1}
+  _itemView: {fileID: -7652198109404347037}
 --- !u!1 &8772010853927263244
 GameObject:
   m_ObjectHideFlags: 0

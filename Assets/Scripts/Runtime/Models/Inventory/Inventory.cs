@@ -19,7 +19,7 @@ namespace Shooter.Model.Inventory
         public IEnumerable<InventorySlot<TItem>> Slots => _slots;
 
         public bool IsFull => _slots.Count >= _maxSlotsCount;
-        
+
         public void Add(InventorySlot<TItem> slot)
         {
             if (IsFull)
@@ -34,18 +34,16 @@ namespace Shooter.Model.Inventory
             if (_slots.Contains(slot) == false)
                 throw new InvalidOperationException("Inventory doesn't contain this slot!");
 
-            var slotIndex = _slots.IndexOf(slot);
-            if (slot.CanDropOneItem())
+            if (slot.ItemsCount - 1 > 0)
             {
-            
-                _slots[slotIndex].DropOneItem();
-                _view.VisualizeItemsCount(_slots[slotIndex].Item.Data, _slots[slotIndex].ItemsCount);
+                slot.DropOneItem();
+                _view.VisualizeItemsCount(slot.Item.Data, slot.ItemsCount);
             }
 
             else
             {
-                _view.DropItem(_slots[slotIndex].Item.Data);
-                _slots.RemoveAt(slotIndex);
+                _view.DropItem(slot.Item.Data);
+                _slots.Remove(slot);
             }
         }
     }

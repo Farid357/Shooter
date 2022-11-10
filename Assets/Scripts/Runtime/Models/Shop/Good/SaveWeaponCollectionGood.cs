@@ -3,13 +3,13 @@ using Shooter.SaveSystem;
 
 namespace Shooter.Shop
 {
-    public sealed class WeaponGood : IGood
+    public sealed class SaveWeaponCollectionGood<TSaveEnum> : IGood where TSaveEnum : Enum
     {
         private readonly IGood _good;
-        private readonly ICollectionStorage<WeaponType> _weaponStorage;
-        private readonly WeaponType _weapon;
+        private readonly ICollectionStorage<TSaveEnum> _weaponStorage;
+        private readonly TSaveEnum _weapon;
 
-        public WeaponGood(IGood good, WeaponType weapon, ICollectionStorage<WeaponType> weaponStorage)
+        public SaveWeaponCollectionGood(IGood good, TSaveEnum weapon, ICollectionStorage<TSaveEnum> weaponStorage)
         {
             _good = good ?? throw new ArgumentNullException(nameof(good));
             _weapon = weapon;

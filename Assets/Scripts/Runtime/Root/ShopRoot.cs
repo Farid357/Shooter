@@ -60,7 +60,7 @@ namespace Shooter.Root
         {
             foreach (var weaponGoodData in _weaponGoodData)
             {
-                yield return new WeaponGood(new Good(_goodSwitchingView.GoodView, weaponGoodData), weaponGoodData.Type,
+                yield return new SaveWeaponCollectionGood<WeaponType>(new Good(_goodSwitchingView.GoodView, weaponGoodData), weaponGoodData.Type,
                     new CollectionStorage<WeaponType>(new BinaryStorage()));
             }
 

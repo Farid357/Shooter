@@ -8,6 +8,7 @@ using Shooter.Shop;
 using Shooter.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Shooter.Root
 {
@@ -22,23 +23,34 @@ namespace Shooter.Root
         [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _healRpgData;
         [SerializeField, VerticalGroup("Weapon Data")] private DualWeaponData _dualPistolsData;
 
-        [SerializeField] private GrenadePickupsFactory _grenadePickupsFactory;
+        [FormerlySerializedAs("_throwingWeaponsAdder")] [SerializeField] private ThrowingWeaponsCountAdder _throwingWeaponsCountAdder;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
         [SerializeField] private HandWeaponFactory _handWeaponFactory;
         [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
+        [SerializeField] private ThrowingWeaponsTypeAdder _throwingWeaponsTypeAdder;
 
-        private readonly List<WeaponType> _defaultWeapons = new()
-        {
-            WeaponType.Shotgun
-        };
-        
+        private readonly List<WeaponType> _defaultWeapons = new() { WeaponType.Shotgun };
+
         public void Compose(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IGrenade> grenadesInventory)
         {
-            _grenadePickupsFactory.Init(grenadesInventory, _grenadeSelectorRoot.Compose());
-            _grenadePickupsFactory.SpawnLoop().Forget();
+            _throwingWeaponsCountAdder.Init(grenadesInventory);
+            var throwingWeaponTypesStorage = new CollectionStorage<ThrowingWeaponType>(new BinaryStorage());
+           // var throwingWeaponTypes = throwingWeaponTypesStorage.Exists(WeaponsKey.Value)
+             //   ? CreateThrowingWeaponsList(throwingWeaponTypesStorage.Load(WeaponsKey.Value))
+               // : new[] { ThrowingWeaponType.Standart };
+
+            var throwingWeaponTypes = new [] { ThrowingWeaponType.Standart };
+            _throwingWeaponsTypeAdder.Init(grenadesInventory, _grenadeSelectorRoot.Compose(), throwingWeaponTypes);
+            _throwingWeaponsCountAdder.SpawnLoop().Forget();
+            _throwingWeaponsTypeAdder.SpawnNewGrenadeTypeLoop().Forget();
+
             var weaponTypesStorage = new CollectionStorage<WeaponType>(new BinaryStorage());
           //  var weaponSpawnTypes = weaponTypesStorage.Exists(WeaponsKey.Value)? CreateWeaponsList(weaponTypesStorage.Load(WeaponsKey.Value)): _defaultWeapons;
-          var weaponSpawnTypes = new List<WeaponType> { WeaponType.DualPistols, WeaponType.LaserGun };
+          var weaponSpawnTypes = new List<WeaponType>
+          {
+              WeaponType.DualPistols, WeaponType.LaserGun, WeaponType.Ak74, WeaponType.Pistol, WeaponType.HealRpg,
+              WeaponType.PistolWithFireBullets, WeaponType.Shotgun, WeaponType.Sword, WeaponType.Rpg
+          };
           
             var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>
             {
@@ -68,6 +80,13 @@ namespace Shooter.Root
             
             _weaponPickupsFactory.Init(weaponSpawnTypes.ToList(), weaponsInventory, factoriesContainer, inputs);
             _weaponPickupsFactory.SpawnLoop().Forget();
+        }
+
+        private IEnumerable<ThrowingWeaponType> CreateThrowingWeaponsList(IEnumerable<ThrowingWeaponType> loadedTypes)
+        {
+            var list = loadedTypes.ToList();
+            list.Add(ThrowingWeaponType.Standart);
+            return list;
         }
 
         private List<WeaponType> CreateWeaponsList(IEnumerable<WeaponType> loadedWeapons)
