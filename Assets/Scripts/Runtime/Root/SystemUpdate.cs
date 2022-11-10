@@ -37,7 +37,7 @@ namespace Shooter.Root
                 }
             }
             
-            catch (Exception e)
+            catch (Exception)
             {
                 // ignored
             }

@@ -2,6 +2,7 @@
 using Shooter.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Shooter.GameLogic
 {
@@ -10,12 +11,12 @@ namespace Shooter.GameLogic
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private AudioSource _sliceAudio;
         [SerializeField] private HandWeapon _prefab;
-        [SerializeField] private CharacterMovement _parent;
+        [FormerlySerializedAs("_parent")] [SerializeField] private CharacterMovement _character;
 
         public IShootingWeapon Create()
         {
-            var handWeapon = Instantiate(_prefab, _spawnPoint.position, Quaternion.identity, _parent.transform);
-            handWeapon.Init(_sliceAudio);
+            var handWeapon = Instantiate(_prefab, _spawnPoint.position, _prefab.transform.rotation, transform);
+            handWeapon.Init(_sliceAudio, _character);
             return handWeapon;
         }
     }

@@ -48,8 +48,7 @@ namespace Shooter.Root
           //  var weaponSpawnTypes = weaponTypesStorage.Exists(WeaponsKey.Value)? CreateWeaponsList(weaponTypesStorage.Load(WeaponsKey.Value)): _defaultWeapons;
           var weaponSpawnTypes = new List<WeaponType>
           {
-              WeaponType.DualPistols, WeaponType.LaserGun, WeaponType.Ak74, WeaponType.Pistol, WeaponType.HealRpg,
-              WeaponType.PistolWithFireBullets, WeaponType.Shotgun, WeaponType.Sword, WeaponType.Rpg
+             WeaponType.Sword, WeaponType.LaserGun
           };
           
             var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>

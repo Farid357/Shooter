@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 404571388027163465}
   - component: {fileID: 3016600746170524385}
   - component: {fileID: 5058625914515897220}
+  - component: {fileID: 8122166569360651253}
+  - component: {fileID: 3294812174399505272}
   m_Layer: 0
   m_Name: Wolf's Gravestone
   m_TagString: Untagged
@@ -27,14 +29,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2206112874769347228}
-  m_LocalRotation: {x: -0.93913907, y: 0.28052762, z: 0.0513897, w: 0.19152336}
-  m_LocalPosition: {x: 2.87, y: -115.62, z: -11.47}
+  m_LocalRotation: {x: -0.96745247, y: 0.25269103, z: -0.0012550544, w: 0.013471783}
+  m_LocalPosition: {x: 2.46, y: 9.43, z: 1.88}
   m_LocalScale: {x: 1.4793, y: 2, z: 10.479875}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -157.135, y: -0.6799927, z: 33.399994}
+  m_LocalEulerAnglesHint: {x: -178.543, y: -0.5289917, z: 29.283005}
 --- !u!33 &2484197819510269827
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -119,6 +121,7 @@ MonoBehaviour:
   _attackDistance: 5
   _attackCooldown: 1.5
   _damage: 30
+  _attackAnimation: {fileID: 3294812174399505272}
 --- !u!114 &5058625914515897220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +134,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e129575e0a1e405d87f621e76cbeecd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8122166569360651253
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206112874769347228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2de2347233bb478438cdcff224496568, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3294812174399505272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206112874769347228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987d40dc71964f5a9ed991078808bb31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerSeconds: 0.7
+  _name: Attack

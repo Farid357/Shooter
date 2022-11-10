@@ -14,23 +14,23 @@ namespace Shooter.GameLogic
         
         public void Activate()
         {
-            _characterHealthOnActivated = _character.Health;
-            _character.Init(new Health(_characterHealthOnActivated.Value + _protection, new DummyHealthView()));
-            _audio.Play();
-            gameObject.SetActive(true);
+            // _characterHealthOnActivated = _character.Health;
+            // _character.Init(new Health(_characterHealthOnActivated.Value + _protection, new DummyHealthView()));
+            // _audio.Play();
+            // gameObject.SetActive(true);
         }
 
         private void Update()
         {
-            if (IsActivated == false)
-                return;
-           
-            if (_character.Health.Value <= _characterHealthOnActivated.Value - _protection)
-            {
-                _character.Init(_characterHealthOnActivated);
-                _characterHealthOnActivated = null;
-                gameObject.SetActive(false);
-            }
+            // if (IsActivated == false)
+            //     return;
+            //
+            // if (_character.Health.Value <= _characterHealthOnActivated.Value - _protection)
+            // {
+            //     _character.Init(_characterHealthOnActivated);
+            //     _characterHealthOnActivated = null;
+            //     gameObject.SetActive(false);
+            // }
         }
     }
 }
