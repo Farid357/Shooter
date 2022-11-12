@@ -1,24 +1,27 @@
-﻿using Shooter.GameLogic;
-using Shooter.Model;
+﻿using System.Collections;
 using Shooter.SaveSystem;
 using UnityEngine;
 
 namespace Shooter.Root
 {
-    public sealed class SettingsRoot : CompositeRoot
+    public sealed class SettingsRoot : MonoBehaviour
     {
-        [SerializeField] private AudioButtonsView _audioButtonsView;
-        [SerializeField] private AudioButton _muteAudioButton;
-        [SerializeField] private AudioButton _onAudioButton;
-        [SerializeField] private AudioSlider _audioSlider;
-        [SerializeField] private ChangeAudioVolumeSliderAction _changeAudioVolumeSliderAction;
-        
-        public override void Compose()
+        private readonly StorageWithNameSaveObject<SettingsRoot, bool> _cursorStateStorage = new(new BinaryStorage());
+        private readonly StorageWithNameSaveObject<SettingsRoot, int> _fpsStorage = new(new BinaryStorage());
+        private readonly StorageWithNameSaveObject<QualitySettings, int> _qualityLevelStorage = new(new BinaryStorage());
+        private readonly StorageWithNameSaveObject<SettingsRoot, ShadowResolution> _shadowResolutionStorage = new(new BinaryStorage());
+
+        private IEnumerator Start()
         {
-            var switchingStateButtonAction = new SwitchingStateButtonAction<AudioButton>(new BinaryStorage(), _audioButtonsView);
-            _muteAudioButton.Subscribe(switchingStateButtonAction);
-            _onAudioButton.Subscribe(switchingStateButtonAction);
-            _audioSlider.Subscribe(_changeAudioVolumeSliderAction);
+            while (true)
+            {
+                var lockState = _cursorStateStorage.HasSave() && _cursorStateStorage.Load();
+                Cursor.visible = lockState;
+                Application.targetFrameRate = _fpsStorage.HasSave() ? _fpsStorage.Load() : 60;
+                QualitySettings.SetQualityLevel(_qualityLevelStorage.HasSave() ? _qualityLevelStorage.Load() : 2);
+                QualitySettings.shadowResolution = _shadowResolutionStorage.HasSave() ? _shadowResolutionStorage.Load() : ShadowResolution.Medium;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
     }
 }

@@ -12,5 +12,10 @@ namespace Shooter.Tools
             await UniTask.Delay(TimeSpan.FromSeconds(audio.clip.length));
             Object.Destroy(audio.gameObject);
         }
+
+        public static float ToVolume(this float value)
+        {
+            return Mathf.Lerp(-30, 20, value);
+        }
     }
 }

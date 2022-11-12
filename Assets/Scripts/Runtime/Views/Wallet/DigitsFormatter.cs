@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Shooter.Model
 {
@@ -7,26 +6,35 @@ namespace Shooter.Model
     {
         private readonly List<(int, string)> _digitsPrefixes = new()
         {
-            (100, "h"),
-            (1000, "k"),
-            (1000000, "m"),
-            (1000000000, "b")
+            (100, "H"),
+            (1000, "K"),
+            (1000000, "M"),
+            (1000000000, "B")
         };
 
         public string TryFormat(int count)
         {
-            var text = count.ToString();
-
-            foreach (var (digit, prefix) in _digitsPrefixes)
+            for (var i = 0; i < _digitsPrefixes.Count - 1; ++i)
             {
-                if (count < digit)
-                    continue;
+                var (currentValue, currentPostfix) = _digitsPrefixes[i];
+                var (nextValue, nextPostfix) = _digitsPrefixes[i + 1];
 
-                var value = Math.Round(count / (double)digit, 1);
-                text = $"{value}{prefix}";
+                var nextIsLast = i >= _digitsPrefixes.Count - 2;
+
+                if (nextValue > count)
+                {
+                    float result = (float)count / currentValue;
+                    return result.ToString(result >= 100 ? "0" : "0.0").Replace(".0", "") + currentPostfix;
+                }
+
+                if (nextIsLast)
+                {
+                    float result = (float)count / nextValue;
+                    return result.ToString(result >= 100 ? "0" : "0.0").Replace(".0", "") + nextPostfix;
+                }
             }
 
-            return text;
+            return string.Empty;
         }
     }
 }

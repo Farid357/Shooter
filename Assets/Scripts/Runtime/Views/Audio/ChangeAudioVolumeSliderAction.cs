@@ -1,4 +1,5 @@
 ﻿using Shooter.SaveSystem;
+using Shooter.Tools;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -16,7 +17,7 @@ namespace Shooter.GameLogic
         {
             _countView.Visualize(Mathf.RoundToInt(value * 100f));
             _storage.Save(value);
-            _audioMixer.SetFloat(GroupName, value);
+            _audioMixer.SetFloat(GroupName, value.ToVolume());
         }
     }
 }

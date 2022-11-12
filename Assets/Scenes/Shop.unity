@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4440221, g: 0.49316514, b: 0.5722316, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -487,6 +487,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -616,6 +617,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2064307267}
     m_Modifications:
     - target: {fileID: 6425708580677175049, guid: ef82d8e54d2644e41bfff5637c6a3694, type: 3}
@@ -727,6 +729,10 @@ PrefabInstance:
       value: -13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6425708580677175053, guid: ef82d8e54d2644e41bfff5637c6a3694, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1533139711}
   m_SourcePrefab: {fileID: 100100000, guid: ef82d8e54d2644e41bfff5637c6a3694, type: 3}
 --- !u!224 &273977835 stripped
 RectTransform:
@@ -1098,6 +1104,7 @@ GameObject:
   - component: {fileID: 504984835}
   - component: {fileID: 504984837}
   - component: {fileID: 504984836}
+  - component: {fileID: 504984839}
   - component: {fileID: 504984838}
   m_Layer: 5
   m_Name: Money
@@ -1232,12 +1239,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 504984834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc44288072854d3ab8714695422e35af, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bcab82d0894f92488345da5bc4efa4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 504984836}
-  _scrambleMode: 2
-  _speedOfChangeText: 0.1
+  _seconds: 0.4
+  _scrambleMode: 4
+--- !u!114 &504984839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504984834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d669407c6dc585c40a74468fe66abe8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lineVisualization: {fileID: 504984838}
 --- !u!1 &589715361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,6 +2958,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5816118566051241883, guid: 559943cebd8f50d4aa4e2a8dfa128e91, type: 3}
@@ -3029,6 +3050,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 559943cebd8f50d4aa4e2a8dfa128e91, type: 3}
 --- !u!114 &1524372706 stripped
 MonoBehaviour:
@@ -3947,7 +3969,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 504984838}
+    - {fileID: 504984839}
     - {fileID: 1688594065}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -4144,6 +4166,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 136616542}
     m_Modifications:
     - target: {fileID: 6425708580677175052, guid: ef82d8e54d2644e41bfff5637c6a3694, type: 3}
@@ -4239,4 +4262,5 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ef82d8e54d2644e41bfff5637c6a3694, type: 3}
