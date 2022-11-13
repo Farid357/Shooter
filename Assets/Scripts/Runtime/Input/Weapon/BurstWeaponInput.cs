@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Shooter.Model;
+using UnityEngine;
 
 namespace Shooter.GameLogic
 {

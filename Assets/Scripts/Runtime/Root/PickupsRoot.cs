@@ -14,14 +14,15 @@ namespace Shooter.Root
 {
     public sealed class PickupsRoot : SerializedMonoBehaviour
     {
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _rpgData;
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _pistolData;
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _shotgunData;
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _ak74Data;
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _laserData;
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _pistolWithFireBullets;
-        [SerializeField, VerticalGroup("Weapon Data")] private WeaponData _healRpgData;
-        [SerializeField, VerticalGroup("Weapon Data")] private DualWeaponData _dualPistolsData;
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData RpgData { get; private set; }
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData PistolData { get; private set; }
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData ShotgunData{ get; private set; }
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData Ak74Data { get; private set; }
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData LaserData { get; private set; }
+        
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData PistolWithFireBullets { get; private set; }
+        [field: SerializeField, VerticalGroup("Weapon Data")] public WeaponData HealRpgData { get; private set; }
+        [field: SerializeField, VerticalGroup("Weapon Data")] public DualWeaponData DualPistolsData { get; private set; }
 
         [FormerlySerializedAs("_throwingWeaponsAdder")] [SerializeField] private ThrowingWeaponsCountAdder _throwingWeaponsCountAdder;
         [SerializeField] private WeaponPickupsFactory _weaponPickupsFactory;
@@ -53,15 +54,15 @@ namespace Shooter.Root
           
             var factoriesContainer = new Dictionary<WeaponType, IFactory<IWeapon>>
             {
-                { WeaponType.Ak74, new WeaponFactoryWithShootWaiting(_ak74Data.BulletsFactory, _ak74Data) },
-                { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(_pistolData.BulletsFactory, _pistolData) },
-                { WeaponType.Rpg, new WeaponFactoryWithShootWaiting(_rpgData.BulletsFactory, _rpgData) }, 
-                { WeaponType.Shotgun, new WeaponFactoryWithShootWaiting(_shotgunData.BulletsFactory, _shotgunData)},
-                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaiting(_pistolWithFireBullets.BulletsFactory, _pistolWithFireBullets)},
-                { WeaponType.LaserGun, new WeaponFactoryWithShootWaiting(_laserData.BulletsFactory, _laserData)},
+                { WeaponType.Ak74, new WeaponFactoryWithShootWaiting(Ak74Data.BulletsFactory, Ak74Data) },
+                { WeaponType.Pistol, new WeaponFactoryWithShootWaiting(PistolData.BulletsFactory, PistolData) },
+                { WeaponType.Rpg, new WeaponFactoryWithShootWaiting(RpgData.BulletsFactory, RpgData) }, 
+                { WeaponType.Shotgun, new WeaponFactoryWithShootWaiting(ShotgunData.BulletsFactory, ShotgunData)},
+                { WeaponType.PistolWithFireBullets, new WeaponFactoryWithShootWaiting(PistolWithFireBullets.BulletsFactory, PistolWithFireBullets)},
+                { WeaponType.LaserGun, new WeaponFactoryWithShootWaiting(LaserData.BulletsFactory, LaserData)},
                 { WeaponType.Sword, new DummyFactoryFromShootingWeapon(_handWeaponFactory)},
-                { WeaponType.HealRpg, new WeaponFactoryWithShootWaiting(_healRpgData.BulletsFactory, _healRpgData)},
-                { WeaponType.DualPistols, new DualWeaponFactory(new WeaponFactoryWithShootWaiting(_dualPistolsData.FirstData.BulletsFactory, _dualPistolsData.FirstData), new WeaponFactoryWithShootWaiting(_dualPistolsData.SecondData.BulletsFactory, _dualPistolsData.SecondData))}
+                { WeaponType.HealRpg, new WeaponFactoryWithShootWaiting(HealRpgData.BulletsFactory, HealRpgData)},
+                { WeaponType.DualPistols, new DualWeaponFactory(new WeaponFactoryWithShootWaiting(DualPistolsData.FirstData.BulletsFactory, DualPistolsData.FirstData), new WeaponFactoryWithShootWaiting(DualPistolsData.SecondData.BulletsFactory, DualPistolsData.SecondData))}
             };
 
             var inputs = new Dictionary<WeaponType, IWeaponInput>

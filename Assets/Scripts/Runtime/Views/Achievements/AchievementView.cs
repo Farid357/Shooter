@@ -1,6 +1,7 @@
 ﻿using System;
 using Shooter.Model;
 using Shooter.SaveSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace Shooter.GameLogic
         [SerializeField] private ParticleSystem _particlePrefab;
         [SerializeField] private Image _lock;
         [SerializeField] private Image _checkmark;
+        [SerializeField] private TMP_Text _text;
         
         private readonly IStorage _storage = new BinaryStorage();
         private string _path;
@@ -22,8 +24,9 @@ namespace Shooter.GameLogic
         {
             _panel = panel ?? throw new ArgumentNullException(nameof(panel));
             _data = data ?? throw new ArgumentNullException(nameof(data));
-            _path = $"{data.name} {gameObject.name} {nameof(AchievementView)}";
-            var isOpen = _storage.Exists(_path);
+            _text.text = _data.Name;
+            _path = $"{data.Name} {data.Name} {gameObject.name} {nameof(AchievementView)}";
+            var isOpen = _storage.Exists(_path) ? _storage.Load<bool>(_path) : false;
             _lock.gameObject.SetActive(!isOpen);
             _checkmark.gameObject.SetActive(isOpen);
         }

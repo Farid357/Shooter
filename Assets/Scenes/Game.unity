@@ -1072,14 +1072,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _rpgData: {fileID: 584544748}
-  _pistolData: {fileID: 1547327395}
-  _shotgunData: {fileID: 307411130}
-  _ak74Data: {fileID: 818745444}
-  _laserData: {fileID: 1620028041}
-  _pistolWithFireBullets: {fileID: 2121236801}
-  _healRpgData: {fileID: 278743344}
-  _dualPistolsData: {fileID: 1172083242}
+  <RpgData>k__BackingField: {fileID: 584544748}
+  <PistolData>k__BackingField: {fileID: 1547327395}
+  <ShotgunData>k__BackingField: {fileID: 307411130}
+  <Ak74Data>k__BackingField: {fileID: 818745444}
+  <LaserData>k__BackingField: {fileID: 1620028041}
+  <PistolWithFireBullets>k__BackingField: {fileID: 2121236801}
+  <HealRpgData>k__BackingField: {fileID: 278743344}
+  <DualPistolsData>k__BackingField: {fileID: 1172083242}
   _throwingWeaponsCountAdder: {fileID: 1430124520}
   _weaponPickupsFactory: {fileID: 1430124519}
   _handWeaponFactory: {fileID: 282305674}
@@ -9672,6 +9672,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ddff35ea9d47ea41ab98be5ea397c1a, type: 2}
   - {fileID: 11400000, guid: 0c72ea8f6ea06a14986ca95c00f2432c, type: 2}
   - {fileID: 11400000, guid: e607ca21582d8924fa238f78ce7316af, type: 2}
+  - {fileID: 11400000, guid: a69d0c098ef509f468a3f80d92944f85, type: 2}
   _prefab: {fileID: 3594310052612232201, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
 --- !u!1 &1389440166
 GameObject:
@@ -9716,6 +9717,7 @@ MonoBehaviour:
     - {fileID: 1061025399}
     - {fileID: 1147681039}
     - {fileID: 2162173612404598957}
+    - {fileID: 1466578219}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -9751,6 +9753,9 @@ MonoBehaviour:
     - Name: _energyShield
       Entry: 10
       Data: 9
+    - Name: _playerRoot
+      Entry: 10
+      Data: 10
   _wavesData:
   - _factoriesData:
     - <Factory>k__BackingField: {fileID: 1282067436}
@@ -9759,6 +9764,8 @@ MonoBehaviour:
       <EnemiesCount>k__BackingField: 2
     <CreateDelaySeconds>k__BackingField: 0.3
     <SecondsAfterEnd>k__BackingField: 6
+  _needSelectRandomWeaponOnEnemyDied: 0
+  _pickupsRoot: {fileID: 181093254}
 --- !u!4 &1389440168
 Transform:
   m_ObjectHideFlags: 0

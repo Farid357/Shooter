@@ -25,9 +25,13 @@ namespace Shooter.Root
         [SerializeField] private IScoreRoot _scoreRoot;
         [SerializeField] private IEnergyShield _energyShield;
         [SerializeField] private List<EnemyWaveData> _wavesData;
-
+        [SerializeField] private bool _needSelectRandomWeaponOnEnemyDied;
+        [SerializeField] private PickupsRoot _pickupsRoot;
+        [SerializeField] private IPlayerRoot _playerRoot;
+        
         private readonly SystemUpdate _systemUpdate = new();
         private WaveFactory _waveFactory;
+        private EnemySimulation _enemySimulation;
 
         public IWaveFactory WaveFactory => _waveFactory;
 
@@ -50,13 +54,27 @@ namespace Shooter.Root
             );
 
             FindObjectsOfType<StandartEnemyFactory>().ForEach(factory => factory.Init(_systemUpdate, rewardFactory, _scoreRoot.Score(), new DiedHealthsCounter(_diedEnemiesView)));
-            var simulation = new EnemySimulation(_navMeshBaker, _aliveEnemiesView);
+            _enemySimulation = new EnemySimulation(_navMeshBaker, _aliveEnemiesView);
             var waitNextWaveTimer = new Timer(_waveTimerSecondsView, 0.01f);
-            _waveFactory = new WaveFactory(new EnemyWaves(simulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));
+            _waveFactory = new WaveFactory(new EnemyWaves(_enemySimulation), waitNextWaveTimer, new WavesDataQueue(_wavesData.ToQueue()));
             _waveFactory.SpawnNextLoop().Forget();
-            _systemUpdate.Add(waitNextWaveTimer, simulation);
+            if (_needSelectRandomWeaponOnEnemyDied)
+            {
+                var randomWeaponFactory = new RandomWeaponFactory(new (IWeapon, IWeaponInput)[]
+                {
+                    (new WeaponWithShotWaiting(new Weapon(_pickupsRoot.LaserData.BulletsFactory, _pickupsRoot.LaserData.BulletsView, _pickupsRoot.LaserData.Bullets), _pickupsRoot.LaserData.WaitSeconds),
+                         new StandartWeaponInput())
+                });
+                
+                var randomWeaponSelector = new RandomWeaponSelector(_enemySimulation, randomWeaponFactory, _playerRoot);
+                _systemUpdate.Add(randomWeaponSelector);
+            }
+            _systemUpdate.Add(waitNextWaveTimer, _enemySimulation);
         }
 
         private void Update() => _systemUpdate.Update(Time.deltaTime);
+
+        private void LateUpdate() => _enemySimulation.LateUpdate(Time.deltaTime);
+        
     }
 }

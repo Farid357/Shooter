@@ -1201,6 +1201,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1765,6 +1766,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5100817722210671561}
     m_Modifications:
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
@@ -1785,7 +1787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1793,7 +1795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1841,11 +1843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -261
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1864,6 +1866,7 @@ PrefabInstance:
       value: Achievement (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
 --- !u!224 &2205897696101094897 stripped
 RectTransform:
@@ -1875,6 +1878,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5100817722210671561}
     m_Modifications:
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
@@ -1895,7 +1899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1903,7 +1907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1951,11 +1955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -361
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1974,6 +1978,7 @@ PrefabInstance:
       value: Achievement (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
 --- !u!224 &2205897695230521949 stripped
 RectTransform:
@@ -1985,6 +1990,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5100817722210671561}
     m_Modifications:
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
@@ -2005,7 +2011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2013,7 +2019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2061,11 +2067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -161
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2084,6 +2090,7 @@ PrefabInstance:
       value: Achievement (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
 --- !u!224 &2205897694368928328 stripped
 RectTransform:
@@ -2095,6 +2102,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5100817722210671561}
     m_Modifications:
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
@@ -2115,7 +2123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2123,7 +2131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2171,11 +2179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 94
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -61
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365084862507936705, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2194,6 +2202,7 @@ PrefabInstance:
       value: Achievement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cd0765e47d3c8b145800752fe47d6496, type: 3}
 --- !u!224 &2205897694315971062 stripped
 RectTransform:

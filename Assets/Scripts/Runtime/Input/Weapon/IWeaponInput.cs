@@ -1,7 +1,7 @@
-﻿namespace Shooter.GameLogic
+﻿namespace Shooter.Model
 {
     public interface IWeaponInput
     {
-        public bool IsPressingLeftMouseButton { get; }
+        bool IsPressingLeftMouseButton { get; }
     }
 }

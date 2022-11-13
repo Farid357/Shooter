@@ -4,7 +4,7 @@ using Shooter.Tools;
 
 namespace Shooter.Model
 {
-    public sealed class EnemySimulation : IEnemiesSimulation, IUpdateble
+    public sealed class EnemySimulation : IEnemiesSimulation, IUpdateble, ILateUpdateble
     {
         private readonly List<IEnemy> _aliveEnemies = new();
         private readonly INavMeshBaker _navMeshBaker;
@@ -15,6 +15,8 @@ namespace Shooter.Model
             _navMeshBaker = navMeshBaker ?? throw new ArgumentNullException(nameof(navMeshBaker));
             _aliveEnemiesCountView = aliveEnemiesCountView ?? throw new ArgumentNullException(nameof(aliveEnemiesCountView));
         }
+
+        public bool HasEnemyDied { get; private set; }
 
         public bool NotContainsAliveEnemy => _aliveEnemies.Count == 0;
 
@@ -38,10 +40,14 @@ namespace Shooter.Model
 
                 if (enemy.Health.IsDied)
                 {
+                    HasEnemyDied = true;
                     _aliveEnemies.RemoveAt(i);
                     _aliveEnemiesCountView.Visualize(_aliveEnemies.Count);
                 }
             }
         }
+
+        public void LateUpdate(float deltaTime) => HasEnemyDied = false;
+        
     }
 }
