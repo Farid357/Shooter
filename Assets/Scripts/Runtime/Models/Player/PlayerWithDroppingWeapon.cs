@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Shooter.GameLogic;
 using Shooter.Model;
 using Shooter.Model.Inventory;
 
 namespace Shooter.Root
 {
-    public sealed class PlayerWithDroppingWeapon<TWeapon> : IUpdateble where TWeapon : IDroppingWeapon
+    public sealed class PlayerWithDroppingWeapon<TWeapon> : IUpdateble where TWeapon : IThrowingWeapon
     {
         private readonly TWeapon _weapon;
         private readonly IWeaponInput _input;
         private readonly IInventory<TWeapon> _droppingWeaponsInventory;
-        private readonly IInventoryItemSelector<TWeapon> _droppingWeaponSelector;
+        private readonly IInventoryItemsSelector _droppingWeaponSelector;
         private readonly IInventory<(IWeapon, IWeaponInput)> _weaponsInventory;
-        private readonly IInventoryItemSelector<(IWeapon, IWeaponInput)> _weaponSelector;
+        private readonly IInventoryItemsSelector _weaponSelector;
 
-        public PlayerWithDroppingWeapon(TWeapon weapon, IWeaponInput input, IInventory<TWeapon> droppingWeaponsInventory,  IInventory<(IWeapon, IWeaponInput)> weaponsInventory,
-            IInventoryItemSelector<TWeapon> droppingWeaponSelector, IInventoryItemSelector<(IWeapon, IWeaponInput)> weaponSelector)
+        public PlayerWithDroppingWeapon(TWeapon weapon, IWeaponInput input,
+            IInventory<TWeapon> droppingWeaponsInventory, IInventory<(IWeapon, IWeaponInput)> weaponsInventory,
+            IInventoryItemsSelector droppingWeaponSelector, IInventoryItemsSelector weaponSelector)
         {
             _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
             _input = input ?? throw new ArgumentNullException(nameof(input));
@@ -31,18 +32,21 @@ namespace Shooter.Root
             if (_input.IsPressingLeftMouseButton && _weapon.CanShoot)
             {
                 _weapon.Shoot();
+                _droppingWeaponSelector.Unselect();
                 var slot = _droppingWeaponsInventory.Slots.First(slot => slot.Item.Model.Equals(_weapon));
                 _droppingWeaponsInventory.Drop(slot);
-
-                if (_droppingWeaponsInventory.Slots.Contains(slot))
-                {
-                    _droppingWeaponSelector.Select(slot.Item.Model);
-                }
+                new List<IInventoryItemsSelector> {_droppingWeaponSelector, _weaponSelector}.
+                    FindAll(selector => selector.CanUnselect)
+                    .ForEach(selector => selector.Unselect());
                 
-                else if(_weaponsInventory.Slots.Count() > 0)
+                if (_droppingWeaponsInventory.Slots.Any(s => s == slot))
                 {
-                    var firstWeapon = _weaponsInventory.Slots.ElementAt(0).Item.Model;
-                    _weaponSelector.Select(firstWeapon);
+                    _droppingWeaponSelector.Select(_droppingWeaponsInventory.Slots.ToList().IndexOf(slot));
+                }
+
+                else if (_weaponsInventory.Slots.Count() > 0)
+                {
+                    _weaponSelector.Select(0);
                 }
             }
         }

@@ -39,17 +39,21 @@ namespace Shooter.Root
             var weaponsInventory = new Inventory<(IWeapon, IWeaponInput)>(_inventoryView);
             var weaponSelector = new WeaponSelector(_playerRoot, _secondWeaponBulletsView);
             var item = new Item<(IWeapon, IWeaponInput)>(_weaponItemData, (weapon, new BurstWeaponInput()), _weaponView);
-            var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item, 1);
+            var slot = new InventorySlot<(IWeapon, IWeaponInput)>(weaponSelector, item);
             var grenadesInventory = new Inventory<IThrowingWeapon>(_grenadesInventoryView, 3);
             var grenade = _grenadeFactory.Create();
-            var grenadeItem = new Item<IThrowingWeapon>(_grenadeItem, grenade, grenade.ItemView);
-            var grenadeSlot = new InventorySlot<IThrowingWeapon>(_grenadeSelectorRoot.Compose(), grenadeItem, 2);
+            var grenadeSlot = new InventorySlot<IThrowingWeapon>(_grenadeSelectorRoot.Compose(), new List<Item<IThrowingWeapon>>
+            {
+                CreateGrenadeItem(),
+                CreateGrenadeItem(),
+            }, 2);
+            
             grenadesInventory.Add(grenadeSlot);
             weaponsInventory.Add(slot);
             var weaponInventoryItemsSelector = new InventoryItemsSelector<(IWeapon, IWeaponInput)>(weaponsInventory);
             var grenadeInventorySelector = new InventoryItemsSelector<IThrowingWeapon>(grenadesInventory);
             var potionsInventory = _potionRoot.Compose();
-            _playerRoot.Init(weaponsInventory, grenadesInventory, weaponSelector);
+            _playerRoot.Init(weaponsInventory, grenadesInventory, weaponInventoryItemsSelector, grenadeInventorySelector);
             var potionInventorySelector = new InventoryItemsSelector<IPotion>(potionsInventory);
             var selectors = new List<IInventoryItemsSelector>{ grenadeInventorySelector, weaponInventoryItemsSelector, potionInventorySelector };
             var inventoryItemsInputSelector = new InventoryItemsSelectorInput(_keypadNumbers, selectors, weaponInventoryItemsSelector);
@@ -66,7 +70,13 @@ namespace Shooter.Root
                 bulletsAddTimer), new InventoryItemsDropInput<(IWeapon, IWeaponInput)>(_keypadNumbers, weaponsInventory));
         }
 
-        
+        private Item<IThrowingWeapon> CreateGrenadeItem()
+        {
+            var grenade = _grenadeFactory.Create();
+            var grenadeItem = new Item<IThrowingWeapon>(_grenadeItem, grenade, grenade.ItemView);
+            return grenadeItem;
+        }
+
         private void Update() => _systemUpdate.Update(Time.deltaTime);
     }
 }

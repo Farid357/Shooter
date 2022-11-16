@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Shooter.GameLogic
 {
-    public sealed class GrenadeView : ThrowingWeaponView
+    public sealed class Grenade : ThrowingWeapon
     {
         [SerializeField] private ThrowingKnife _throwingKnife;
         [SerializeField, MinValue(0.4f)] private float _explosionSeconds = 1.2f;

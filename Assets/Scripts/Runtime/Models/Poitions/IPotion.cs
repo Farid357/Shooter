@@ -1,6 +1,6 @@
 ﻿namespace Shooter.Model
 {
-    public interface IPotion : IDroppingWeapon
+    public interface IPotion : IThrowingWeapon
     {
     }
 }

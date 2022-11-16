@@ -37,7 +37,7 @@ namespace Shooter.Model.Inventory
             if (slot.ItemsCount - 1 > 0)
             {
                 slot.DropOneItem();
-                _view.VisualizeItemsCount(slot.Item.Data, slot.ItemsCount);
+                _view.VisualizeItemsCount(slot.Item.Data, slot.ItemsCount + 1);
             }
 
             else

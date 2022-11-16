@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Shooter.Tools;
 
 namespace Shooter.Model.Inventory
 {
@@ -21,9 +22,9 @@ namespace Shooter.Model.Inventory
             if (CanSelect(index) == false)
                 throw new InvalidOperationException(nameof(Select));
 
-            if (_previousSelectedItem.View is not null)
+            if (_previousSelectedItem.View is not null && _previousSelectedItem.Model.IsNotThrowingWeapon())
                 await _previousSelectedItem.View.Hide();
-            
+
             var slot = _inventory.Slots.ElementAt(index);
             await slot.Item.View.Show();
             slot.ItemSelector.Select(slot.Item.Model);
@@ -37,7 +38,8 @@ namespace Shooter.Model.Inventory
             if (CanUnselect == false)
                 throw new InvalidOperationException("Already unselected!");
 
-            _lastSelectedSlot.Item.View.Hide();
+            if (_lastSelectedSlot.Item.Model.IsNotThrowingWeapon())
+                _lastSelectedSlot.Item.View.Hide();
             _lastSelectedSlot.ItemSelector.Unselect();
             CanUnselect = false;
         }

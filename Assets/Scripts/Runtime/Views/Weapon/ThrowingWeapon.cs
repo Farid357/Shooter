@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 
 namespace Shooter.GameLogic
 {
-    public abstract class ThrowingWeaponView : SerializedMonoBehaviour, IThrowingWeapon
+    public abstract class ThrowingWeapon : SerializedMonoBehaviour, IThrowingWeapon
     {
         public abstract void Shoot();
         

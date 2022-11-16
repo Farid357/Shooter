@@ -11,17 +11,19 @@ namespace Shooter.Root
     public sealed class PlayerRoot : SerializedMonoBehaviour, IPlayerRoot
     {
         [SerializeField] private PotionRoot _potionRoot;
-        [SerializeField] private GrenadeSelectorRoot _grenadeSelectorRoot;
         private readonly SystemUpdate _systemUpdate = new();
         private IUpdateble _lastPlayer;
         private IInventory<IThrowingWeapon> _grenadesInventory;
         private IInventory<(IWeapon, IWeaponInput)> _weaponsInventory;
-        private IInventoryItemSelector<(IWeapon, IWeaponInput)> _weaponSelector;
+        private IInventoryItemsSelector _weaponSelector;
+        private IInventoryItemsSelector _grenadeSelector;
 
-        public IDroppingWeapon ComposedDroppingWeapon { get; private set; }
+        public IThrowingWeapon ComposedThrowingWeapon { get; private set; } = new DummyPotion();
         
-        public void Init(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IThrowingWeapon> grenadesInventory, IInventoryItemSelector<(IWeapon, IWeaponInput)> weaponSelector)
+        public void Init(IInventory<(IWeapon, IWeaponInput)> weaponsInventory, IInventory<IThrowingWeapon> grenadesInventory, IInventoryItemsSelector weaponSelector, 
+            IInventoryItemsSelector grenadeSelector)
         {
+            _grenadeSelector = grenadeSelector;
             _weaponSelector = weaponSelector ?? throw new ArgumentNullException(nameof(weaponSelector));
             _weaponsInventory = weaponsInventory ?? throw new ArgumentNullException(nameof(weaponsInventory));
             _grenadesInventory = grenadesInventory ?? throw new ArgumentNullException(nameof(grenadesInventory));
@@ -34,15 +36,15 @@ namespace Shooter.Root
             Add(player);
         }
 
-        public void Compose(IWeaponInput potionInput, IPotion potion) => Compose(potionInput, potion, _potionRoot.Compose(), _potionRoot.Selector);
+        public void Compose(IWeaponInput potionInput, IPotion potion) => Compose(potionInput, potion, _potionRoot.Compose(), _grenadeSelector);
 
-        public void Compose(IWeaponInput weaponInput, IThrowingWeapon throwingWeapon) => Compose(weaponInput, throwingWeapon, _grenadesInventory, _grenadeSelectorRoot.Compose());
+        public void Compose(IWeaponInput weaponInput, IThrowingWeapon throwingWeapon) => Compose(weaponInput, throwingWeapon, _grenadesInventory, _grenadeSelector);
 
-        private void Compose<TWeapon>(IWeaponInput weaponInput, TWeapon weapon, IInventory<TWeapon> inventory, IInventoryItemSelector<TWeapon> droppingWeaponSelector) where TWeapon : IDroppingWeapon
+        private void Compose<TWeapon>(IWeaponInput weaponInput, TWeapon weapon, IInventory<TWeapon> inventory, IInventoryItemsSelector droppingWeaponSelector) where TWeapon : IThrowingWeapon
         {
             TryRemove(_lastPlayer);
             var player = new PlayerWithDroppingWeapon<TWeapon>(weapon, weaponInput, inventory, _weaponsInventory, droppingWeaponSelector, _weaponSelector);
-            ComposedDroppingWeapon = weapon;
+            ComposedThrowingWeapon = weapon;
             Add(player);
         }
         

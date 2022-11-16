@@ -8,10 +8,8 @@
         {
             
         }
+        
 
-        public void Disable()
-        {
-            
-        }
+        public IInventoryItemGameObjectView ItemView { get; }
     }
 }

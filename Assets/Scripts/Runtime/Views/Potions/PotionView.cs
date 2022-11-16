@@ -22,19 +22,4 @@ namespace Shooter.Model
             await Task.Delay(TimeSpan.FromSeconds(0.4f));
         }
     }
-    
-    public sealed class PotionGameObjectView : MonoBehaviour, IPotion
-    {
-        private IPotion _potion;
-
-        public void Init(IPotion potion)
-        {
-            _potion = potion ?? throw new ArgumentNullException(nameof(potion));
-        }
-        
-        public bool CanShoot => _potion.CanShoot;
-        
-        public void Shoot() => _potion.Shoot();
-
-    }
 }

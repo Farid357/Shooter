@@ -38,7 +38,6 @@ namespace Shooter.GameLogic
 
                 if (magnitude <= _distanceBetweenHitPositionAndAttack * _distanceBetweenHitPositionAndAttack)
                 {
-                    Debug.Log("ogo");
                     _enemyAttackSound.Play();
                     Attack();
                 }

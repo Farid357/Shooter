@@ -1,4 +1,5 @@
 using System;
+using Shooter.Model.Inventory;
 
 namespace Shooter.Model
 {
@@ -8,16 +9,19 @@ namespace Shooter.Model
         private readonly IPotionView _view;
         private readonly int healAmount;
 
-        public HealthPotion(IHealth health, IPotionView view)
+        public HealthPotion(IHealth health, IPotionView view, IInventoryItemGameObjectView itemView)
         {
             _health = health ?? throw new ArgumentNullException(nameof(health));
             _view = view ?? throw new ArgumentNullException(nameof(view));
+            ItemView = itemView ?? throw new ArgumentNullException(nameof(itemView));
             healAmount = new Random().Next(10, 50);
         }
 
         public bool CanShoot { get; private set; } = true;
-        
+
         public bool HasDropped { get; private set; }
+        
+        public IInventoryItemGameObjectView ItemView { get; }
 
         public async void Shoot()
         {
@@ -32,5 +36,6 @@ namespace Shooter.Model
                 _health.Heal(healAmount);
             
         }
+
     }
 }

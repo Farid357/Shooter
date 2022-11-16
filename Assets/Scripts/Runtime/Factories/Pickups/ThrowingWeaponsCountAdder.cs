@@ -27,12 +27,12 @@ namespace Shooter.GameLogic
         {
             while (true)
             {
-                if (_inventory.Slots.Count() > 0 && _inventory.Slots.Any(slot => slot.ItemsCount < slot.MaxItemsCount))
-                {
-                    await UniTask.Delay(TimeSpan.FromSeconds(_addNewCountDelay));
-                    var slot = _inventory.Slots.First(slot => slot.ItemsCount < slot.MaxItemsCount);
-                    slot.AddItems(_addAmount);
-                }
+                // if (_inventory.Slots.Count() > 0 && _inventory.Slots.Any(slot => slot.ItemsCount < slot.MaxItemsCount))
+                // {
+                //     await UniTask.Delay(TimeSpan.FromSeconds(_addNewCountDelay));
+                //     var slot = _inventory.Slots.First(slot => slot.ItemsCount < slot.MaxItemsCount);
+                //     slot.AddItems(_addAmount);
+                // }
 
                 await UniTask.Yield();
             }

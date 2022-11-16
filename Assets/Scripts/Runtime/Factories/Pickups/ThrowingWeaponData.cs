@@ -9,6 +9,6 @@ namespace Shooter.GameLogic
     {
         [field: SerializeField] public GrenadePickup Prefab { get; private set; }
         
-        [field: SerializeField] public IFactory<ThrowingWeaponView> Factory { get; private set; }
+        [field: SerializeField] public IFactory<ThrowingWeapon> Factory { get; private set; }
     }
 }

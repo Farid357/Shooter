@@ -42,7 +42,7 @@ namespace Shooter.GameLogic.Inventory
             potionPickup.Movement.Init(_spine);
             var potion = _potionFactory.Create();
             var item = new Item<IPotion>(potionPickup.ItemData, potion, _potionGameObjectFactory.Create());
-            potionPickup.Init(_inventory, new InventorySlot<IPotion>(_potionSelector, item, 2));
+            potionPickup.Init(_inventory, new InventorySlot<IPotion>(_potionSelector, item));
         }
     }
 }

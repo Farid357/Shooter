@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Shooter.Model;
 using Shooter.Model.Inventory;
 using Shooter.Tools;
@@ -8,7 +9,8 @@ namespace Shooter.GameLogic.Inventory
 {
     public sealed class GrenadePickup : Pickup
     {
-        [SerializeField, Min(1)] private int _count = 1;
+        [SerializeField, Min(1)] private int _count = 2;
+        [SerializeField, Min(1)] private int _maxItemsCountInSlot = 2;
         [SerializeField] private ItemData _itemData;
 
         private IInventory<IThrowingWeapon> _inventory;
@@ -26,10 +28,18 @@ namespace Shooter.GameLogic.Inventory
         {
             if (_inventory.IsFull == false)
             {
+                var slot = new InventorySlot<IThrowingWeapon>(_selector, CreateItems(), _maxItemsCountInSlot);
+                _inventory.Add(slot);
+            }
+        }
+
+        private IEnumerable<Item<IThrowingWeapon>> CreateItems()
+        {
+            for (var i = 0; i < _count; i++)
+            {
                 var grenade = _factory.Create();
                 var item = new Item<IThrowingWeapon>(_itemData, grenade, grenade.ItemView);
-                var slot = new InventorySlot<IThrowingWeapon>(_selector, item, _count);
-                _inventory.Add(slot);
+                yield return item;
             }
         }
     }

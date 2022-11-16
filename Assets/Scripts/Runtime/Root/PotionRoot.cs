@@ -12,12 +12,13 @@ namespace Shooter.Root
         [SerializeField] private EnemyRoot _enemyRoot;
         [SerializeField] private PotionPickupsFactory _potionPickupsFactory;
         [SerializeField] private IHealthTransformView _character;
-        [SerializeField] private IPotionView _healthPotionView;
         [SerializeField] private IScoreRoot _scoreRoot;
         [SerializeField] private ItemGameObjectViewFactory _potionGameObjectViewFactory;
         [SerializeField] private IPlayerRoot _playerRoot;
         [SerializeField] private IBulletsView[] _bulletsViews;
         [SerializeField] private IInventoryView _inventoryView;
+        [SerializeField] private ICharacterMovement _characterMovement;
+        [SerializeField] private Dictionary<PotionType, IPotionView> _views;
 
         public IInventoryItemSelector<IPotion> Selector { get; private set; }
         
@@ -27,17 +28,28 @@ namespace Shooter.Root
         public IInventory<IPotion> Compose()
         {
             var potionsInventory = new Inventory<IPotion>(_inventoryView, 3);
+            var view = _potionGameObjectViewFactory.Create();
+            
             var potions = new IPotion[]
             {
-                new HealthPotion(_character.Health, _healthPotionView),
-                new RewardPotion(_healthPotionView, new ScoreReward(_scoreRoot.Score(), 1000)),
-                new NegativeHealthPotion(_character.Health, _healthPotionView)
+                new HealthPotion(_character.Health, _views[PotionType.Health], view),
+                new RewardPotion(_views[PotionType.Reward], new ScoreReward(_scoreRoot.Score(), 1000), view),
+                new NegativeHealthPotion(_character.Health, _views[PotionType.NegativeHealth], view),
+                new SpeedPotion(_characterMovement, _views[PotionType.Speed], view)
             };
             
             var potionFactory = new PotionFactory(potions);
-            Selector = new DroppingWeaponSelector(_playerRoot, potionFactory, _bulletsViews);
+            Selector = new ThrowingWeaponSelector(_playerRoot, _bulletsViews);
             _potionPickupsFactory.Init(potionFactory, _potionGameObjectViewFactory, potionsInventory, _enemyRoot.WaveFactory, Selector);
             return potionsInventory;
+        }
+        
+        private enum PotionType
+        {
+            Health,
+            Reward,
+            Speed,
+            NegativeHealth
         }
     }
 }

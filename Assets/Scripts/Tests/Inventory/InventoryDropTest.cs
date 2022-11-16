@@ -14,7 +14,7 @@ namespace Shooter.Test
         {
             var inventory = new Inventory<IWeapon>(new DummyInventoryView());
             var weapon = new DummyWeapon();
-            var slot = new InventorySlot<IWeapon>(new DummyItemSelector<IWeapon>(), new Item<IWeapon>(ScriptableObject.CreateInstance<ItemData>(), weapon, new DummyItemView()),3, 3);
+            var slot = new InventorySlot<IWeapon>(new DummyItemSelector<IWeapon>(), new Item<IWeapon>(ScriptableObject.CreateInstance<ItemData>(), weapon, new DummyItemView()));
             inventory.Add(slot);
             inventory.Drop(slot);
             Assert.That(inventory.Slots.Count() == 1 && inventory.Slots.ElementAt(0).ItemsCount == 2);

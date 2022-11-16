@@ -9,7 +9,7 @@ namespace Shooter.GameLogic
         [SerializeField] private TPrefab _prefab;
         [SerializeField] private TParent _parent;
         [SerializeField] private Transform _spawnPoint;
-        
+
         public TPrefab Create()
         {
             var obj = Instantiate(_prefab, _spawnPoint.position, Quaternion.identity, _parent.transform);

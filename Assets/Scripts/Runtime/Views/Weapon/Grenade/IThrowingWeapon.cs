@@ -2,7 +2,7 @@
 
 namespace Shooter.Model
 {
-    public interface IThrowingWeapon : IDroppingWeapon
+    public interface IThrowingWeapon : IShootingWeapon
     {
         IInventoryItemGameObjectView ItemView { get; }
 

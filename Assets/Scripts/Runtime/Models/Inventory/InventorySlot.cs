@@ -1,25 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Shooter.Tools;
 
 namespace Shooter.Model.Inventory
 {
     public sealed class InventorySlot<TItem>
     {
-        public InventorySlot(IInventoryItemSelector<TItem> selector, Item<TItem> item, int maxItemsCount, int itemsCount = 1)
+        private readonly List<Item<TItem>> _items = new();
+        
+        public InventorySlot(IInventoryItemSelector<TItem> selector, Item<TItem> item) : this(selector, new []{item}, 1) { }
+
+        public InventorySlot(IInventoryItemSelector<TItem> selector, IEnumerable<Item<TItem>> items, int maxItemsCount)
         {
-            if (maxItemsCount < itemsCount)
+            ItemsCount = items.Count();
+            
+            if (maxItemsCount < ItemsCount)
                 throw new ArgumentOutOfRangeException(nameof(maxItemsCount));
             
-            Item = item;
-            MaxItemsCount = maxItemsCount.TryThrowLessThanOrEqualsToZeroException();
-            ItemsCount = itemsCount.TryThrowLessThanOrEqualsToZeroException();
             ItemSelector = selector ?? throw new ArgumentNullException(nameof(selector));
+            MaxItemsCount = maxItemsCount.TryThrowLessThanOrEqualsToZeroException();
+            _items.AddRange(items);
         }
         
         public IInventoryItemSelector<TItem> ItemSelector { get; }
-        
-        public Item<TItem> Item { get; }
-        
+
+        public Item<TItem> Item => _items[^1];
+
         public int MaxItemsCount { get; }
 
         public int ItemsCount { get; private set; }
@@ -29,6 +36,7 @@ namespace Shooter.Model.Inventory
             if (CanDropOneItem() == false)
                 throw new InvalidOperationException(nameof(DropOneItem));
 
+            _items.RemoveAt(_items.Count - 1);
             ItemsCount--;
         }
 
