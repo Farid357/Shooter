@@ -15,5 +15,5 @@ MonoBehaviour:
   <Name>k__BackingField: Increase Bullets 3
   <Sprite>k__BackingField: {fileID: 21300000, guid: 0770a149698aa1540b0923a3827328c1, type: 3}
   <Price>k__BackingField: 1000
-  <WalletForPay>k__BackingField: 1
+  <Currency>k__BackingField: 1
   <ForUsingSeconds>k__BackingField: 30

@@ -9839,6 +9839,26 @@ MonoBehaviour:
       <EnemiesCount>k__BackingField: 2
     <CreateDelaySeconds>k__BackingField: 0.3
     <SecondsAfterEnd>k__BackingField: 6
+  - _factoriesData:
+    - <Factory>k__BackingField: {fileID: 1362595609}
+      <EnemiesCount>k__BackingField: 1
+    - <Factory>k__BackingField: {fileID: 1282067436}
+      <EnemiesCount>k__BackingField: 1
+    - <Factory>k__BackingField: {fileID: 1701383500}
+      <EnemiesCount>k__BackingField: 1
+    <CreateDelaySeconds>k__BackingField: 0.001
+    <SecondsAfterEnd>k__BackingField: 10
+  - _factoriesData:
+    - <Factory>k__BackingField: {fileID: 1362595609}
+      <EnemiesCount>k__BackingField: 1
+    - <Factory>k__BackingField: {fileID: 1282067436}
+      <EnemiesCount>k__BackingField: 1
+    - <Factory>k__BackingField: {fileID: 1701383500}
+      <EnemiesCount>k__BackingField: 1
+    - <Factory>k__BackingField: {fileID: 1298473878}
+      <EnemiesCount>k__BackingField: 1
+    <CreateDelaySeconds>k__BackingField: 0.001
+    <SecondsAfterEnd>k__BackingField: 15
   _needSelectRandomWeaponOnEnemyDied: 0
   _pickupsRoot: {fileID: 181093254}
 --- !u!4 &1389440168
@@ -10743,7 +10763,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _potionRoot: {fileID: 1223089888}
-  _grenadeSelectorRoot: {fileID: 0}
 --- !u!114 &1466578220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12018,7 +12037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2596275, y: 0.055555556}
   m_AnchorMax: {x: 0.7403958, y: 0.21577777}
-  m_AnchoredPosition: {x: -0.5, y: -6.5}
+  m_AnchoredPosition: {x: -0.5, y: -6.499939}
   m_SizeDelta: {x: 997, y: 907}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648017571

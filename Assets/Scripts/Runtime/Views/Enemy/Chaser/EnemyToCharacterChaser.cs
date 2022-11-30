@@ -28,7 +28,7 @@ namespace Shooter.GameLogic
         {
             if (_showGizmas)
             {
-                Gizmos.color = Color.blue;
+                Gizmos.color = Color.red;
                 Gizmos.DrawSphere(_center.position, _radius);
             }
         }

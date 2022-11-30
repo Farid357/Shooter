@@ -12,6 +12,6 @@ namespace Shooter.Shop
         
         [field: SerializeField, MinValue(1)] public int Price { get; private set; }
 
-        [field: SerializeField] public WalletType WalletForPay { get; private set; }
+        [field: SerializeField] public Currency Currency { get; private set; }
     }
 }

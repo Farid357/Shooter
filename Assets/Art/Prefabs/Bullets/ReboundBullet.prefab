@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5216364007565696850}
   - component: {fileID: -2301362056045337685}
   - component: {fileID: 7527864124268466040}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: ReboundBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c001b889f1f6459bbf82f79de57883e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   <Damage>k__BackingField: 15
   _needDisableOnEnteredCollision: 0
 --- !u!23 &2976904946290311158
@@ -144,6 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26152cb4bafb4fa99bcdfacd26d950f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _throwForce: 60
 --- !u!114 &7527864124268466040
 MonoBehaviour:
@@ -157,6 +175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aed33e6895641218db00d95d3c1fea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   <Damage>k__BackingField: 0
   _movement: {fileID: -2301362056045337685}
   _maxReboundsCount: 1

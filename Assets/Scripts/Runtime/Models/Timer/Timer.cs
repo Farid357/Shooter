@@ -16,7 +16,13 @@ namespace Shooter.Model
         
         public bool IsEnded => _cooldown == 0;
         
-        public void Restart(float newTime) => _cooldown = newTime.TryThrowLessThanOrEqualsToZeroException();
+        public void Restart(float newTime)
+        {
+            if (newTime < 0)
+                throw new ArgumentOutOfRangeException(nameof(newTime));
+            
+            _cooldown = newTime;
+        }
 
         public void Update(float deltaTime)
         {

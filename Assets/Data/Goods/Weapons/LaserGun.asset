@@ -15,5 +15,5 @@ MonoBehaviour:
   <Name>k__BackingField: Laser Gun
   <Sprite>k__BackingField: {fileID: 21300000, guid: f9313f3fec2710948b9a864de521460c, type: 3}
   <Price>k__BackingField: 500
-  <WalletForPay>k__BackingField: 1
+  <Currency>k__BackingField: 1
   <Type>k__BackingField: 6

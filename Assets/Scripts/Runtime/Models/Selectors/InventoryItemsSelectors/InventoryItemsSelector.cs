@@ -22,7 +22,7 @@ namespace Shooter.Model.Inventory
             if (CanSelect(index) == false)
                 throw new InvalidOperationException(nameof(Select));
 
-            if (_previousSelectedItem.View is not null && _previousSelectedItem.Model.IsNotThrowingWeapon())
+            if (_previousSelectedItem.View is not null)
                 await _previousSelectedItem.View.Hide();
 
             var slot = _inventory.Slots.ElementAt(index);

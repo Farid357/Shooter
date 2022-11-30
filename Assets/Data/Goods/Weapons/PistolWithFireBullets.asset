@@ -15,5 +15,5 @@ MonoBehaviour:
   <Name>k__BackingField: Fire Gun
   <Sprite>k__BackingField: {fileID: 21300000, guid: 12bce975269904a43b80b18e346d5140, type: 3}
   <Price>k__BackingField: 500
-  <WalletForPay>k__BackingField: 1
+  <Currency>k__BackingField: 1
   <Type>k__BackingField: 4

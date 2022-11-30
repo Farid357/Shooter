@@ -13,30 +13,30 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private TMP_Text _priceText;
         [SerializeField] private TMP_Text _nameText;
-        [SerializeField] private Dictionary<WalletType, Sprite> _paymentSystemsSprites;
+        [SerializeField] private Dictionary<Currency, Sprite> _paymentSystemsSprites;
         [SerializeField] private Image _paymentSystemImage;
-        private IReadOnlyDictionary<WalletType, IShoppingCart> _shoppingCarts;
+        private IReadOnlyDictionary<Currency, IShoppingCart> _shoppingCarts;
         
         [field: SerializeField] public GoodInContentView GoodView { get; private set; }
 
-        public void Init(IReadOnlyDictionary<WalletType, IShoppingCart> shoppingCarts)
+        public void Init(IReadOnlyDictionary<Currency, IShoppingCart> shoppingCarts)
         {
             _shoppingCarts = shoppingCarts ?? throw new ArgumentNullException(nameof(shoppingCarts));
         }
         
         public void Switch(IGood good)
         {
-            var walletForPay = good.Data.WalletForPay;
+            var currency = good.Data.Currency;
             
-            if (_shoppingCarts.ContainsKey(walletForPay) == false)
-                throw new ArgumentOutOfRangeException(nameof(walletForPay));
+            if (_shoppingCarts.ContainsKey(currency) == false)
+                throw new ArgumentOutOfRangeException(nameof(currency));
 
-            _paymentSystemImage.sprite = _paymentSystemsSprites[walletForPay];
+            _paymentSystemImage.sprite = _paymentSystemsSprites[currency];
             _priceText.text = good.Data.Price.ToString();
             _nameText.text = good.Data.Name;
             GoodView.Visualize(good.Data);
             GoodView.SelectingButton.DeleteAllSubscribers();
-            GoodView.SelectingButton.Subscribe(new SelectingGoodButtonAction(good, _shoppingCarts[walletForPay], GoodView.SelectingButton));
+            GoodView.SelectingButton.Subscribe(new SelectingGoodButtonAction(good, _shoppingCarts[currency], GoodView.SelectingButton));
         }
     }
 }

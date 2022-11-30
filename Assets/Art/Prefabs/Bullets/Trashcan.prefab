@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8911453035274418907}
   - component: {fileID: 5948612692223928987}
   - component: {fileID: 1988732953477980290}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trashcan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 773695200656068398}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 4.4571266, y: -119.12, z: 0.43}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4134, y: 1.3249, z: 1.572}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

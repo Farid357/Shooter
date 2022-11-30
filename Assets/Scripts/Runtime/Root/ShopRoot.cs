@@ -35,10 +35,10 @@ namespace Shooter.Root
         {
             IShoppingCart shoppingCart = new ShoppingCart(_shoppingCartView);
             IShoppingCart diamondsShoppingCart = new ShoppingCart(_diamondsShoppingCartView);
-            _goodSwitchingView.Init(new Dictionary<WalletType, IShoppingCart>
+            _goodSwitchingView.Init(new Dictionary<Currency, IShoppingCart>
                 {
-                    { WalletType.WithCoins, shoppingCart },
-                    { WalletType.WithDiamonds, diamondsShoppingCart }
+                    { Currency.Coins, shoppingCart },
+                    { Currency.Diamonds, diamondsShoppingCart }
                 }
             );
             

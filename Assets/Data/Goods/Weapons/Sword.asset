@@ -15,5 +15,5 @@ MonoBehaviour:
   <Name>k__BackingField: Just a sword
   <Sprite>k__BackingField: {fileID: 21300000, guid: e5a645e10841035409fe7ae9930c6ab0, type: 3}
   <Price>k__BackingField: 15
-  <WalletForPay>k__BackingField: 1
+  <Currency>k__BackingField: 1
   <Type>k__BackingField: 5

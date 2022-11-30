@@ -11,6 +11,6 @@ namespace Shooter.Shop
         
         int Price { get; }
         
-        WalletType WalletForPay { get; }
+        Currency Currency { get; }
     }
 }

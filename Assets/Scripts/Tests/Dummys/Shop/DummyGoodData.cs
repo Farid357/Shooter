@@ -12,6 +12,6 @@ namespace Shooter.Test
 
         public int Price => 500;
         
-        public WalletType WalletForPay => WalletType.WithCoins;
+        public Currency Currency => Model.Currency.Coins;
     }
 }

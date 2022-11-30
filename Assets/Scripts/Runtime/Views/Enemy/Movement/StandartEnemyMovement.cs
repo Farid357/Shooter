@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Shooter.Model;
 using UnityEngine;
@@ -47,7 +46,7 @@ namespace Shooter.GameLogic
             while (transform.rotation != _character.Rotation)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, _character.Rotation, _rotateSpeed * Time.deltaTime);
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             _needRotate = false;
