@@ -10,7 +10,9 @@ namespace Shooter.Tools
         public static async UniTaskVoid DestroyOnEnded(this AudioSource audio)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(audio.clip.length));
-            Object.Destroy(audio.gameObject);
+            
+            if (audio != null)
+                Object.Destroy(audio.gameObject);
         }
 
         public static float ToVolume(this float value)

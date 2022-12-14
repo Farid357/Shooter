@@ -27,7 +27,6 @@ namespace Shooter.Model
 
             enemy.Enable();
             enemy.Movement.MoveToCharacter();
-            enemy.Movement.RotateToCharacter();
             _navMeshBaker.Bake();
             _aliveEnemies.Add(enemy);
         }

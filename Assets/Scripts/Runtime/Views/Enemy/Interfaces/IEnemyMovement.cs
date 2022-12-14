@@ -8,8 +8,7 @@ namespace Shooter.Model
         
         void Init(ICharacterTransform character);
         
-        public void MoveToCharacter();
+        void MoveToCharacter();
 
-        public void RotateToCharacter();
     }
 }
