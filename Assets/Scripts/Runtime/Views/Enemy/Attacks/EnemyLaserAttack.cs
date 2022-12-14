@@ -9,14 +9,10 @@ namespace Shooter.GameLogic
     {
         [SerializeField] private IAttackAnimation _attackAnimation;
         [SerializeField] private EnemyToCharacterChaser _chaser;
-        [SerializeField] private LineRenderer _line;
         [SerializeField, Min(2f)] private float _maxLaserDistance = 15f;
         [SerializeField, Min(0.01f)] private float _distanceBetweenHitPositionAndAttack;
-        [SerializeField] private Transform _laserStartPoint;
-
-        [SerializeField, ProgressBar(1, 100, 1, 0, 0)]
-        private int _damage;
-
+        [SerializeField] private EnemyLaserView _laserView;
+        [SerializeField, ProgressBar(1, 100, 1, 0, 0)] private int _damage;
         [SerializeField] private EnemySound _enemyAttackSound;
 
         private IHealth Character => _chaser.Character.Health;
@@ -40,14 +36,9 @@ namespace Shooter.GameLogic
                 {
                     _enemyAttackSound.Play();
                     Attack();
+                    _laserView.ShowIsAttacking();
                 }
             });
-        }
-
-        private void LateUpdate()
-        {
-            _line.SetPosition(0, _laserStartPoint.position);
-            _line.SetPosition(1, _chaser.Character.Position);
         }
 
         private void Attack()

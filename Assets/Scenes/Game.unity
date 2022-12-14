@@ -9793,8 +9793,6 @@ MonoBehaviour:
       <EnemiesCount>k__BackingField: 2
     - <Factory>k__BackingField: {fileID: 1362595609}
       <EnemiesCount>k__BackingField: 2
-    - <Factory>k__BackingField: {fileID: 1641612918}
-      <EnemiesCount>k__BackingField: 1
     <CreateDelaySeconds>k__BackingField: 0.3
     <SecondsAfterEnd>k__BackingField: 6
   - _factoriesData:
