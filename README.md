@@ -10,7 +10,7 @@
 ### Подходы
  - В проекте используется архитектурный подход **MV**, в котором модель знает о view
  - Проект пытается следовать GRASP & SOLID
- - Чистый DI (без Zenject, VCotainer and etc)
+ - Чистый DI (без Zenject, VContainer and etc)
  - Composite Root
  
 ### Были разработанны:
